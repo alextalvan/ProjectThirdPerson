@@ -33,6 +33,10 @@ using namespace std;
 #include <mge/test/TestSphereCol.hpp>
 #include <mge/behaviours/CameraOrbit.hpp>
 
+#include <mge/sound/SoundManager.hpp>
+#include <mge/sound/SoundChannel.hpp>
+
+
 
 //construct the game class into _window, _renderer and hud (other parts are initialized by build)
 MGEDemo::MGEDemo():AbstractGame ()
@@ -168,7 +172,7 @@ void MGEDemo::_initializeScene()
 
     CollisionManager::SetLayerInteraction(CollisionManager::WALLS,CollisionManager::WALLS,false);
 
-
+    //Sound::SoundManager::GetSingleton()->LoadSFX(config::MGE_SOUND_PATH + "test.wav")->Play();
 }
 
 
