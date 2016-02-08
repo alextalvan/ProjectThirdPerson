@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="project" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/game" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="assets" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wnon-virtual-dtor" />
+					<Add option="-Wunreachable-code" />
+					<Add option="-std=c++11" />
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add option="-DGLEW_STATIC" />
+					<Add option="-DSFML_STATIC" />
+					<Add directory="src" />
+				</Compiler>
+				<Linker>
+					<Add library="glew32s" />
+					<Add library="sfml-graphics-s-d" />
+					<Add library="sfml-window-s-d" />
+					<Add library="sfml-audio-s-d" />
+					<Add library="sfml-system-s-d" />
+					<Add library="opengl32" />
+					<Add library="freetype" />
+					<Add library="jpeg" />
+					<Add library="winmm" />
+					<Add library="gdi32" />
+					<Add library="openal32" />
+					<Add library="flac" />
+					<Add library="vorbisenc" />
+					<Add library="vorbisfile" />
+					<Add library="vorbis" />
+					<Add library="ogg" />
+					<Add library="ws2_32" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="assets/mge/fonts/arial.ttf" />
+		<Unit filename="assets/mge/models/cone_flat.obj" />
+		<Unit filename="assets/mge/models/cone_smooth.obj" />
+		<Unit filename="assets/mge/models/cube_flat.obj" />
+		<Unit filename="assets/mge/models/cube_smooth.obj" />
+		<Unit filename="assets/mge/models/cylinder_flat.obj" />
+		<Unit filename="assets/mge/models/cylinder_smooth.obj" />
+		<Unit filename="assets/mge/models/plane20x20_2048tris_aligned_uvs.obj" />
+		<Unit filename="assets/mge/models/plane20x20_2tris_aligned_uvs.obj" />
+		<Unit filename="assets/mge/models/sphere_flat.obj" />
+		<Unit filename="assets/mge/models/sphere_smooth.obj" />
+		<Unit filename="assets/mge/models/suzanna_flat.obj" />
+		<Unit filename="assets/mge/models/suzanna_smooth.obj" />
+		<Unit filename="assets/mge/models/teapot_flat.obj" />
+		<Unit filename="assets/mge/models/teapot_smooth.obj" />
+		<Unit filename="assets/mge/shaders/color.fs" />
+		<Unit filename="assets/mge/shaders/color.vs" />
+		<Unit filename="assets/mge/shaders/texture.fs" />
+		<Unit filename="assets/mge/shaders/texture.vs" />
+		<Unit filename="assets/mge/textures/bricks.jpg" />
+		<Unit filename="assets/mge/textures/land.jpg" />
+		<Unit filename="src/glm.hpp" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/mge/MGEDemo.cpp" />
+		<Unit filename="src/mge/MGEDemo.hpp" />
+		<Unit filename="src/mge/behaviours/AbstractBehaviour.cpp" />
+		<Unit filename="src/mge/behaviours/AbstractBehaviour.hpp" />
+		<Unit filename="src/mge/behaviours/KeysBehaviour.cpp" />
+		<Unit filename="src/mge/behaviours/KeysBehaviour.hpp" />
+		<Unit filename="src/mge/behaviours/LookAt.cpp" />
+		<Unit filename="src/mge/behaviours/LookAt.hpp" />
+		<Unit filename="src/mge/behaviours/RotatingBehaviour.cpp" />
+		<Unit filename="src/mge/behaviours/RotatingBehaviour.hpp" />
+		<Unit filename="src/mge/config.hpp" />
+		<Unit filename="src/mge/core/AbstractGame.cpp" />
+		<Unit filename="src/mge/core/AbstractGame.hpp" />
+		<Unit filename="src/mge/core/Camera.cpp" />
+		<Unit filename="src/mge/core/Camera.hpp" />
+		<Unit filename="src/mge/core/FPS.cpp" />
+		<Unit filename="src/mge/core/FPS.hpp" />
+		<Unit filename="src/mge/core/GameObject.cpp" />
+		<Unit filename="src/mge/core/GameObject.hpp" />
+		<Unit filename="src/mge/core/Mesh.cpp" />
+		<Unit filename="src/mge/core/Mesh.hpp" />
+		<Unit filename="src/mge/core/Renderer.cpp" />
+		<Unit filename="src/mge/core/Renderer.hpp" />
+		<Unit filename="src/mge/core/ShaderProgram.cpp" />
+		<Unit filename="src/mge/core/ShaderProgram.hpp" />
+		<Unit filename="src/mge/core/Texture.cpp" />
+		<Unit filename="src/mge/core/Texture.hpp" />
+		<Unit filename="src/mge/core/Timer.cpp" />
+		<Unit filename="src/mge/core/Timer.hpp" />
+		<Unit filename="src/mge/core/World.cpp" />
+		<Unit filename="src/mge/core/World.hpp" />
+		<Unit filename="src/mge/materials/AbstractMaterial.cpp" />
+		<Unit filename="src/mge/materials/AbstractMaterial.hpp" />
+		<Unit filename="src/mge/materials/ColorMaterial.cpp" />
+		<Unit filename="src/mge/materials/ColorMaterial.hpp" />
+		<Unit filename="src/mge/materials/TextureMaterial.cpp" />
+		<Unit filename="src/mge/materials/TextureMaterial.hpp" />
+		<Unit filename="src/mge/util/DebugHud.cpp" />
+		<Unit filename="src/mge/util/DebugHud.hpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

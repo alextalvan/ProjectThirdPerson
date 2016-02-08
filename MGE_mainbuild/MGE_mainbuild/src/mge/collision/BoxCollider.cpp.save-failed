@@ -1,0 +1,130 @@
+#include<mge/collision/BoxCollider.hpp>
+#include<mge/collision/SphereCollider.hpp>
+#include<mge/core/GameObject.hpp>
+#include<glm.hpp>
+#include<limits>
+using namespace std;
+
+BoxCollider::BoxCollider()
+{
+    _name = "Box Collider";
+}
+
+BoxCollider::~BoxCollider()
+{
+
+}
+
+bool BoxCollider::HitTest(BoxCollider* other)
+{
+
+    glm::vec4 myVerts[8];
+    glm::vec4 otherVerts[8];
+
+    glm::mat4 myMat = _owner->getWorldTransform();
+    glm::mat4 otherMat = other->getOwner()->getWorldTransform();
+
+    myVerts[0] = myMat * glm::vec4(xSize*0.5f,ySize*0.5f,zSize * 0.5f, 1);//
+    myVerts[1] = myMat * glm::vec4(xSize*0.5f,ySize*0.5f,-zSize * 0.5f, 1);//
+    myVerts[2] = myMat * glm::vec4(xSize*0.5f,-ySize*0.5f,zSize * 0.5f, 1);
+    myVerts[3] = myMat * glm::vec4(xSize*0.5f,-ySize*0.5f,-zSize * 0.5f, 1);
+    myVerts[4] = myMat * glm::vec4(-xSize*0.5f,ySize*0.5f,zSize * 0.5f, 1);
+    myVerts[5] = myMat * glm::vec4(-xSize*0.5f,ySize*0.5f,-zSize * 0.5f, 1);
+    myVerts[6] = myMat * glm::vec4(-xSize*0.5f,-ySize*0.5f,zSize * 0.5f, 1);
+    myVerts[7] = myMat * glm::vec4(-xSize*0.5f,-ySize*0.5f,-zSize * 0.5f, 1);
+
+    otherVerts[0] = otherMat * glm::vec4(other->xSize*0.5f,other->ySize*0.5f,other->zSize * 0.5f, 1);//
+    otherVerts[1] = otherMat * glm::vec4(other->xSize*0.5f,other->ySize*0.5f,other->zSize * -0.5f, 1);//
+    otherVerts[2] = otherMat * glm::vec4(other->xSize*0.5f,other->ySize*-0.5f,other->zSize * 0.5f, 1);
+    otherVerts[3] = otherMat * glm::vec4(other->xSize*0.5f,other->ySize*-0.5f,other->zSize * -0.5f, 1);
+    otherVerts[4] = otherMat * glm::vec4(other->xSize*-0.5f,other->ySize*0.5f,other->zSize * 0.5f, 1);
+    otherVerts[5] = otherMat * glm::vec4(other->xSize*-0.5f,other->ySize*0.5f,other->zSize * -0.5f, 1);
+    otherVerts[6] = otherMat * glm::vec4(other->xSize*-0.5f,other->ySize*-0.5f,other->zSize * 0.5f, 1);
+    otherVerts[7] = otherMat * glm::vec4(other->xSize*-0.5f,other->ySize*-0.5f,other->zSize * -0.5f, 1);
+
+    //const float* data = glm::value_ptr(myMat);
+
+    //start with this box's projection directions
+    for(int i = 0; i<3;++i)
+    {
+        glm::vec4 workNormal;
+        if(i==0) workNormal = glm::normalize(myMat * glm::vec4(1,0,0,0));
+        if(i==1) workNormal = glm::normalize(myMat * glm::vec4(0,1,0,0));
+        if(i==2) workNormal = glm::normalize(myMat * glm::vec4(0,0,1,0));
+
+
+        float myMin,otherMin;
+        float myMax,otherMax;
+        myMin = myMax = glm::dot(myVerts[0],workNormal);
+        otherMin = otherMax = glm::dot(otherVerts[0],workNormal);
+
+        for(int j = 1; j < 8 ;++j)
+        {
+            float myProj = glm::dot(myVerts[j],workNormal);
+            float otherProj = glm::dot(otherVerts[j],workNormal);
+
+            if(myProj < myMin) myMin = myProj;
+            if(myProj > myMax) myMax = myProj;
+
+            if(otherProj < otherMin) otherMin = otherProj;
+            if(otherProj > otherMax) otherMax = otherProj;
+        }
+
+        float overallMin = (myMin < otherMin) ? myMin : otherMin;
+        float overallMax = (myMax > otherMax) ? myMax : otherMax;
+
+        //test if shadows have gap between them
+        if((myMax - myMin) + (otherMax - otherMin) < overallMax - overallMin)
+            return false;
+    }
+
+    //const float* data2 = glm::value_ptr(otherMat);
+
+    //continue with other box's projection directions
+    for(int i = 0; i<3;++i)
+    {
+        glm::vec4 workNormal;
+        if(i==0) workNormal = glm::normalize(otherMat * glm::vec4(1,0,0,0));
+        if(i==1) workNormal = glm::normalize(otherMat * glm::vec4(0,1,0,0));
+        if(i==2) workNormal = glm::normalize(otherMat * glm::vec4(0,0,1,0));
+
+
+        float myMin,otherMin;
+        float myMax,otherMax;
+        myMin = myMax = glm::dot(myVerts[0],workNormal);
+        otherMin = otherMax = glm::dot(otherVerts[0],workNormal);
+
+        for(int j = 1; j < 8 ;++j)
+        {
+            float myProj = glm::dot(myVerts[j],workNormal);
+            float otherProj = glm::dot(otherVerts[j],workNormal);
+
+            if(myProj < myMin) myMin = myProj;
+            if(myProj > myMax) myMax = myProj;
+
+            if(otherProj < otherMin) otherMin = otherProj;
+            if(otherProj > otherMax) otherMax = otherProj;
+        }
+
+        float overallMin = (myMin < otherMin) ? myMin : otherMin;
+        float overallMax = (myMax > otherMax) ? myMax : otherMax;
+
+        //test if shadows have gap between them
+        if((myMax - myMin) + (otherMax - otherMin) < overallMax - overallMin)
+            return false;
+    }
+
+    return true;
+    //myVerts[]
+    //myMat
+}
+
+bool BoxCollider::HitTest(SphereCollider* other)
+{
+    return false;
+}
+
+bool BoxCollider::HitTest(Collider* other)
+{
+    return other->HitTest(this);
+}
