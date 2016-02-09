@@ -51,8 +51,8 @@ namespace Test
 
     void TestSphereCol::Update()
     {
-        if(Input::GetKeyDown(Input::D))
-            std::cout<<"\n\nnew\n\n";
+        //if(Input::GetKeyDown(Input::D))
+        //    std::cout<<"\n\nnew\n\n";
 
         //_owner->translate(glm::vec3(0.0f,0,0.05f));
         //std::cout<<"\n";
