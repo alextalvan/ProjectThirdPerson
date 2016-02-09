@@ -46,7 +46,8 @@ MGEDemo::MGEDemo():AbstractGame ()
 {
 }
 
-void MGEDemo::initialize() {
+void MGEDemo::initialize()
+{
     //setup the core part
     AbstractGame::initialize();
 
@@ -175,17 +176,17 @@ void MGEDemo::_initializeScene()
 
     CollisionManager::SetLayerInteraction(CollisionManager::WALLS,CollisionManager::WALLS,false);
 
-    //Sound::SoundManager::GetSingleton()->LoadSFX(config::MGE_SOUND_PATH + "test.wav")->Play();
+    //Sound::PlayMusic(config::MGE_SOUND_PATH + "test.wav",1,true);
 
-    engine = new LuaEngine();
+    //engine = new LuaEngine();
 
     //register person class into lua script engine
-    GameObject::register_lua(engine->L());
+    //GameObject::register_lua(engine->L());
 
     //execute specified file file
 
     //yeah, otherwise doesn't find the file :P
-    engine->ExecuteFile("C:/GitHub/ProjectThirdPerson/MGE_mainbuild/src/mge/lua/script.lua");
+    //engine->ExecuteFile("C:/GitHub/ProjectThirdPerson/MGE_mainbuild/src/mge/lua/script.lua");
 }
 
 

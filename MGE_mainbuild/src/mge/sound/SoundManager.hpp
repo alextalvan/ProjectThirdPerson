@@ -15,8 +15,9 @@ namespace Sound
     {
     public:
         static SoundManager* const GetSingleton();
+
         Sound::SoundChannel* const LoadSFX(std::string fileName);
-        sf::Music* const getMusicChannel();
+        Sound::SoundChannel* const LoadMusic(std::string fileName);
 
 
     private:
@@ -25,9 +26,12 @@ namespace Sound
 
         static SoundManager* _instance;
         std::vector<SoundChannel*> _sfxChannels;
-        sf::Music* _musicChannel;
+        Sound::SoundChannel* _musicChannel = NULL;
         Sound::SoundCacher* _cache;
     };
+
+    void PlaySFX(std::string fileName,float vol = 1.0f);
+    void PlayMusic(std::string fileName,float vol =1.0f,bool loop = true);
 }
 
 

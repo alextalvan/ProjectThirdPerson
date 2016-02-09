@@ -9,8 +9,6 @@ namespace Sound
     SoundManager::SoundManager()
     {
         _cache = new Sound::SoundCacher();
-        _musicChannel = new sf::Music();
-
     }
 
     SoundManager::~SoundManager()
@@ -50,6 +48,31 @@ namespace Sound
             freeChannel->_internalSound->setBuffer(*buffer);
             return freeChannel;
         }
+    }
+
+    void PlaySFX(std::string fileName,float vol)
+    {
+        Sound::SoundManager::GetSingleton()->LoadSFX(fileName)->Play(vol,false);
+    }
+
+
+    Sound::SoundChannel* const SoundManager::LoadMusic(std::string fileName)
+    {
+        if(_musicChannel == NULL)
+        {
+            _musicChannel = new Sound::SoundChannel(_cache->LoadSoundFile(fileName));
+            return _musicChannel;
+        }
+        else
+        {
+            _musicChannel->SetBuffer(_cache->LoadSoundFile(fileName));
+            return _musicChannel;
+        }
+    }
+
+    void PlayMusic(std::string fileName,float vol,bool loop)
+    {
+        Sound::SoundManager::GetSingleton()->LoadMusic(fileName)->Play(vol,loop);
     }
 
     SoundManager* const SoundManager::GetSingleton()

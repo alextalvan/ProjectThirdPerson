@@ -51,4 +51,9 @@ namespace Sound
     {
         return !(_internalSound->getStatus() == sf::SoundSource::Stopped);
     }
+
+    void SoundChannel::SetBuffer(sf::SoundBuffer* const buffer)
+    {
+        _internalSound->setBuffer(*buffer);
+    }
 }
