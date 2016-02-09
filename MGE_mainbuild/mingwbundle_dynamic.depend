@@ -12358,7 +12358,8 @@
 	<vector>
 	"mge/lua/LuaEngine.hpp"
 
-1454958377 c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luaengine.hpp
+1455017718 c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luaengine.hpp
+	<string>
 	<iostream>
 	"lua.hpp"
 
@@ -12397,7 +12398,7 @@
 	<string>
 	"mge/core/GameObject.hpp"
 
-1454957686 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\gameobject.hpp
+1455018339 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\gameobject.hpp
 	<vector>
 	<string>
 	<iostream>
@@ -13522,7 +13523,7 @@
 	<glm.hpp>
 	"mge/core/Camera.hpp"
 
-1454940977 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\destroyable.cpp
+1455019122 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\destroyable.cpp
 	<mge/core/Destroyable.hpp>
 	<mge/util/list/SingleLinkNode.hpp>
 	<mge/util/list/SingleLinkList.hpp>
@@ -13534,7 +13535,7 @@
 	"mge/core/FPS.hpp"
 	"mge/core/Time.hpp"
 
-1454955536 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\gameobject.cpp
+1455020705 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\gameobject.cpp
 	<cassert>
 	<iostream>
 	<glm.hpp>
@@ -13550,7 +13551,7 @@
 	<GL/glew.h>
 	<glm.hpp>
 
-1454940977 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\light.cpp
+1455020004 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\light.cpp
 	<mge/core/Light.hpp>
 
 1454940977 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\light.hpp
@@ -13623,7 +13624,7 @@
 	"mge/materials/AbstractMaterial.hpp"
 	<glm.hpp>
 
-1454959751 c:\github\projectthirdperson\mge_mainbuild\src\mge\config.hpp
+1455016512 c:\github\projectthirdperson\mge_mainbuild\src\mge\config.hpp
 	<string>
 
 1454940977 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\postprocessing\postprocess.cpp
@@ -13796,7 +13797,7 @@
 
 1452188439 c:\github\projectthirdperson\mge_mainbuild\luabridge\detail\namespace.h
 
-1454959751 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
+1455020931 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -13903,6 +13904,6 @@
 	<cstddef>
 	<iostream>
 
-1454958668 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luaengine.cpp
+1455017950 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luaengine.cpp
 	"LuaEngine.hpp"
 

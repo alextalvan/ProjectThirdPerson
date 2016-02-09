@@ -55,6 +55,7 @@
 		<Unit filename="assets/mge/models/suzanna_smooth.obj" />
 		<Unit filename="assets/mge/models/teapot_flat.obj" />
 		<Unit filename="assets/mge/models/teapot_smooth.obj" />
+		<Unit filename="assets/mge/scripts/script.lua" />
 		<Unit filename="assets/mge/shaders/PostProcessing/cut_screen.fs" />
 		<Unit filename="assets/mge/shaders/PostProcessing/identity.fs" />
 		<Unit filename="assets/mge/shaders/PostProcessing/identity.vs" />
