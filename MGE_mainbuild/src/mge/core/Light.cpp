@@ -9,7 +9,7 @@ Light::Light() : GameObject("light")
 
 Light::~Light()
 {
-    //_lightList.Remove(this);
+    //_lightList.erase(this);
 }
 
 std::vector<Light*> const  Light::GetLightList()

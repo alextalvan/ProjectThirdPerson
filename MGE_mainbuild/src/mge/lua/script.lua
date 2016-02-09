@@ -1,3 +1,4 @@
-a = Engine.GameObject('chiki');
-
-print(a:getName());
+--local a = Engine.GameObject('chiki');
+--a:setParent(World);
+--print(a:getName());
+--a:Destroy();

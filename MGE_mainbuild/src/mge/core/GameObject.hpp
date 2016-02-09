@@ -124,8 +124,8 @@ class GameObject : public Activateable, public Destroyable
 				.addFunction("setParent", &GameObject::setParent) //reg. setParent function
 				.addFunction("getParent", &GameObject::getParent) //reg. getParent function
 				.addFunction("GetChildCount", &GameObject::GetChildCount) //reg. GetChildCount function
-				.addFunction("GetChildAt", &GameObject::GetChildAt) //reg. getParent function
-				.addFunction("Destroy", &GameObject::Destroy) //reg. getParent function
+				.addFunction("GetChildAt", &GameObject::GetChildAt) //reg. GetChildAt function
+				.addFunction("Destroy", &GameObject::Destroy) //reg. Destroy function
 				.endClass() //end class
 				.endNamespace(); //end namespace
 		}

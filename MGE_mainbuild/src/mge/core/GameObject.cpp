@@ -26,7 +26,7 @@ GameObject::GameObject(std::string pName, float posX, float posY, float posZ)
 GameObject::~GameObject()
 {
     //detach all children
-    cout << getName()<<" was released.";
+    cout << getName()<<" was released.\n";
 }
 
 void GameObject::Destroy()
@@ -44,7 +44,7 @@ void GameObject::Destroy()
     }
 
     //destroy children as well
-     for (auto i = _children.begin(); i != _children.end(); ++i)
+    for (auto i = _children.begin(); i != _children.end(); ++i)
     {
        (*i)->Destroy();
     }

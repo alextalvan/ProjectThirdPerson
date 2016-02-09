@@ -46,8 +46,7 @@ MGEDemo::MGEDemo():AbstractGame ()
 {
 }
 
-void MGEDemo::initialize()
-{
+void MGEDemo::initialize() {
     //setup the core part
     AbstractGame::initialize();
 
@@ -105,9 +104,10 @@ void MGEDemo::_initializeScene()
 
     //SCENE SETUP
 
-    Camera* camera = new Camera ("camera", glm::vec3(0,0,0));
+    Camera* camera = new Camera ("camera", glm::vec3(0,3,-2));
     //camera->rotate(glm::radians(-90.0f),glm::vec3(1,0,0));
     _world->setMainCamera(camera);
+    _world->AddChild(camera);
 
     GameObject* plane = new GameObject ("plane");
     plane->scale(glm::vec3(20,5,20));
@@ -153,7 +153,6 @@ void MGEDemo::_initializeScene()
     sphere1->AttachComponent(new Test::TestSphereCol());
     _world->AddChild(sphere1);
 
-
     Light* light3 = new Light();
     light3->color = glm::vec3(1,0,0);
     //light3->attenuation = glm::vec3(0.75f,0,0.5f);
@@ -163,30 +162,27 @@ void MGEDemo::_initializeScene()
     //light3->translate(glm::vec3(0,10000,0));
     //light3->angle = 3.14f;
     light3->setLocalPosition(glm::vec3(0,2,0));
-    sphere1->AddChild(light3);
+    //sphere1->AddChild(light3);
 
-    sphere1->AddChild(camera);
-    Test::CameraOrbit* orbit = new Test::CameraOrbit();
-    camera->AttachComponent(orbit);
-    orbit->horizontalDistance = 5;
-    orbit->verticalDistance = 5;
-    orbit->target = sphere1;
+    //sphere1->AddChild(camera);
+
 
     CreateWall(glm::vec3(0,0.0f,0),0,colorMaterial,cubeMeshF,_world);
 
     CollisionManager::SetLayerInteraction(CollisionManager::WALLS,CollisionManager::WALLS,false);
 
-    //Sound::PlayMusic(config::MGE_SOUND_PATH + "test.wav",1,true);
+    //Sound::SoundManager::GetSingleton()->LoadSFX(config::MGE_SOUND_PATH + "test.wav")->Play();
 
-    //engine = new LuaEngine();
+    engine = new LuaEngine(_world);
 
     //register person class into lua script engine
-    //GameObject::register_lua(engine->L());
+    GameObject::register_lua(engine->L());
 
     //execute specified file file
 
     //yeah, otherwise doesn't find the file :P
-    //engine->ExecuteFile("C:/GitHub/ProjectThirdPerson/MGE_mainbuild/src/mge/lua/script.lua");
+    engine->ExecuteFile(config::MGE_SCRIPT_PATH + "script.lua");
+
 }
 
 

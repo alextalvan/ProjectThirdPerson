@@ -17,13 +17,20 @@ void LuaEngine::report_errors( int state )
 }
 
 //executes a lua script file
-void LuaEngine::ExecuteFile( const char* file )
+void LuaEngine::ExecuteFile( std::string file )
 {
-    if(file == NULL)
-        return;
+    //if(file == NULL)
+    //    return;
 
-    int state = luaL_dofile(m_L, file);
+    int state = luaL_dofile(m_L, file.c_str());
     report_errors(state);
+    SetWorld();
+}
+
+void LuaEngine::SetWorld()
+{
+	lua_pushlightuserdata(m_L, _world);
+	lua_setglobal(m_L, "World");
 }
 
 //execute a lua expression contained in string
