@@ -9,9 +9,6 @@
 #include "mge/core/Destroyable.hpp"
 #include "mge/core/AbstractGame.hpp"
 
-#include "lua.hpp"
-#include "luabridge.h" //new include for LuaBridge
-
 class AbstractCollider;
 class Component;
 class AbstractMaterial;
@@ -84,9 +81,6 @@ class GameObject : public Activateable, public Destroyable
             return NULL;
         }
 
-
-
-
         //child management
 
         //shortcut to set the parent of pChild to ourselves
@@ -100,37 +94,8 @@ class GameObject : public Activateable, public Destroyable
         int GetChildCount();
         GameObject* GetChildAt (int pIndex);
 
-		static void register_lua(lua_State* L)
-		{
-			using namespace luabridge;
-			getGlobalNamespace(L) //global namespace to lua
-				.beginNamespace("Engine") //our defined namespace (w.e we want to call it)
-				.beginClass<GameObject>("GameObject") //define class object
-				.addConstructor<void(*)(std::string)>() //reg. empty constructor
-				.addFunction("setName", &GameObject::setName) //reg. setName function
-				.addFunction("getName", &GameObject::getName) //reg. setAge function
-				.addFunction("setLocalPosition", &GameObject::setLocalPosition) //reg. setLocalPosition function
-				.addFunction("getLocalPosition", &GameObject::getLocalPosition) //reg. getLocalPosition function
-				.addFunction("getWorldPosition", &GameObject::getWorldPosition) //reg. getWorldPosition function
-				.addFunction("translate", &GameObject::translate) //reg. translate function
-				.addFunction("rotate", &GameObject::rotate) //reg. rotate function
-				.addFunction("scale", &GameObject::scale) //reg. scale function
-				.addFunction("setMesh", &GameObject::setMesh) //reg. setMesh function
-				.addFunction("getMesh", &GameObject::getMesh) //reg. getMesh function
-				.addFunction("setMaterial", &GameObject::setMaterial) //reg. setMaterial function
-				.addFunction("getMaterial", &GameObject::getMaterial) //reg. getMaterial function
-				.addFunction("AddChild", &GameObject::AddChild) //reg. AddChild function
-				.addFunction("RemoveChild", &GameObject::RemoveChild) //reg. RemoveChild function
-				.addFunction("setParent", &GameObject::setParent) //reg. setParent function
-				.addFunction("getParent", &GameObject::getParent) //reg. getParent function
-				.addFunction("GetChildCount", &GameObject::GetChildCount) //reg. GetChildCount function
-				.addFunction("GetChildAt", &GameObject::GetChildAt) //reg. GetChildAt function
-				.addFunction("Destroy", &GameObject::Destroy) //reg. Destroy function
-				.endClass() //end class
-				.endNamespace(); //end namespace
-		}
 
-	public:
+	protected:
 	    virtual ~GameObject();
 		std::string _name;
 		glm::mat4 _transform;
