@@ -19,6 +19,7 @@ namespace Sound
         float GetVolume();
         bool IsLooping();
         void SetLoop(bool target);
+        void SetBuffer(sf::SoundBuffer* const buffer);
 
     private:
         SoundChannel(sf::SoundBuffer* buffer);

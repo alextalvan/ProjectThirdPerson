@@ -13907,3 +13907,1960 @@
 1455017950 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luaengine.cpp
 	"LuaEngine.hpp"
 
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\main.cpp
+	<iostream>
+	"mge/core/AbstractGame.hpp"
+	"mge/MGEDemo.hpp"
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.hpp
+	<SFML/Graphics.hpp>
+	<GL/glew.h>
+	<string>
+
+1455012457 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics.hpp
+	<SFML/Window.hpp>
+	<SFML/Graphics/BlendMode.hpp>
+	<SFML/Graphics/CircleShape.hpp>
+	<SFML/Graphics/Color.hpp>
+	<SFML/Graphics/ConvexShape.hpp>
+	<SFML/Graphics/Drawable.hpp>
+	<SFML/Graphics/Font.hpp>
+	<SFML/Graphics/Glyph.hpp>
+	<SFML/Graphics/Image.hpp>
+	<SFML/Graphics/PrimitiveType.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<SFML/Graphics/RectangleShape.hpp>
+	<SFML/Graphics/RenderStates.hpp>
+	<SFML/Graphics/RenderTarget.hpp>
+	<SFML/Graphics/RenderTexture.hpp>
+	<SFML/Graphics/RenderWindow.hpp>
+	<SFML/Graphics/Shader.hpp>
+	<SFML/Graphics/Shape.hpp>
+	<SFML/Graphics/Sprite.hpp>
+	<SFML/Graphics/Text.hpp>
+	<SFML/Graphics/Texture.hpp>
+	<SFML/Graphics/Transform.hpp>
+	<SFML/Graphics/Transformable.hpp>
+	<SFML/Graphics/Vertex.hpp>
+	<SFML/Graphics/VertexArray.hpp>
+	<SFML/Graphics/View.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\window.hpp
+	<SFML/System.hpp>
+	<SFML/Window/Context.hpp>
+	<SFML/Window/ContextSettings.hpp>
+	<SFML/Window/Event.hpp>
+	<SFML/Window/Joystick.hpp>
+	<SFML/Window/Keyboard.hpp>
+	<SFML/Window/Mouse.hpp>
+	<SFML/Window/Sensor.hpp>
+	<SFML/Window/Touch.hpp>
+	<SFML/Window/VideoMode.hpp>
+	<SFML/Window/Window.hpp>
+	<SFML/Window/WindowHandle.hpp>
+	<SFML/Window/WindowStyle.hpp>
+
+1455012460 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Clock.hpp>
+	<SFML/System/Err.hpp>
+	<SFML/System/FileInputStream.hpp>
+	<SFML/System/InputStream.hpp>
+	<SFML/System/Lock.hpp>
+	<SFML/System/MemoryInputStream.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Sleep.hpp>
+	<SFML/System/String.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/ThreadLocal.hpp>
+	<SFML/System/ThreadLocalPtr.hpp>
+	<SFML/System/Time.hpp>
+	<SFML/System/Utf.hpp>
+	<SFML/System/Vector2.hpp>
+	<SFML/System/Vector3.hpp>
+
+1455012457 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\config.hpp
+	"TargetConditionals.h"
+
+1455012460 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\clock.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Time.hpp>
+
+1455012460 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\export.hpp
+	<SFML/Config.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\time.hpp
+	<SFML/System/Export.hpp>
+
+1455012460 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\err.hpp
+	<SFML/System/Export.hpp>
+	<ostream>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\fileinputstream.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Export.hpp>
+	<SFML/System/InputStream.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<cstdio>
+	<string>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\inputstream.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Export.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\noncopyable.hpp
+	<SFML/System/Export.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\lock.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\memoryinputstream.hpp
+	<SFML/Config.hpp>
+	<SFML/System/InputStream.hpp>
+	<SFML/System/Export.hpp>
+	<cstdlib>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\mutex.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\sleep.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Time.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\string.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Utf.hpp>
+	<locale>
+	<string>
+	<SFML/System/String.inl>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\utf.hpp
+	<SFML/Config.hpp>
+	<algorithm>
+	<locale>
+	<string>
+	<cstdlib>
+	<SFML/System/Utf.inl>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\utf.inl
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\string.inl
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\thread.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<cstdlib>
+	<SFML/System/Thread.inl>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\thread.inl
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\threadlocal.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<cstdlib>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\threadlocalptr.hpp
+	<SFML/System/ThreadLocal.hpp>
+	<SFML/System/ThreadLocalPtr.inl>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\threadlocalptr.inl
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\vector2.hpp
+	<SFML/System/Vector2.inl>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\vector2.inl
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\vector3.hpp
+	<SFML/System/Vector3.inl>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\system\vector3.inl
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\window\context.hpp
+	<SFML/Window/Export.hpp>
+	<SFML/Window/GlResource.hpp>
+	<SFML/Window/ContextSettings.hpp>
+	<SFML/System/NonCopyable.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\window\export.hpp
+	<SFML/Config.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\window\glresource.hpp
+	<SFML/Window/Export.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\window\contextsettings.hpp
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\window\event.hpp
+	<SFML/Config.hpp>
+	<SFML/Window/Joystick.hpp>
+	<SFML/Window/Keyboard.hpp>
+	<SFML/Window/Mouse.hpp>
+	<SFML/Window/Sensor.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\window\joystick.hpp
+	<SFML/Window/Export.hpp>
+	<SFML/System/String.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\window\keyboard.hpp
+	<SFML/Window/Export.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\window\mouse.hpp
+	<SFML/Window/Export.hpp>
+	<SFML/System/Vector2.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\window\sensor.hpp
+	<SFML/Window/Export.hpp>
+	<SFML/System/Vector3.hpp>
+	<SFML/System/Time.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\window\touch.hpp
+	<SFML/Window/Export.hpp>
+	<SFML/System/Vector2.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\window\videomode.hpp
+	<SFML/Window/Export.hpp>
+	<vector>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\window\window.hpp
+	<SFML/Window/Export.hpp>
+	<SFML/Window/ContextSettings.hpp>
+	<SFML/Window/VideoMode.hpp>
+	<SFML/Window/WindowHandle.hpp>
+	<SFML/Window/WindowStyle.hpp>
+	<SFML/Window/GlResource.hpp>
+	<SFML/System/Clock.hpp>
+	<SFML/System/Vector2.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/String.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\window\windowhandle.hpp
+	<SFML/Config.hpp>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\window\windowstyle.hpp
+
+1455012457 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\blendmode.hpp
+	<SFML/Graphics/Export.hpp>
+
+1455012457 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\export.hpp
+	<SFML/Config.hpp>
+
+1455012457 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\circleshape.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Shape.hpp>
+
+1455012458 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\shape.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Drawable.hpp>
+	<SFML/Graphics/Transformable.hpp>
+	<SFML/Graphics/VertexArray.hpp>
+	<SFML/System/Vector2.hpp>
+
+1455012457 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\drawable.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/RenderStates.hpp>
+
+1455012457 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\renderstates.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/BlendMode.hpp>
+	<SFML/Graphics/Transform.hpp>
+
+1455012458 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\transform.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<SFML/System/Vector2.hpp>
+
+1455012457 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\rect.hpp
+	<SFML/System/Vector2.hpp>
+	<algorithm>
+	<SFML/Graphics/Rect.inl>
+
+1455012457 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\rect.inl
+
+1455012458 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\transformable.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Transform.hpp>
+
+1455012458 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\vertexarray.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Vertex.hpp>
+	<SFML/Graphics/PrimitiveType.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<SFML/Graphics/Drawable.hpp>
+	<vector>
+
+1455012458 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\vertex.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Color.hpp>
+	<SFML/System/Vector2.hpp>
+
+1455012457 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\color.hpp
+	<SFML/Graphics/Export.hpp>
+
+1455012457 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\primitivetype.hpp
+
+1455012457 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\convexshape.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Shape.hpp>
+	<vector>
+
+1455012457 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\font.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Glyph.hpp>
+	<SFML/Graphics/Texture.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<SFML/System/Vector2.hpp>
+	<SFML/System/String.hpp>
+	<map>
+	<string>
+	<vector>
+
+1455012457 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\glyph.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Rect.hpp>
+
+1455012458 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\texture.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Image.hpp>
+	<SFML/Window/GlResource.hpp>
+
+1455012457 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\image.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Color.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<string>
+	<vector>
+
+1455012457 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\rectangleshape.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Shape.hpp>
+
+1455012458 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\rendertarget.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Color.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<SFML/Graphics/View.hpp>
+	<SFML/Graphics/Transform.hpp>
+	<SFML/Graphics/BlendMode.hpp>
+	<SFML/Graphics/RenderStates.hpp>
+	<SFML/Graphics/PrimitiveType.hpp>
+	<SFML/Graphics/Vertex.hpp>
+	<SFML/System/NonCopyable.hpp>
+
+1455012458 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\view.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<SFML/Graphics/Transform.hpp>
+	<SFML/System/Vector2.hpp>
+
+1455012458 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\rendertexture.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Texture.hpp>
+	<SFML/Graphics/RenderTarget.hpp>
+
+1455012458 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\renderwindow.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/RenderTarget.hpp>
+	<SFML/Graphics/Image.hpp>
+	<SFML/Window/Window.hpp>
+	<string>
+
+1455012458 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\shader.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Transform.hpp>
+	<SFML/Graphics/Color.hpp>
+	<SFML/Window/GlResource.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Vector2.hpp>
+	<SFML/System/Vector3.hpp>
+	<map>
+	<string>
+
+1455012458 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\sprite.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Drawable.hpp>
+	<SFML/Graphics/Transformable.hpp>
+	<SFML/Graphics/Vertex.hpp>
+	<SFML/Graphics/Rect.hpp>
+
+1455012458 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\graphics\text.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Drawable.hpp>
+	<SFML/Graphics/Transformable.hpp>
+	<SFML/Graphics/Font.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<SFML/Graphics/VertexArray.hpp>
+	<SFML/System/String.hpp>
+	<string>
+	<vector>
+
+1455012454 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\gl\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<Availability.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1455012454 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\gl\glu.h
+	<stddef.h>
+	<GL/gl.h>
+
+1455012454 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\gl\gl.h
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.hpp
+	<mge/core/AbstractGame.hpp>
+	<SFML/Graphics.hpp>
+	<vector>
+	"mge/lua/LuaEngine.hpp"
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luaengine.hpp
+	<iostream>
+	"lua.hpp"
+
+1455012450 c:\users\user\documents\projectthirdperson2\mge_mainbuild\lua\5.1\include\lua.hpp
+	"lua.h"
+	"lualib.h"
+	"lauxlib.h"
+
+1455012450 c:\users\user\documents\projectthirdperson2\mge_mainbuild\lua\5.1\include\lua.h
+	<stdarg.h>
+	<stddef.h>
+	"luaconf.h"
+
+1455012450 c:\users\user\documents\projectthirdperson2\mge_mainbuild\lua\5.1\include\luaconf.h
+	<limits.h>
+	<stddef.h>
+	<unistd.h>
+	<io.h>
+	<stdio.h>
+	<stdio.h>
+	<readline/readline.h>
+	<readline/history.h>
+	<assert.h>
+	<math.h>
+	<unistd.h>
+
+1455012450 c:\users\user\documents\projectthirdperson2\mge_mainbuild\lua\5.1\include\lualib.h
+	"lua.h"
+
+1455012450 c:\users\user\documents\projectthirdperson2\mge_mainbuild\lua\5.1\include\lauxlib.h
+	<stddef.h>
+	<stdio.h>
+	"lua.h"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\cameraorbit.cpp
+	<mge/behaviours/CameraOrbit.hpp>
+	<mge/util/Input.hpp>
+	<mge/core/Camera.hpp>
+	<iostream>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\cameraorbit.hpp
+	<mge/behaviours/Component.hpp>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\component.hpp
+	"mge/core/Activateable.hpp"
+	"mge/core/Destroyable.hpp"
+	<string>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\activateable.hpp
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\destroyable.hpp
+	<mge/util/list/SingleLinkList.hpp>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\singlelinklist.hpp
+	<mge/util/list/SingleLinkNode.hpp>
+	<cstddef>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\singlelinknode.hpp
+	<cstddef>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\input.hpp
+	<SFML/Window/Keyboard.hpp>
+	<SFML/Graphics/RenderWindow.hpp>
+	<SFML/Window/Event.hpp>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.hpp
+	<string>
+	"mge/core/GameObject.hpp"
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
+	<vector>
+	<string>
+	<iostream>
+	<glm.hpp>
+	"mge/core/Activateable.hpp"
+	"mge/core/Destroyable.hpp"
+	"mge/core/AbstractGame.hpp"
+	"lua.hpp"
+	"luabridge.h"
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm.hpp
+	<iostream>
+	<iomanip>
+	<glm/glm.hpp>
+	<glm/ext.hpp>
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\glm.hpp
+	"detail/_fixes.hpp"
+	<cmath>
+	<climits>
+	<cfloat>
+	<limits>
+	<cassert>
+	"fwd.hpp"
+	"vec2.hpp"
+	"vec3.hpp"
+	"vec4.hpp"
+	"mat2x2.hpp"
+	"mat2x3.hpp"
+	"mat2x4.hpp"
+	"mat3x2.hpp"
+	"mat3x3.hpp"
+	"mat3x4.hpp"
+	"mat4x2.hpp"
+	"mat4x3.hpp"
+	"mat4x4.hpp"
+	"trigonometric.hpp"
+	"exponential.hpp"
+	"common.hpp"
+	"packing.hpp"
+	"geometric.hpp"
+	"matrix.hpp"
+	"vector_relational.hpp"
+	"integer.hpp"
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\_fixes.hpp
+	<cmath>
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\fwd.hpp
+	"detail/type_int.hpp"
+	"detail/type_float.hpp"
+	"detail/type_vec.hpp"
+	"detail/type_mat.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_int.hpp
+	"setup.hpp"
+	<cstdint>
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\setup.hpp
+	<cassert>
+	<cuda.h>
+	<intrin.h>
+	<immintrin.h>
+	<immintrin.h>
+	<smmintrin.h>
+	<pmmintrin.h>
+	<emmintrin.h>
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_float.hpp
+	"setup.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_vec.hpp
+	"precision.hpp"
+	"type_int.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\precision.hpp
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat.hpp
+	"precision.hpp"
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\vec2.hpp
+	"detail/type_vec2.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_vec2.hpp
+	"type_vec.hpp"
+	"_swizzle.hpp"
+	"_swizzle_func.hpp"
+	<cstddef>
+	"type_vec2.inl"
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\_swizzle.hpp
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\_swizzle_func.hpp
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_vec2.inl
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\vec3.hpp
+	"detail/type_vec3.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_vec3.hpp
+	"type_vec.hpp"
+	"_swizzle.hpp"
+	"_swizzle_func.hpp"
+	<cstddef>
+	"type_vec3.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_vec3.inl
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\vec4.hpp
+	"detail/type_vec4.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_vec4.hpp
+	"setup.hpp"
+	"type_vec.hpp"
+	"_swizzle.hpp"
+	"_swizzle_func.hpp"
+	<cstddef>
+	"type_vec4.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_vec4.inl
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\mat2x2.hpp
+	"detail/type_mat2x2.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat2x2.hpp
+	"../fwd.hpp"
+	"type_vec2.hpp"
+	"type_mat.hpp"
+	<limits>
+	"type_mat2x2.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat2x2.inl
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\mat2x3.hpp
+	"detail/type_mat2x3.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat2x3.hpp
+	"../fwd.hpp"
+	"type_vec2.hpp"
+	"type_vec3.hpp"
+	"type_mat.hpp"
+	<limits>
+	"type_mat2x3.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat2x3.inl
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\mat2x4.hpp
+	"detail/type_mat2x4.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat2x4.hpp
+	"../fwd.hpp"
+	"type_vec2.hpp"
+	"type_vec4.hpp"
+	"type_mat.hpp"
+	<limits>
+	"type_mat2x4.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat2x4.inl
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\mat3x2.hpp
+	"detail/type_mat3x2.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat3x2.hpp
+	"../fwd.hpp"
+	"type_vec2.hpp"
+	"type_vec3.hpp"
+	"type_mat.hpp"
+	<limits>
+	"type_mat3x2.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat3x2.inl
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\mat3x3.hpp
+	"detail/type_mat3x3.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat3x3.hpp
+	"../fwd.hpp"
+	"type_vec3.hpp"
+	"type_mat.hpp"
+	<limits>
+	"type_mat3x3.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat3x3.inl
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\mat3x4.hpp
+	"detail/type_mat3x4.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat3x4.hpp
+	"../fwd.hpp"
+	"type_vec3.hpp"
+	"type_vec4.hpp"
+	"type_mat.hpp"
+	<limits>
+	"type_mat3x4.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat3x4.inl
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\mat4x2.hpp
+	"detail/type_mat4x2.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat4x2.hpp
+	"../fwd.hpp"
+	"type_vec2.hpp"
+	"type_vec4.hpp"
+	"type_mat.hpp"
+	<limits>
+	"type_mat4x2.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat4x2.inl
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\mat4x3.hpp
+	"detail/type_mat4x3.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat4x3.hpp
+	"../fwd.hpp"
+	"type_vec3.hpp"
+	"type_vec4.hpp"
+	"type_mat.hpp"
+	<limits>
+	"type_mat4x3.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat4x3.inl
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\mat4x4.hpp
+	"detail/type_mat4x4.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat4x4.hpp
+	"../fwd.hpp"
+	"type_vec4.hpp"
+	"type_mat.hpp"
+	<limits>
+	<cstddef>
+	"type_mat4x4.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_mat4x4.inl
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\trigonometric.hpp
+	"detail/func_trigonometric.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\func_trigonometric.hpp
+	"func_trigonometric.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\func_trigonometric.inl
+	"_vectorize.hpp"
+	<cmath>
+	<limits>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\_vectorize.hpp
+	"type_vec1.hpp"
+	"type_vec2.hpp"
+	"type_vec3.hpp"
+	"type_vec4.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_vec1.hpp
+	"../fwd.hpp"
+	"type_vec.hpp"
+	"_swizzle.hpp"
+	"_swizzle_func.hpp"
+	<cstddef>
+	"type_vec1.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_vec1.inl
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\exponential.hpp
+	"detail/func_exponential.hpp"
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\func_exponential.hpp
+	"type_vec1.hpp"
+	"type_vec2.hpp"
+	"type_vec3.hpp"
+	"type_vec4.hpp"
+	<cmath>
+	"func_exponential.inl"
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\func_exponential.inl
+	"func_vector_relational.hpp"
+	"_vectorize.hpp"
+	<limits>
+	<cassert>
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\func_vector_relational.hpp
+	"precision.hpp"
+	"setup.hpp"
+	"func_vector_relational.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\func_vector_relational.inl
+	<limits>
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\common.hpp
+	"detail/func_common.hpp"
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\func_common.hpp
+	"setup.hpp"
+	"precision.hpp"
+	"type_int.hpp"
+	"_fixes.hpp"
+	"func_common.inl"
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\func_common.inl
+	"func_vector_relational.hpp"
+	"type_vec2.hpp"
+	"type_vec3.hpp"
+	"type_vec4.hpp"
+	"_vectorize.hpp"
+	<limits>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\packing.hpp
+	"detail/func_packing.hpp"
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\func_packing.hpp
+	"type_vec2.hpp"
+	"type_vec4.hpp"
+	"func_packing.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\func_packing.inl
+	"func_common.hpp"
+	"type_half.hpp"
+	"../fwd.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_half.hpp
+	"setup.hpp"
+	"type_half.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\type_half.inl
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\geometric.hpp
+	"detail/func_geometric.hpp"
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\func_geometric.hpp
+	"type_vec3.hpp"
+	"func_geometric.inl"
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\func_geometric.inl
+	"func_exponential.hpp"
+	"func_common.hpp"
+	"type_vec2.hpp"
+	"type_vec4.hpp"
+	"type_float.hpp"
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\matrix.hpp
+	"detail/func_matrix.hpp"
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\func_matrix.hpp
+	"../detail/precision.hpp"
+	"../detail/setup.hpp"
+	"../detail/type_mat.hpp"
+	"../vec2.hpp"
+	"../vec3.hpp"
+	"../vec4.hpp"
+	"../mat2x2.hpp"
+	"../mat2x3.hpp"
+	"../mat2x4.hpp"
+	"../mat3x2.hpp"
+	"../mat3x3.hpp"
+	"../mat3x4.hpp"
+	"../mat4x2.hpp"
+	"../mat4x3.hpp"
+	"../mat4x4.hpp"
+	"func_matrix.inl"
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\func_matrix.inl
+	"../geometric.hpp"
+	<limits>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\vector_relational.hpp
+	"detail/func_vector_relational.hpp"
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\integer.hpp
+	"detail/func_integer.hpp"
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\func_integer.hpp
+	"setup.hpp"
+	"func_integer.inl"
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\func_integer.inl
+	"type_vec2.hpp"
+	"type_vec3.hpp"
+	"type_vec4.hpp"
+	"type_int.hpp"
+	"_vectorize.hpp"
+	<intrin.h>
+	<limits>
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\ext.hpp
+	"./gtc/constants.hpp"
+	"./gtc/epsilon.hpp"
+	"./gtc/matrix_access.hpp"
+	"./gtc/matrix_integer.hpp"
+	"./gtc/matrix_inverse.hpp"
+	"./gtc/matrix_transform.hpp"
+	"./gtc/noise.hpp"
+	"./gtc/packing.hpp"
+	"./gtc/quaternion.hpp"
+	"./gtc/random.hpp"
+	"./gtc/reciprocal.hpp"
+	"./gtc/type_precision.hpp"
+	"./gtc/type_ptr.hpp"
+	"./gtc/ulp.hpp"
+	"./gtx/associated_min_max.hpp"
+	"./gtx/bit.hpp"
+	"./gtx/closest_point.hpp"
+	"./gtx/color_space.hpp"
+	"./gtx/color_space_YCoCg.hpp"
+	"./gtx/compatibility.hpp"
+	"./gtx/component_wise.hpp"
+	"./gtx/dual_quaternion.hpp"
+	"./gtx/euler_angles.hpp"
+	"./gtx/extend.hpp"
+	"./gtx/extented_min_max.hpp"
+	"./gtx/fast_exponential.hpp"
+	"./gtx/fast_square_root.hpp"
+	"./gtx/fast_trigonometry.hpp"
+	"./gtx/gradient_paint.hpp"
+	"./gtx/handed_coordinate_space.hpp"
+	"./gtx/inertia.hpp"
+	"./gtx/int_10_10_10_2.hpp"
+	"./gtx/integer.hpp"
+	"./gtx/intersect.hpp"
+	"./gtx/log_base.hpp"
+	"./gtx/matrix_cross_product.hpp"
+	"./gtx/matrix_interpolation.hpp"
+	"./gtx/matrix_major_storage.hpp"
+	"./gtx/matrix_operation.hpp"
+	"./gtx/matrix_query.hpp"
+	"./gtx/mixed_product.hpp"
+	"./gtx/multiple.hpp"
+	"./gtx/norm.hpp"
+	"./gtx/normal.hpp"
+	"./gtx/normalize_dot.hpp"
+	"./gtx/number_precision.hpp"
+	"./gtx/optimum_pow.hpp"
+	"./gtx/orthonormalize.hpp"
+	"./gtx/perpendicular.hpp"
+	"./gtx/polar_coordinates.hpp"
+	"./gtx/projection.hpp"
+	"./gtx/quaternion.hpp"
+	"./gtx/raw_data.hpp"
+	"./gtx/rotate_vector.hpp"
+	"./gtx/spline.hpp"
+	"./gtx/std_based_type.hpp"
+	"./gtx/string_cast.hpp"
+	"./gtx/transform.hpp"
+	"./gtx/transform2.hpp"
+	"./gtx/vec1.hpp"
+	"./gtx/vector_angle.hpp"
+	"./gtx/vector_query.hpp"
+	"./gtx/wrap.hpp"
+	"./gtx/simd_vec4.hpp"
+	"./gtx/simd_mat4.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\constants.hpp
+	"../detail/setup.hpp"
+	"constants.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\constants.inl
+	<limits>
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\epsilon.hpp
+	"../detail/setup.hpp"
+	"../detail/precision.hpp"
+	"epsilon.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\epsilon.inl
+	"quaternion.hpp"
+	"../vector_relational.hpp"
+	"../common.hpp"
+	"../vec2.hpp"
+	"../vec3.hpp"
+	"../vec4.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\quaternion.hpp
+	"../mat3x3.hpp"
+	"../mat4x4.hpp"
+	"../vec3.hpp"
+	"../vec4.hpp"
+	"../gtc/constants.hpp"
+	"quaternion.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\quaternion.inl
+	"../trigonometric.hpp"
+	"../geometric.hpp"
+	"../exponential.hpp"
+	<limits>
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\matrix_access.hpp
+	"../detail/setup.hpp"
+	"matrix_access.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\matrix_access.inl
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\matrix_integer.hpp
+	"../mat2x2.hpp"
+	"../mat2x3.hpp"
+	"../mat2x4.hpp"
+	"../mat3x2.hpp"
+	"../mat3x3.hpp"
+	"../mat3x4.hpp"
+	"../mat4x2.hpp"
+	"../mat4x3.hpp"
+	"../mat4x4.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\matrix_inverse.hpp
+	"../detail/setup.hpp"
+	"matrix_inverse.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\matrix_inverse.inl
+	"../mat2x2.hpp"
+	"../mat3x3.hpp"
+	"../mat4x4.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\matrix_transform.hpp
+	"../mat4x4.hpp"
+	"../vec2.hpp"
+	"../vec3.hpp"
+	"../vec4.hpp"
+	"../gtc/constants.hpp"
+	"matrix_transform.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\matrix_transform.inl
+	"../geometric.hpp"
+	"../trigonometric.hpp"
+	"../matrix.hpp"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\noise.hpp
+	"../detail/setup.hpp"
+	"../detail/precision.hpp"
+	"noise.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\noise.inl
+	"../geometric.hpp"
+	"../common.hpp"
+	"../vector_relational.hpp"
+	"../detail/_noise.hpp"
+
+1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\_noise.hpp
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\packing.hpp
+	"type_precision.hpp"
+	"packing.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\type_precision.hpp
+	"../gtc/quaternion.hpp"
+	"../vec2.hpp"
+	"../vec3.hpp"
+	"../vec4.hpp"
+	"../mat2x2.hpp"
+	"../mat2x3.hpp"
+	"../mat2x4.hpp"
+	"../mat3x2.hpp"
+	"../mat3x3.hpp"
+	"../mat3x4.hpp"
+	"../mat4x2.hpp"
+	"../mat4x3.hpp"
+	"../mat4x4.hpp"
+	"type_precision.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\type_precision.inl
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\packing.inl
+	"../common.hpp"
+	"../vec2.hpp"
+	"../vec3.hpp"
+	"../vec4.hpp"
+	"../detail/type_half.hpp"
+	<cstring>
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\random.hpp
+	"../vec2.hpp"
+	"../vec3.hpp"
+	"random.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\random.inl
+	"../geometric.hpp"
+	"../exponential.hpp"
+	<cstdlib>
+	<ctime>
+	<cassert>
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\reciprocal.hpp
+	"../detail/setup.hpp"
+	"reciprocal.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\reciprocal.inl
+	"../trigonometric.hpp"
+	<limits>
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\type_ptr.hpp
+	"../gtc/quaternion.hpp"
+	"../vec2.hpp"
+	"../vec3.hpp"
+	"../vec4.hpp"
+	"../mat2x2.hpp"
+	"../mat2x3.hpp"
+	"../mat2x4.hpp"
+	"../mat3x2.hpp"
+	"../mat3x3.hpp"
+	"../mat3x4.hpp"
+	"../mat4x2.hpp"
+	"../mat4x3.hpp"
+	"../mat4x4.hpp"
+	<cstring>
+	"type_ptr.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\type_ptr.inl
+	<cstring>
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\ulp.hpp
+	"../detail/setup.hpp"
+	"../detail/precision.hpp"
+	"../detail/type_int.hpp"
+	"ulp.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtc\ulp.inl
+	"../detail/type_int.hpp"
+	<cmath>
+	<cfloat>
+	<limits>
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\associated_min_max.hpp
+	"../glm.hpp"
+	"associated_min_max.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\associated_min_max.inl
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\bit.hpp
+	"../detail/type_int.hpp"
+	"../detail/setup.hpp"
+	<cstddef>
+	"bit.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\bit.inl
+	"../detail/_vectorize.hpp"
+	<limits>
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\closest_point.hpp
+	"../glm.hpp"
+	"closest_point.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\closest_point.inl
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\color_space.hpp
+	"../glm.hpp"
+	"color_space.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\color_space.inl
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\color_space_ycocg.hpp
+	"../glm.hpp"
+	"color_space_YCoCg.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\color_space_ycocg.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\compatibility.hpp
+	"../glm.hpp"
+	"../gtc/quaternion.hpp"
+	<cfloat>
+	<cmath>
+	"compatibility.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\compatibility.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\component_wise.hpp
+	"../detail/setup.hpp"
+	"component_wise.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\component_wise.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\dual_quaternion.hpp
+	"../glm.hpp"
+	"../gtc/constants.hpp"
+	"../gtc/quaternion.hpp"
+	"dual_quaternion.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\dual_quaternion.inl
+	"../geometric.hpp"
+	<limits>
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\euler_angles.hpp
+	"../glm.hpp"
+	"euler_angles.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\euler_angles.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\extend.hpp
+	"../glm.hpp"
+	"extend.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\extend.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\extented_min_max.hpp
+	"../glm.hpp"
+	"extented_min_max.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\extented_min_max.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\fast_exponential.hpp
+	"../glm.hpp"
+	"fast_exponential.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\fast_exponential.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\fast_square_root.hpp
+	"../glm.hpp"
+	"fast_square_root.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\fast_square_root.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\fast_trigonometry.hpp
+	"../glm.hpp"
+	"fast_trigonometry.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\fast_trigonometry.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\gradient_paint.hpp
+	"../glm.hpp"
+	"../gtx/optimum_pow.hpp"
+	"gradient_paint.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\optimum_pow.hpp
+	"../glm.hpp"
+	"optimum_pow.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\optimum_pow.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\gradient_paint.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\handed_coordinate_space.hpp
+	"../glm.hpp"
+	"handed_coordinate_space.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\handed_coordinate_space.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\inertia.hpp
+	"../glm.hpp"
+	"inertia.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\inertia.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\int_10_10_10_2.hpp
+	"../glm.hpp"
+	"../gtx/raw_data.hpp"
+	"int_10_10_10_2.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\raw_data.hpp
+	"../detail/setup.hpp"
+	"../detail/type_int.hpp"
+	"raw_data.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\raw_data.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\int_10_10_10_2.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\integer.hpp
+	"../glm.hpp"
+	"integer.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\integer.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\intersect.hpp
+	"../glm.hpp"
+	"../gtx/closest_point.hpp"
+	"intersect.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\intersect.inl
+	"../geometric.hpp"
+	<cfloat>
+	<limits>
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\log_base.hpp
+	"../glm.hpp"
+	"log_base.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\log_base.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\matrix_cross_product.hpp
+	"../glm.hpp"
+	"matrix_cross_product.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\matrix_cross_product.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\matrix_interpolation.hpp
+	"../glm.hpp"
+	"matrix_interpolation.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\matrix_interpolation.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\matrix_major_storage.hpp
+	"../glm.hpp"
+	"matrix_major_storage.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\matrix_major_storage.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\matrix_operation.hpp
+	"../glm.hpp"
+	"matrix_operation.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\matrix_operation.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\matrix_query.hpp
+	"../glm.hpp"
+	"../gtx/vector_query.hpp"
+	<limits>
+	"matrix_query.inl"
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\vector_query.hpp
+	"../glm.hpp"
+	<cfloat>
+	<limits>
+	"vector_query.inl"
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\vector_query.inl
+	<cassert>
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\matrix_query.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\mixed_product.hpp
+	"../glm.hpp"
+	"mixed_product.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\mixed_product.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\multiple.hpp
+	"../glm.hpp"
+	"multiple.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\multiple.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\norm.hpp
+	"../glm.hpp"
+	"../gtx/quaternion.hpp"
+	"norm.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\quaternion.hpp
+	"../glm.hpp"
+	"../gtc/constants.hpp"
+	"../gtc/quaternion.hpp"
+	"../gtx/norm.hpp"
+	"quaternion.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\quaternion.inl
+	<limits>
+	"../gtc/constants.hpp"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\norm.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\normal.hpp
+	"../glm.hpp"
+	"normal.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\normal.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\normalize_dot.hpp
+	"../glm.hpp"
+	"../gtx/fast_square_root.hpp"
+	"normalize_dot.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\normalize_dot.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\number_precision.hpp
+	"../glm.hpp"
+	"../gtc/type_precision.hpp"
+	"number_precision.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\number_precision.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\orthonormalize.hpp
+	"../glm.hpp"
+	"orthonormalize.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\orthonormalize.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\perpendicular.hpp
+	"../glm.hpp"
+	"../gtx/projection.hpp"
+	"perpendicular.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\projection.hpp
+	"../glm.hpp"
+	"projection.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\projection.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\perpendicular.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\polar_coordinates.hpp
+	"../glm.hpp"
+	"polar_coordinates.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\polar_coordinates.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\rotate_vector.hpp
+	"../glm.hpp"
+	"../gtx/transform.hpp"
+	"rotate_vector.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\transform.hpp
+	"../glm.hpp"
+	"../gtc/matrix_transform.hpp"
+	"transform.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\transform.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\rotate_vector.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\spline.hpp
+	"../glm.hpp"
+	"../gtx/optimum_pow.hpp"
+	"spline.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\spline.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\std_based_type.hpp
+	"../glm.hpp"
+	<cstdlib>
+	"std_based_type.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\std_based_type.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\string_cast.hpp
+	"../glm.hpp"
+	"../gtx/integer.hpp"
+	"../gtx/quaternion.hpp"
+	<string>
+	"string_cast.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\string_cast.inl
+	<cstdarg>
+	<cstdio>
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\transform2.hpp
+	"../glm.hpp"
+	"../gtx/transform.hpp"
+	"transform2.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\transform2.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\vec1.hpp
+	"../glm.hpp"
+	"../detail/type_vec1.hpp"
+	"vec1.inl"
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\vec1.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\vector_angle.hpp
+	"../glm.hpp"
+	"../gtc/epsilon.hpp"
+	"../gtx/quaternion.hpp"
+	"../gtx/rotate_vector.hpp"
+	"vector_angle.inl"
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\vector_angle.inl
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\wrap.hpp
+	"../glm.hpp"
+	"wrap.inl"
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\wrap.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\simd_vec4.hpp
+	"../glm.hpp"
+	"../detail/intrinsic_common.hpp"
+	"../detail/intrinsic_geometric.hpp"
+	"../detail/intrinsic_integer.hpp"
+	"simd_vec4.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\intrinsic_common.hpp
+	"setup.hpp"
+	"intrinsic_common.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\intrinsic_common.inl
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\intrinsic_geometric.hpp
+	"setup.hpp"
+	"intrinsic_common.hpp"
+	"intrinsic_geometric.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\intrinsic_geometric.inl
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\intrinsic_integer.hpp
+	"glm/glm.hpp"
+	"intrinsic_integer.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\intrinsic_integer.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\simd_vec4.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\simd_mat4.hpp
+	"../detail/setup.hpp"
+	"../detail/intrinsic_matrix.hpp"
+	"../gtx/simd_vec4.hpp"
+	"simd_mat4.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\intrinsic_matrix.hpp
+	"setup.hpp"
+	"intrinsic_geometric.hpp"
+	"intrinsic_matrix.inl"
+
+1455012462 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\detail\intrinsic_matrix.inl
+
+1455012463 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm\gtx\simd_mat4.inl
+
+1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\luabridge.h
+	<cassert>
+	<sstream>
+	<stdexcept>
+	<string>
+	<typeinfo>
+	"detail/LuaHelpers.h"
+	"detail/TypeTraits.h"
+	"detail/TypeList.h"
+	"detail/FuncTraits.h"
+	"detail/Constructor.h"
+	"detail/Stack.h"
+	"detail/ClassInfo.h"
+	"detail/LuaException.h"
+	"detail/LuaRef.h"
+	"detail/Iterator.h"
+	"detail/Userdata.h"
+	"detail/CFunctions.h"
+	"detail/Namespace.h"
+
+1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\detail\luahelpers.h
+
+1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\detail\typetraits.h
+
+1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\detail\typelist.h
+
+1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\detail\functraits.h
+
+1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\detail\constructor.h
+
+1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\detail\stack.h
+
+1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\detail\classinfo.h
+
+1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\detail\luaexception.h
+
+1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\detail\luaref.h
+
+1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\detail\iterator.h
+
+1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\detail\userdata.h
+
+1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\detail\cfunctions.h
+
+1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\detail\namespace.h
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\component.cpp
+	<cassert>
+	<iostream>
+	"mge/behaviours/Component.hpp"
+	"mge/core/GameObject.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\keysbehaviour.cpp
+	"mge/behaviours/KeysBehaviour.hpp"
+	"mge/core/GameObject.hpp"
+	"mge/util/Input.hpp"
+	<sfml/window/event.hpp>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\keysbehaviour.hpp
+	"mge/behaviours/Component.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\lookat.cpp
+	<glm.hpp>
+	"mge/behaviours/LookAt.hpp"
+	"mge/core/GameObject.hpp"
+	<iostream>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\lookat.hpp
+	<glm.hpp>
+	"mge/behaviours/Component.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\rotatingbehaviour.cpp
+	"mge/behaviours/RotatingBehaviour.hpp"
+	"mge/core/GameObject.hpp"
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\rotatingbehaviour.hpp
+	"mge/behaviours/Component.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\boxcollider.cpp
+	<mge/collision/BoxCollider.hpp>
+	<mge/collision/SphereCollider.hpp>
+	<mge/core/GameObject.hpp>
+	<glm.hpp>
+	<limits>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\boxcollider.hpp
+	<mge/collision/Collider.hpp>
+	<mge/collision/SphereCollider.hpp>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collider.hpp
+	<mge/behaviours/Component.hpp>
+	<mge/util/list/DualLinkNode.hpp>
+	<mge/collision/CollisionManager.hpp>
+	<functional>
+	<glm.hpp>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\duallinknode.hpp
+	<cstddef>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.hpp
+	<mge/util/list/DualLinkList.hpp>
+	<mge/core/AbstractGame.hpp>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\duallinklist.hpp
+	<cstddef>
+	<functional>
+	<mge/util/list/DualLinkNode.hpp>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\spherecollider.hpp
+	<mge/collision/Collider.hpp>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collider.cpp
+	<mge/collision/Collider.hpp>
+	<mge/collision/CollisionManager.hpp>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.cpp
+	<mge/collision/CollisionManager.hpp>
+	<mge/util/list/DualLinkNode.hpp>
+	<mge/collision/Collider.hpp>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\spherecollider.cpp
+	<mge/collision/SphereCollider.hpp>
+	<mge/collision/BoxCollider.hpp>
+	<mge/core/GameObject.hpp>
+	<glm.hpp>
+	<iostream>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
+	"AbstractGame.hpp"
+	<iostream>
+	"mge/core/Time.hpp"
+	"mge/core/FPS.hpp"
+	"mge/core/Renderer.hpp"
+	"mge/core/World.hpp"
+	<mge/collision/CollisionManager.hpp>
+	<mge/util/Input.hpp>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\time.hpp
+	<SFML/System.hpp>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\fps.hpp
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.hpp
+	<GL/glew.h>
+	<vector>
+	<mge/materials/PostProcessing/PostProcess.hpp>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\postprocessing\postprocess.hpp
+	<GL/glew.h>
+	<mge/core/ShaderProgram.hpp>
+	<string>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\shaderprogram.hpp
+	<vector>
+	<string>
+	<GL/glew.h>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\world.hpp
+	<vector>
+	"mge/core/GameObject.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\activateable.cpp
+	"mge/core/Activateable.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.cpp
+	<iostream>
+	<glm.hpp>
+	"mge/core/Camera.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\destroyable.cpp
+	<mge/core/Destroyable.hpp>
+	<mge/util/list/SingleLinkNode.hpp>
+	<mge/util/list/SingleLinkList.hpp>
+	<mge/core/GameObject.hpp>
+	<iostream>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\fps.cpp
+	<iostream>
+	"mge/core/FPS.hpp"
+	"mge/core/Time.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
+	<cassert>
+	<iostream>
+	<glm.hpp>
+	"mge/core/GameObject.hpp"
+	"mge/core/Mesh.hpp"
+	"mge/core/World.hpp"
+	"mge/behaviours/Component.hpp"
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\mesh.hpp
+	<vector>
+	<cstring>
+	<string>
+	<GL/glew.h>
+	<glm.hpp>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\light.cpp
+	<mge/core/Light.hpp>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\light.hpp
+	<mge/core/GameObject.hpp>
+	<glm.hpp>
+	<vector>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\mesh.cpp
+	"mge/core/Mesh.hpp"
+	<iostream>
+	<map>
+	<string>
+	<fstream>
+	"mge/core/Renderer.hpp"
+	"mge/core/World.hpp"
+	"mge/core/Camera.hpp"
+	"glm.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
+	"mge/core/Renderer.hpp"
+	<cassert>
+	<GL/glew.h>
+	"mge/core/GameObject.hpp"
+	"mge/core/World.hpp"
+	"mge/core/Camera.hpp"
+	"mge/materials/AbstractMaterial.hpp"
+	<iostream>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\abstractmaterial.hpp
+	"mge/core/ShaderProgram.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\shaderprogram.cpp
+	"mge/core/ShaderProgram.hpp"
+	<iostream>
+	<fstream>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\texture.cpp
+	<iostream>
+	<string>
+	<SFML/Graphics.hpp>
+	"mge/core/Texture.hpp"
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\texture.hpp
+	<map>
+	<string>
+	<GL/glew.h>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\time.cpp
+	"mge/core/Time.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\world.cpp
+	<cassert>
+	<algorithm>
+	<iostream>
+	"mge/core/World.hpp"
+	"mge/core/Camera.hpp"
+	"mge/core/Mesh.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luaengine.cpp
+	"LuaEngine.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\abstractmaterial.cpp
+	"mge/materials/AbstractMaterial.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\colormaterial.cpp
+	<glm.hpp>
+	"mge/materials/ColorMaterial.hpp"
+	"mge/config.hpp"
+	"mge/core/Camera.hpp"
+	"mge/core/Mesh.hpp"
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\colormaterial.hpp
+	"mge/materials/AbstractMaterial.hpp"
+	<glm.hpp>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\config.hpp
+	<string>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\postprocessing\postprocess.cpp
+	<glm.hpp>
+	"mge/materials/PostProcessing/PostProcess.hpp"
+	"mge/core/Texture.hpp"
+	"mge/core/Camera.hpp"
+	"mge/core/Mesh.hpp"
+	"mge/core/Renderer.hpp"
+	"mge/config.hpp"
+	<string>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\terrainmaterial.cpp
+	<glm.hpp>
+	"mge/materials/TerrainMaterial.hpp"
+	"mge/core/Texture.hpp"
+	"mge/core/Camera.hpp"
+	"mge/core/Mesh.hpp"
+	"mge/config.hpp"
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\terrainmaterial.hpp
+	"mge/core/Texture.hpp"
+	"mge/materials/AbstractMaterial.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
+	<glm.hpp>
+	"mge/materials/TextureLitMaterial.hpp"
+	"mge/core/Texture.hpp"
+	"mge/core/Camera.hpp"
+	"mge/core/Mesh.hpp"
+	"mge/config.hpp"
+	"mge/core/Light.hpp"
+	<string>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.hpp
+	"mge/core/Texture.hpp"
+	"mge/materials/AbstractMaterial.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturematerial.cpp
+	<glm.hpp>
+	"mge/materials/TextureMaterial.hpp"
+	"mge/core/Texture.hpp"
+	"mge/core/Camera.hpp"
+	"mge/core/Mesh.hpp"
+	"mge/config.hpp"
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturematerial.hpp
+	"mge/core/Texture.hpp"
+	"mge/materials/AbstractMaterial.hpp"
+
+1455016535 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
+	<glm.hpp>
+	<iostream>
+	<string>
+	"mge/core/Renderer.hpp"
+	"mge/core/Mesh.hpp"
+	"mge/core/World.hpp"
+	"mge/core/FPS.hpp"
+	"mge/core/Camera.hpp"
+	"mge/core/GameObject.hpp"
+	"mge/materials/AbstractMaterial.hpp"
+	"mge/materials/ColorMaterial.hpp"
+	"mge/materials/TextureMaterial.hpp"
+	"mge/materials/TerrainMaterial.hpp"
+	"mge/materials/TextureLitMaterial.hpp"
+	"mge/core/Light.hpp"
+	"mge/behaviours/RotatingBehaviour.hpp"
+	"mge/behaviours/KeysBehaviour.hpp"
+	"mge/behaviours/LookAt.hpp"
+	"mge/util/DebugHud.hpp"
+	"mge/config.hpp"
+	"mge/MGEDemo.hpp"
+	<mge/collision/SphereCollider.hpp>
+	<mge/test/TestSphereCol.hpp>
+	<mge/behaviours/CameraOrbit.hpp>
+	<mge/sound/SoundManager.hpp>
+	<mge/sound/SoundChannel.hpp>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\debughud.hpp
+	<SFML/Graphics.hpp>
+	<iostream>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\test\testspherecol.hpp
+	<mge/collision/SphereCollider.hpp>
+	<mge/collision/BoxCollider.hpp>
+	<mge/collision/Collider.hpp>
+
+1455014884 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\sound\soundmanager.hpp
+	<vector>
+	<SFML/Audio/Sound.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/Music.hpp>
+	<mge/sound/SoundCacher.hpp>
+	<mge/sound/SoundChannel.hpp>
+
+1455012455 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\audio\sound.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Time.hpp>
+	<cstdlib>
+
+1455012455 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\audio\export.hpp
+	<SFML/Config.hpp>
+
+1455012456 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\audio\soundsource.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Vector3.hpp>
+
+1455012454 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\audio\alresource.hpp
+	<SFML/Audio/Export.hpp>
+
+1455012455 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\audio\soundbuffer.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+	<set>
+
+1455012455 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\audio\music.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundStream.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+
+1455012456 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\audio\soundstream.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<SFML/System/Mutex.hpp>
+	<cstdlib>
+
+1455012455 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\sfml\audio\inputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+
+1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\sound\soundcacher.hpp
+	<SFML/Audio/SoundBuffer.hpp>
+	<map>
+
+1455015102 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\sound\soundchannel.hpp
+	<SFML/Audio/Sound.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<mge/sound/SoundManager.hpp>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\sound\soundcacher.cpp
+	"SoundCacher.hpp"
+	<SFML/Audio/SoundBuffer.hpp>
+	<iostream>
+	<map>
+
+1455015352 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\sound\soundchannel.cpp
+	"mge/sound/SoundChannel.hpp"
+
+1455015421 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\sound\soundmanager.cpp
+	<mge/sound/SoundManager.hpp>
+	<cstddef>
+	<iostream>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\test\testspherecol.cpp
+	<mge/test/TestSphereCol.hpp>
+	<mge/core/GameObject.hpp>
+	<mge/util/Input.hpp>
+	<iostream>
+	<glm.hpp>
+	<conio.h>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\debughud.cpp
+	<cassert>
+	<iostream>
+	<cstdio>
+	<GL/glew.h>
+	<SFML/Graphics/Text.hpp>
+	"mge/core/FPS.hpp"
+	"mge/util/DebugHud.hpp"
+	"mge/config.hpp"
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\input.cpp
+	<mge/util/Input.hpp>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\duallinklist.cpp
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\duallinknode.cpp
+	<mge/util/list/DualLinkNode.hpp>
+	<mge/core/Destroyable.hpp>
+	<mge/core/Light.hpp>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\singlelinklist.cpp
+	<mge/util/list/SingleLinkList.hpp>
+	<mge/core/Destroyable.hpp>
+
+1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\singlelinknode.cpp
+	<mge/util/list/SingleLinkNode.hpp>
+	<mge/core/Destroyable.hpp>
+
