@@ -36,11 +36,6 @@ using namespace std;
 #include <mge/sound/SoundManager.hpp>
 #include <mge/sound/SoundChannel.hpp>
 
-
-//macro definition for *safe* deletion of pointer object
-#define SAFE_DELETE(x) { if(x) delete x; x = nullptr; }
-
-
 //construct the game class into _window, _renderer and hud (other parts are initialized by build)
 MGEDemo::MGEDemo():AbstractGame ()
 {
@@ -104,8 +99,8 @@ void MGEDemo::_initializeScene()
 
     //SCENE SETUP
 
-    Camera* camera = new Camera ("camera", glm::vec3(0,3,-2));
-    //camera->rotate(glm::radians(-90.0f),glm::vec3(1,0,0));
+    Camera* camera = new Camera ("camera", glm::vec3(0,5,0));
+    camera->rotate(glm::radians(-90.0f),glm::vec3(1,0,0));
     _world->setMainCamera(camera);
     _world->AddChild(camera);
 
@@ -173,16 +168,9 @@ void MGEDemo::_initializeScene()
 
     //Sound::SoundManager::GetSingleton()->LoadSFX(config::MGE_SOUND_PATH + "test.wav")->Play();
 
-    engine = new LuaEngine(_world);
-
-    //register person class into lua script engine
-    GameObject::register_lua(engine->L());
-
-    //execute specified file file
-
-    //yeah, otherwise doesn't find the file :P
-    engine->ExecuteFile(config::MGE_SCRIPT_PATH + "script.lua");
-
+    luaScript = new LuaScript((config::MGE_SCRIPT_PATH + "script.lua").c_str(), _world);
+    //_world->AttachComponent(luaScript);
+    sphere1->AttachComponent(luaScript);
 }
 
 
@@ -207,6 +195,5 @@ void MGEDemo::_updateHud() {
 
 MGEDemo::~MGEDemo()
 {
-    SAFE_DELETE(engine); //delete engine from memory
 	//dtor
 }

@@ -20,7 +20,6 @@
 					<Add option="-g" />
 					<Add directory="src" />
 					<Add directory="Lua/5.1/include" />
-					<Add directory="LuaBridge" />
 				</Compiler>
 				<Linker>
 					<Add library="lua51" />
@@ -120,8 +119,8 @@
 		<Unit filename="src/mge/core/Time.hpp" />
 		<Unit filename="src/mge/core/World.cpp" />
 		<Unit filename="src/mge/core/World.hpp" />
-		<Unit filename="src/mge/lua/LuaEngine.cpp" />
-		<Unit filename="src/mge/lua/LuaEngine.hpp" />
+		<Unit filename="src/mge/lua/LuaScript.cpp" />
+		<Unit filename="src/mge/lua/LuaScript.hpp" />
 		<Unit filename="src/mge/materials/AbstractMaterial.cpp" />
 		<Unit filename="src/mge/materials/AbstractMaterial.hpp" />
 		<Unit filename="src/mge/materials/ColorMaterial.cpp" />

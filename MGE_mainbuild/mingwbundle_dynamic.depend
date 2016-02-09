@@ -12352,11 +12352,11 @@
 
 1454940975 c:\github\projectthirdperson\mge_mainbuild\src\gl\gl.h
 
-1454958220 c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.hpp
+1455026994 c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.hpp
 	<mge/core/AbstractGame.hpp>
 	<SFML/Graphics.hpp>
 	<vector>
-	"mge/lua/LuaEngine.hpp"
+	"mge/lua/LuaScript.hpp"
 
 1455017718 c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luaengine.hpp
 	<string>
@@ -12372,7 +12372,7 @@
 1454940977 c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\cameraorbit.hpp
 	<mge/behaviours/Component.hpp>
 
-1454940977 c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\component.hpp
+1455033157 c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\component.hpp
 	"mge/core/Activateable.hpp"
 	"mge/core/Destroyable.hpp"
 	<string>
@@ -12398,7 +12398,7 @@
 	<string>
 	"mge/core/GameObject.hpp"
 
-1455018339 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\gameobject.hpp
+1455027436 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\gameobject.hpp
 	<vector>
 	<string>
 	<iostream>
@@ -12406,8 +12406,6 @@
 	"mge/core/Activateable.hpp"
 	"mge/core/Destroyable.hpp"
 	"mge/core/AbstractGame.hpp"
-	"lua.hpp"
-	"luabridge.h"
 
 1454940976 c:\github\projectthirdperson\mge_mainbuild\src\glm.hpp
 	<iostream>
@@ -13469,10 +13467,12 @@
 	<mge/collision/Collider.hpp>
 	<mge/collision/CollisionManager.hpp>
 
-1454940977 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\collisionmanager.cpp
+1455033205 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\collisionmanager.cpp
 	<mge/collision/CollisionManager.hpp>
 	<mge/util/list/DualLinkNode.hpp>
 	<mge/collision/Collider.hpp>
+	<mge/lua/LuaScript.hpp>
+	<mge/core/GameObject.hpp>
 
 1454940977 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\spherecollider.cpp
 	<mge/collision/SphereCollider.hpp>
@@ -13791,13 +13791,13 @@
 
 1452188439 c:\github\projectthirdperson\mge_mainbuild\luabridge\detail\iterator.h
 
-1454947438 c:\github\projectthirdperson\mge_mainbuild\luabridge\detail\userdata.h
+1455026332 c:\github\projectthirdperson\mge_mainbuild\luabridge\detail\userdata.h
 
 1452188439 c:\github\projectthirdperson\mge_mainbuild\luabridge\detail\cfunctions.h
 
 1452188439 c:\github\projectthirdperson\mge_mainbuild\luabridge\detail\namespace.h
 
-1455020931 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
+1455032100 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -13825,7 +13825,7 @@
 	<mge/sound/SoundManager.hpp>
 	<mge/sound/SoundChannel.hpp>
 
-1454959751 c:\github\projectthirdperson\mge_mainbuild\src\mge\sound\soundmanager.hpp
+1455021500 c:\github\projectthirdperson\mge_mainbuild\src\mge\sound\soundmanager.hpp
 	<vector>
 	<SFML/Audio/Sound.hpp>
 	<SFML/Audio/SoundBuffer.hpp>
@@ -13885,7 +13885,7 @@
 	<SFML/Audio/SoundBuffer.hpp>
 	<map>
 
-1454959751 c:\github\projectthirdperson\mge_mainbuild\src\mge\sound\soundchannel.hpp
+1455021500 c:\github\projectthirdperson\mge_mainbuild\src\mge\sound\soundchannel.hpp
 	<SFML/Audio/Sound.hpp>
 	<SFML/Audio/SoundBuffer.hpp>
 	<mge/sound/SoundManager.hpp>
@@ -13896,10 +13896,10 @@
 	<iostream>
 	<map>
 
-1454959751 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\sound\soundchannel.cpp
+1455021500 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\sound\soundchannel.cpp
 	"mge/sound/SoundChannel.hpp"
 
-1454959751 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\sound\soundmanager.cpp
+1455021500 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\sound\soundmanager.cpp
 	<mge/sound/SoundManager.hpp>
 	<cstddef>
 	<iostream>
@@ -15863,4 +15863,25 @@
 1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\singlelinknode.cpp
 	<mge/util/list/SingleLinkNode.hpp>
 	<mge/core/Destroyable.hpp>
+
+1455033229 c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luascript.hpp
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+	<iostream>
+	<vector>
+	<mge/behaviours/Component.hpp>
+
+1455032869 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luascript.cpp
+	"mge/lua/LuaScript.hpp"
+	"mge/core/World.hpp"
+	"mge/core/GameObject.hpp"
+	"mge/core/Camera.hpp"
+	"mge/core/Mesh.hpp"
+	"mge/materials/ColorMaterial.hpp"
+	"mge/materials/TextureMaterial.hpp"
+	"mge/behaviours/KeysBehaviour.hpp"
+	"mge/behaviours/LookAt.hpp"
+	"mge/config.hpp"
+	<sfml/window/event.hpp>
 

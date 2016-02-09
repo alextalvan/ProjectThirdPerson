@@ -1,6 +1,8 @@
 #include<mge/collision/CollisionManager.hpp>
 #include<mge/util/list/DualLinkNode.hpp>
 #include<mge/collision/Collider.hpp>
+#include<mge/lua/LuaScript.hpp>
+#include<mge/core/GameObject.hpp>
 using namespace Utils;
 
 bool CollisionManager::collisionMatrix[10][10];
@@ -69,6 +71,7 @@ void CollisionManager::DoCollisions()
                 if(collideri->OnCollision!=NULL)
                 {
                     collideri->OnCollision(colliderj,mtv);
+
                 }
 
                 if(colliderj->OnCollision!=NULL)
@@ -76,6 +79,15 @@ void CollisionManager::DoCollisions()
                     //mtv.axis *= -1;
                     colliderj->OnCollision(collideri,mtv);
                 }
+
+                //lua callbacks
+                LuaScript* l = collideri->getOwner()->GetComponent<LuaScript>();
+                if(l!=NULL)
+                    l->InvokeCollisionCallback(colliderj->getOwner());
+
+                LuaScript* l1 = colliderj->getOwner()->GetComponent<LuaScript>();
+                if(l1!=NULL)
+                    l1->InvokeCollisionCallback(collideri->getOwner());
 
             }
 
@@ -86,3 +98,4 @@ void CollisionManager::DoCollisions()
         currentNodei = currentNodei->nextNode;
     }
 }
+
