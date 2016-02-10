@@ -14,7 +14,7 @@ class KeysBehaviour : public Component
 		virtual ~KeysBehaviour();
 		virtual void Update();
 
-    private:
+    protected:
         float _moveSpeed;
         float _turnSpeed;
 };

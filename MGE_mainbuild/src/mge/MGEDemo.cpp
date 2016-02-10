@@ -35,6 +35,7 @@ using namespace std;
 
 #include <mge/sound/SoundManager.hpp>
 #include <mge/sound/SoundChannel.hpp>
+#include <mge/behaviours/CharacterController.hpp>
 
 //construct the game class into _window, _renderer and hud (other parts are initialized by build)
 MGEDemo::MGEDemo():AbstractGame ()
@@ -99,10 +100,16 @@ void MGEDemo::_initializeScene()
 
     //SCENE SETUP
 
-    Camera* camera = new Camera ("camera", glm::vec3(0,5,0));
-    camera->rotate(glm::radians(-90.0f),glm::vec3(1,0,0));
+    GameObject* sphere1 = new GameObject ("object_controlled", glm::vec3(0,0,0));
+    sphere1->setMesh (sphereMeshF);
+    sphere1->setMaterial(textureMaterial2);
+    sphere1->AttachComponent(new Test::TestSphereCol());
+    _world->AddChild(sphere1);
+
+    Camera* camera = new Camera ("camera", glm::vec3(0,0,0));
     _world->setMainCamera(camera);
-    _world->AddChild(camera);
+    sphere1->AddChild(camera);
+    sphere1->AttachComponent(new CharacterController(1.0f,1.0f));
 
     GameObject* plane = new GameObject ("plane");
     plane->scale(glm::vec3(20,5,20));
@@ -141,13 +148,6 @@ void MGEDemo::_initializeScene()
 
     //light3->
 
-    GameObject* sphere1 = new GameObject ("object_controlled", glm::vec3(0,0,0));
-    sphere1->setMesh (sphereMeshF);
-    sphere1->setMaterial(textureMaterial2);
-    sphere1->AttachComponent(new KeysBehaviour(0.05f,1.0f));
-    sphere1->AttachComponent(new Test::TestSphereCol());
-    _world->AddChild(sphere1);
-
     Light* light3 = new Light();
     light3->color = glm::vec3(1,0,0);
     //light3->attenuation = glm::vec3(0.75f,0,0.5f);
@@ -168,11 +168,11 @@ void MGEDemo::_initializeScene()
 
     //Sound::SoundManager::GetSingleton()->LoadSFX(config::MGE_SOUND_PATH + "test.wav")->Play();
 
-    luaScript = new LuaScript((config::MGE_SCRIPT_PATH + "test.lua").c_str(), _world);
+    //luaScript = new LuaScript((config::MGE_SCRIPT_PATH + "test.lua").c_str(), _world);
     //_world->AttachComponent(luaScript);
-    sphere1->AttachComponent(luaScript);
+    //sphere1->AttachComponent(luaScript);
 
-    sphere1->Destroy();
+    //sphere1->Destroy();
 }
 
 
