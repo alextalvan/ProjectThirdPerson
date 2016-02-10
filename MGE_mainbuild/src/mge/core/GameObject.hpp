@@ -8,6 +8,8 @@
 #include "mge/core/Activateable.hpp"
 #include "mge/core/Destroyable.hpp"
 #include "mge/core/AbstractGame.hpp"
+#include "mge/util/list/DualLinkList.hpp"
+#include "mge/util/list/DualLinkNode.hpp"
 
 class AbstractCollider;
 class Component;
@@ -16,7 +18,9 @@ class World;
 class Mesh;
 //class Activateable;
 
-class GameObject : public Activateable, public Destroyable
+class ChildList;
+
+class GameObject : public Activateable, public Destroyable, public DualLinkNode2<ChildList>
 {
     friend class AbstractGame;
 
@@ -69,14 +73,16 @@ class GameObject : public Activateable, public Destroyable
         Component* GetComponentAt (int pIndex);
 
         //note that this thing returns the FIRST component of type tp found, if it exists
-        template<class tp>
-        tp* GetComponent()
+        template<class T>
+        T* GetComponent()
         {
-            for(int i = 0; i< GetComponentsCount(); ++i)
+            DualLinkNode<Component>* cn = _components.startNode;
+            while(cn!=NULL)
             {
-                tp* ret = dynamic_cast<tp*>(GetComponentAt(i));
+                T* ret = dynamic_cast<T*>((Component*)cn);
                 if(ret)
                     return ret;
+                cn = cn->nextNode;
             }
             return NULL;
         }
@@ -102,14 +108,15 @@ class GameObject : public Activateable, public Destroyable
 		glm::mat4 _worldTransform;
 
         GameObject* _parent;
-		std::vector<GameObject*> _children;
+		//std::vector<GameObject*> _children;
+		DualLinkList2<ChildList> _children;
 
         Mesh* _mesh;
 
-        std::vector<Component*> _components;
+        DualLinkList<Component> _components;
 		//Component* _behaviour;
 		AbstractMaterial* _material;
-		World* _world;
+		//World* _world;
 
         //update children list administration
         void _innerAdd (GameObject* pChild);

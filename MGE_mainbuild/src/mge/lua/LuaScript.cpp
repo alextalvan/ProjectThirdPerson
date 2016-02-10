@@ -12,7 +12,9 @@
 //#include "LitColorMaterial.hpp"
 //#include "LitTextureMaterial.hpp"
 #include "mge/config.hpp"
-#include <sfml/window/event.hpp>
+#include "mge/util/Input.hpp"
+#include "mge/core/Time.hpp"
+
 
 LuaScript::LuaScript(const char * path, World * world)
 {
@@ -39,7 +41,6 @@ LuaScript::LuaScript(const char * path, World * world)
 	lua_register(L, "SetMainCamera", setMainCamera);
 	lua_register(L, "SetParent", setParent);
 	lua_register(L, "GetParent", getParent);
-	lua_register(L, "Remove", remove);
 	lua_register(L, "GetChildCount", getChildCount);
 	lua_register(L, "GetChildAt", getChildAt);
 	lua_register(L, "SetLocalPos", setLocalPosition);
@@ -49,12 +50,12 @@ LuaScript::LuaScript(const char * path, World * world)
 	lua_register(L, "Scale", scale);
 	lua_register(L, "Translate", translate);
 	lua_register(L, "GetTime", getTime);
-	lua_register(L, "KeyPressed", keyPressed);
-	lua_register(L, "KeysBehaviour", keysBehaviour);
-	lua_register(L, "OrbitBehaviour", orbitBehaviour);
-	lua_register(L, "LookAtBehaviour", lookAtBehaviour);
-	lua_register(L, "SetBehaviour", setBehaviour);
-	lua_register(L, "GetBehaviour", getBehaviour);
+	lua_register(L, "GetKey", keyPressed);
+	lua_register(L, "GetKeyUp", keyUp);
+	lua_register(L, "GetKeyDown", keyDown);
+	lua_register(L, "GetMouseButton", mouseButton);
+	lua_register(L, "GetMouseButtonUp", mouseButtonUp);
+	lua_register(L, "AttachComponent", attachComponent);
 	lua_register(L, "Distance", distance);
 
 	//Load file
@@ -62,11 +63,22 @@ LuaScript::LuaScript(const char * path, World * world)
 
 	//Set world
 	lua_pushlightuserdata(L, world);
-	lua_setglobal(L, "World");
+	lua_setglobal(L, "world");
+
+	//set self reference
+	lua_pushlightuserdata(L, this);
+	lua_setglobal(L, "this");
 
 	//Start
 	lua_getglobal(L, "Start");
 	lua_call(L, 0, 0);
+}
+
+void LuaScript::setOwner(GameObject* pOwner)
+{
+    Component::setOwner(pOwner);
+    lua_pushlightuserdata(L, pOwner);
+	lua_setglobal(L, "myGameObject");
 }
 
 int LuaScript::loadMesh(lua_State * lua)
@@ -209,19 +221,6 @@ int LuaScript::getParent(lua_State * lua)
 	return 1;
 }
 
-int LuaScript::remove(lua_State * lua)
-{
-	if (!lua_islightuserdata(lua, -2)) throw "Expect: game object";
-	if (!lua_islightuserdata(lua, -1)) throw "Expect: game object";
-
-	GameObject * parent = (GameObject*)lua_touserdata(lua, -2);
-	GameObject * child = (GameObject*)lua_touserdata(lua, -1);
-
-	parent->RemoveChild(child);
-
-	return 0;
-}
-
 int LuaScript::getChildCount(lua_State * lua)
 {
 	if (!lua_islightuserdata(lua, lua_gettop(lua))) throw "Expect: game object";
@@ -311,7 +310,7 @@ int LuaScript::rotate(lua_State * lua)
 	axis.y = lua_tonumber(lua, -2);
 	axis.z = lua_tonumber(lua, -1);
 
-	gameObj->rotate(angle, axis);
+	gameObj->rotate(glm::radians(angle), axis);
 
 	return 0;
 }
@@ -429,7 +428,7 @@ int LuaScript::getName(lua_State * lua)
 
 int LuaScript::getTime(lua_State * lua)
 {
-	float time = clock() / 500.0f;
+	float time = Time::now();
 	lua_pushnumber(lua, time);
 
 	return 1;
@@ -440,89 +439,82 @@ int LuaScript::keyPressed(lua_State * lua)
 	if (!lua_isnumber(lua, lua_gettop(lua))) throw "Expect: number";
 
 	int keyIndex = lua_tonumber(lua, lua_gettop(lua));
-	bool pressed = false;
-
-	if (sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(keyIndex)))
-		pressed = true;
-
-	lua_pushboolean(lua, pressed);
+	lua_pushboolean(lua, Input::GetKey((Input::KeyCode)keyIndex));
 
 	return 1;
 }
 
-int LuaScript::keysBehaviour(lua_State * lua)
+int LuaScript::keyUp(lua_State * lua)
 {
-	if (!lua_isnumber(lua, -2)) throw "Expect: number";
-	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	if (!lua_isnumber(lua, lua_gettop(lua))) throw "Expect: number";
 
-	float moveSpeed = lua_tonumber(lua, -2);
-	float turnSpeed = lua_tonumber(lua, -1);
-
-	KeysBehaviour * keyBeh = new KeysBehaviour(moveSpeed, turnSpeed);
-	lua_pushlightuserdata(lua, keyBeh);
+	int keyIndex = lua_tonumber(lua, lua_gettop(lua));
+	lua_pushboolean(lua, Input::GetKeyUp((Input::KeyCode)keyIndex));
 
 	return 1;
 }
 
-int LuaScript::orbitBehaviour(lua_State * lua)
-{/*
-	if (!lua_islightuserdata(lua, -5)) throw "Expect: game object";
-	if (!lua_isnumber(lua, -4)) throw "Expect: number";
-	if (!lua_isnumber(lua, -3)) throw "Expect: number";
-	if (!lua_isnumber(lua, -2)) throw "Expect: number";
-	if (!lua_isnumber(lua, -1)) throw "Expect: number";
-
-	GameObject * gameObj = (GameObject*)lua_touserdata(lua, -5);
-	float radius = lua_tonumber(lua, -4);
-	float rotationLimitX = lua_tonumber(lua, -3);
-	float rotationLimitY = lua_tonumber(lua, -2);
-	float rotationSpeed = lua_tonumber(lua, -1);
-
-	OrbitBehaviour * orbitBeh = new OrbitBehaviour(gameObj, radius, rotationLimitX, rotationLimitY, rotationSpeed);
-	lua_pushlightuserdata(lua, orbitBeh);
-*/
-	return 1;
-}
-
-int LuaScript::lookAtBehaviour(lua_State * lua)
+int LuaScript::keyDown(lua_State * lua)
 {
-	if (!lua_islightuserdata(lua, lua_gettop(lua))) throw "Expect: game object";
+	if (!lua_isnumber(lua, lua_gettop(lua))) throw "Expect: number";
 
-	GameObject * gameObj = (GameObject*)lua_touserdata(lua, lua_gettop(lua));
-
-	LookAt * lookAt = new LookAt(gameObj);
-	lua_pushlightuserdata(lua, lookAt);
+	int keyIndex = lua_tonumber(lua, lua_gettop(lua));
+	lua_pushboolean(lua, Input::GetKeyDown((Input::KeyCode)keyIndex));
 
 	return 1;
 }
 
-int LuaScript::setBehaviour(lua_State * lua)
+int LuaScript::mouseButton(lua_State * lua)
 {
-    /*
+	if (!lua_isnumber(lua, lua_gettop(lua))) throw "Expect: number";
+
+	int button = lua_tonumber(lua, lua_gettop(lua));
+	lua_pushboolean(lua, Input::GetMouseButton(button));
+
+	return 1;
+}
+
+int LuaScript::mouseButtonUp(lua_State * lua)
+{
+	if (!lua_isnumber(lua, lua_gettop(lua))) throw "Expect: number";
+
+	int button = lua_tonumber(lua, lua_gettop(lua));
+	lua_pushboolean(lua, Input::GetMouseButtonUp(button));
+
+	return 1;
+}
+
+
+int LuaScript::attachComponent(lua_State * lua)
+{
+
 	if (!lua_islightuserdata(lua, -2)) throw "Expect: game object";
 	if (!lua_islightuserdata(lua, -1)) throw "Expect: behaviour";
 
 	GameObject * gameObj = (GameObject*)lua_touserdata(lua, -2);
-	AbstractBehaviour * behaviour = (AbstractBehaviour*)lua_touserdata(lua, -1);
+	Component * comp = (Component*)lua_touserdata(lua, -1);
 
-	gameObj->setBehaviour(behaviour);
-*/
+	gameObj->AttachComponent(comp);
+
 	return 0;
 
 }
 
+//removed for now
+/*
 int LuaScript::getBehaviour(lua_State * lua)
 {
-    /*
+
 	if (!lua_islightuserdata(lua, lua_gettop(lua))) throw "Expect: game object";
 
 	GameObject * gameObj = (GameObject*)lua_touserdata(lua, lua_gettop(lua));
 	AbstractBehaviour * behaviour = gameObj->getBehaviour();
 
 	lua_pushlightuserdata(lua, behaviour);
-*/
+
 	return 1;
 }
+*/
 
 int LuaScript::distance(lua_State * lua)
 {

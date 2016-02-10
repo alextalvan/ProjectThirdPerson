@@ -4,6 +4,8 @@
 #include "mge/core/World.hpp"
 #include "mge/core/Camera.hpp"
 #include "mge/core/Mesh.hpp"
+#include "mge/lua/LuaScript.hpp"
+#include "mge/config.hpp"
 
 using namespace std;
 
@@ -12,7 +14,8 @@ World::World():GameObject("root"), _mainCamera(0)
 	//ctor
 	_transform = glm::mat4();
 	_worldTransform = glm::mat4();
-	GameObject::_world = this;
+	//GameObject::_world = this;
+	AttachComponent(new LuaScript((config::MGE_SCRIPT_PATH + "main.lua").c_str(),this));
 }
 
 void World::setMainCamera (Camera* pCamera) {

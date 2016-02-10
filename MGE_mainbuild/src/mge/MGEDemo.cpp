@@ -157,7 +157,7 @@ void MGEDemo::_initializeScene()
     //light3->translate(glm::vec3(0,10000,0));
     //light3->angle = 3.14f;
     light3->setLocalPosition(glm::vec3(0,2,0));
-    //sphere1->AddChild(light3);
+    sphere1->AddChild(light3);
 
     //sphere1->AddChild(camera);
 
@@ -168,9 +168,11 @@ void MGEDemo::_initializeScene()
 
     //Sound::SoundManager::GetSingleton()->LoadSFX(config::MGE_SOUND_PATH + "test.wav")->Play();
 
-    luaScript = new LuaScript((config::MGE_SCRIPT_PATH + "script.lua").c_str(), _world);
+    luaScript = new LuaScript((config::MGE_SCRIPT_PATH + "test.lua").c_str(), _world);
     //_world->AttachComponent(luaScript);
     sphere1->AttachComponent(luaScript);
+
+    sphere1->Destroy();
 }
 
 

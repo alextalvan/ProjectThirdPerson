@@ -138,6 +138,7 @@ void AbstractGame::TimedStep()
         CollisionManager::DoCollisions();
         logicUpdated = true;
         _timeAccumultor -= _targetFrameTime;
+        Input::EndLoopReset();
     }
 
     //use the catchup mechanism for game logic but not for rendering, rendering multiple times is useless

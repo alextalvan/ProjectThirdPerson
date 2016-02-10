@@ -42,14 +42,16 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
     //pass in light data
     int index = 0;
 
-    std::vector<Light*> list = Light::GetLightList();
+    DualLinkList<Light> list = Light::GetLightList();
 
-    glUniform1i(_shader->getUniformLocation("lightCount"),list.size());
+    glUniform1i(_shader->getUniformLocation("lightCount"),list.GetCount());
 
-    for (auto i = list.begin(); i != list.end(); ++i)
+    DualLinkNode<Light>* cn = list.startNode;
+
+    while(cn!=NULL && index < MGE_MAX_LIGHTS)
     {
         string indexString = std::to_string(index);
-        Light* light = (*i);
+        Light* light = (Light*)cn;
         GLuint loc;
 
         loc = _shader->getUniformLocation("LightArray["+indexString+"].type");
@@ -82,6 +84,7 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
         glUniform1f(loc,light->angle);
 
         ++index;
+        cn = cn->nextNode;
     }
 
 

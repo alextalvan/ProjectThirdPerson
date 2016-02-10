@@ -11,7 +11,7 @@ using namespace std;
 
 GameObject::GameObject(std::string pName, glm::vec3 pPosition )
 :	_name( pName ), _transform( glm::translate( pPosition ) ),  _parent(NULL), _children(),
-    _mesh( NULL ),_components(), _material(NULL), _world(NULL)
+    _mesh( NULL ),_components(), _material(NULL)//,_world(NULL)
 {
 }
 
@@ -38,15 +38,20 @@ void GameObject::Destroy()
     setParent(NULL);
 
     //destroy all my components
-    for (auto i = _components.begin(); i != _components.end(); ++i)
+    DualLinkNode<Component>* cn = _components.startNode;
+    while(cn!=NULL)
     {
-       (*i)->Destroy();
+        ((Component*)cn)->Destroy();
+        cn = cn->nextNode;
     }
 
     //destroy children as well
-    for (auto i = _children.begin(); i != _children.end(); ++i)
+    DualLinkNode2<ChildList>* cn2 = _children.startNode;
+
+    while(cn2!=NULL)
     {
-       (*i)->Destroy();
+        ((GameObject*)cn2)->Destroy();
+        cn2 = cn2->nextNode;
     }
 }
 
@@ -104,26 +109,27 @@ Mesh * GameObject::getMesh() const
 
 void GameObject::AttachComponent(Component* comp)
 {
-	_components.push_back(comp);
+	_components.Add(comp);
 	comp->setOwner(this);
 }
 
 void GameObject::DetachComponent(Component* comp)
 {
-    for (auto i = _components.begin(); i != _components.end(); ++i)
+    DualLinkNode<Component>* cn = _components.startNode;
+    while(cn!=NULL)
     {
-        if (*i == comp)
+        if(((Component*)cn)==comp);
         {
-            (*i)->setOwner(NULL);
-            _components.erase(i);
+            comp->setOwner(NULL);
+            _components.Remove(cn);
             return;
         }
+        cn = cn->nextNode;
     }
 }
 
 void GameObject::DestroyComponent(Component* comp)
 {
-    //todo: desroy
     DetachComponent(comp);
     comp->Destroy();
 }
@@ -133,7 +139,7 @@ void GameObject::setParent (GameObject* pParent) {
     if (_parent != NULL) {
         _parent->_innerRemove(this);
         _parent = NULL;
-        _world = NULL;
+        //_world = NULL;
     }
 
     //set new parent
@@ -141,7 +147,7 @@ void GameObject::setParent (GameObject* pParent) {
         _parent = pParent;
         _parent->_innerAdd(this);
         //pass on world to child
-        _world = _parent->_world;
+        //_world = _parent->_world;
     }
 
     MakeTransformDirty();
@@ -155,10 +161,27 @@ void GameObject::_innerAdd(GameObject* pChild)
 {
     //set new parent
     pChild->_parent = this;
-	_children.push_back(pChild);
+    _children.Add(pChild);
+	//_children.push_back(pChild);
 }
 
-void GameObject::_innerRemove (GameObject* pChild) {
+void GameObject::_innerRemove (GameObject* pChild)
+{
+    DualLinkNode2<ChildList>* cn = _children.startNode;
+
+    while(cn!=NULL)
+    {
+       GameObject* cast = (GameObject*)cn;
+       if(cast == pChild)
+       {
+            cast->_parent = NULL;
+            _children.Remove(cn);
+            return;
+       }
+        cn = cn->nextNode;
+    }
+
+    /*
     for (auto i = _children.begin(); i != _children.end(); ++i) {
         if (*i == pChild) {
             (*i)->_parent = NULL;
@@ -166,6 +189,7 @@ void GameObject::_innerRemove (GameObject* pChild) {
             return;
         }
     }
+    */
 }
 
 void GameObject::AddChild (GameObject* pChild) {
@@ -215,9 +239,18 @@ void GameObject::MakeTransformDirty()
     //mark this world transform dirty and the children ones as well, only if it has not already been marked this frame
     if(!_worldTransformIsDirty)
     {
+        /*
         for (auto i = _children.begin(); i != _children.end(); ++i)
         {
             (*i)->MakeTransformDirty();
+        }
+        */
+
+        DualLinkNode2<ChildList>* cn = _children.startNode;
+        while(cn!=NULL)
+        {
+            ((GameObject*)cn)->MakeTransformDirty();
+            cn = cn->nextNode;
         }
 
         _worldTransformIsDirty = true;
@@ -253,34 +286,43 @@ void GameObject::InternalUpdate()
 {
     Update();
 
-	for (int i = _components.size()-1; i >= 0; --i )
+	DualLinkNode<Component>* cn = _components.startNode;
+    while(cn!=NULL)
     {
-        if(_components[i]->IsActive())
-            _components[i]->Update();
+        Component* cast = ((Component*)cn);
+        if(cast->IsActive())
+            cast->Update();
+
+        cn = cn->nextNode;
     }
 
     //recursive internal update of children
-    for (int i = _children.size()-1; i >= 0; --i )
+    DualLinkNode2<ChildList>* cn2 = _children.startNode;
+    while(cn2!=NULL)
     {
-        if(_children[i]->IsActive())
-            _children[i]->InternalUpdate();
+        GameObject* cast = ((GameObject*)cn2);
+        if(cast->IsActive())
+            cast->InternalUpdate();
+
+        cn2 = cn2->nextNode;
     }
 }
 
 int GameObject::GetChildCount() {
-    return _children.size();
+    return _children.GetCount();
 }
 
-GameObject* GameObject::GetChildAt(int pIndex) {
-    return _children[pIndex];
+GameObject* GameObject::GetChildAt(int pIndex)
+{
+    return (GameObject*)(_children.GetAt(pIndex));
 }
 
 int GameObject::GetComponentsCount() {
-    return _components.size();
+    return _components.GetCount();
 }
 
 Component* GameObject::GetComponentAt(int pIndex) {
-    return _components[pIndex];
+    return (Component*)(_components.GetAt(pIndex));
 }
 
 

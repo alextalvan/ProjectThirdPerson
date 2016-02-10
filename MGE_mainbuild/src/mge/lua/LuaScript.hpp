@@ -5,7 +5,7 @@ extern "C" {
 	#include "lualib.h"
 }
 #include <iostream>
-#include <vector>
+#include <string>
 #include <mge/behaviours/Component.hpp>
 
 class World;
@@ -17,10 +17,14 @@ public:
 	LuaScript(const char * path, World * world);
 	void Update() override;
 	void InvokeCollisionCallback(GameObject* other);
+	void setOwner(GameObject* pOwner) override;
 protected:
     virtual ~LuaScript();
 private:
 	lua_State * L;
+
+
+	//core rendering and gameobject
 	static int loadMesh(lua_State * lua);
 	static int loadTexture(lua_State * lua);
 	static int colorMaterial(lua_State * lua);
@@ -31,7 +35,6 @@ private:
 	static int setMainCamera(lua_State * lua);
 	static int setParent(lua_State * lua);
 	static int getParent(lua_State * lua);
-	static int remove(lua_State * lua);
 	static int getChildCount(lua_State * lua);
 	static int getChildAt(lua_State * lua);
 	static int setLocalPosition(lua_State * lua);
@@ -48,10 +51,11 @@ private:
 	static int getName(lua_State * lua);
 	static int getTime(lua_State * lua);
 	static int keyPressed(lua_State * lua);
-	static int keysBehaviour(lua_State * lua);
-	static int orbitBehaviour(lua_State * lua);
-	static int lookAtBehaviour(lua_State * lua);
-	static int setBehaviour(lua_State * lua);
-	static int getBehaviour(lua_State * lua);
+	static int keyUp(lua_State * lua);
+	static int keyDown(lua_State * lua);
+	static int mouseButton(lua_State * lua);
+	static int mouseButtonUp(lua_State * lua);
+	static int attachComponent(lua_State * lua);
+	//static int getBehaviour(lua_State * lua);
 	static int distance(lua_State * lua);
 };

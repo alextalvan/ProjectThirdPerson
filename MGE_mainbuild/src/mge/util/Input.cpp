@@ -17,7 +17,7 @@ bool Input::GetKey(Input::KeyCode target)
 bool Input::GetKeyDown(Input::KeyCode target)
 {
     int keyIndex = (int)target;
-    return _wasPressed[keyIndex];
+    return !_wasPressed[keyIndex] && GetKey(target);
 }
 
 bool Input::GetKeyUp(Input::KeyCode target)
@@ -43,7 +43,7 @@ void Input::PollInputEvents(sf::RenderWindow* target)
 
     for(int i=0;i<101;++i)
     {
-        _wasPressed[i] = false;
+        //_wasPressed[i] = false;
         _wasReleased[i] = false;
     }
 
@@ -57,9 +57,11 @@ void Input::PollInputEvents(sf::RenderWindow* target)
             target->close();
             return;
 
-        case sf::Event::KeyPressed:
-            _wasPressed[(int)(event.key.code)] = true;
-            break;
+
+        //this is not working properly, workaround by having the EndLoopReset called at the end of the game loop
+        //case sf::Event::KeyPressed:
+          //  _wasPressed[(int)(event.key.code)] = true;
+           // break;
 
         case sf::Event::KeyReleased:
             _wasReleased[(int)(event.key.code)] = true;
@@ -83,6 +85,14 @@ void Input::PollInputEvents(sf::RenderWindow* target)
     }
 }
 
+
+void Input::EndLoopReset()
+{
+    for(int i=0;i<101;++i)
+    {
+        _wasPressed[i] = sf::Keyboard::isKeyPressed((sf::Keyboard::Key)(i));
+    }
+}
 
 bool Input::GetMouseButton(int target)
 {

@@ -122,6 +122,8 @@ public:
 
     static void PollInputEvents(sf::RenderWindow* target);
 
+    static void EndLoopReset();
+
     static int getMouseX();
     static int getMouseY();
 

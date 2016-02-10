@@ -2,28 +2,18 @@
 #define ABSTRACTBEHAVIOUR_H
 #include "mge/core/Activateable.hpp"
 #include "mge/core/Destroyable.hpp"
+#include "mge/util/list/DualLinkList.hpp"
+#include "mge/util/list/DualLinkNode.hpp"
 #include <string>
 
 class GameObject;
 
 /**
- * class Behaviour allows you to attach reusable behaviours to a GameObject.
- * Think of steering, rotating, billboarding, etc.
- * A Behaviour is set on a GameObject, which in turn passes in a reference to itself through the setOwner method.
- * This way we can enforce that a Behaviour can never have an owner different from the object it has been attached to.
- *
- * It is similar to MonoBehaviour in Unity.
+ *Component, just like Unity.
  */
-class Component: public Activateable, public Destroyable
+class Component: public Activateable, public Destroyable, public DualLinkNode<Component>
 {
 	public:
-
-
-
-        //we would like to have this private and only accessible by GameObject, but this
-        //doesnt work out for the CompositeBehaviour, we would have to declare both of them
-        //as friends, tying this class to one of its subclasses, so design decision:
-        //this is kept public but should not be used directly.
         virtual void setOwner (GameObject* pGameObject);
 
         GameObject* const getOwner() const;

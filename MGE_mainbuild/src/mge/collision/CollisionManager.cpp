@@ -81,6 +81,14 @@ void CollisionManager::DoCollisions()
                 }
 
                 //lua callbacks
+                //int compCount;
+
+                //GameObject* g1 = collideri->getOwner();
+                //GameObject* g2 = colliderj->getOwner();
+
+                //compCount = g1->GetComponentsCount();
+                //for()
+
                 LuaScript* l = collideri->getOwner()->GetComponent<LuaScript>();
                 if(l!=NULL)
                     l->InvokeCollisionCallback(colliderj->getOwner());

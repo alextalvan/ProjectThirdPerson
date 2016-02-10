@@ -11,6 +11,15 @@ namespace Utils
         DualLinkNode<T>* nextNode = NULL;
         DualLinkNode<T>* prevNode = NULL;
     };
+
+    template<class T>
+    class DualLinkNode2
+    {
+    public:
+        DualLinkNode2<T>* nextNode = NULL;
+        DualLinkNode2<T>* prevNode = NULL;
+    };
+
 }
 
 

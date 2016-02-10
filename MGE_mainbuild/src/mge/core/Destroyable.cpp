@@ -5,11 +5,14 @@
 #include<iostream>
 using namespace Utils;
 
+//int testCount = 0;
+
 SingleLinkList<Destroyable> Destroyable::_objectList;
 
 Destroyable::Destroyable()
 {
     _objectList.Add(this);
+    //testCount++;
 }
 
 void Destroyable::Destroy()
@@ -24,7 +27,7 @@ bool Destroyable::isDestroyed()
 
 Destroyable::~Destroyable()
 {
-
+    //testCount--;
 }
 
 void Destroyable::CollectGarbage()
@@ -71,5 +74,5 @@ void Destroyable::CollectGarbage()
     }
 
     //std::cout<<"escaped cg loop.\n";
-
+    //std::cout<<testCount<<"\n";
 }

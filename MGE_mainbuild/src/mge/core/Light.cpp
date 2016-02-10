@@ -1,18 +1,18 @@
 #include <mge/core/Light.hpp>
 
-std::vector<Light*> Light::_lightList;
+DualLinkList<Light> Light::_lightList;
 
 Light::Light() : GameObject("light")
 {
-    _lightList.push_back(this);
+    _lightList.Add(this);
 }
 
 Light::~Light()
 {
-    //_lightList.erase(this);
+    _lightList.Remove(this);
 }
 
-std::vector<Light*> const  Light::GetLightList()
+DualLinkList<Light> const  Light::GetLightList()
 {
     return _lightList;
 }
