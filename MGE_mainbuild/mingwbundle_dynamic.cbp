@@ -54,7 +54,8 @@
 		<Unit filename="assets/mge/models/suzanna_smooth.obj" />
 		<Unit filename="assets/mge/models/teapot_flat.obj" />
 		<Unit filename="assets/mge/models/teapot_smooth.obj" />
-		<Unit filename="assets/mge/scripts/script.lua" />
+		<Unit filename="assets/mge/scripts/main.lua" />
+		<Unit filename="assets/mge/scripts/test.lua" />
 		<Unit filename="assets/mge/shaders/PostProcessing/cut_screen.fs" />
 		<Unit filename="assets/mge/shaders/PostProcessing/identity.fs" />
 		<Unit filename="assets/mge/shaders/PostProcessing/identity.vs" />
@@ -92,6 +93,8 @@
 		<Unit filename="src/mge/collision/CollisionManager.hpp" />
 		<Unit filename="src/mge/collision/SphereCollider.cpp" />
 		<Unit filename="src/mge/collision/SphereCollider.hpp" />
+		<Unit filename="src/mge/collision/WallCollider.cpp" />
+		<Unit filename="src/mge/collision/WallCollider.hpp" />
 		<Unit filename="src/mge/config.hpp" />
 		<Unit filename="src/mge/core/AbstractGame.cpp" />
 		<Unit filename="src/mge/core/AbstractGame.hpp" />
@@ -145,6 +148,8 @@
 		<Unit filename="src/mge/util/DebugHud.hpp" />
 		<Unit filename="src/mge/util/Input.cpp" />
 		<Unit filename="src/mge/util/Input.hpp" />
+		<Unit filename="src/mge/util/Random.cpp" />
+		<Unit filename="src/mge/util/Random.hpp" />
 		<Unit filename="src/mge/util/list/DualLinkList.cpp" />
 		<Unit filename="src/mge/util/list/DualLinkList.hpp" />
 		<Unit filename="src/mge/util/list/DualLinkNode.cpp" />

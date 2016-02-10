@@ -6,9 +6,8 @@ function Start()
 end
 
 function Update()
-    if(GetKeyDown(0)) then
-        print("test")
-    end
+    if(GetKeyUp(0)) then
+    print(RandomInRange(0,10)); end
 end
 
 function OnCollision(otherCollider)

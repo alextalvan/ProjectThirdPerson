@@ -31,6 +31,7 @@ using namespace std;
 
 #include <mge/collision/SphereCollider.hpp>
 #include <mge/test/TestSphereCol.hpp>
+#include <mge/collision/WallCollider.hpp>
 #include <mge/behaviours/CameraOrbit.hpp>
 
 #include <mge/sound/SoundManager.hpp>
@@ -58,12 +59,9 @@ void CreateWall(glm::vec3 pos, float horizRot, AbstractMaterial* mat, Mesh* mesh
     sphere2->setMaterial(mat);
     sphere2->rotate(horizRot,glm::vec3(0,1,0));
 
-    BoxCollider* box = new BoxCollider();
-    //box->zSize = 8.0f;
-    box->layer = CollisionManager::WALLS;
+    WallCollider* wall = new WallCollider();
+    sphere2->AttachComponent(wall);
 
-    //sphere2->scale(glm::vec3(1,1,16.0f));
-    sphere2->AttachComponent(box);
     world->AddChild(sphere2);
 }
 
@@ -145,7 +143,8 @@ void MGEDemo::_initializeScene()
     sphere1->setMesh (sphereMeshF);
     sphere1->setMaterial(textureMaterial2);
     sphere1->AttachComponent(new KeysBehaviour(0.05f,1.0f));
-    sphere1->AttachComponent(new Test::TestSphereCol());
+    sphere1->AttachComponent(new SphereCollider());
+    //sphere1->AttachComponent(new Test::TestSphereCol());
     _world->AddChild(sphere1);
 
     Light* light3 = new Light();
@@ -164,7 +163,7 @@ void MGEDemo::_initializeScene()
 
     CreateWall(glm::vec3(0,0.0f,0),0,colorMaterial,cubeMeshF,_world);
 
-    CollisionManager::SetLayerInteraction(CollisionManager::WALLS,CollisionManager::WALLS,false);
+
 
     //Sound::SoundManager::GetSingleton()->LoadSFX(config::MGE_SOUND_PATH + "test.wav")->Play();
 
@@ -172,7 +171,7 @@ void MGEDemo::_initializeScene()
     //_world->AttachComponent(luaScript);
     sphere1->AttachComponent(luaScript);
 
-    sphere1->Destroy();
+    //sphere1->Destroy();
 }
 
 

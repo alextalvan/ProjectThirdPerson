@@ -15442,7 +15442,7 @@
 	"mge/behaviours/Component.hpp"
 	"mge/core/GameObject.hpp"
 
-1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\keysbehaviour.cpp
+1455099021 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\keysbehaviour.cpp
 	"mge/behaviours/KeysBehaviour.hpp"
 	"mge/core/GameObject.hpp"
 	"mge/util/Input.hpp"
@@ -15493,7 +15493,7 @@
 	<mge/util/list/DualLinkList.hpp>
 	<mge/core/AbstractGame.hpp>
 
-1455060671 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\duallinklist.hpp
+1455062700 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\duallinklist.hpp
 	<cstddef>
 	<functional>
 	<mge/util/list/DualLinkNode.hpp>
@@ -15505,7 +15505,7 @@
 	<mge/collision/Collider.hpp>
 	<mge/collision/CollisionManager.hpp>
 
-1455044761 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.cpp
+1455108319 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.cpp
 	<mge/collision/CollisionManager.hpp>
 	<mge/util/list/DualLinkNode.hpp>
 	<mge/collision/Collider.hpp>
@@ -15519,7 +15519,7 @@
 	<glm.hpp>
 	<iostream>
 
-1455056458 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
+1455099864 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
 	"AbstractGame.hpp"
 	<iostream>
 	"mge/core/Time.hpp"
@@ -15528,6 +15528,7 @@
 	"mge/core/World.hpp"
 	<mge/collision/CollisionManager.hpp>
 	<mge/util/Input.hpp>
+	<mge/util/Random.hpp>
 
 1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\time.hpp
 	<SFML/System.hpp>
@@ -15573,7 +15574,7 @@
 	"mge/core/FPS.hpp"
 	"mge/core/Time.hpp"
 
-1455062328 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
+1455097362 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
 	<cassert>
 	<iostream>
 	<glm.hpp>
@@ -15719,7 +15720,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1455061893 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
+1455109377 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -15743,6 +15744,7 @@
 	"mge/MGEDemo.hpp"
 	<mge/collision/SphereCollider.hpp>
 	<mge/test/TestSphereCol.hpp>
+	<mge/collision/WallCollider.hpp>
 	<mge/behaviours/CameraOrbit.hpp>
 	<mge/sound/SoundManager.hpp>
 	<mge/sound/SoundChannel.hpp>
@@ -15892,7 +15894,7 @@
 	"mge/config.hpp"
 	<sfml/window/event.hpp>
 
-1455055412 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
+1455108221 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
 	"lua.h"
 	"lauxlib.h"
 	"lualib.h"
@@ -15900,7 +15902,7 @@
 	<string>
 	<mge/behaviours/Component.hpp>
 
-1455055606 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
+1455107615 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
 	"mge/lua/LuaScript.hpp"
 	"mge/core/World.hpp"
 	"mge/core/GameObject.hpp"
@@ -15912,7 +15914,11 @@
 	"mge/behaviours/LookAt.hpp"
 	"mge/config.hpp"
 	"mge/util/Input.hpp"
+	"mge/util/Random.hpp"
 	"mge/core/Time.hpp"
+	"mge/collision/SphereCollider.hpp"
+	"mge/collision/BoxCollider.hpp"
+	"mge/collision/WallCollider.hpp"
 
 1455012450 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\lua.h
 	<stdarg.h>
@@ -15939,4 +15945,20 @@
 
 1455012450 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\lualib.h
 	"lua.h"
+
+1455100234 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\random.hpp
+
+1455100357 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\random.cpp
+	<mge/util/Random.hpp>
+	<cstdlib>
+	<ctime>
+
+1455109540 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\wallcollider.cpp
+	<mge/collision/WallCollider.hpp>
+	<mge/collision/CollisionManager.hpp>
+	<mge/core/GameObject.hpp>
+	<glm.hpp>
+
+1455106687 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\wallcollider.hpp
+	"mge/collision/BoxCollider.hpp"
 

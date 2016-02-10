@@ -9,6 +9,7 @@ using namespace std;
 #include "mge/core/World.hpp"
 #include <mge/collision/CollisionManager.hpp>
 #include <mge/util/Input.hpp>
+#include <mge/util/Random.hpp>
 
 
 //debugging by stepping into individual frames
@@ -17,6 +18,7 @@ using namespace std;
 AbstractGame::AbstractGame():_window(NULL),_renderer(NULL),_world(NULL),_running(false)
 {
     CollisionManager::Initialize();
+    Random::Initialize();
 }
 
 AbstractGame::~AbstractGame()

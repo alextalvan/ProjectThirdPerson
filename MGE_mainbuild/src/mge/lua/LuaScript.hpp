@@ -23,7 +23,6 @@ protected:
 private:
 	lua_State * L;
 
-
 	//core rendering and gameobject
 	static int loadMesh(lua_State * lua);
 	static int loadTexture(lua_State * lua);
@@ -49,13 +48,27 @@ private:
 	static int getMaterial(lua_State * lua);
 	static int setName(lua_State * lua);
 	static int getName(lua_State * lua);
+
+	//utils
 	static int getTime(lua_State * lua);
+	static int distance(lua_State * lua);
+	static int randomRange(lua_State * lua);
+	static int randomRoll(lua_State * lua);
+
+	//input
 	static int keyPressed(lua_State * lua);
 	static int keyUp(lua_State * lua);
 	static int keyDown(lua_State * lua);
 	static int mouseButton(lua_State * lua);
 	static int mouseButtonUp(lua_State * lua);
+	static int mousePosition(lua_State * lua);
+
+	//components
 	static int attachComponent(lua_State * lua);
-	//static int getBehaviour(lua_State * lua);
-	static int distance(lua_State * lua);
+	static int sphereCollider(lua_State * lua);
+	static int boxCollider(lua_State * lua);
+	static int wallCollider(lua_State * lua);
+
+
+
 };
