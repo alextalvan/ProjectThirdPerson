@@ -20,6 +20,7 @@
 					<Add option="-g" />
 					<Add directory="src" />
 					<Add directory="Lua/5.1/include" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add library="lua51" />
@@ -71,12 +72,15 @@
 		<Unit filename="assets/mge/shaders/texture_lit.vs" />
 		<Unit filename="assets/mge/textures/bricks.jpg" />
 		<Unit filename="assets/mge/textures/land.jpg" />
+		<Unit filename="include/CharacterController.hpp" />
 		<Unit filename="src/glm.hpp" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/mge/MGEDemo.cpp" />
 		<Unit filename="src/mge/MGEDemo.hpp" />
 		<Unit filename="src/mge/behaviours/CameraOrbit.cpp" />
 		<Unit filename="src/mge/behaviours/CameraOrbit.hpp" />
+		<Unit filename="src/mge/behaviours/CharacterController.cpp" />
+		<Unit filename="src/mge/behaviours/CharacterController.hpp" />
 		<Unit filename="src/mge/behaviours/Component.cpp" />
 		<Unit filename="src/mge/behaviours/Component.hpp" />
 		<Unit filename="src/mge/behaviours/KeysBehaviour.cpp" />
