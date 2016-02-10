@@ -29,7 +29,8 @@ void Component::Destroy()
 {
     Destroyable::Destroy();
     SetActive(false);
-    setOwner(NULL);
+    if(_owner!=NULL && !_owner->isDestroyed())
+        setOwner(NULL);
 }
 std::string Component::getName() const
 {

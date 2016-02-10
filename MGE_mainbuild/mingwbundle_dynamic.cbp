@@ -56,6 +56,7 @@
 		<Unit filename="assets/mge/models/teapot_flat.obj" />
 		<Unit filename="assets/mge/models/teapot_smooth.obj" />
 		<Unit filename="assets/mge/scripts/main.lua" />
+		<Unit filename="assets/mge/scripts/template.lua" />
 		<Unit filename="assets/mge/scripts/test.lua" />
 		<Unit filename="assets/mge/shaders/PostProcessing/cut_screen.fs" />
 		<Unit filename="assets/mge/shaders/PostProcessing/identity.fs" />

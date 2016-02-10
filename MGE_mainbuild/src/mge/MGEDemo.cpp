@@ -171,7 +171,7 @@ void MGEDemo::_initializeScene()
     //_world->AttachComponent(luaScript);
     sphere1->AttachComponent(luaScript);
 
-    //sphere1->Destroy();
+    sphere1->Destroy();
 }
 
 

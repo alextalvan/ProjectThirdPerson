@@ -11,7 +11,7 @@ end
 
 --Called every game logic step
 function Update()
-    print(GetName(myGameObject))
+
 end
 
 --Collision callback, the argument is the GameObject you are overlapping with
