@@ -1,6 +1,7 @@
 #ifndef ABSTRACTBEHAVIOUR_H
 #define ABSTRACTBEHAVIOUR_H
 #include "mge/core/Activateable.hpp"
+#include "mge/core/GameObject.hpp"
 #include "mge/core/Destroyable.hpp"
 #include "mge/util/list/DualLinkList.hpp"
 #include "mge/util/list/DualLinkNode.hpp"
@@ -14,7 +15,7 @@ class GameObject;
 class Component: public Activateable, public Destroyable, public DualLinkNode<Component>
 {
 	public:
-        virtual void setOwner (GameObject* pGameObject);
+        virtual void setOwner (GameObject* owner);
 
         GameObject* const getOwner() const;
 
@@ -29,6 +30,7 @@ class Component: public Activateable, public Destroyable, public DualLinkNode<Co
         std::string _name = "Unnamed Component";
         virtual ~Component();
 	    //reference back its owner
+    //private:
 		GameObject* _owner;
 
 };

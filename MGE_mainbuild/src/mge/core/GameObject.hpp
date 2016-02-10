@@ -23,7 +23,7 @@ class ChildList;
 class GameObject : public Activateable, public Destroyable, public DualLinkNode2<ChildList>
 {
     friend class AbstractGame;
-
+    friend class Component;
 	public:
 		GameObject(std::string pName = NULL, glm::vec3 pPosition = glm::vec3( 0.0f, 0.0f, 0.0f ) );
 		//GameObject(std::string pName = NULL, float posX = 0.0f, float posY = 0.0f, float posZ = 0.0f);
@@ -63,11 +63,11 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 		//void setBehaviour(Component* pBehaviour);
 		//Component* getBehaviour() const;
 
-		void AttachComponent(Component* comp);
+		virtual void AttachComponent(Component* comp);
 
-		void DetachComponent(Component* comp);
+		virtual void DetachComponent(Component* comp);
 
-		void DestroyComponent(Component* comp);
+		virtual void DestroyComponent(Component* comp);
 
         int GetComponentsCount();
         Component* GetComponentAt (int pIndex);
@@ -118,9 +118,7 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 		AbstractMaterial* _material;
 		//World* _world;
 
-        //update children list administration
-        void _innerAdd (GameObject* pChild);
-		void _innerRemove (GameObject* pChild);
+
 
 		virtual void Update();
 
@@ -129,6 +127,13 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
         bool _worldTransformIsDirty = true;
         void MakeTransformDirty();
         void InternalUpdate();
+
+         //update children list administration
+        void _innerAdd (GameObject* pChild);
+		void _innerRemove (GameObject* pChild);
+
+        void _innerAdd (Component* comp);
+		void _innerRemove (Component* comp);
         //bool _transformIsDirty = true;
 };
 

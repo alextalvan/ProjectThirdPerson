@@ -68,6 +68,7 @@ private:
 	static int sphereCollider(lua_State * lua);
 	static int boxCollider(lua_State * lua);
 	static int wallCollider(lua_State * lua);
+	static int luaScript(lua_State * lua);
 
 
 

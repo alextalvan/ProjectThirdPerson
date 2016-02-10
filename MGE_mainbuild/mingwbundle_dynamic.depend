@@ -13907,7 +13907,7 @@
 1455017950 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luaengine.cpp
 	"LuaEngine.hpp"
 
-1455055046 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\main.cpp
+1455121037 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\main.cpp
 	<iostream>
 	"mge/core/AbstractGame.hpp"
 	"mge/MGEDemo.hpp"
@@ -14351,7 +14351,7 @@
 	<stdio.h>
 	"lua.h"
 
-1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\cameraorbit.cpp
+1455126333 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\cameraorbit.cpp
 	<mge/behaviours/CameraOrbit.hpp>
 	<mge/util/Input.hpp>
 	<mge/core/Camera.hpp>
@@ -14360,8 +14360,9 @@
 1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\cameraorbit.hpp
 	<mge/behaviours/Component.hpp>
 
-1455048716 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\component.hpp
+1455133715 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\component.hpp
 	"mge/core/Activateable.hpp"
+	"mge/core/GameObject.hpp"
 	"mge/core/Destroyable.hpp"
 	"mge/util/list/DualLinkList.hpp"
 	"mge/util/list/DualLinkNode.hpp"
@@ -14388,7 +14389,7 @@
 	<string>
 	"mge/core/GameObject.hpp"
 
-1455062040 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
+1455133055 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
 	<vector>
 	<string>
 	<iostream>
@@ -15436,19 +15437,19 @@
 
 1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\detail\namespace.h
 
-1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\component.cpp
+1455133649 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\component.cpp
 	<cassert>
 	<iostream>
 	"mge/behaviours/Component.hpp"
 	"mge/core/GameObject.hpp"
 
-1455099021 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\keysbehaviour.cpp
+1455133687 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\keysbehaviour.cpp
 	"mge/behaviours/KeysBehaviour.hpp"
 	"mge/core/GameObject.hpp"
 	"mge/util/Input.hpp"
 	<sfml/window/event.hpp>
 
-1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\keysbehaviour.hpp
+1455114536 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\keysbehaviour.hpp
 	"mge/behaviours/Component.hpp"
 
 1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\lookat.cpp
@@ -15574,7 +15575,7 @@
 	"mge/core/FPS.hpp"
 	"mge/core/Time.hpp"
 
-1455097362 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
+1455133450 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
 	<cassert>
 	<iostream>
 	<glm.hpp>
@@ -15720,7 +15721,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1455109377 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
+1455133955 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -15894,7 +15895,7 @@
 	"mge/config.hpp"
 	<sfml/window/event.hpp>
 
-1455108221 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
+1455131351 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
 	"lua.h"
 	"lauxlib.h"
 	"lualib.h"
@@ -15902,7 +15903,7 @@
 	<string>
 	<mge/behaviours/Component.hpp>
 
-1455107615 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
+1455131418 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
 	"mge/lua/LuaScript.hpp"
 	"mge/core/World.hpp"
 	"mge/core/GameObject.hpp"
@@ -15961,4 +15962,13 @@
 
 1455106687 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\wallcollider.hpp
 	"mge/collision/BoxCollider.hpp"
+
+1455133632 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
+	"CharacterController.hpp"
+	"mge/core/GameObject.hpp"
+
+1455114536 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\charactercontroller.hpp
+	<mge/behaviours/KeysBehaviour.hpp>
+	<glm.hpp>
+	"mge/util/Input.hpp"
 

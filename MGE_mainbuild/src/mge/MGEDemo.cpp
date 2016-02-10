@@ -77,7 +77,7 @@ void MGEDemo::_initializeScene()
     //F is flat shaded, S is smooth shaded (normals aligned or not), check the models folder!
     Mesh* planeMeshDefault = Mesh::load (config::MGE_MODEL_PATH+"plane_8192.obj");
     Mesh* raptorMesh = Mesh::load(config::MGE_MODEL_PATH+"raptor.obj");
-    Mesh* cubeMeshF = Mesh::load (config::MGE_MODEL_PATH+"cube_flat.obj");
+    //Mesh* cubeMeshF = Mesh::load (config::MGE_MODEL_PATH+"cube_flat.obj");
     //Mesh* suzannaMeshF = Mesh::load (config::MGE_MODEL_PATH+"suzanna_flat.obj");
     Mesh* sphereMeshF = Mesh::load(config::MGE_MODEL_PATH+"sphere_smooth.obj");
     //Mesh* teapotMeshS = Mesh::load (config::MGE_MODEL_PATH+"teapot_smooth.obj");
@@ -100,7 +100,7 @@ void MGEDemo::_initializeScene()
     Camera* camera = new Camera ("camera", glm::vec3(0,5,0));
     camera->rotate(glm::radians(-90.0f),glm::vec3(1,0,0));
     _world->setMainCamera(camera);
-    _world->AddChild(camera);
+    //_world->AddChild(camera);
 
     GameObject* plane = new GameObject ("plane");
     plane->scale(glm::vec3(20,5,20));
@@ -161,7 +161,7 @@ void MGEDemo::_initializeScene()
     //sphere1->AddChild(camera);
 
 
-    CreateWall(glm::vec3(0,0.0f,0),0,colorMaterial,cubeMeshF,_world);
+    //CreateWall(glm::vec3(0,0.0f,0),0,colorMaterial,cubeMeshF,_world);
 
 
 

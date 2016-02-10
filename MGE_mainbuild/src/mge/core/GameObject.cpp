@@ -107,25 +107,31 @@ Mesh * GameObject::getMesh() const
     return _mesh;
 }
 
+void GameObject::_innerAdd(Component* comp)
+{
+    _components.Add(comp);
+}
+
+void GameObject::_innerRemove(Component* comp)
+{
+    _components.Remove(comp);
+}
+
 void GameObject::AttachComponent(Component* comp)
 {
-	_components.Add(comp);
-	comp->setOwner(this);
+    if(comp==NULL)
+        return;
+
+    comp->setOwner(this);
 }
 
 void GameObject::DetachComponent(Component* comp)
 {
-    DualLinkNode<Component>* cn = _components.startNode;
-    while(cn!=NULL)
-    {
-        if(((Component*)cn)==comp);
-        {
-            comp->setOwner(NULL);
-            _components.Remove(cn);
-            return;
-        }
-        cn = cn->nextNode;
-    }
+    if(comp==NULL)
+        return;
+
+    if(_components.Contains(comp))
+        comp->setOwner(NULL);
 }
 
 void GameObject::DestroyComponent(Component* comp)
@@ -167,6 +173,7 @@ void GameObject::_innerAdd(GameObject* pChild)
 
 void GameObject::_innerRemove (GameObject* pChild)
 {
+    /*
     DualLinkNode2<ChildList>* cn = _children.startNode;
 
     while(cn!=NULL)
@@ -180,16 +187,11 @@ void GameObject::_innerRemove (GameObject* pChild)
        }
         cn = cn->nextNode;
     }
-
-    /*
-    for (auto i = _children.begin(); i != _children.end(); ++i) {
-        if (*i == pChild) {
-            (*i)->_parent = NULL;
-            _children.erase(i);
-            return;
-        }
-    }
     */
+
+    if(_children.SafeRemove(pChild))
+        pChild->_parent = NULL;
+
 }
 
 void GameObject::AddChild (GameObject* pChild) {

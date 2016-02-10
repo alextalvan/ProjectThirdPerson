@@ -24,7 +24,8 @@
 
 LuaScript::LuaScript(const char * path, World * world)
 {
-    _name = "LuaScript";
+
+    _name = "LuaScript:" + std::string(path);
 	//Open lua
 	L = lua_open();
 	//Open libs
@@ -43,34 +44,33 @@ LuaScript::LuaScript(const char * path, World * world)
 	lua_register(L, "SetMaterial", setMaterial);//
 	lua_register(L, "GetMaterial", getMaterial);//
 	lua_register(L, "Camera", camera);//
-	lua_register(L, "AddToWorld", addToWorld);
+	lua_register(L, "AddToWorld", addToWorld);//
 	lua_register(L, "SetMainCamera", setMainCamera);//
-	lua_register(L, "SetParent", setParent);
-	lua_register(L, "GetParent", getParent);
+	lua_register(L, "SetParent", setParent);//
+	lua_register(L, "GetParent", getParent);//
 	lua_register(L, "GetChildCount", getChildCount);
 	lua_register(L, "GetChildAt", getChildAt);
-	lua_register(L, "SetLocalPos", setLocalPosition);
-	lua_register(L, "GetWorldPos", getWorldPos);
-	lua_register(L, "GetLocalPos", getLocalPos);
-	lua_register(L, "Rotate", rotate);
-	lua_register(L, "Scale", scale);
-	lua_register(L, "Translate", translate);
-	lua_register(L, "GetTime", getTime);
-	lua_register(L, "GetKey", keyPressed);
-	lua_register(L, "GetKeyUp", keyUp);
-	lua_register(L, "GetKeyDown", keyDown);
-	lua_register(L, "GetMouseButton", mouseButton);
-	lua_register(L, "GetMouseButtonUp", mouseButtonUp);
-	lua_register(L, "GetMousePosition", mousePosition);
-	lua_register(L, "AttachComponent", attachComponent);
-	lua_register(L, "Distance", distance);
-	lua_register(L, "RandomInRange", randomRange);
-	lua_register(L, "RollDice", randomRoll);
-	lua_register(L, "SphereCollider", sphereCollider);
-	lua_register(L, "BoxCollider", boxCollider);
-
-	//Load file
-	luaL_dofile(L, path);
+	lua_register(L, "SetLocalPos", setLocalPosition);//
+	lua_register(L, "GetWorldPos", getWorldPos);//
+	lua_register(L, "GetLocalPos", getLocalPos);//
+	lua_register(L, "Rotate", rotate);//
+	lua_register(L, "Scale", scale);//
+	lua_register(L, "Translate", translate);//
+	lua_register(L, "GetTime", getTime);//
+	lua_register(L, "GetKey", keyPressed);//
+	lua_register(L, "GetKeyUp", keyUp);//
+	lua_register(L, "GetKeyDown", keyDown);//
+	lua_register(L, "GetMouseButton", mouseButton);//
+	lua_register(L, "GetMouseButtonUp", mouseButtonUp);//
+	lua_register(L, "GetMousePosition", mousePosition);//
+	lua_register(L, "AttachComponent", attachComponent);//
+	lua_register(L, "Distance", distance);//
+	lua_register(L, "RandomInRange", randomRange);//
+	lua_register(L, "RollDice", randomRoll);//
+	lua_register(L, "SphereCollider", sphereCollider);//
+	lua_register(L, "BoxCollider", boxCollider);//
+	lua_register(L, "WallCollider", wallCollider);//
+	lua_register(L, "LuaScript", luaScript);//
 
 	//Set world
 	lua_pushlightuserdata(L, world);
@@ -80,6 +80,8 @@ LuaScript::LuaScript(const char * path, World * world)
 	lua_pushlightuserdata(L, this);
 	lua_setglobal(L, "this");
 
+    //Load file
+	luaL_dofile(L, path);
 	//Start
 	lua_getglobal(L, "Start");
 	lua_call(L, 0, 0);
@@ -88,8 +90,19 @@ LuaScript::LuaScript(const char * path, World * world)
 void LuaScript::setOwner(GameObject* pOwner)
 {
     Component::setOwner(pOwner);
-    lua_pushlightuserdata(L, pOwner);
-	lua_setglobal(L, "myGameObject");
+    if(pOwner==NULL)
+    {
+        lua_pushnil(L);
+        lua_setglobal(L,"myGameObject");
+    }
+    else
+    {
+        lua_pushlightuserdata(L, pOwner);
+        lua_setglobal(L,"myGameObject");
+
+        lua_getglobal(L, "OnAttach");
+        lua_call(L, 0, 0);
+    }
 }
 
 int LuaScript::loadMesh(lua_State * lua)
@@ -600,7 +613,8 @@ int LuaScript::attachComponent(lua_State * lua)
 	GameObject * gameObj = (GameObject*)lua_touserdata(lua, -2);
 	Component * comp = (Component*)lua_touserdata(lua, -1);
 
-	gameObj->AttachComponent(comp);
+	//gameObj->AttachComponent(comp);
+	comp->setOwner(gameObj);
 
 	return 0;
 
@@ -638,6 +652,16 @@ int LuaScript::wallCollider(lua_State * lua)
     wall->ySize = y;
     wall->zSize = z;
     lua_pushlightuserdata(lua,wall);
+    return 1;
+}
+
+int LuaScript::luaScript(lua_State * lua)
+{
+    string fileName = lua_tostring(lua, -1);
+    lua_getglobal(lua,"world");
+    World* world = (World*)lua_touserdata(lua,-1);
+    LuaScript* script = new LuaScript((config::MGE_SCRIPT_PATH+fileName).c_str(),world);
+    lua_pushlightuserdata(lua,script);
     return 1;
 }
 
@@ -679,6 +703,7 @@ void LuaScript::Update()
 {
 	lua_getglobal(L, "Update");
 	lua_call(L, 0, 0);
+	//cout<<_name<<"\n";
 }
 
 void LuaScript::InvokeCollisionCallback(GameObject* other)
