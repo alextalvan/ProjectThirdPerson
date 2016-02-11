@@ -126,6 +126,12 @@
 		<Unit filename="src/mge/core/Time.hpp" />
 		<Unit filename="src/mge/core/World.cpp" />
 		<Unit filename="src/mge/core/World.hpp" />
+		<Unit filename="src/mge/gui/GUI.cpp" />
+		<Unit filename="src/mge/gui/GUI.hpp" />
+		<Unit filename="src/mge/gui/GUISprite.cpp" />
+		<Unit filename="src/mge/gui/GUISprite.hpp" />
+		<Unit filename="src/mge/gui/GUIText.cpp" />
+		<Unit filename="src/mge/gui/GUIText.hpp" />
 		<Unit filename="src/mge/lua/LuaScript.cpp" />
 		<Unit filename="src/mge/lua/LuaScript.hpp" />
 		<Unit filename="src/mge/materials/AbstractMaterial.cpp" />

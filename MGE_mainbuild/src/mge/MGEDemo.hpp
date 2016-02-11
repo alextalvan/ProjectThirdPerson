@@ -8,6 +8,7 @@
 class Swapper;
 class GameObject;
 class DebugHud;
+class GUIText;
 
 class MGEDemo: public AbstractGame
 {
@@ -27,6 +28,7 @@ class MGEDemo: public AbstractGame
 
 	private:
 		DebugHud* _hud;                   //hud display
+		GUIText* guiText;
         LuaScript* luaScript;
         void _updateHud();
 };

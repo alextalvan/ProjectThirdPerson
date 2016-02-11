@@ -37,6 +37,8 @@ using namespace std;
 #include <mge/sound/SoundManager.hpp>
 #include <mge/sound/SoundChannel.hpp>
 
+#include "mge/gui/GUIText.hpp"
+
 //construct the game class into _window, _renderer and hud (other parts are initialized by build)
 MGEDemo::MGEDemo():AbstractGame ()
 {
@@ -49,6 +51,8 @@ void MGEDemo::initialize() {
     //setup the custom part
 	cout << "Initializing HUD" << endl;
 	_hud = new DebugHud(_window);
+	guiText = new GUIText(_window, glm::vec2(_window->getSize().x/2, _window->getSize().y/2));
+	_world->AddChild(guiText);
 	cout << "HUD initialized." << endl << endl;
 }
 
@@ -63,6 +67,7 @@ void MGEDemo::_initializeScene()
 void MGEDemo::_render() {
     AbstractGame::_render();
     _updateHud();
+    _window->draw(*guiText);
 
     //_world->renderDebugInfo();
 }
