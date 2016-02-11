@@ -32,6 +32,9 @@ class Renderer
 
     //framebuffer object used for post processing
     private:
+        ///shadow mapping
+        const GLuint SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 768;
+        GLuint depthMapFBO, depthMap;
 
         ///post processing
         GLuint postProc_fbo, postProc_fbo_texture0,postProc_fbo_texture1, postProc_rbo_depth;//frame buffer object with depth buffer

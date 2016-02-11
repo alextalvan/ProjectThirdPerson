@@ -3,9 +3,13 @@
 #define MGE_MAX_LIGHTS 8
 
 uniform sampler2D textureDiffuse;
+uniform sampler2D shadowMap;
+
 in vec2 texCoord;
 in vec3 worldNormal;
 in vec3 position;
+in vec4 fragPosLightSpace;
+
 out vec4 fragment_color;
 
 uniform int lightCount;
@@ -22,10 +26,10 @@ struct light
 
 uniform light LightArray[MGE_MAX_LIGHTS];
 
-vec3 DoDirectionalLight(int lightIndex, vec3 currentLight, vec3 worldNormal)
+vec3 DoDirectionalLight(int lightIndex, vec3 currentLight, vec3 worldNormal, float shadow)
 {
     vec3 diffuseTerm = ((dot(worldNormal,LightArray[lightIndex].direction)+1.0f) * 0.5f) * LightArray[lightIndex].color;
-    return currentLight + diffuseTerm;
+    return currentLight + (diffuseTerm * (1.0 - shadow));
 }
 
 vec3 DoPointLight(int lightIndex, vec3 currentLight, vec3 worldNormal,vec3 worldVertex)
@@ -55,18 +59,26 @@ vec3 DoSpotlight(int lightIndex, vec3 currentLight, vec3 worldNormal,vec3 worldV
     return currentLight + diffuseTerm;
 }
 
+float ShadowCalculation(vec4 pFragPosLightSpace)
+{
+    // perform perspective divide
+    vec3 projCoords = pFragPosLightSpace.xyz / pFragPosLightSpace.w;
+    projCoords = projCoords * 0.5 + 0.5;
+}
+
 void main( void )
 {
 	//fragment_color = vec4(testColor,1);//
 	//fragment_color = texture(textureDiffuse,texCoord) * vec4(v2f,1);
 
+    float shadow = ShadowCalculation(fragPosLightSpace);
 	vec3 finalLight = vec3(0,0,0);
 
     //light handling
     for(int i=0;i<lightCount;++i)
     {
         if(LightArray[i].type==0)
-            finalLight = DoDirectionalLight(i,finalLight,worldNormal);
+            finalLight = DoDirectionalLight(i,finalLight,worldNormal, shadow);
 
         if(LightArray[i].type==1)
             finalLight = DoPointLight(i,finalLight,worldNormal,position);

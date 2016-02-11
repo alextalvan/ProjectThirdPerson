@@ -8,6 +8,7 @@
 #include "mge/core/Light.hpp"
 #include <string>
 
+ShaderProgram* TextureLitMaterial::_depthShader = NULL;
 ShaderProgram* TextureLitMaterial::_shader = NULL;
 
 TextureLitMaterial::TextureLitMaterial(Texture * pDiffuseTexture):_diffuseTexture(pDiffuseTexture) {
@@ -17,6 +18,12 @@ TextureLitMaterial::TextureLitMaterial(Texture * pDiffuseTexture):_diffuseTextur
 TextureLitMaterial::~TextureLitMaterial() {}
 
 void TextureLitMaterial::_lazyInitializeShader() {
+    if (!_depthShader) {
+        _depthShader = new ShaderProgram();
+        _depthShader->addShader(GL_VERTEX_SHADER, config::MGE_SHADER_PATH+"depth_shader.vs");
+        _depthShader->addShader(GL_FRAGMENT_SHADER, config::MGE_SHADER_PATH+"depth_shader.fs");
+        _depthShader->finalize();
+    }
     if (!_shader) {
         _shader = new ShaderProgram();
         _shader->addShader(GL_VERTEX_SHADER, config::MGE_SHADER_PATH+"texture_fragment_lit.vs");
@@ -32,6 +39,7 @@ void TextureLitMaterial::setDiffuseTexture (Texture* pDiffuseTexture) {
 void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pCamera) {
     if (!_diffuseTexture) return;
 
+    _depthShader->use();
     _shader->use();
 
     //setup texture slot 0
@@ -48,6 +56,8 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
 
     DualLinkNode<Light>* cn = list.startNode;
 
+    GLfloat near_plane = 1.0f, far_plane = 7.5f;
+
     while(cn!=NULL && index < MGE_MAX_LIGHTS)
     {
         string indexString = std::to_string(index);
@@ -58,7 +68,8 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
         glUniform1i(loc,light->type);
 
         loc = _shader->getUniformLocation("LightArray["+indexString+"].position");
-        glUniform3fv(loc,1,glm::value_ptr(light->getWorldPosition()));
+        glm::vec3 lightPos = light->getWorldPosition();
+        glUniform3fv(loc,1,glm::value_ptr(lightPos));
 
         loc = _shader->getUniformLocation("LightArray["+indexString+"].direction");
 
@@ -68,9 +79,17 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
             glUniform3fv(loc,1,glm::value_ptr(lightForward));
             //std::cout<<"spotlight dir: "<<lightForward<<"\n";
         }
-
+        else if (light->type == MGE_LIGHT_DIRECTIONAL)
+        {
+            glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
+            glm::mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(1.0));
+            glm::mat4 lightSpaceMatrix = lightProjection * lightView;
+            glUniformMatrix4fv (_depthShader->getUniformLocation("lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
+        }
         else
+        {
             glUniform3fv(loc,1,glm::value_ptr(light->direction));
+        }
 
 
 
@@ -87,6 +106,8 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
         cn = cn->nextNode;
     }
 
+    ///pass model matrix to depth shader
+    glUniformMatrix4fv (_depthShader->getUniformLocation("modelMatrix"),    1, GL_FALSE, glm::value_ptr(pGameObject->getWorldTransform() ));
 
     //pass in all MVP matrices separately
     glUniformMatrix4fv ( _shader->getUniformLocation("projectionMatrix"),   1, GL_FALSE, glm::value_ptr(pCamera->getProjection()));

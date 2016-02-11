@@ -19,6 +19,7 @@ class TextureLitMaterial : public AbstractMaterial
 
     protected:
     private:
+        static ShaderProgram* _depthShader;
         static ShaderProgram* _shader;
         static void _lazyInitializeShader();
 

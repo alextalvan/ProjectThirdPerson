@@ -30,8 +30,10 @@ Renderer::Renderer()
 Renderer::~Renderer()
 {
     glDeleteRenderbuffers(1, &postProc_rbo_depth);
+    glDeleteRenderbuffers(1, &depthMapFBO);
     glDeleteTextures(1, &postProc_fbo_texture0);
     glDeleteTextures(1, &postProc_fbo_texture1);
+    glDeleteTextures(1, &depthMap);
     glDeleteFramebuffers(1, &postProc_fbo);
 }
 
@@ -39,11 +41,14 @@ void Renderer::setClearColor(int pR, int pG, int pB) {
     glClearColor((float)pR/0xff, (float)pG/0xff, (float)pB/0xff, 1.0f );
 }
 
-
-
-
 void Renderer::render (World* pWorld)
 {
+    ///shadow mapping (render depth map)
+    glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+    glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+    glClear(GL_DEPTH_BUFFER_BIT);
+    render (pWorld, pWorld, pWorld->getMainCamera(), true);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     if(_postProcessList.size()>0)
     {
@@ -166,6 +171,26 @@ void Renderer::InitializePostProc()
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1024, 768, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
       glBindTexture(GL_TEXTURE_2D, 0);
 
+      ///depth map (shadow mapping)
+      //generate depth map texture
+      glActiveTexture(GL_TEXTURE0); ///?
+      glGenTextures(1, &depthMap);
+      glBindTexture(GL_TEXTURE_2D, depthMap);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+      glBindTexture(GL_TEXTURE_2D, 0); ///?
+
+      ///depth buffer (shadow mapping)
+      //attach depth map texture to depth buffer
+      glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+      glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
+      glDrawBuffer(GL_NONE);
+      glReadBuffer(GL_NONE);
+      glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
       /* Depth buffer */
       glGenRenderbuffers(1, &postProc_rbo_depth);
       glBindRenderbuffer(GL_RENDERBUFFER, postProc_rbo_depth);
@@ -176,7 +201,7 @@ void Renderer::InitializePostProc()
       glGenFramebuffers(1, &postProc_fbo);
       glBindFramebuffer(GL_FRAMEBUFFER, postProc_fbo);
       glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, postProc_fbo_texture0, 0);
-      glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, postProc_rbo_depth);
+      glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, postProc_rbo_depth); ///?
       GLenum status;
       if ((status = glCheckFramebufferStatus(GL_FRAMEBUFFER)) != GL_FRAMEBUFFER_COMPLETE) {
         std::cout<<"PostProcess Framebuffer generation failure!\n";
