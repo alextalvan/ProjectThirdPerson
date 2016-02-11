@@ -1,7 +1,9 @@
 --Only called once, at instantiation. Do NOT reference myGameObject here
 function Start()
-    g = GameObject("test",0,0,0);
-    AttachComponent(g,LuaScript("test.lua"))
+    a = GameObject("ayy lmao",0,0,0);
+    SetMesh(a,LoadMesh("cube_flat.obj"));
+    SetMaterial(a,ColorMaterial(0,1,1));
+    SetMainCamera(world,Camera("cam",0,0,10));
 end
 
 --Called when the script component is attached to a GameObject.
