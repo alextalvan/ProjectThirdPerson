@@ -119,10 +119,14 @@ void GameObject::_innerRemove(Component* comp)
 
 void GameObject::AttachComponent(Component* comp)
 {
-    if(comp==NULL)
+    if(comp==NULL||comp->_owner==this)
         return;
 
-    comp->setOwner(this);
+    if(comp->_owner!=NULL)//detach from prev owner, if any
+        comp->_owner->_innerRemove(comp);//we already know its owner has it so no need to use Detach() which does a safety check
+
+    _innerAdd(comp);
+    comp->setOwner(this);//this is used because derived Components may want to have special behaviour when attached to objects
 }
 
 void GameObject::DetachComponent(Component* comp)
@@ -130,8 +134,13 @@ void GameObject::DetachComponent(Component* comp)
     if(comp==NULL)
         return;
 
+    //safety check in case the list does not actually contain the component
     if(_components.Contains(comp))
+    {
+        _innerRemove(comp);
         comp->setOwner(NULL);
+    }
+
 }
 
 void GameObject::DestroyComponent(Component* comp)

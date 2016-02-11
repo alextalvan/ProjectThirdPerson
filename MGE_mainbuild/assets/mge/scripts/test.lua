@@ -6,8 +6,7 @@ function Start()
     SetMesh(a,LoadMesh("cube_flat.obj"));
     SetMaterial(a,ColorMaterial(1,0.5,1));
     SetParent(world,a);
-    s = LuaScript("template.lua");
-    AttachComponent(a,s);
+
 end
 
 function OnAttach()
@@ -17,6 +16,7 @@ end
 function Update()
     --if(GetKeyUp(0)) then
     --print(RandomInRange(0,10)); end
+    print("newScript")
 
 end
 

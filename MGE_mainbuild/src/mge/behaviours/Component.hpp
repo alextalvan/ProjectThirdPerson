@@ -14,9 +14,8 @@ class GameObject;
  */
 class Component: public Activateable, public Destroyable, public DualLinkNode<Component>
 {
+    friend class GameObject;
 	public:
-        virtual void setOwner (GameObject* owner);
-
         GameObject* const getOwner() const;
 
 		virtual void Update();
@@ -27,6 +26,7 @@ class Component: public Activateable, public Destroyable, public DualLinkNode<Co
 
     protected:
         Component();
+        virtual void setOwner (GameObject* owner);
         std::string _name = "Unnamed Component";
         virtual ~Component();
 	    //reference back its owner

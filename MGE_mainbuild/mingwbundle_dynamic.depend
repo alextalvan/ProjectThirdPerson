@@ -14360,7 +14360,7 @@
 1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\cameraorbit.hpp
 	<mge/behaviours/Component.hpp>
 
-1455133715 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\component.hpp
+1455180136 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\component.hpp
 	"mge/core/Activateable.hpp"
 	"mge/core/GameObject.hpp"
 	"mge/core/Destroyable.hpp"
@@ -14389,7 +14389,7 @@
 	<string>
 	"mge/core/GameObject.hpp"
 
-1455133055 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
+1455180163 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
 	<vector>
 	<string>
 	<iostream>
@@ -15437,7 +15437,7 @@
 
 1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\detail\namespace.h
 
-1455133649 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\component.cpp
+1455180466 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\component.cpp
 	<cassert>
 	<iostream>
 	"mge/behaviours/Component.hpp"
@@ -15575,7 +15575,7 @@
 	"mge/core/FPS.hpp"
 	"mge/core/Time.hpp"
 
-1455133450 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
+1455180664 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
 	<cassert>
 	<iostream>
 	<glm.hpp>
@@ -15903,7 +15903,7 @@
 	<string>
 	<mge/behaviours/Component.hpp>
 
-1455131418 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
+1455180762 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
 	"mge/lua/LuaScript.hpp"
 	"mge/core/World.hpp"
 	"mge/core/GameObject.hpp"

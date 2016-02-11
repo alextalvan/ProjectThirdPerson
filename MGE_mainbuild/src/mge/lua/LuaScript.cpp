@@ -613,8 +613,7 @@ int LuaScript::attachComponent(lua_State * lua)
 	GameObject * gameObj = (GameObject*)lua_touserdata(lua, -2);
 	Component * comp = (Component*)lua_touserdata(lua, -1);
 
-	//gameObj->AttachComponent(comp);
-	comp->setOwner(gameObj);
+	gameObj->AttachComponent(comp);
 
 	return 0;
 

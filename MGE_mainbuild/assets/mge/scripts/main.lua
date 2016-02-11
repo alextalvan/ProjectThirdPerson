@@ -1,6 +1,7 @@
 --Only called once, at instantiation. Do NOT reference myGameObject here
 function Start()
-
+    g = GameObject("test",0,0,0);
+    AttachComponent(g,LuaScript("test.lua"))
 end
 
 --Called when the script component is attached to a GameObject.
