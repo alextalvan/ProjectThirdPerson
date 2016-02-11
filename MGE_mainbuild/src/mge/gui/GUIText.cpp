@@ -1,44 +1,23 @@
-#include <cassert>
-#include <iostream>
-using namespace std;
-
-#include "mge/gui/GUIText.hpp"
-#include <cstdio>
 #include <GL/glew.h>
 #include <SFML/Graphics/Text.hpp>
-#include "mge/core/FPS.hpp"
+#include "mge/gui/GUIText.hpp"
 
-#include "mge/config.hpp"
+using namespace std;
 
-GUIText::GUIText( sf::RenderWindow * aWindow, /*sf::Font& pFont,*/ glm::vec2 pPosition,
-                 std::string pText, int pTextSize, sf::Color pColor)
-:   GameObject("GUIText", glm::vec3(pPosition, 0.0f)), _window( aWindow ), /*_font(pFont), */_textStr(pText), _textSize(pTextSize), _textColor(pColor)
+GUIText::GUIText( sf::RenderWindow * pWindow, sf::Font& pFont, glm::vec2 pPosition,std::string pText, int pTextSize, sf::Color pColor)
+:   GameObject("GUIText", glm::vec3(pPosition, 0.0f)), _window( pWindow ), _text(pText, pFont, pTextSize), _textColor(pColor)
 {
 	assert ( _window != NULL );
 
-    if (!_font.loadFromFile(config::MGE_FONT_PATH+ "arial.ttf")) {
-        cout << "Could not load font, exiting..." << endl;
-        return;
-    }
-
     sf::FloatRect textRect = _text.getLocalBounds();
     _text.setOrigin(textRect.left + textRect.width/2.0f, textRect.top  + textRect.height/2.0f);
-
-    initializeSettings();
+    setTextPosition(pPosition);
+	setTextColor(_textColor);
 }
 
 GUIText::~GUIText()
 {
 	//dtor
-}
-
-void GUIText::initializeSettings()
-{
-    _text.setString(_textStr);
-    _text.setPosition(getLocalPosition().x,getLocalPosition().y);
-    _text.setFont(_font);
-	_text.setCharacterSize(_textSize);
-	_text.setColor(_textColor);
 }
 
 void GUIText::setTextString(std::string pText) {

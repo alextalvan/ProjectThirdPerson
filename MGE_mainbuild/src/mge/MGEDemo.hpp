@@ -9,6 +9,8 @@ class Swapper;
 class GameObject;
 class DebugHud;
 class GUIText;
+class GUISprite;
+class Resources;
 
 class MGEDemo: public AbstractGame
 {
@@ -27,8 +29,10 @@ class MGEDemo: public AbstractGame
 	    virtual void _render();
 
 	private:
+	    Resources* resources;
 		DebugHud* _hud;                   //hud display
 		GUIText* guiText;
+		GUISprite* guiSprite;
         LuaScript* luaScript;
         void _updateHud();
 };

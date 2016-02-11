@@ -12352,7 +12352,7 @@
 
 1455200484 c:\github\projectthirdperson\mge_mainbuild\src\gl\gl.h
 
-1455215397 c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.hpp
+1455231773 c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.hpp
 	<mge/core/AbstractGame.hpp>
 	<SFML/Graphics.hpp>
 	<vector>
@@ -13697,7 +13697,7 @@
 	<mge/collision/BoxCollider.hpp>
 	<mge/collision/Collider.hpp>
 
-1455200486 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\util\debughud.cpp
+1455218075 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\util\debughud.cpp
 	<cassert>
 	<iostream>
 	<cstdio>
@@ -13806,7 +13806,7 @@
 
 1452188439 c:\github\projectthirdperson\mge_mainbuild\luabridge\detail\namespace.h
 
-1455218033 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
+1455231854 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -13835,6 +13835,8 @@
 	<mge/sound/SoundManager.hpp>
 	<mge/sound/SoundChannel.hpp>
 	"mge/gui/GUIText.hpp"
+	"mge/gui/GUISprite.hpp"
+	"mge/core/Resources.hpp"
 
 1455200486 c:\github\projectthirdperson\mge_mainbuild\src\mge\sound\soundmanager.hpp
 	<vector>
@@ -16041,20 +16043,30 @@
 
 1455202038 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\gui.cpp
 
-1455202038 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guisprite.cpp
+1455232189 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guisprite.cpp
+	<GL/glew.h>
+	<SFML/Graphics.hpp>
+	"mge/gui/GUISprite.hpp"
 
-1455217871 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guitext.cpp
-	<cassert>
-	<iostream>
-	"mge/gui/GUIText.hpp"
-	<cstdio>
+1455232276 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guitext.cpp
 	<GL/glew.h>
 	<SFML/Graphics/Text.hpp>
-	"mge/core/FPS.hpp"
+	"mge/gui/GUIText.hpp"
+
+1455231524 c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guitext.hpp
+	<SFML/Graphics.hpp>
+	"mge/core/GameObject.hpp"
+
+1455226674 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\resources.cpp
+	"mge/core/Resources.hpp"
 	"mge/config.hpp"
 
-1455216017 c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guitext.hpp
+1455226697 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\resources.hpp
+	<memory.h>
+	<assert.h>
 	<SFML/Graphics.hpp>
-	<iostream>
+
+1455232093 c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guisprite.hpp
+	<SFML/Graphics.hpp>
 	"mge/core/GameObject.hpp"
 

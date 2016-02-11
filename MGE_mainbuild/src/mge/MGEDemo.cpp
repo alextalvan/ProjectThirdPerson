@@ -38,6 +38,8 @@ using namespace std;
 #include <mge/sound/SoundChannel.hpp>
 
 #include "mge/gui/GUIText.hpp"
+#include "mge/gui/GUISprite.hpp"
+#include "mge/core/Resources.hpp"
 
 //construct the game class into _window, _renderer and hud (other parts are initialized by build)
 MGEDemo::MGEDemo():AbstractGame ()
@@ -47,12 +49,16 @@ MGEDemo::MGEDemo():AbstractGame ()
 void MGEDemo::initialize() {
     //setup the core part
     AbstractGame::initialize();
-
+    resources = new Resources();
+    resources->loadFont("Arial", "arial.ttf");
+    resources->loadTexture("Osama", "osama.jpg");
     //setup the custom part
 	cout << "Initializing HUD" << endl;
 	_hud = new DebugHud(_window);
-	guiText = new GUIText(_window, glm::vec2(_window->getSize().x/2, _window->getSize().y/2));
+	guiText = new GUIText(_window, resources->getFont("Arial"), glm::vec2(_window->getSize().x/2, _window->getSize().y/1.5f), "ALLAHU AKBAR!", 50, sf::Color::Red);
 	_world->AddChild(guiText);
+	guiSprite = new GUISprite(_window, resources->getTexture("Osama"), glm::vec2(_window->getSize().x/2, _window->getSize().y/2));
+    _world->AddChild(guiSprite);
 	cout << "HUD initialized." << endl << endl;
 }
 
@@ -67,6 +73,7 @@ void MGEDemo::_initializeScene()
 void MGEDemo::_render() {
     AbstractGame::_render();
     _updateHud();
+    _window->draw(*guiSprite);
     _window->draw(*guiText);
 
     //_world->renderDebugInfo();

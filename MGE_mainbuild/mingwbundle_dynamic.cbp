@@ -118,6 +118,8 @@
 		<Unit filename="src/mge/core/Mesh.hpp" />
 		<Unit filename="src/mge/core/Renderer.cpp" />
 		<Unit filename="src/mge/core/Renderer.hpp" />
+		<Unit filename="src/mge/core/Resources.cpp" />
+		<Unit filename="src/mge/core/Resources.hpp" />
 		<Unit filename="src/mge/core/ShaderProgram.cpp" />
 		<Unit filename="src/mge/core/ShaderProgram.hpp" />
 		<Unit filename="src/mge/core/Texture.cpp" />
