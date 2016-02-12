@@ -40,6 +40,7 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 		void setLocalPosition (glm::vec3 pPosition);
 		glm::vec3 getLocalPosition();
 
+        void setLocalRotation(glm::vec4 xAxis, glm::vec4 yAxis,glm::vec4 zAxis);
         //get the objects world position by combining transforms
 		glm::vec3 getWorldPosition();
 		virtual glm::mat4& getWorldTransform();

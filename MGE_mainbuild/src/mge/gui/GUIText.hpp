@@ -1,23 +1,23 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include "mge/core/GameObject.hpp"
+#include "mge/gui/GUI.hpp"
 
-class GUIText : public GameObject, public sf::Drawable
+class GUIText : public GUI
 {
 	public:
-		GUIText( sf::RenderWindow * pWindow, sf::Font& pFont, glm::vec2 pPosition = glm::vec2(0,0),
+		GUIText( sf::RenderWindow * pWindow, sf::Font& pFont, float pPosX = 0.0f, float pPosY = 0.0f, float pRotation = 0.0f,
                  std::string pText = "Text", int pTextSize = 10, sf::Color pColor = sf::Color::White );
-		~GUIText();
-		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 		void setTextFont (sf::Font& pFont);
-		void setTextPosition (glm::vec2 pPosition);
+		void setTextPosition (float pPosX, float pPosY);
+		void setTextRotation(float pAngle);
 		void setTextString (std::string text);
 		void setTextSize (int pTextSize);
 		void setTextColor (sf::Color pColor);
+	protected:
+	    virtual ~GUIText();
+		virtual void drawCurrent(GUI& target) ;
     private:
-		sf::RenderWindow * _window;
-        sf::Color _textColor;
         sf::Text _text;
+        sf::Color _textColor;
         void initializeSettings();
 };
