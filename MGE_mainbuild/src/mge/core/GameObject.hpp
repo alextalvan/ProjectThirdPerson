@@ -57,11 +57,6 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 		void setMaterial (AbstractMaterial* pMaterial);
 		AbstractMaterial* getMaterial() const;
 
-        //behaviour will probably be a unique instance per gameobject
-        //NOPE
-		//void setBehaviour(Component* pBehaviour);
-		//Component* getBehaviour() const;
-
 		virtual void AttachComponent(Component* comp);
 
 		virtual void DetachComponent(Component* comp);
