@@ -37,6 +37,8 @@ using namespace std;
 #include <mge/sound/SoundManager.hpp>
 #include <mge/sound/SoundChannel.hpp>
 
+#include <mge/editor/LevelImporter.hpp>
+
 //construct the game class into _window, _renderer and hud (other parts are initialized by build)
 MGEDemo::MGEDemo():AbstractGame ()
 {
@@ -55,6 +57,19 @@ void MGEDemo::initialize() {
 //build the game _world
 void MGEDemo::_initializeScene()
 {
+    LevelEditor::LoadLevel(config::MGE_LEVEL_PATH + "out.txt",_world);
+
+    /*
+    Mesh* m = Mesh::load(config::MGE_MODEL_PATH + "sphere_smooth.obj");
+    GameObject* g = new GameObject("t",glm::vec3(0,0,5));
+    g->setMesh(m);
+    ColorMaterial* c = new ColorMaterial();
+    g->setMaterial(c);
+
+    Camera* cam = new Camera();
+    _world->setMainCamera(cam);
+    */
+
 
 }
 

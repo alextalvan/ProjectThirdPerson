@@ -6,4 +6,5 @@ namespace config {
     const std::string MGE_FONT_PATH ("mge/fonts/");
     const std::string MGE_SOUND_PATH ("mge/sounds/");
     const std::string MGE_SCRIPT_PATH ("mge/scripts/");
+    const std::string MGE_LEVEL_PATH("mge/levels/");
 }

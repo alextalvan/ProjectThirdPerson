@@ -1,0 +1,67 @@
+GAMEOBJECT:
+   name MGE_root
+   transform: 
+      1  0  0  0  
+      0  1  0  0  
+      0  0  1  0  
+      0  0  0  1  
+   no_mesh
+
+   COMPONENTS:
+
+
+   END_COMPONENTS
+
+   CHILDREN:
+
+   CAMERA:
+      name Main_Camera
+      transform: 
+         -0.9784203  -0.05527663  0.199094  -3.49  
+         -1.862645E-09  0.9635519  0.2675214  2.34  
+         -0.2066251  0.2617483  -0.9427587  -6.52  
+         0  0  0  1  
+      isMainCamera 1
+
+      COMPONENTS:
+
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_CAMERA
+
+   GAMEOBJECT:
+      name Cube
+      transform: 
+         1  0  0  0  
+         0  1  0  0  
+         0  0  1  0  
+         0  0  0  1  
+      mesh cube_flat.obj
+
+      COMPONENTS:
+
+         TEXTURE_MATERIAL:
+            name Texture_material
+            diffuseTex bricks.jpg
+         END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+
+   END_CHILDREN
+
+END_GAMEOBJECT
+

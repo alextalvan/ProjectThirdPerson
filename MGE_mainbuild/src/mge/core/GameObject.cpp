@@ -38,20 +38,30 @@ void GameObject::Destroy()
     setParent(NULL);
 
     //destroy all my components
-    DualLinkNode<Component>* cn = _components.startNode;
-    while(cn!=NULL)
-    {
-        ((Component*)cn)->Destroy();
-        cn = cn->nextNode;
-    }
+    DestroyComponents();
 
     //destroy children as well
+    DestroyChildren();
+}
+
+void GameObject::DestroyChildren()
+{
     DualLinkNode2<ChildList>* cn2 = _children.startNode;
 
     while(cn2!=NULL)
     {
         ((GameObject*)cn2)->Destroy();
         cn2 = cn2->nextNode;
+    }
+}
+
+void GameObject::DestroyComponents()
+{
+    DualLinkNode<Component>* cn = _components.startNode;
+    while(cn!=NULL)
+    {
+        ((Component*)cn)->Destroy();
+        cn = cn->nextNode;
     }
 }
 

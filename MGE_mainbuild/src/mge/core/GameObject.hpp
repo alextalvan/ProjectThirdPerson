@@ -24,7 +24,7 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 {
     friend class AbstractGame;
 	public:
-		GameObject(std::string pName = NULL, glm::vec3 pPosition = glm::vec3( 0.0f, 0.0f, 0.0f ) );
+		GameObject(std::string pName = "GameObject", glm::vec3 pPosition = glm::vec3( 0.0f, 0.0f, 0.0f ) );
 		//GameObject(std::string pName = NULL, float posX = 0.0f, float posY = 0.0f, float posZ = 0.0f);
 
         virtual void Destroy() override;
@@ -68,6 +68,8 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 
 		virtual void DestroyComponent(Component* comp);
 
+		virtual void DestroyComponents();
+
         int GetComponentsCount();
         Component* GetComponentAt (int pIndex);
 
@@ -92,6 +94,8 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 		void AddChild (GameObject* pChild);
 		//shortcut to set the parent of pChild to NULL
 		void RemoveChild (GameObject* pChild);
+
+		void DestroyChildren();
 
 		virtual void setParent (GameObject* pGameObject);
 		GameObject* getParent();

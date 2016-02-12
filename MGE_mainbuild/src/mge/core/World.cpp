@@ -15,7 +15,7 @@ World::World():GameObject("root"), _mainCamera(0)
 	_transform = glm::mat4();
 	_worldTransform = glm::mat4();
 	//GameObject::_world = this;
-	AttachComponent(new LuaScript((config::MGE_SCRIPT_PATH + "main.lua").c_str(),this));
+	//AttachComponent(new LuaScript((config::MGE_SCRIPT_PATH + "main.lua").c_str(),this));
 }
 
 void World::setMainCamera (Camera* pCamera) {

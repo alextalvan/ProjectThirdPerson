@@ -14385,11 +14385,11 @@
 	<SFML/Graphics/RenderWindow.hpp>
 	<SFML/Window/Event.hpp>
 
-1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.hpp
+1455236552 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.hpp
 	<string>
 	"mge/core/GameObject.hpp"
 
-1455180163 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
+1455234414 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
 	<vector>
 	<string>
 	<iostream>
@@ -15558,7 +15558,7 @@
 1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\activateable.cpp
 	"mge/core/Activateable.hpp"
 
-1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.cpp
+1455237429 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.cpp
 	<iostream>
 	<glm.hpp>
 	"mge/core/Camera.hpp"
@@ -15575,7 +15575,7 @@
 	"mge/core/FPS.hpp"
 	"mge/core/Time.hpp"
 
-1455180664 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
+1455224007 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
 	<cassert>
 	<iostream>
 	<glm.hpp>
@@ -15611,7 +15611,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
+1455237240 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -15643,7 +15643,7 @@
 1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\time.cpp
 	"mge/core/Time.hpp"
 
-1455062121 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\world.cpp
+1455235276 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\world.cpp
 	<cassert>
 	<algorithm>
 	<iostream>
@@ -15670,7 +15670,7 @@
 	"mge/materials/AbstractMaterial.hpp"
 	<glm.hpp>
 
-1455021776 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\config.hpp
+1455224483 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\config.hpp
 	<string>
 
 1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\postprocessing\postprocess.cpp
@@ -15721,7 +15721,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1455191277 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
+1455235293 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -15749,6 +15749,7 @@
 	<mge/behaviours/CameraOrbit.hpp>
 	<mge/sound/SoundManager.hpp>
 	<mge/sound/SoundChannel.hpp>
+	<mge/editor/LevelImporter.hpp>
 
 1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\debughud.hpp
 	<SFML/Graphics.hpp>
@@ -15971,4 +15972,21 @@
 	<mge/behaviours/KeysBehaviour.hpp>
 	<glm.hpp>
 	"mge/util/Input.hpp"
+
+1455235330 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
+	<mge/editor/LevelImporter.hpp>
+	<mge/config.hpp>
+	<glm.hpp>
+	<mge/materials/ColorMaterial.hpp>
+	<mge/core/Mesh.hpp>
+	<mge/core/Texture.hpp>
+	<mge/materials/TextureMaterial.hpp>
+	<mge/collision/BoxCollider.hpp>
+	<mge/collision/WallCollider.hpp>
+	<mge/core/Camera.hpp>
+	<mge/core/Light.hpp>
+
+1455233860 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.hpp
+	<fstream>
+	<mge/core/World.hpp>
 
