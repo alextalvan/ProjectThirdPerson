@@ -131,6 +131,12 @@
 		<Unit filename="src/mge/core/World.hpp" />
 		<Unit filename="src/mge/editor/LevelImporter.cpp" />
 		<Unit filename="src/mge/editor/LevelImporter.hpp" />
+		<Unit filename="src/mge/gui/GUI.cpp" />
+		<Unit filename="src/mge/gui/GUI.hpp" />
+		<Unit filename="src/mge/gui/GUISprite.cpp" />
+		<Unit filename="src/mge/gui/GUISprite.hpp" />
+		<Unit filename="src/mge/gui/GUIText.cpp" />
+		<Unit filename="src/mge/gui/GUIText.hpp" />
 		<Unit filename="src/mge/lua/LuaScript.cpp" />
 		<Unit filename="src/mge/lua/LuaScript.hpp" />
 		<Unit filename="src/mge/materials/AbstractMaterial.cpp" />
@@ -159,6 +165,8 @@
 		<Unit filename="src/mge/util/Input.hpp" />
 		<Unit filename="src/mge/util/Random.cpp" />
 		<Unit filename="src/mge/util/Random.hpp" />
+		<Unit filename="src/mge/util/ResourceCacher.cpp" />
+		<Unit filename="src/mge/util/ResourceCacher.hpp" />
 		<Unit filename="src/mge/util/list/DualLinkList.cpp" />
 		<Unit filename="src/mge/util/list/DualLinkList.hpp" />
 		<Unit filename="src/mge/util/list/DualLinkNode.cpp" />
