@@ -221,6 +221,15 @@ void GameObject::RemoveChild (GameObject* pChild) {
     pChild->setParent(NULL);
 }
 
+void GameObject::setLocalRotation(glm::vec4 xAxis, glm::vec4 yAxis,glm::vec4 zAxis)
+{
+    _transform[0] = xAxis;
+    _transform[1] = yAxis;
+    _transform[2] = zAxis;
+
+    MakeTransformDirty();
+}
+
 ////////////
 
 glm::vec3 GameObject::getWorldPosition()

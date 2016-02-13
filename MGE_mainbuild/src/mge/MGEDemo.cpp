@@ -39,16 +39,32 @@ using namespace std;
 
 #include <mge/editor/LevelImporter.hpp>
 
+#include "mge/gui/GUI.hpp"
+#include "mge/gui/GUIText.hpp"
+#include "mge/gui/GUISprite.hpp"
+#include "mge/util/ResourceCacher.hpp"
+
 //construct the game class into _window, _renderer and hud (other parts are initialized by build)
 MGEDemo::MGEDemo():AbstractGame ()
 {
+
 }
 
 void MGEDemo::initialize() {
     //setup the core part
     AbstractGame::initialize();
-
     //setup the custom part
+	cout << "Initializing HUD" << endl;
+	gui = new GUI(_window);
+	_hud = new DebugHud(_window);
+	guiSprite = new GUISprite(_window, *Utils::LoadTexture("osama.jpg"), _window->getSize().x/2, _window->getSize().y/2, 0.0f);
+    gui->AddChild(guiSprite);
+
+    //cout<<guiSprite->getWorldTransform();
+
+	guiText = new GUIText(_window, *Utils::LoadFont("arial.ttf"), _window->getSize().x/2, _window->getSize().y/2, 0.0f, "ALLAHU AKBAR!", 50, sf::Color::Red);
+	guiSprite->AddChild(guiText);
+
 	cout << "Initializing HUD" << endl;
 	_hud = new DebugHud(_window);
 	cout << "HUD initialized." << endl << endl;
@@ -64,6 +80,7 @@ void MGEDemo::_initializeScene()
 
 void MGEDemo::_render() {
     AbstractGame::_render();
+    gui->draw(*gui);
     _updateHud();
 
     //_world->renderDebugInfo();
