@@ -14310,7 +14310,7 @@
 
 1455012454 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\gl\gl.h
 
-1455238231 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.hpp
+1455324393 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.hpp
 	<mge/core/AbstractGame.hpp>
 	<SFML/Graphics.hpp>
 	<vector>
@@ -14389,7 +14389,7 @@
 	<string>
 	"mge/core/GameObject.hpp"
 
-1455238231 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
+1455324393 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
 	<vector>
 	<string>
 	<iostream>
@@ -15578,7 +15578,7 @@
 	"mge/core/FPS.hpp"
 	"mge/core/Time.hpp"
 
-1455224007 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
+1455324393 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
 	<cassert>
 	<iostream>
 	<glm.hpp>
@@ -15724,7 +15724,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1455322832 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
+1455324393 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -15753,6 +15753,10 @@
 	<mge/sound/SoundManager.hpp>
 	<mge/sound/SoundChannel.hpp>
 	<mge/editor/LevelImporter.hpp>
+	"mge/gui/GUI.hpp"
+	"mge/gui/GUIText.hpp"
+	"mge/gui/GUISprite.hpp"
+	"mge/util/ResourceCacher.hpp"
 
 1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\debughud.hpp
 	<SFML/Graphics.hpp>
@@ -16011,4 +16015,37 @@
 
 1455322248 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\firstpersonlook.hpp
 	<mge/behaviours/Component.hpp>
+
+1455324393 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\gui.hpp
+	<SFML/Graphics.hpp>
+	"mge/core/GameObject.hpp"
+
+1455324393 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guitext.hpp
+	"mge/gui/GUI.hpp"
+
+1455324393 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guisprite.hpp
+	"mge/gui/GUI.hpp"
+
+1455324393 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\resourcecacher.hpp
+	<SFML/Graphics.hpp>
+
+1455324393 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\gui.cpp
+	"mge/gui/GUI.hpp"
+
+1455324393 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guisprite.cpp
+	<GL/glew.h>
+	<SFML/Graphics.hpp>
+	"mge/gui/GUISprite.hpp"
+	"SFML/Graphics/Transform.hpp"
+
+1455324393 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guitext.cpp
+	<GL/glew.h>
+	<SFML/Graphics/Text.hpp>
+	"mge/gui/GUIText.hpp"
+
+1455324393 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\resourcecacher.cpp
+	"mge/util/ResourceCacher.hpp"
+	<iostream>
+	<map>
+	"mge/config.hpp"
 
