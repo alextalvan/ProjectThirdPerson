@@ -70,6 +70,9 @@ private:
 	static int wallCollider(lua_State * lua);
 	static int luaScript(lua_State * lua);
 
+	//levels/scenes
+	static int loadLevel(lua_State * lua);
+
 
 
 };

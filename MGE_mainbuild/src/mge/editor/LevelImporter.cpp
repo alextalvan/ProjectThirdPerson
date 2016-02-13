@@ -9,6 +9,8 @@
 #include <mge/collision/WallCollider.hpp>
 #include <mge/core/Camera.hpp>
 #include <mge/core/Light.hpp>
+#include <mge/behaviours/CharacterController.hpp>
+#include <mge/lua/LuaScript.hpp>
 
 
 namespace LevelEditor
@@ -122,8 +124,8 @@ namespace LevelEditor
         {
             if(s=="TEXTURE_MATERIAL:")
             {
-                f>>s;//"name"
-                f>>s;//the name
+                //f>>s;//"name"
+                //f>>s;//the name
                 f>>s;//"diffuseTex
                 f>>s;//the filename
 
@@ -135,8 +137,8 @@ namespace LevelEditor
 
             if(s=="COLOR_MATERIAL:")
             {
-                f>>s;//"name"
-                f>>s;//the name
+                //f>>s;//"name"
+                //f>>s;//the name
                 f>>s;//"color
                 float r,g,b;
                 f>>s; r = std::strtof(s.c_str(),nullptr);
@@ -149,8 +151,8 @@ namespace LevelEditor
 
             if(s=="BOX_COLLIDER:")
             {
-                f>>s;//"name"
-                f>>s;//the name
+                //f>>s;//"name"
+                //f>>s;//the name
                 f>>s;//"dimensions"
                 float r,g,b;
                 f>>s; r = std::strtof(s.c_str(),nullptr);
@@ -164,8 +166,8 @@ namespace LevelEditor
 
             if(s=="WALL_COLLIDER:")
             {
-                f>>s;//"name"
-                f>>s;//the name
+                //f>>s;//"name"
+                //f>>s;//the name
                 f>>s;//"dimensions"
                 float r,g,b;
                 f>>s; r = std::strtof(s.c_str(),nullptr);
@@ -177,6 +179,49 @@ namespace LevelEditor
                 f>>s;//end_wall
             }
 
+            if(s=="CHARACTER_CONTROLLER:")
+            {
+                //f>>s;//"name"
+                //f>>s;//the name
+                f>>s;//"move_speed"
+                float m,j,g;
+                f>>s; m = std::strtof(s.c_str(),nullptr);
+                f>>s;//"jump_force"
+                f>>s; j = std::strtof(s.c_str(),nullptr);
+                f>>s;//"gravity"
+                f>>s; g = std::strtof(s.c_str(),nullptr);
+
+                CharacterController* c = new CharacterController(m,j,g);
+                owner->AttachComponent(c);
+                f>>s;//end_character
+            }
+
+            if(s=="LUA_SCRIPT:")
+            {
+                //string name;
+                //f>>s;//"name"
+                //f>>name;//the name
+
+                f>>s;//"script_name"
+                f>>s;//the actual script path
+
+                LuaScript* script = new LuaScript((config::MGE_SCRIPT_PATH + s).c_str(),_storedWorld);
+                owner->AttachComponent(script);
+                f>>s;//end_luascript
+            }
+
+            if(s=="SPHERE_COLLIDER:")
+            {
+                //f>>s;//"name"
+                //f>>s;//the name
+                f>>s;//"radius"
+                float r;
+                f>>s; r = std::strtof(s.c_str(),nullptr);
+                SphereCollider* col = new SphereCollider();
+                col->radius = r;
+                owner->AttachComponent(col);
+                f>>s;//end_sphere
+            }
             f>>s;//new component or end_components
         }
     }
@@ -228,7 +273,6 @@ namespace LevelEditor
         f>>isMain;//actual value, 1 or 0
 
         if(isMain) _storedWorld->setMainCamera(obj);
-        //obj->AttachComponent(new KeysBehaviour());
 
         ParseComponents(f,obj);
         ParseChildren(f,obj);

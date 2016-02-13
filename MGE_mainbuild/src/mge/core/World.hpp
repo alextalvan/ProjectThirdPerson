@@ -12,13 +12,13 @@ class World : public GameObject
 	public:
         World();
 
-		void setMainCamera (Camera* pCamera);
-		Camera* getMainCamera();
-
+		static void setMainCamera (Camera* pCamera);
+		static Camera* getMainCamera();
         void renderDebugInfo();
 
 	private:
-	    Camera* _mainCamera;
+	    static Camera* _mainCamera;
+
 };
 
 

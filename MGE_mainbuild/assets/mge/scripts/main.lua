@@ -4,6 +4,8 @@ function Start()
     --SetMesh(a,LoadMesh("cube_flat.obj"));
     --SetMaterial(a,ColorMaterial(0,1,1));
     --SetMainCamera(world,Camera("cam",0,0,10));
+    --print("test");
+    LoadLevel("out.txt");
 end
 
 --Called when the script component is attached to a GameObject.

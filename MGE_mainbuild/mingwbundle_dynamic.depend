@@ -14310,7 +14310,7 @@
 
 1455012454 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\gl\gl.h
 
-1455038411 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.hpp
+1455238231 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.hpp
 	<mge/core/AbstractGame.hpp>
 	<SFML/Graphics.hpp>
 	<vector>
@@ -14389,7 +14389,7 @@
 	<string>
 	"mge/core/GameObject.hpp"
 
-1455234414 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
+1455238231 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
 	<vector>
 	<string>
 	<iostream>
@@ -15520,7 +15520,7 @@
 	<glm.hpp>
 	<iostream>
 
-1455099864 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
+1455271636 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
 	"AbstractGame.hpp"
 	<iostream>
 	"mge/core/Time.hpp"
@@ -15536,7 +15536,7 @@
 
 1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\fps.hpp
 
-1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.hpp
+1455271264 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.hpp
 	<GL/glew.h>
 	<vector>
 	<mge/materials/PostProcessing/PostProcess.hpp>
@@ -15551,17 +15551,20 @@
 	<string>
 	<GL/glew.h>
 
-1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\world.hpp
+1455321318 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\world.hpp
 	<vector>
 	"mge/core/GameObject.hpp"
 
 1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\activateable.cpp
 	"mge/core/Activateable.hpp"
 
-1455237429 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.cpp
+1455322216 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.cpp
 	<iostream>
 	<glm.hpp>
 	"mge/core/Camera.hpp"
+	<mge/behaviours/Component.hpp>
+	<mge/core/GameObject.hpp>
+	<mge/behaviours/FirstPersonLook.hpp>
 
 1455061927 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\destroyable.cpp
 	<mge/core/Destroyable.hpp>
@@ -15611,7 +15614,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1455237240 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
+1455306362 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -15643,7 +15646,7 @@
 1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\time.cpp
 	"mge/core/Time.hpp"
 
-1455235276 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\world.cpp
+1455321341 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\world.cpp
 	<cassert>
 	<algorithm>
 	<iostream>
@@ -15721,7 +15724,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1455235293 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
+1455322832 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -15847,7 +15850,7 @@
 	<glm.hpp>
 	<conio.h>
 
-1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\debughud.cpp
+1455238231 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\debughud.cpp
 	<cassert>
 	<iostream>
 	<cstdio>
@@ -15896,7 +15899,7 @@
 	"mge/config.hpp"
 	<sfml/window/event.hpp>
 
-1455131351 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
+1455322690 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
 	"lua.h"
 	"lauxlib.h"
 	"lualib.h"
@@ -15904,7 +15907,7 @@
 	<string>
 	<mge/behaviours/Component.hpp>
 
-1455180762 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
+1455322862 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
 	"mge/lua/LuaScript.hpp"
 	"mge/core/World.hpp"
 	"mge/core/GameObject.hpp"
@@ -15921,6 +15924,7 @@
 	"mge/collision/SphereCollider.hpp"
 	"mge/collision/BoxCollider.hpp"
 	"mge/collision/WallCollider.hpp"
+	"mge/editor/LevelImporter.hpp"
 
 1455012450 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\lua.h
 	<stdarg.h>
@@ -15964,16 +15968,18 @@
 1455106687 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\wallcollider.hpp
 	"mge/collision/BoxCollider.hpp"
 
-1455134728 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
+1455321872 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
 	"CharacterController.hpp"
 	"mge/core/GameObject.hpp"
+	"mge/core/Camera.hpp"
+	"mge/core/World.hpp"
 
-1455114536 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\charactercontroller.hpp
-	<mge/behaviours/KeysBehaviour.hpp>
+1455306479 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\charactercontroller.hpp
+	<mge/behaviours/Component.hpp>
 	<glm.hpp>
 	"mge/util/Input.hpp"
 
-1455235330 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
+1455306637 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
 	<mge/editor/LevelImporter.hpp>
 	<mge/config.hpp>
 	<glm.hpp>
@@ -15985,8 +15991,24 @@
 	<mge/collision/WallCollider.hpp>
 	<mge/core/Camera.hpp>
 	<mge/core/Light.hpp>
+	<mge/behaviours/CharacterController.hpp>
+	<mge/lua/LuaScript.hpp>
 
 1455233860 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.hpp
 	<fstream>
 	<mge/core/World.hpp>
+
+1455320803 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\firstpersonvision.cpp
+	<mge/behaviours/FirstPersonVision.hpp>
+	<mge/util/Input.hpp>
+
+1455310221 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\firstpersonvision.hpp
+	<mge/behaviours/Component.hpp>
+
+1455322216 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\firstpersonlook.cpp
+	<mge/behaviours/FirstPersonLook.hpp>
+	<mge/util/Input.hpp>
+
+1455322248 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\firstpersonlook.hpp
+	<mge/behaviours/Component.hpp>
 

@@ -1,26 +1,26 @@
 #ifndef CHARACTERCONTROLLER_H
 #define CHARACTERCONTROLLER_H
 
-#include <mge/behaviours/KeysBehaviour.hpp>
+#include <mge/behaviours/Component.hpp>
 #include <glm.hpp>
 #include "mge/util/Input.hpp"
 
 class GameObject;
 
-class CharacterController : public KeysBehaviour
+class CharacterController : public Component
 {
     public:
-        CharacterController(float moveSpeed = 1.0f, float turnSpeed = 1.0f);
-        virtual ~CharacterController();
-		virtual void Update();
+        CharacterController(float moveSpeed = 0.2f, float jumpStrength = 1.0f, float gravity = 0.1f);
+
+		void Update() override;
     protected:
+        virtual ~CharacterController();
     private:
         void Movement();
-        void Rotation();
-        glm::vec2 GetMouseOffset();
-        glm::vec2 prevMousePos;
-        float rotationX = 0.0f;
-        float rotationY = 0.0f;
+
+        float _jumpForce;
+        float _gravityForce;
+        float _moveSpeed;
 };
 
 #endif // CHARACTERCONTROLLER_H

@@ -16,7 +16,7 @@ class Camera;
 class Renderer
 {
 	public:
-		Renderer();
+		Renderer(int width, int height);
 		virtual ~Renderer();
 
         //render whole world
@@ -32,6 +32,10 @@ class Renderer
 
     //framebuffer object used for post processing
     private:
+        //general settings
+        int _screenWidth, _screenHeight;
+
+
 
         ///post processing
         GLuint postProc_fbo, postProc_fbo_texture0,postProc_fbo_texture1, postProc_rbo_depth;//frame buffer object with depth buffer

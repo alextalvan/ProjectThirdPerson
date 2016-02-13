@@ -44,7 +44,7 @@ void AbstractGame::initialize() {
 
 void AbstractGame::_initializeWindow() {
 	cout << "Initializing window..." << endl;
-	_window = new sf::RenderWindow( sf::VideoMode(1024,768), "My Game!", sf::Style::Default, sf::ContextSettings(24,8,4,3,3));
+	_window = new sf::RenderWindow( sf::VideoMode(1366,768), "FairWind Game Engine", sf::Style::Titlebar, sf::ContextSettings(24,8,4,3,3));
 	_window->setVerticalSyncEnabled(true);
     cout << "Window initialized." << endl << endl;
 }
@@ -81,7 +81,7 @@ void AbstractGame::_initializeGlew() {
 void AbstractGame::_initializeRenderer() {
     //setup our own renderer
 	cout << "Initializing renderer..." << endl;
-	_renderer = new Renderer();
+	_renderer = new Renderer(1366,768);
     cout << "Renderer done." << endl << endl;
 }
 

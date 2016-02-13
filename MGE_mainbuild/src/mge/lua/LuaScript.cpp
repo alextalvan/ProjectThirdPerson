@@ -18,6 +18,7 @@
 #include "mge/collision/SphereCollider.hpp"
 #include "mge/collision/BoxCollider.hpp"
 #include "mge/collision/WallCollider.hpp"
+#include "mge/editor/LevelImporter.hpp"
 
 //#define MGE_LUA_SAFETY 1  //comment this define out to remove the lua safety checks but heavily improve performance
 
@@ -71,6 +72,7 @@ LuaScript::LuaScript(const char * path, World * world)
 	lua_register(L, "BoxCollider", boxCollider);//
 	lua_register(L, "WallCollider", wallCollider);//
 	lua_register(L, "LuaScript", luaScript);//
+	lua_register(L, "LoadLevel", loadLevel);//
 
 	//Set world
 	lua_pushlightuserdata(L, world);
@@ -207,6 +209,10 @@ int LuaScript::camera(lua_State * lua)
 	position.z = lua_tonumber(lua, -1);
 
 	Camera * cam = new Camera(name, position);
+
+	lua_getglobal(lua,"world");
+	World* w = (World*) lua_touserdata(lua,-1);
+	w->AddChild(cam);
 	lua_pushlightuserdata(lua, cam);
 
 	return 1;
@@ -662,6 +668,15 @@ int LuaScript::luaScript(lua_State * lua)
     LuaScript* script = new LuaScript((config::MGE_SCRIPT_PATH+fileName).c_str(),world);
     lua_pushlightuserdata(lua,script);
     return 1;
+}
+
+int LuaScript::loadLevel(lua_State * lua)
+{
+    string fileName = lua_tostring(lua, -1);
+    lua_getglobal(lua,"world");
+    World* world = (World*)lua_touserdata(lua,-1);
+    LevelEditor::LoadLevel(config::MGE_LEVEL_PATH + fileName,world);
+    return 0;
 }
 
 //removed for now
