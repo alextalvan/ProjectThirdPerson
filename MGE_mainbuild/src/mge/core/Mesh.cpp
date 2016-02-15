@@ -11,6 +11,8 @@ using namespace std;
 #include "mge/core/Camera.hpp"
 #include "glm.hpp"
 
+std::map<std::string,Mesh*> Mesh::_meshCache;
+
 Mesh::Mesh(string pId)
 :	_id(pId), _indexBufferId(0), _vertexBufferId(0), _normalBufferId(0), _uvBufferId(0)
 {
@@ -20,6 +22,29 @@ Mesh::Mesh(string pId)
 Mesh::~Mesh()
 {
 	//dtor
+}
+
+Mesh* Mesh::load(string pFileName)
+{
+    Mesh* ret;
+    std::map<std::string, Mesh*>::iterator pos = _meshCache.find(pFileName);
+
+    if(pos==_meshCache.end())
+    {
+        ret = cache(pFileName);
+        if(!ret)
+        {
+            throw "Mesh loading error. Aborting.";
+        }
+        _meshCache.insert(_meshCache.end(),std::pair<std::string,Mesh*>(pFileName,ret));
+
+    }
+    else
+    {
+        ret = _meshCache[pFileName];
+        std::cout<<"Returning cached mesh "<< pFileName<<".\n";
+    }
+    return ret;
 }
 
 /**
@@ -70,7 +95,7 @@ Mesh::~Mesh()
  *
  * Note that loading this mesh isn't cached like we do with texturing, this is an exercise left for the students.
  */
-Mesh* Mesh::load(string pFileName)
+Mesh* Mesh::cache(string pFileName)
 {
     cout << "Loading " << pFileName << "...";
 

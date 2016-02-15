@@ -15,48 +15,24 @@ GAMEOBJECT:
    CHILDREN:
 
    GAMEOBJECT:
-      name Cube(1)
+      name TriggerCube
       transform: 
-         1  0  0  9.88  
-         0  1  0  6.25  
-         0  0  1  -7.38  
+         0.6648017  -0.5582984  0.4963282  5.93  
+         0.4473719  0.8296402  0.3339993  2.67  
+         -0.5982451  -4.470348E-08  0.8013132  -9.8  
          0  0  0  1  
       mesh cube_flat.obj
 
       COMPONENTS:
 
+         LUA_SCRIPT:
+            scriptName test.lua
+         END_LUA_SCRIPT
+         BOX_COLLIDER:
+            dimensions 1 1 1
+         END_BOX_COLLIDER
          TEXTURE_MATERIAL:
             diffuseTex raptor.png
-         END_TEXTURE_MATERIAL
-         WALL_COLLIDER:
-            dimensions 1 1 1
-         END_WALL_COLLIDER
-
-      END_COMPONENTS
-
-      CHILDREN:
-
-
-      END_CHILDREN
-
-   END_GAMEOBJECT
-
-   GAMEOBJECT:
-      name Floor
-      transform: 
-         500  0  0  0  
-         0  2  0  0  
-         0  0  500  0  
-         0  0  0  1  
-      mesh cube_flat.obj
-
-      COMPONENTS:
-
-         WALL_COLLIDER:
-            dimensions 1 1 1
-         END_WALL_COLLIDER
-         TEXTURE_MATERIAL:
-            diffuseTex bricks.jpg
          END_TEXTURE_MATERIAL
 
       END_COMPONENTS
@@ -119,6 +95,60 @@ GAMEOBJECT:
    END_GAMEOBJECT
 
    GAMEOBJECT:
+      name Cube(1)
+      transform: 
+         1  0  0  9.88  
+         0  1  0  6.25  
+         0  0  1  -7.38  
+         0  0  0  1  
+      mesh cube_flat.obj
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 1 1 1
+         END_WALL_COLLIDER
+         TEXTURE_MATERIAL:
+            diffuseTex raptor.png
+         END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Floor
+      transform: 
+         500  0  0  0  
+         0  2  0  0  
+         0  0  500  0  
+         0  0  0  1  
+      mesh cube_flat.obj
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 1 1 1
+         END_WALL_COLLIDER
+         TEXTURE_MATERIAL:
+            diffuseTex bricks.jpg
+         END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
       name Cube
       transform: 
          1  0  0  0  
@@ -129,12 +159,12 @@ GAMEOBJECT:
 
       COMPONENTS:
 
-         TEXTURE_MATERIAL:
-            diffuseTex raptor.png
-         END_TEXTURE_MATERIAL
          WALL_COLLIDER:
             dimensions 1 1 1
          END_WALL_COLLIDER
+         TEXTURE_MATERIAL:
+            diffuseTex raptor.png
+         END_TEXTURE_MATERIAL
 
       END_COMPONENTS
 
