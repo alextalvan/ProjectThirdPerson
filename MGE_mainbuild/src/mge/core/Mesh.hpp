@@ -5,6 +5,7 @@
 #include <string>
 #include <GL/glew.h>
 #include <glm.hpp>
+#include <map>
 
 class World;
 
@@ -24,6 +25,7 @@ class Mesh
          * for more format information.
          */
 		static Mesh* load(std::string pFileName);
+		static Mesh* cache(std::string pFileName);
 
         /**
          * Streams the mesh to opengl using the given indexes for the different attributes
@@ -75,6 +77,10 @@ class Mesh
 					return memcmp((void*)this, (void*)&other, sizeof(FaceIndexTriplet))>0;
 				}
 		};
+
+    private:
+         static std::map<std::string,Mesh*> _meshCache;
+
 
 };
 
