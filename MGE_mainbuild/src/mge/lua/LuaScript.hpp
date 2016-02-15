@@ -7,6 +7,7 @@ extern "C" {
 #include <iostream>
 #include <string>
 #include <mge/behaviours/Component.hpp>
+#include <SFML/Graphics.hpp>
 
 class World;
 class GameObject;
@@ -14,7 +15,7 @@ class GameObject;
 class LuaScript : public Component
 {
 public:
-	LuaScript(const char * path, World * world);
+	LuaScript(const char * path, World * world, sf::RenderWindow * window);
 	void Update() override;
 	void InvokeCollisionCallback(GameObject* other);
 	void setOwner(GameObject* pOwner) override;
@@ -48,6 +49,24 @@ private:
 	static int getMaterial(lua_State * lua);
 	static int setName(lua_State * lua);
 	static int getName(lua_State * lua);
+
+	//gui
+	static int gui(lua_State * lua);
+	static int guiText(lua_State * lua);
+	static int setTextFont (lua_State * lua);
+    static int setTextPosition (lua_State * lua);
+    static int setTextRotation(lua_State * lua);
+    static int setTextString (lua_State * lua);
+    static int setTextSize (lua_State * lua);
+    static int setTextColor (lua_State * lua);
+	static int guiSprite(lua_State * lua);
+    static int setSpriteTexture (lua_State * lua);
+	static int setSpritePosition (lua_State * lua);
+    static int setSpriteRotation(lua_State * lua);
+    static int setSpriteScale (lua_State * lua);
+    static int guiButton (lua_State * lua);
+    static int setButtonTexture (lua_State * lua);
+    static int onClick (lua_State * lua);
 
 	//utils
 	static int getTime(lua_State * lua);

@@ -4,7 +4,7 @@
 
 namespace LevelEditor
 {
-    void LoadLevel(std::string fileName, World* world);
+    void LoadLevel(std::string fileName, World* world, sf::RenderWindow * window);
 
     bool ParseAbstractObject(ifstream& f, GameObject* parent);
 

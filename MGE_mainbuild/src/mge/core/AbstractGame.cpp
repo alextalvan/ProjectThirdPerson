@@ -88,7 +88,7 @@ void AbstractGame::_initializeRenderer() {
 void AbstractGame::_initializeWorld() {
     //setup our own renderer
 	cout << "Initializing world..." << endl;
-	_world = new World();
+	_world = new World(_window);
 	//_world
     cout << "World initialized." << endl << endl;
 }
