@@ -133,6 +133,8 @@
 		<Unit filename="src/mge/editor/LevelImporter.hpp" />
 		<Unit filename="src/mge/gui/GUI.cpp" />
 		<Unit filename="src/mge/gui/GUI.hpp" />
+		<Unit filename="src/mge/gui/GUIButton.cpp" />
+		<Unit filename="src/mge/gui/GUIButton.hpp" />
 		<Unit filename="src/mge/gui/GUISprite.cpp" />
 		<Unit filename="src/mge/gui/GUISprite.hpp" />
 		<Unit filename="src/mge/gui/GUIText.cpp" />

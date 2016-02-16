@@ -10,13 +10,14 @@ class Camera;
 class World : public GameObject
 {
 	public:
-        World();
+        World(sf::RenderWindow * pWindow);
 
 		static void setMainCamera (Camera* pCamera);
 		static Camera* getMainCamera();
         void renderDebugInfo();
 
 	private:
+	    sf::RenderWindow * _window;
 	    static Camera* _mainCamera;
 
 };

@@ -4,10 +4,10 @@
 
 using namespace std;
 
-GUIText::GUIText( sf::RenderWindow * pWindow, sf::Font& pFont, float pPosX, float pPosY, float pRotation, std::string pText, int pTextSize, sf::Color pColor)
+GUIText::GUIText( sf::RenderWindow * pWindow, sf::Font& pFont, std::string pText, float pPosX, float pPosY, float pRotation, int pTextSize, sf::Color pColor)
 :   GUI(pWindow, "GUIText", pPosX, pPosY), _text(pText, pFont, pTextSize), _textColor(pColor)
 {
-	assert ( _window != NULL );
+	assert ( pWindow != NULL );
 
     sf::FloatRect textRect = _text.getLocalBounds();
     _text.setOrigin(textRect.left + textRect.width/2.0f, textRect.top  + textRect.height/2.0f);

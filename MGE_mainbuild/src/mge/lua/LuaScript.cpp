@@ -19,11 +19,16 @@
 #include "mge/collision/BoxCollider.hpp"
 #include "mge/collision/WallCollider.hpp"
 #include "mge/editor/LevelImporter.hpp"
+#include "mge/gui/GUI.hpp"
+#include "mge/gui/GUIText.hpp"
+#include "mge/gui/GUISprite.hpp"
+#include "mge/gui/GUIButton.hpp"
+#include "mge/util/ResourceCacher.hpp"
 
 //#define MGE_LUA_SAFETY 1  //comment this define out to remove the lua safety checks but heavily improve performance
 
 
-LuaScript::LuaScript(const char * path, World * world)
+LuaScript::LuaScript(const char * path, World * world, sf::RenderWindow * window)
 {
 
     _name = "LuaScript:" + std::string(path);
@@ -73,10 +78,30 @@ LuaScript::LuaScript(const char * path, World * world)
 	lua_register(L, "WallCollider", wallCollider);//
 	lua_register(L, "LuaScript", luaScript);//
 	lua_register(L, "LoadLevel", loadLevel);//
+	lua_register(L, "Gui", gui);
+	lua_register(L, "GuiText", guiText);
+	lua_register(L, "SetTextFont", setTextFont);
+	lua_register(L, "SetTextPosition", setTextPosition);
+	lua_register(L, "SetTextRotation", setTextRotation);
+	lua_register(L, "SetTextString", setTextString);
+	lua_register(L, "SetTextSize", setTextSize);
+	lua_register(L, "SetTextColor", setTextColor);
+	lua_register(L, "GuiSprite", guiSprite);
+	lua_register(L, "SetSpriteTexture", setSpriteTexture);
+	lua_register(L, "SetSpritePosition", setSpritePosition);
+	lua_register(L, "SetSpriteRotation", setSpriteRotation);
+	lua_register(L, "SetSpriteScale", setSpriteScale);
+	lua_register(L, "GuiButton", guiButton);
+	lua_register(L, "SetButtonTexture", setButtonTexture);
+	lua_register(L, "OnClick", onClick);
 
 	//Set world
 	lua_pushlightuserdata(L, world);
 	lua_setglobal(L, "world");
+
+	//Set window
+	lua_pushlightuserdata(L, window);
+	lua_setglobal(L, "window");
 
 	//set self reference
 	lua_pushlightuserdata(L, this);
@@ -189,6 +214,313 @@ int LuaScript::gameObject(lua_State * lua)
 	World* w = (World*) lua_touserdata(lua,-1);
 	w->AddChild(gameObj);
 	lua_pushlightuserdata(lua, gameObj);
+
+	return 1;
+}
+
+///GUI
+
+int LuaScript::gui(lua_State * lua)
+{
+	lua_getglobal(lua,"window");
+	sf::RenderWindow * window = (sf::RenderWindow*) lua_touserdata(lua,-1);
+	GUI * newGUI = new GUI(window);
+
+	lua_getglobal(lua,"world");
+	World* w = (World*) lua_touserdata(lua,-1);
+	w->AddChild(newGUI);
+	lua_pushlightuserdata(lua, newGUI);
+
+	return 1;
+}
+
+int LuaScript::guiSprite(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -7)) throw "Expect: gui";
+	if (!lua_isstring(lua, -6)) throw "Expect: string";
+	if (!lua_isnumber(lua, -5)) throw "Expect: number";
+	if (!lua_isnumber(lua, -4)) throw "Expect: number";
+	if (!lua_isnumber(lua, -3)) throw "Expect: number";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+	glm::vec2 position = glm::vec2(0, 0);
+	glm::vec2 scale = glm::vec2(0, 0);
+	GUI * gui = (GUI*)lua_touserdata(lua,-7);
+	string textureName = lua_tostring(lua, -6);
+	position.x = lua_tonumber(lua, -5);
+	position.y = lua_tonumber(lua, -4);
+	float rotation = lua_tonumber(lua, -3);
+	scale.x = lua_tonumber(lua, -2);
+	scale.y = lua_tonumber(lua, -1);
+
+	lua_getglobal(lua,"window");
+	sf::RenderWindow * window = (sf::RenderWindow*) lua_touserdata(lua,-1);
+	GUISprite * newGuiSprite = new GUISprite(window, *Utils::LoadTexture(textureName), position.x , position.y ,rotation, scale.x, scale.y);
+
+	gui->AddChild(newGuiSprite);
+	lua_pushlightuserdata(lua, newGuiSprite);
+
+	return 1;
+}
+
+int LuaScript::guiText(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -11)) throw "Expect: gui";
+	if (!lua_isstring(lua, -10)) throw "Expect: string";
+	if (!lua_isstring(lua, -9)) throw "Expect: string";
+	if (!lua_isnumber(lua, -8)) throw "Expect: number";
+	if (!lua_isnumber(lua, -7)) throw "Expect: number";
+	if (!lua_isnumber(lua, -6)) throw "Expect: number";
+	if (!lua_isnumber(lua, -5)) throw "Expect: number";
+	if (!lua_isnumber(lua, -4)) throw "Expect: number";
+	if (!lua_isnumber(lua, -3)) throw "Expect: number";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+	glm::vec2 position = glm::vec2(0, 0);
+	GUI * gui = (GUI*)lua_touserdata(lua,-11);
+	string fontName = lua_tostring(lua, -10);
+	string text = lua_tostring(lua, -9);
+	position.x = lua_tonumber(lua, -8);
+	position.y = lua_tonumber(lua, -7);
+	float rotation = lua_tonumber(lua, -6);
+	int textSize = lua_tonumber(lua, -5);
+	int r = lua_tonumber(lua, -4);
+	int g = lua_tonumber(lua, -3);
+	int b = lua_tonumber(lua, -2);
+	int a = lua_tonumber(lua, -1);
+
+	lua_getglobal(lua,"window");
+	sf::RenderWindow * window = (sf::RenderWindow*) lua_touserdata(lua,-1);
+	GUIText * newGuiText = new GUIText(window, *Utils::LoadFont(fontName), text, position.x, position.y, rotation, textSize, sf::Color(r, g, b, a));
+
+	gui->AddChild(newGuiText);
+	lua_pushlightuserdata(lua, newGuiText);
+
+	return 1;
+}
+
+int LuaScript::guiButton(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -8)) throw "Expect: gui";
+	if (!lua_isstring(lua, -7)) throw "Expect: string";
+	if (!lua_isstring(lua, -6)) throw "Expect: string";
+	if (!lua_isnumber(lua, -5)) throw "Expect: number";
+	if (!lua_isnumber(lua, -4)) throw "Expect: number";
+	if (!lua_isnumber(lua, -3)) throw "Expect: number";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+	glm::vec2 position = glm::vec2(0, 0);
+	glm::vec2 scale = glm::vec2(0, 0);
+	GUI * gui = (GUI*)lua_touserdata(lua, -8);
+	string texture1Name = lua_tostring(lua, -7);
+	string texture2Name = lua_tostring(lua, -6);
+	position.x = lua_tonumber(lua, -5);
+	position.y = lua_tonumber(lua, -4);
+	scale.x = lua_tonumber(lua, -3);
+	scale.y = lua_tonumber(lua, -2);
+	float rotation = lua_tonumber(lua, -1);
+
+	lua_getglobal(lua,"window");
+	sf::RenderWindow * window = (sf::RenderWindow*) lua_touserdata(lua,-1);
+	GUIButton * newGuiButton = new GUIButton(window, *Utils::LoadTexture(texture1Name), *Utils::LoadTexture(texture2Name), position.x, position.y, scale.x, scale.y, rotation);
+
+	gui->AddChild(newGuiButton);
+	lua_pushlightuserdata(lua, newGuiButton);
+
+	return 1;
+}
+
+int LuaScript::setButtonTexture(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -3)) throw "Expect: game object";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+	GUIButton * guiButton = (GUIButton*)lua_touserdata(lua, -3);
+	string textureName = lua_tostring(lua, -2);
+	int index = lua_tonumber(lua, -1);
+
+	guiButton->setSpriteTexture(*Utils::LoadTexture(textureName), index);
+
+	return 0;
+}
+
+int LuaScript::setTextFont(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -2)) throw "Expect: game object";
+	if (!lua_isstring(lua, -1)) throw "Expect: string";
+	#endif
+
+	GUIText * guiText = (GUIText*)lua_touserdata(lua, -2);
+	string fontName = lua_tostring(lua, -1);
+	guiText->setTextFont(*Utils::LoadFont(fontName));
+
+	return 0;
+}
+
+int LuaScript::setTextPosition(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -3)) throw "Expect: game object";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+	GUIText * guiText = (GUIText*)lua_touserdata(lua, -3);
+	float x = lua_tonumber(lua, -2);
+	float y = lua_tonumber(lua, -1);
+	guiText->setTextPosition(x, y);
+
+	return 0;
+}
+
+int LuaScript::setTextRotation(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -2)) throw "Expect: game object";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+	GUIText * guiText = (GUIText*)lua_touserdata(lua, -2);
+	float rot = lua_tonumber(lua, -1);
+	guiText->setTextRotation(rot);
+
+	return 0;
+}
+
+int LuaScript::setTextSize(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -2)) throw "Expect: game object";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+	GUIText * guiText = (GUIText*)lua_touserdata(lua, -2);
+	int size = lua_tonumber(lua, -1);
+	guiText->setTextSize(size);
+
+	return 0;
+}
+
+int LuaScript::setTextString(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -2)) throw "Expect: game object";
+	if (!lua_isstring(lua, -1)) throw "Expect: string";
+	#endif
+
+	GUIText * guiText = (GUIText*)lua_touserdata(lua, -2);
+	string text = lua_tostring(lua, -1);
+	guiText->setTextString(text);
+
+	return 0;
+}
+
+int LuaScript::setTextColor(lua_State * lua)
+{
+     #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -5)) throw "Expect: game object";
+	if (!lua_isnumber(lua, -4)) throw "Expect: number";
+	if (!lua_isnumber(lua, -3)) throw "Expect: number";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+	GUIText * guiText = (GUIText*)lua_touserdata(lua,-5);
+	int r = lua_tonumber(lua, -4);
+	int g = lua_tonumber(lua, -3);
+	int b = lua_tonumber(lua, -2);
+	int a = lua_tonumber(lua, -1);
+	guiText->setTextColor(sf::Color(r, g, b, a));
+
+	return 0;
+}
+
+int LuaScript::setSpriteTexture(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -2)) throw "Expect: game object";
+	if (!lua_isstring(lua, -1)) throw "Expect: string";
+	#endif
+
+	GUISprite * guiSprite = (GUISprite*)lua_touserdata(lua, -2);
+	string textureName = lua_tostring(lua, -1);
+	guiSprite->setSpriteTexture(*Utils::LoadTexture(textureName));
+
+	return 0;
+}
+
+int LuaScript::setSpritePosition(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -3)) throw "Expect: game object";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+	GUISprite * guiSprite = (GUISprite*)lua_touserdata(lua, -3);
+	float x = lua_tonumber(lua, -2);
+	float y = lua_tonumber(lua, -1);
+	guiSprite->setSpritePosition(x, y);
+
+	return 0;
+}
+
+int LuaScript::setSpriteScale(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -3)) throw "Expect: game object";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+	GUISprite * guiSprite = (GUISprite*)lua_touserdata(lua, -3);
+	float x = lua_tonumber(lua, -2);
+	float y = lua_tonumber(lua, -1);
+	guiSprite->setSpriteScale(x, y);
+
+	return 0;
+}
+
+int LuaScript::setSpriteRotation(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -2)) throw "Expect: game object";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+	GUISprite * guiSprite = (GUISprite*)lua_touserdata(lua, -2);
+	float rot = lua_tonumber(lua, -1);
+	guiSprite->setSpriteRotation(rot);
+
+	return 0;
+}
+
+int LuaScript::onClick(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -1)) throw "Expect: game object";
+	#endif
+
+	GUIButton * guiButton = (GUIButton*)lua_touserdata(lua, -1);
+	bool clicked = false;
+	if (guiButton->onClick()) {
+        clicked = true;
+	}
+
+    lua_pushboolean(lua, clicked);
 
 	return 1;
 }
@@ -665,7 +997,9 @@ int LuaScript::luaScript(lua_State * lua)
     string fileName = lua_tostring(lua, -1);
     lua_getglobal(lua,"world");
     World* world = (World*)lua_touserdata(lua,-1);
-    LuaScript* script = new LuaScript((config::MGE_SCRIPT_PATH+fileName).c_str(),world);
+    lua_getglobal(lua,"window");
+    sf::RenderWindow * window = (sf::RenderWindow*)lua_touserdata(lua,-1);
+    LuaScript* script = new LuaScript((config::MGE_SCRIPT_PATH+fileName).c_str(),world, window);
     lua_pushlightuserdata(lua,script);
     return 1;
 }
@@ -675,7 +1009,9 @@ int LuaScript::loadLevel(lua_State * lua)
     string fileName = lua_tostring(lua, -1);
     lua_getglobal(lua,"world");
     World* world = (World*)lua_touserdata(lua,-1);
-    LevelEditor::LoadLevel(config::MGE_LEVEL_PATH + fileName,world);
+    lua_getglobal(lua,"window");
+    sf::RenderWindow * window = (sf::RenderWindow*)lua_touserdata(lua,-1);
+    LevelEditor::LoadLevel(config::MGE_LEVEL_PATH + fileName,world,window);
     return 0;
 }
 

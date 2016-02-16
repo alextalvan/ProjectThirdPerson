@@ -61,14 +61,19 @@ void MGEDemo::initialize() {
 //build the game _world
 void MGEDemo::_initializeScene()
 {
-
+    /*
+    GUISprite * sprite = new GUISprite(_window, *Utils::LoadTexture("bricks.jpg"), 50, 50);
+    GUIText * text = new GUIText(_window, *Utils::LoadFont("Arial.ttf"), 200, 200);
+    _world->AddChild(sprite);
+    sprite->AddChild(text);
+    */
 }
-
-
 
 void MGEDemo::_render() {
     AbstractGame::_render();
-    gui->draw(*gui);
+
+    ///no idea how to automatically draw all guis attached to world in other way so far. (i know this way is pretty ugly, but all other ways i can think of are as well)
+    updateGUI();
     _updateHud();
 
     //_world->renderDebugInfo();
@@ -80,6 +85,19 @@ void MGEDemo::_updateHud() {
 
     _hud->setDebugInfo(debugInfo);
     _hud->draw();
+}
+
+void MGEDemo::updateGUI() {
+    int childCount = _world->GetChildCount();
+    if (childCount < 1) return;
+
+    for (int i = 0; i < childCount; i++) {
+         if (dynamic_cast<GUI*>(_world->GetChildAt(i)) != NULL)
+         {
+            GUI* gui = (GUI*)_world->GetChildAt(i);
+            gui->draw(*gui);
+         }
+    }
 }
 
 

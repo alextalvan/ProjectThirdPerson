@@ -11,13 +11,14 @@ using namespace std;
 
 Camera* World::_mainCamera = NULL;
 
-World::World():GameObject("root")
+World::World(sf::RenderWindow * pWindow):GameObject("root")
 {
+    _window = pWindow;
 	//ctor
 	_transform = glm::mat4();
 	_worldTransform = glm::mat4();
 	//GameObject::_world = this;
-	AttachComponent(new LuaScript((config::MGE_SCRIPT_PATH + "main.lua").c_str(),this));
+	AttachComponent(new LuaScript((config::MGE_SCRIPT_PATH + "main.lua").c_str(),this, _window));
 }
 
 void World::setMainCamera (Camera* pCamera) {

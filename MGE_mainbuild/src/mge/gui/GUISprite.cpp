@@ -8,7 +8,7 @@ using namespace std;
 GUISprite::GUISprite( sf::RenderWindow * pWindow, sf::Texture& pTexture, float pPosX, float pPosY, float pRotation, float pScaleX, float pScaleY)
 :   GUI(pWindow, "GUISprite", pPosX, pPosY), _sprite(pTexture)
 {
-	assert ( _window != NULL );
+	assert ( pWindow != NULL );
 
     sf::FloatRect spriteRect = _sprite.getLocalBounds();
     _sprite.setOrigin(spriteRect.left + spriteRect.width/2.0f, spriteRect.top  + spriteRect.height/2.0f);
