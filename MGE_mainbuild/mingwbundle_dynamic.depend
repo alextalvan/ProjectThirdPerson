@@ -15520,7 +15520,7 @@
 	<glm.hpp>
 	<iostream>
 
-1455271636 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
+1455622577 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
 	"AbstractGame.hpp"
 	<iostream>
 	"mge/core/Time.hpp"
@@ -15528,6 +15528,7 @@
 	"mge/core/Renderer.hpp"
 	"mge/core/World.hpp"
 	<mge/collision/CollisionManager.hpp>
+	<mge/particles/ParticleSystem.hpp>
 	<mge/util/Input.hpp>
 	<mge/util/Random.hpp>
 
@@ -15587,7 +15588,7 @@
 	"mge/core/World.hpp"
 	"mge/behaviours/Component.hpp"
 
-1455366343 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\mesh.hpp
+1455622049 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\mesh.hpp
 	<vector>
 	<cstring>
 	<string>
@@ -15604,7 +15605,7 @@
 	"mge/util/list/DualLinkList.hpp"
 	"mge/util/list/DualLinkNode.hpp"
 
-1455366520 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\mesh.cpp
+1455622042 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\mesh.cpp
 	"mge/core/Mesh.hpp"
 	<iostream>
 	<map>
@@ -15957,9 +15958,10 @@
 1455012450 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\lualib.h
 	"lua.h"
 
-1455100234 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\random.hpp
+1455548024 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\random.hpp
+	<random>
 
-1455100357 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\random.cpp
+1455548068 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\random.cpp
 	<mge/util/Random.hpp>
 	<cstdlib>
 	<ctime>
@@ -16049,4 +16051,13 @@
 	<iostream>
 	<map>
 	"mge/config.hpp"
+
+1455622357 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\particles\particlesystem.cpp
+	"mge/particles/ParticleSystem.hpp"
+	"mge/config.hpp"
+
+1455620442 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\particles\particlesystem.hpp
+	"mge/behaviours/Component.hpp"
+	"mge/core/Mesh.hpp"
+	"glm.hpp"
 

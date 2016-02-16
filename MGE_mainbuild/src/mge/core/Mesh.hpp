@@ -16,7 +16,6 @@ class World;
 class Mesh
 {
 	public:
-		Mesh(std::string pId);
 		virtual ~Mesh();
 
         /**
@@ -34,7 +33,7 @@ class Mesh
         void renderDebugInfo(glm::mat4& pModelMatrix, World* pWorld);
 
 	protected:
-
+        Mesh(std::string pId);
 	    std::string _id;
 
         //OpenGL id's for the different buffers created for this mesh

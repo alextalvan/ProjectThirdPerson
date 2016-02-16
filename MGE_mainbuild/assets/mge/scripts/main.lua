@@ -1,11 +1,12 @@
 --Only called once, at instantiation. Do NOT reference myGameObject here
 function Start()
-    --a = GameObject("ayy lmao",0,0,5);
-    --SetMesh(a,LoadMesh("cube_flat.obj"));
-    --SetMaterial(a,ColorMaterial(0,1,1));
-    --SetMainCamera(world,Camera("cam",0,0,10));
+     LoadLevel("out.txt");
+     --a = GameObject("ayy lmao",0,10,0);
+     --SetMesh(a,LoadMesh("quad.obj"));
+     --SetMaterial(a,ColorMaterial(0,1,1));
+     --SetMainCamera(world,Camera("cam",0,0,10));
     --print("test");
-    LoadLevel("out.txt");
+
 end
 
 --Called when the script component is attached to a GameObject.
@@ -16,7 +17,9 @@ end
 
 --Called every game logic step
 function Update()
-
+    --Rotate(a,0.15,0.5,0.5,0);
+    if(GetKeyDown(0)) then
+    print(RandomInRange(0,9)) end
 end
 
 --Collision callback, the argument is the GameObject you are overlapping with

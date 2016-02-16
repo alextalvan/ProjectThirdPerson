@@ -151,6 +151,8 @@
 		<Unit filename="src/mge/materials/TextureLitMaterial.hpp" />
 		<Unit filename="src/mge/materials/TextureMaterial.cpp" />
 		<Unit filename="src/mge/materials/TextureMaterial.hpp" />
+		<Unit filename="src/mge/particles/ParticleSystem.cpp" />
+		<Unit filename="src/mge/particles/ParticleSystem.hpp" />
 		<Unit filename="src/mge/sound/SoundCacher.cpp" />
 		<Unit filename="src/mge/sound/SoundCacher.hpp" />
 		<Unit filename="src/mge/sound/SoundChannel.cpp" />
