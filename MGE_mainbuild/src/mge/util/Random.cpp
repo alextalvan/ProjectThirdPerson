@@ -4,21 +4,24 @@
 
 namespace Utils
 {
-    void Random::Initialize()
-    {
-        srand(time(NULL));
-    }
+    std::mt19937 Random::generator(time(0));
 
     int Random::GetValue(int rangeStart, int rangeEnd)
     {
-        //assert(rangeEng>rangeStart);
-        int range = rangeEnd - rangeStart + 1;
+        std::uniform_int_distribution<int> dist(rangeStart,rangeEnd);
+        return dist(generator);
+    }
 
-        return rand()%range + rangeStart;
+    float Random::GetValue(float rangeStart, float rangeEnd)
+    {
+        std::uniform_real_distribution<float> dist(rangeStart,rangeEnd);
+        return dist(generator);
     }
 
     bool Random::Roll(int sides)
     {
-        return (rand()%sides) == 0 ;
+
+        std::uniform_int_distribution<int> dist(0,sides-1);
+        return dist(generator) == 0;
     }
 }

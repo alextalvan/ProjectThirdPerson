@@ -8,6 +8,7 @@ using namespace std;
 #include "mge/core/Renderer.hpp"
 #include "mge/core/World.hpp"
 #include <mge/collision/CollisionManager.hpp>
+#include <mge/particles/ParticleSystem.hpp>
 #include <mge/util/Input.hpp>
 #include <mge/util/Random.hpp>
 
@@ -17,8 +18,8 @@ using namespace std;
 
 AbstractGame::AbstractGame():_window(NULL),_renderer(NULL),_world(NULL),_running(false)
 {
-    CollisionManager::Initialize();
-    Random::Initialize();
+    //initialize game systems
+
 }
 
 AbstractGame::~AbstractGame()
@@ -37,6 +38,9 @@ void AbstractGame::initialize() {
     _initializeRenderer();
     _initializeWorld();
     _initializeScene();
+
+    CollisionManager::Initialize();
+    ParticleSystem::Initialize();
     cout << endl << "Engine initialized." << endl << endl;
 }
 

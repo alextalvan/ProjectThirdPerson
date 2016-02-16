@@ -15,7 +15,7 @@ end
 function Update()
     --if(GetKeyUp(0)) then
     --print(RandomInRange(0,10)); end
-    print("");
+    --("");
 end
 
 function OnCollision(otherCollider)
