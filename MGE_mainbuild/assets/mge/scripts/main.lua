@@ -1,9 +1,10 @@
 --Only called once, at instantiation. Do NOT reference myGameObject here
 function Start()
      LoadLevel("out.txt");
-     a = Sprite("Osama.jpg",100,100,1,1,0);
-     b = Sprite("Osama.jpg",100,100,1,1,45);
-     SetParent(a,b);
+     a = Sprite("Osama.jpg",100,100,0.5,0.5,0);
+     b = Sprite("Osama.jpg",500,500,1,1,45);
+     --SetParent(a,b);
+     --SetSpritePosition(b,100,100);
      --a = GameObject("ayy lmao",0,10,0);
      --SetMesh(a,LoadMesh("quad.obj"));
      --SetMaterial(a,ColorMaterial(0,1,1));

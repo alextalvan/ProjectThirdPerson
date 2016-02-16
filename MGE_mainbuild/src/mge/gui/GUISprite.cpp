@@ -10,8 +10,9 @@ GUISprite::GUISprite(sf::Texture& pTexture, float pPosX, float pPosY, float pRot
 {
     sf::FloatRect spriteRect = _sprite.getLocalBounds();
     _sprite.setOrigin(spriteRect.left + spriteRect.width/2.0f, spriteRect.top  + spriteRect.height/2.0f);
+    setSpriteRotation(pRotation);
 	setSpritePosition (pPosX, pPosY);
-	setSpriteRotation(pRotation);
+
 	setSpriteScale(pScaleX, pScaleY);
 }
 
@@ -51,4 +52,17 @@ void GUISprite::setSpriteScale(float pScaleX, float pScaleY) {
 void GUISprite::InnerDraw(sf::RenderTarget& target)
 {
     target.draw(_sprite);
+}
+
+void GUISprite::Refresh2DTransform()
+{
+    glm::mat4 worldTr = getWorldTransform();
+
+    glm::vec2 pos = glm::vec2(worldTr[3].x,worldTr[3].y);
+    glm::vec2 scale = glm::vec2(glm::length(worldTr[0]),glm::length(worldTr[1]));
+    float rot = atan2(worldTr[0].y,worldTr[0].x);
+
+    _sprite.setPosition(pos.x,pos.y);
+    _sprite.setRotation(rot);
+    _sprite.setScale(scale.x,scale.y);
 }

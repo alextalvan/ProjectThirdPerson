@@ -572,6 +572,13 @@ int LuaScript::setParent(lua_State * lua)
 
 	parent->AddChild(child);
 
+	//2d
+	GUI* guiCast = dynamic_cast<GUI*>(child);
+	if(guiCast!=NULL)
+    {
+        guiCast->Refresh2DTransform();
+    }
+
 	return 0;
 }
 
