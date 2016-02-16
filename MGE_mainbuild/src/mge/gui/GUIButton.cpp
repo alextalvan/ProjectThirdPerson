@@ -5,12 +5,10 @@
 
 using namespace std;
 
-GUIButton::GUIButton(sf::RenderWindow * pWindow, sf::Texture& pTexture1, sf::Texture& pTexture2, float pPosX, float pPosY,
+GUIButton::GUIButton(sf::Texture& pTexture1, sf::Texture& pTexture2, float pPosX, float pPosY,
             float pScaleX, float pScaleY, float pRotation)
-            : GUISprite(pWindow, pTexture2, pPosX, pPosY, pRotation, pScaleX, pScaleY), _active(pTexture1), _inactive(pTexture2)
+            : GUISprite(pTexture2, pPosX, pPosY, pRotation, pScaleX, pScaleY), _active(pTexture1), _inactive(pTexture2)
 {
-	assert ( pWindow != NULL );
-
     _sprite.setTexture(pTexture2);
 
     sf::FloatRect spriteRect = _sprite.getLocalBounds();
@@ -65,9 +63,3 @@ bool GUIButton::onClick()
     }
 }
 
-void GUIButton::drawCurrent(GUI& target)
-{
-    _window->pushGLStates();
-    _window->draw(_sprite);
-	_window->popGLStates();
-}

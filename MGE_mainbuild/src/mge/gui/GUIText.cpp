@@ -4,11 +4,9 @@
 
 using namespace std;
 
-GUIText::GUIText( sf::RenderWindow * pWindow, sf::Font& pFont, std::string pText, float pPosX, float pPosY, float pRotation, int pTextSize, sf::Color pColor)
-:   GUI(pWindow, "GUIText", pPosX, pPosY), _text(pText, pFont, pTextSize), _textColor(pColor)
+GUIText::GUIText( sf::Font& pFont, std::string pText, float pPosX, float pPosY, float pRotation, int pTextSize, sf::Color pColor)
+:   GUI("GUIText", pPosX, pPosY), _text(pText, pFont, pTextSize), _textColor(pColor)
 {
-	assert ( pWindow != NULL );
-
     sf::FloatRect textRect = _text.getLocalBounds();
     _text.setOrigin(textRect.left + textRect.width/2.0f, textRect.top  + textRect.height/2.0f);
     setTextPosition(pPosX, pPosY);
@@ -54,9 +52,7 @@ void GUIText::setTextColor(sf::Color pColor)
 	_text.setColor(pColor);
 }
 
-void GUIText::drawCurrent(GUI& target)
+void GUIText::InnerDraw(sf::RenderTarget& target)
 {
-    _window->pushGLStates();
-    _window->draw(_text);
-	_window->popGLStates();
+    target.draw(_text);
 }

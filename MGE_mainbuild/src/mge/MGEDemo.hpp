@@ -9,7 +9,7 @@
 class Swapper;
 class GameObject;
 class DebugHud;
-class GUI;
+//class GUI;
 
 class MGEDemo: public AbstractGame
 {
@@ -28,11 +28,10 @@ class MGEDemo: public AbstractGame
 	    virtual void _render();
 
 	private:
-		DebugHud* _hud;                   //hud display
-		GUI* gui;
-        LuaScript* luaScript;
+		DebugHud* _hud;
+        //LuaScript* luaScript;
         void _updateHud();
-        void updateGUI();
+
 };
 
 #endif // MGEDEMO_H

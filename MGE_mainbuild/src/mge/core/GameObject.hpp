@@ -99,6 +99,7 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
         int GetChildCount();
         GameObject* GetChildAt (int pIndex);
 
+        DualLinkList2<ChildList>& GetChildren();
 
 	protected:
 	    virtual ~GameObject();

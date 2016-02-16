@@ -11,6 +11,9 @@ using namespace std;
 #include <mge/particles/ParticleSystem.hpp>
 #include <mge/util/Input.hpp>
 #include <mge/util/Random.hpp>
+#include <mge/gui/GUI.hpp>
+#include <mge/lua/LuaScript.hpp>
+#include <mge/config.hpp>
 
 
 //debugging by stepping into individual frames
@@ -93,6 +96,10 @@ void AbstractGame::_initializeWorld() {
     //setup our own renderer
 	cout << "Initializing world..." << endl;
 	_world = new World(_window);
+	_world2D = new GUI();
+
+    cout << "Attaching main lua script..." << endl;
+	_world->AttachComponent(new LuaScript((config::MGE_SCRIPT_PATH + "main.lua").c_str(),_world, _world2D));
 	//_world
     cout << "World initialized." << endl << endl;
 }
@@ -162,11 +169,18 @@ void AbstractGame::TimedStep()
 
 void AbstractGame::_update() {
     _world->InternalUpdate();
+    _world2D->InternalUpdate();
 }
 
 void AbstractGame::_render ()
 {
+    //render 3d world
     _renderer->render(_world);
+
+    //gui overlay
+    _window->pushGLStates();
+    _world2D->DrawTo(*_window);
+    _window->popGLStates();
 }
 
 void AbstractGame::_processEvents()

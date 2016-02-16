@@ -4,10 +4,12 @@
 #include <SFML/Graphics.hpp>
 #include <GL/glew.h>
 #include <string>
+
 using namespace std;
 
 class World;
 class Renderer;
+class GUI;
 
 /**
  * Defines the basic structure for a game, with defaults already filled in.
@@ -58,6 +60,7 @@ class AbstractGame
 		sf::RenderWindow* _window;  //sfml window to render into
 		Renderer* _renderer;        //the renderer class to render the world
 		World* _world;              //the root game object that represents our scene
+		GUI* _world2D;
 		bool _running;
 
     private:

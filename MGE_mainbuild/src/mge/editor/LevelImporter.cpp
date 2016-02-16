@@ -17,9 +17,9 @@ namespace LevelEditor
 {
     using namespace std;
     World* _storedWorld;
-    sf::RenderWindow * _window;
+    GUI* _storedWorld2D;
 
-    void LoadLevel(std::string fileName, World* world, sf::RenderWindow * window)
+    void LoadLevel(std::string fileName, World* world, GUI* world2D)
     {
 
 
@@ -27,7 +27,7 @@ namespace LevelEditor
             return;
 
         _storedWorld = world;
-        _window = window;
+        _storedWorld2D = world2D;
 
         //first release the previous level
         world->DestroyChildren();
@@ -207,7 +207,7 @@ namespace LevelEditor
                 f>>s;//"script_name"
                 f>>s;//the actual script path
 
-                LuaScript* script = new LuaScript((config::MGE_SCRIPT_PATH + s).c_str(),_storedWorld, _window);
+                LuaScript* script = new LuaScript((config::MGE_SCRIPT_PATH + s).c_str(),_storedWorld, _storedWorld2D);
                 owner->AttachComponent(script);
                 f>>s;//end_luascript
             }

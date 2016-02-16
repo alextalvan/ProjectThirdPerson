@@ -6,10 +6,14 @@
 class GUI : public GameObject
 {
 	public:
-        GUI(sf::RenderWindow * pWindow, std::string pName = "GUI", float pPosX = 0.0f, float pPosY = 0.0f);
-		virtual void draw(GUI& target);
+        GUI(std::string pName = "GUI Element", float pPosX = 0.0f, float pPosY = 0.0f);
+		//virtual void draw(GUI& target);
+		void DrawTo(sf::RenderTarget& target);
     protected:
         virtual ~GUI();
-		sf::RenderWindow * _window;
-		virtual void drawCurrent(GUI& target);
+        virtual void InnerDraw(sf::RenderTarget& target);
+    private:
+
+		//sf::RenderWindow * _window;
+		//virtual void drawCurrent(GUI& target);
 };

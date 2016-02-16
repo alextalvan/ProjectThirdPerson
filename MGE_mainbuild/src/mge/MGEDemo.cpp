@@ -54,8 +54,9 @@ void MGEDemo::initialize() {
     //setup the core part
     AbstractGame::initialize();
     //setup the custom part
-	gui = new GUI(_window);
+	//gui = new GUI();
 	_hud = new DebugHud(_window);
+
 }
 
 //build the game _world
@@ -73,7 +74,7 @@ void MGEDemo::_render() {
     AbstractGame::_render();
 
     ///no idea how to automatically draw all guis attached to world in other way so far. (i know this way is pretty ugly, but all other ways i can think of are as well)
-    updateGUI();
+    //updateGUI();
     _updateHud();
 
     //_world->renderDebugInfo();
@@ -85,19 +86,6 @@ void MGEDemo::_updateHud() {
 
     _hud->setDebugInfo(debugInfo);
     _hud->draw();
-}
-
-void MGEDemo::updateGUI() {
-    int childCount = _world->GetChildCount();
-    if (childCount < 1) return;
-
-    for (int i = 0; i < childCount; i++) {
-         if (dynamic_cast<GUI*>(_world->GetChildAt(i)) != NULL)
-         {
-            GUI* gui = (GUI*)_world->GetChildAt(i);
-            gui->draw(*gui);
-         }
-    }
 }
 
 

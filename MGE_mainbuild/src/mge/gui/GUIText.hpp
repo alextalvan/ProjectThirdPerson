@@ -5,7 +5,7 @@
 class GUIText : public GUI
 {
 	public:
-		GUIText( sf::RenderWindow * pWindow, sf::Font& pFont, std::string pText = "Text", float pPosX = 0.0f, float pPosY = 0.0f,
+		GUIText(sf::Font& pFont, std::string pText = "Text", float pPosX = 0.0f, float pPosY = 0.0f,
           float pRotation = 0.0f, int pTextSize = 10, sf::Color pColor = sf::Color::White );
 		void setTextFont (sf::Font& pFont);
 		void setTextPosition (float pPosX, float pPosY);
@@ -13,9 +13,10 @@ class GUIText : public GUI
 		void setTextString (std::string text);
 		void setTextSize (int pTextSize);
 		void setTextColor (sf::Color pColor);
+
 	protected:
 	    virtual ~GUIText();
-		virtual void drawCurrent(GUI& target) ;
+	    void InnerDraw(sf::RenderTarget& target) override;
     private:
         sf::Text _text;
         sf::Color _textColor;

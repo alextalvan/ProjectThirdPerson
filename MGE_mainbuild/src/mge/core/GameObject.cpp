@@ -347,6 +347,11 @@ GameObject* GameObject::GetChildAt(int pIndex)
     return (GameObject*)(_children.GetAt(pIndex));
 }
 
+DualLinkList2<ChildList>& GameObject::GetChildren()
+{
+    return _children;
+}
+
 int GameObject::GetComponentsCount() {
     return _components.GetCount();
 }

@@ -15,7 +15,7 @@ class GameObject;
 class LuaScript : public Component
 {
 public:
-	LuaScript(const char * path, World * world, sf::RenderWindow * window);
+	LuaScript(const char * path, World * world, GUI* world2D);
 	void Update() override;
 	void InvokeCollisionCallback(GameObject* other);
 	void setOwner(GameObject* pOwner) override;
@@ -51,7 +51,6 @@ private:
 	static int getName(lua_State * lua);
 
 	//gui
-	static int gui(lua_State * lua);
 	static int guiText(lua_State * lua);
 	static int setTextFont (lua_State * lua);
     static int setTextPosition (lua_State * lua);
