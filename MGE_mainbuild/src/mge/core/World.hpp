@@ -3,22 +3,23 @@
 
 #include <vector>
 #include "mge/core/GameObject.hpp"
+#include <SFML/Window.hpp>
 
 class Light;
 class Camera;
-class GUI;
 
 class World : public GameObject
 {
 	public:
         World(sf::RenderWindow * pWindow);
+
 		static void setMainCamera (Camera* pCamera);
 		static Camera* getMainCamera();
         void renderDebugInfo();
-        GUI * getGui();
+
 	private:
+	    sf::RenderWindow * _window;
 	    static Camera* _mainCamera;
-        GUI * gui;
 
 };
 
