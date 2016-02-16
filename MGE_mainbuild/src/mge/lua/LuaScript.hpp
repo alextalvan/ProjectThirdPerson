@@ -11,11 +11,12 @@ extern "C" {
 
 class World;
 class GameObject;
+class GUI;
 
 class LuaScript : public Component
 {
 public:
-	LuaScript(const char * path, World * world, sf::RenderWindow * window);
+	LuaScript(const char * path, World * world, GUI * gui);
 	void Update() override;
 	void InvokeCollisionCallback(GameObject* other);
 	void setOwner(GameObject* pOwner) override;
@@ -51,7 +52,6 @@ private:
 	static int getName(lua_State * lua);
 
 	//gui
-	static int gui(lua_State * lua);
 	static int guiText(lua_State * lua);
 	static int setTextFont (lua_State * lua);
     static int setTextPosition (lua_State * lua);
@@ -67,6 +67,8 @@ private:
     static int guiButton (lua_State * lua);
     static int setButtonTexture (lua_State * lua);
     static int onClick (lua_State * lua);
+    static int getWindowWidth (lua_State * lua);
+    static int getWindowHeight (lua_State * lua);
 
 	//utils
 	static int getTime(lua_State * lua);

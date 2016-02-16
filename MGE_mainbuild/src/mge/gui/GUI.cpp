@@ -17,8 +17,8 @@ void GUI::draw(GUI& target)
 
     //note that with a loop like this, deleting children during rendering is not a good idea :)
     for (int i = 0; i < childCount; i++) {
-        GUI* r = (GUI*)GetChildAt(i);
-        r->draw(*r);
+        GUI* child = (GUI*)GetChildAt(i);
+        child->draw(*child);
     }
 }
 
@@ -27,6 +27,10 @@ void GUI::drawCurrent(GUI& target)
 
 }
 
+sf::RenderWindow* GUI::getWindow()
+{
+    return _window;
+}
 
 GUI::~GUI()
 {

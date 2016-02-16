@@ -32,7 +32,7 @@ GAMEOBJECT:
             dimensions 1 1 1
          END_BOX_COLLIDER
          TEXTURE_MATERIAL:
-            diffuseTex raptor.png
+            diffuseTex brickwall.jpg
          END_TEXTURE_MATERIAL
 
       END_COMPONENTS

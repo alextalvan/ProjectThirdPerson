@@ -8,6 +8,7 @@ class GUI : public GameObject
 	public:
         GUI(sf::RenderWindow * pWindow, std::string pName = "GUI", float pPosX = 0.0f, float pPosY = 0.0f);
 		virtual void draw(GUI& target);
+		sf::RenderWindow* getWindow();
     protected:
         virtual ~GUI();
 		sf::RenderWindow * _window;

@@ -6,6 +6,7 @@
 #include "mge/core/Mesh.hpp"
 #include "mge/lua/LuaScript.hpp"
 #include "mge/config.hpp"
+#include "mge/gui/GUI.hpp"
 
 using namespace std;
 
@@ -13,12 +14,12 @@ Camera* World::_mainCamera = NULL;
 
 World::World(sf::RenderWindow * pWindow):GameObject("root")
 {
-    _window = pWindow;
+    gui = new GUI(pWindow);
 	//ctor
 	_transform = glm::mat4();
 	_worldTransform = glm::mat4();
 	//GameObject::_world = this;
-	AttachComponent(new LuaScript((config::MGE_SCRIPT_PATH + "main.lua").c_str(),this, _window));
+	AttachComponent(new LuaScript((config::MGE_SCRIPT_PATH + "main.lua").c_str(), this, gui));
 }
 
 void World::setMainCamera (Camera* pCamera) {
@@ -30,6 +31,10 @@ void World::setMainCamera (Camera* pCamera) {
 
 Camera* World::getMainCamera () {
     return _mainCamera;
+}
+
+GUI* World::getGui() {
+    return gui;
 }
 
 void World::renderDebugInfo() {

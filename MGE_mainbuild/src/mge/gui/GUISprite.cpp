@@ -52,6 +52,8 @@ void GUISprite::setSpriteScale(float pScaleX, float pScaleY) {
 
 void GUISprite::drawCurrent(GUI& target)
 {
+	//glDisable( GL_CULL_FACE );
+	glActiveTexture(GL_TEXTURE0);
     _window->pushGLStates();
     _window->draw(_sprite);
 	_window->popGLStates();

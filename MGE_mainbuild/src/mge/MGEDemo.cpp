@@ -40,8 +40,6 @@ using namespace std;
 #include <mge/editor/LevelImporter.hpp>
 
 #include "mge/gui/GUI.hpp"
-#include "mge/gui/GUIText.hpp"
-#include "mge/gui/GUISprite.hpp"
 #include "mge/util/ResourceCacher.hpp"
 
 //construct the game class into _window, _renderer and hud (other parts are initialized by build)
@@ -54,19 +52,28 @@ void MGEDemo::initialize() {
     //setup the core part
     AbstractGame::initialize();
     //setup the custom part
-	gui = new GUI(_window);
 	_hud = new DebugHud(_window);
 }
 
 //build the game _world
 void MGEDemo::_initializeScene()
 {
-    /*
-    GUISprite * sprite = new GUISprite(_window, *Utils::LoadTexture("bricks.jpg"), 50, 50);
-    GUIText * text = new GUIText(_window, *Utils::LoadFont("Arial.ttf"), 200, 200);
-    _world->AddChild(sprite);
-    sprite->AddChild(text);
-    */
+    Camera* camera = new Camera("camera", glm::vec3(3, 3, 3));
+    _world->setMainCamera(camera);
+    _world->AddChild(camera);
+
+    Mesh* cubeMesh = Mesh::load(config::MGE_MODEL_PATH + "cube_flat.obj");
+    TextureLitMaterial* cubeMat = new TextureLitMaterial(Texture::load(config::MGE_TEXTURE_PATH + "brickwall.jpg"), Texture::load(config::MGE_TEXTURE_PATH + "brickwall_normal.jpg"));
+    GameObject * testCube = new GameObject("cube", glm::vec3(0,0,0));
+    testCube->setMesh(cubeMesh);
+    testCube->setMaterial(cubeMat);
+    _world->AddChild(testCube);
+
+    Light* light1 = new Light();
+    light1->color = glm::vec3(1,1,1);
+    light1->direction = glm::vec3(1,1,1);
+    light1->type = MGE_LIGHT_DIRECTIONAL;
+    camera->AttachComponent(new LookAt(testCube));
 }
 
 void MGEDemo::_render() {
@@ -87,19 +94,11 @@ void MGEDemo::_updateHud() {
     _hud->draw();
 }
 
-void MGEDemo::updateGUI() {
-    int childCount = _world->GetChildCount();
-    if (childCount < 1) return;
-
-    for (int i = 0; i < childCount; i++) {
-         if (dynamic_cast<GUI*>(_world->GetChildAt(i)) != NULL)
-         {
-            GUI* gui = (GUI*)_world->GetChildAt(i);
-            gui->draw(*gui);
-         }
-    }
+void MGEDemo::updateGUI()
+{
+    GUI * gui = _world->getGui();
+    gui->draw(*gui);
 }
-
 
 MGEDemo::~MGEDemo()
 {

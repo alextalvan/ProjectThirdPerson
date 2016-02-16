@@ -56,6 +56,8 @@ void GUIText::setTextColor(sf::Color pColor)
 
 void GUIText::drawCurrent(GUI& target)
 {
+	//glDisable( GL_CULL_FACE );
+	glActiveTexture(GL_TEXTURE0);
     _window->pushGLStates();
     _window->draw(_text);
 	_window->popGLStates();

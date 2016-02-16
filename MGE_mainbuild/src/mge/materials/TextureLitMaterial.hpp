@@ -11,11 +11,12 @@
 class TextureLitMaterial : public AbstractMaterial
 {
     public:
-        TextureLitMaterial (Texture* pDiffuseTexture);
+        TextureLitMaterial (Texture* pDiffuseTexture, Texture * pNormalMapTexture);
         virtual ~TextureLitMaterial ();
         virtual void render(World* pWorld, GameObject* pGameObject, Camera* pCamera);
 
         void setDiffuseTexture (Texture* pDiffuseTexture);
+        void setNormalMapTexture (Texture* pNormalMapTexture);
 
     protected:
     private:
@@ -23,6 +24,7 @@ class TextureLitMaterial : public AbstractMaterial
         static void _lazyInitializeShader();
 
         Texture* _diffuseTexture;
+        Texture* _normalMapTexture;
 };
 
 #endif // TextureLitMaterial_H

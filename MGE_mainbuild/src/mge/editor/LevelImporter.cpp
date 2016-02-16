@@ -207,7 +207,7 @@ namespace LevelEditor
                 f>>s;//"script_name"
                 f>>s;//the actual script path
 
-                LuaScript* script = new LuaScript((config::MGE_SCRIPT_PATH + s).c_str(),_storedWorld, _window);
+                LuaScript* script = new LuaScript((config::MGE_SCRIPT_PATH + s).c_str(),_storedWorld, _storedWorld->getGui());
                 owner->AttachComponent(script);
                 f>>s;//end_luascript
             }
