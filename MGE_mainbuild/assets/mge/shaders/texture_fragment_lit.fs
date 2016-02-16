@@ -3,6 +3,8 @@
 #define MGE_MAX_LIGHTS 8
 
 uniform sampler2D textureDiffuse;
+uniform sampler2D normalMap;
+
 in vec2 texCoord;
 in vec3 worldNormal;
 in vec3 position;
@@ -60,19 +62,25 @@ void main( void )
 	//fragment_color = vec4(testColor,1);//
 	//fragment_color = texture(textureDiffuse,texCoord) * vec4(v2f,1);
 
+    vec3 normal = normalize(worldNormal);
+	 // Obtain normal from normal map in range [0,1]
+    normal = texture(normalMap, texCoord).rgb;
+    // Transform normal vector to range [-1,1]
+    normal = normalize(normal * 2.0 - 1.0);
+
 	vec3 finalLight = vec3(0,0,0);
 
     //light handling
     for(int i=0;i<lightCount;++i)
     {
         if(LightArray[i].type==0)
-            finalLight = DoDirectionalLight(i,finalLight,worldNormal);
+            finalLight = DoDirectionalLight(i,finalLight,normal);
 
         if(LightArray[i].type==1)
-            finalLight = DoPointLight(i,finalLight,worldNormal,position);
+            finalLight = DoPointLight(i,finalLight,normal,position);
 
         if(LightArray[i].type==2)
-            finalLight = DoSpotlight(i,finalLight,worldNormal,position);
+            finalLight = DoSpotlight(i,finalLight,normal,position);
     }
 
     fragment_color = texture(textureDiffuse,texCoord) * vec4(finalLight,1);

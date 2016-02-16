@@ -10,7 +10,8 @@
 
 ShaderProgram* TextureLitMaterial::_shader = NULL;
 
-TextureLitMaterial::TextureLitMaterial(Texture * pDiffuseTexture):_diffuseTexture(pDiffuseTexture) {
+TextureLitMaterial::TextureLitMaterial(Texture * pDiffuseTexture, Texture * pNormalMapTexture)
+:_diffuseTexture(pDiffuseTexture), _normalMapTexture(pNormalMapTexture) {
     _lazyInitializeShader();
 }
 
@@ -29,6 +30,10 @@ void TextureLitMaterial::setDiffuseTexture (Texture* pDiffuseTexture) {
     _diffuseTexture = pDiffuseTexture;
 }
 
+void TextureLitMaterial::setNormalMapTexture (Texture* pNormalMapTexture) {
+    _normalMapTexture = pNormalMapTexture;
+}
+
 void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pCamera) {
     if (!_diffuseTexture) return;
 
@@ -38,6 +43,11 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _diffuseTexture->getId());
     glUniform1i (_shader->getUniformLocation("textureDiffuse"), 0);
+
+    //setup texture slot 1
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, _normalMapTexture->getId());
+    glUniform1i (_shader->getUniformLocation("normalMap"), 1);
 
     //pass in light data
     int index = 0;
