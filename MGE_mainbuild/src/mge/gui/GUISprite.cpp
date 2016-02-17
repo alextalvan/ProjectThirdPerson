@@ -51,7 +51,11 @@ void GUISprite::setSpriteScale(float pScaleX, float pScaleY) {
 
 void GUISprite::InnerDraw(sf::RenderTarget& target)
 {
+	//glDisable( GL_CULL_FACE );
+	glActiveTexture(GL_TEXTURE0);
+    target.pushGLStates();
     target.draw(_sprite);
+	target.popGLStates();
 }
 
 void GUISprite::Refresh2DTransform()

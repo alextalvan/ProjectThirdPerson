@@ -67,5 +67,9 @@ void GUIText::Refresh2DTransform()
 
 void GUIText::InnerDraw(sf::RenderTarget& target)
 {
+	//glDisable( GL_CULL_FACE );
+	glActiveTexture(GL_TEXTURE0);
+    target.pushGLStates();
     target.draw(_text);
+	target.popGLStates();
 }

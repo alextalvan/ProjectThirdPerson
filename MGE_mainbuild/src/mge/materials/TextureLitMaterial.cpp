@@ -10,9 +10,19 @@
 
 ShaderProgram* TextureLitMaterial::_shader = NULL;
 
-TextureLitMaterial::TextureLitMaterial(Texture * pDiffuseTexture, Texture * pNormalMapTexture)
-:_diffuseTexture(pDiffuseTexture), _normalMapTexture(pNormalMapTexture) {
+TextureLitMaterial::TextureLitMaterial(Texture * pDiffuseTexture, float pSmoothness, float pShininess, float pAmbient, Texture * pNormalMapTexture, Texture * pSpecularMapTexture)
+:_diffuseTexture(pDiffuseTexture), _normalMapTexture(pNormalMapTexture), _specularMapTexture(pSpecularMapTexture), _smoothness(pSmoothness), _shininess(pShininess), _ambient(pAmbient) {
     _lazyInitializeShader();
+
+    if (_normalMapTexture == nullptr)
+        normalMap = false;
+    else
+        normalMap = true;
+
+    if (_specularMapTexture == nullptr)
+        specularMap = false;
+    else
+        specularMap = true;
 }
 
 TextureLitMaterial::~TextureLitMaterial() {}
@@ -32,6 +42,12 @@ void TextureLitMaterial::setDiffuseTexture (Texture* pDiffuseTexture) {
 
 void TextureLitMaterial::setNormalMapTexture (Texture* pNormalMapTexture) {
     _normalMapTexture = pNormalMapTexture;
+    normalMap = true;
+}
+
+void TextureLitMaterial::setSpecularMapTexture (Texture* pSpecularMapTexture) {
+    _specularMapTexture = pSpecularMapTexture;
+    specularMap = true;
 }
 
 void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pCamera) {
@@ -39,15 +55,21 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
 
     _shader->use();
 
-    //setup texture slot 0
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _diffuseTexture->getId());
-    glUniform1i (_shader->getUniformLocation("textureDiffuse"), 0);
+    glUniform1i (_shader->getUniformLocation("diffuseMap"), 0);
 
-    //setup texture slot 1
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, _normalMapTexture->getId());
-    glUniform1i (_shader->getUniformLocation("normalMap"), 1);
+    if (normalMap) {
+        //glUniform1i (_shader->getUniformLocation("normalMap"), 0);
+    }
+
+    if (specularMap) {
+        //glUniform1i (_shader->getUniformLocation("specularMap"), 0);
+    }
+
+	glUniform1f(_shader->getUniformLocation("material.smoothness"), _smoothness);
+	glUniform1f(_shader->getUniformLocation("material.shininess"), _shininess);
+	glUniform1f(_shader->getUniformLocation("material.ambient"), _ambient);
 
     //pass in light data
     int index = 0;
@@ -76,13 +98,11 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
         {
             glm::vec3 lightForward = glm::vec3(light->getWorldTransform()[2]);
             glUniform3fv(loc,1,glm::value_ptr(lightForward));
-            //std::cout<<"spotlight dir: "<<lightForward<<"\n";
         }
-
         else
+        {
             glUniform3fv(loc,1,glm::value_ptr(light->direction));
-
-
+        }
 
         loc = _shader->getUniformLocation("LightArray["+indexString+"].color");
         glUniform3fv(loc,1,glm::value_ptr(light->color));
@@ -91,12 +111,14 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
         glUniform3fv(loc,1,glm::value_ptr(light->attenuation));
 
         loc = _shader->getUniformLocation("LightArray["+indexString+"].angle");
-        glUniform1f(loc,light->angle);
+        glUniform1f(loc,glm::cos(light->angle)); //????
 
         ++index;
         cn = cn->nextNode;
     }
 
+	//set view pos
+	glUniform3fv(_shader->getUniformLocation("viewPos"), 1, glm::value_ptr(pCamera->getWorldPosition()));
 
     //pass in all MVP matrices separately
     glUniformMatrix4fv ( _shader->getUniformLocation("projectionMatrix"),   1, GL_FALSE, glm::value_ptr(pCamera->getProjection()));

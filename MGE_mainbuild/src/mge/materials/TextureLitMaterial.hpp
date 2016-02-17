@@ -11,20 +11,28 @@
 class TextureLitMaterial : public AbstractMaterial
 {
     public:
-        TextureLitMaterial (Texture* pDiffuseTexture, Texture * pNormalMapTexture);
+        TextureLitMaterial (Texture* pDiffuseTexture, float pSmoothness = 0.5f, float pShininess = 32.0f, float pAmbient = 0.1f, Texture * pNormalMapTexture = nullptr, Texture* pSpecularMapTexture = nullptr);
         virtual ~TextureLitMaterial ();
         virtual void render(World* pWorld, GameObject* pGameObject, Camera* pCamera);
 
         void setDiffuseTexture (Texture* pDiffuseTexture);
         void setNormalMapTexture (Texture* pNormalMapTexture);
+        void setSpecularMapTexture (Texture* pSpecularMapTexture);
 
     protected:
     private:
+        bool normalMap = false;
+        bool specularMap = false;
         static ShaderProgram* _shader;
         static void _lazyInitializeShader();
 
+
         Texture* _diffuseTexture;
         Texture* _normalMapTexture;
+        Texture* _specularMapTexture;
+        float _smoothness;
+        float _shininess;
+        float _ambient;
 };
 
 #endif // TextureLitMaterial_H
