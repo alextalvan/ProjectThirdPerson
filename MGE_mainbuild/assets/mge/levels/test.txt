@@ -1,0 +1,4705 @@
+GAMEOBJECT:
+   name MGE_exporter_root
+   transform: 
+      1  0  0  0  
+      0  1  0  0  
+      0  0  1  0  
+      0  0  0  1  
+   no_mesh
+
+   COMPONENTS:
+
+
+   END_COMPONENTS
+
+   CHILDREN:
+
+   GAMEOBJECT:
+      name Cubes_GB(10)
+      transform: 
+         1  0  0  -13.9  
+         0  2.216687  0  15  
+         0  0  1  53.8  
+         0  0  0  1  
+      no_mesh
+
+      COMPONENTS:
+
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+      GAMEOBJECT:
+         name Cube_greybox
+         transform: 
+            2.62558  0  0  -6.539999  
+            0  5.820092  0  6.953426  
+            0  0  2.625581  35.51  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.62558  0  0  -6.539999  
+               0  5.820092  0  6.953426  
+               0  0  2.625581  35.45749  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(1)
+         transform: 
+            4.224526  0  0  -8.539999  
+            0  9.364458  0  6.953426  
+            0  0  4.224529  33.76  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               4.224526  0  0  -8.539999  
+               0  9.364458  0  6.953426  
+               0  0  4.224529  33.67551  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(2)
+         transform: 
+            4.224526  0  0  -11.88  
+            0  9.364458  0  8.505107  
+            0  0  4.224529  34.72  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               4.224526  0  0  -11.88  
+               0  9.364458  0  8.505107  
+               0  0  4.224529  34.63551  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(3)
+         transform: 
+            5.914336  0  0  -15.63  
+            0  13.11024  0  5.09141  
+            0  0  5.91434  34.72  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               5.914336  0  0  -15.63  
+               0  13.11024  0  5.09141  
+               0  0  5.91434  34.60172  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(4)
+         transform: 
+            5.914336  0  0  -28.59  
+            0  13.11024  0  5.09141  
+            0  0  5.91434  34.72  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               5.914336  0  0  -28.59  
+               0  13.11024  0  5.09141  
+               0  0  5.91434  34.60172  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(5)
+         transform: 
+            4.224526  0  0  -24.84  
+            0  9.364458  0  8.505107  
+            0  0  4.224529  34.72  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               4.224526  0  0  -24.84  
+               0  9.364458  0  8.505107  
+               0  0  4.224529  34.63551  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(6)
+         transform: 
+            4.224526  0  0  -21.5  
+            0  11.9615  0  7.795767  
+            0  0  3.436307  36.43  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               4.224526  0  0  -21.5  
+               0  11.9615  0  7.795767  
+               0  0  3.436307  36.36127  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(7)
+         transform: 
+            2.62558  0  0  -19.5  
+            0  5.820092  0  6.953426  
+            0  0  2.625581  35.51  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.62558  0  0  -19.5  
+               0  5.820092  0  6.953426  
+               0  0  2.625581  35.45749  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Cubes_GB(9)
+      transform: 
+         0.4851694  0  0.8744202  12.03  
+         0  2.216687  0  18.6  
+         -0.8744202  0  0.4851694  44.42  
+         0  0  0  1  
+      no_mesh
+
+      COMPONENTS:
+
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+      GAMEOBJECT:
+         name Cube_greybox
+         transform: 
+            1.273851  0  2.295861  -0.3923006  
+            0  5.820092  0  10.55343  
+            -2.295861  0  1.273852  29.11052  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               1.273851  0  2.295861  -0.4382178  
+               0  5.820092  0  10.55343  
+               -2.295861  0  1.273852  29.08504  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(1)
+         transform: 
+            2.049611  0  3.694013  -2.892875  
+            0  9.364458  0  10.55343  
+            -3.694011  0  2.049612  30.01031  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.049611  0  3.694013  -2.966755  
+               0  9.364458  0  10.55343  
+               -3.694011  0  2.049612  29.96932  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(2)
+         transform: 
+            2.049611  0  3.694013  -3.673895  
+            0  9.364458  0  12.10511  
+            -3.694011  0  2.049612  33.39664  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.049611  0  3.694013  -3.747775  
+               0  9.364458  0  12.10511  
+               -3.694011  0  2.049612  33.35564  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(3)
+         transform: 
+            2.869455  0  5.171618  -5.493281  
+            0  13.11024  0  8.69141  
+            -5.171615  0  2.869457  36.67571  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.869455  0  5.171618  -5.596714  
+               0  13.11024  0  8.69141  
+               -5.171615  0  2.869457  36.61832  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(4)
+         transform: 
+            2.869455  0  5.171618  -11.78108  
+            0  13.11024  0  8.69141  
+            -5.171615  0  2.869457  48.0082  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.869455  0  5.171618  -11.88451  
+               0  13.11024  0  8.69141  
+               -5.171615  0  2.869457  47.95081  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(5)
+         transform: 
+            2.049611  0  3.694013  -9.96169  
+            0  9.364458  0  12.10511  
+            -3.694011  0  2.049612  44.72912  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.049611  0  3.694013  -10.03557  
+               0  9.364458  0  12.10511  
+               -3.694011  0  2.049612  44.68813  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(6)
+         transform: 
+            2.049611  0  3.004776  -6.845967  
+            0  11.9615  0  11.39577  
+            -3.694011  0  1.667191  42.6382  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.049611  0  3.004776  -6.906063  
+               0  11.9615  0  11.39577  
+               -3.694011  0  1.667191  42.60485  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(7)
+         transform: 
+            1.273851  0  2.295861  -6.680097  
+            0  5.820092  0  10.55343  
+            -2.295861  0  1.273852  40.443  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               1.273851  0  2.295861  -6.726014  
+               0  5.820092  0  10.55343  
+               -2.295861  0  1.273852  40.41752  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Cubes_GB(8)
+      transform: 
+         0.4851694  0  0.8744202  -13.5  
+         0  2.216687  0  18.6  
+         -0.8744202  0  0.4851694  37.1  
+         0  0  0  1  
+      no_mesh
+
+      COMPONENTS:
+
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+      GAMEOBJECT:
+         name Cube_greybox
+         transform: 
+            1.273851  0  2.295861  -25.9223  
+            0  5.820092  0  10.55343  
+            -2.295861  0  1.273852  21.79052  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               1.273851  0  2.295861  -25.96822  
+               0  5.820092  0  10.55343  
+               -2.295861  0  1.273852  21.76504  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(1)
+         transform: 
+            2.049611  0  3.694013  -28.42287  
+            0  9.364458  0  10.55343  
+            -3.694011  0  2.049612  22.69031  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.049611  0  3.694013  -28.49676  
+               0  9.364458  0  10.55343  
+               -3.694011  0  2.049612  22.64932  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(2)
+         transform: 
+            2.049611  0  3.694013  -29.2039  
+            0  9.364458  0  12.10511  
+            -3.694011  0  2.049612  26.07664  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.049611  0  3.694013  -29.27778  
+               0  9.364458  0  12.10511  
+               -3.694011  0  2.049612  26.03564  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(3)
+         transform: 
+            2.869455  0  5.171618  -31.02328  
+            0  13.11024  0  8.69141  
+            -5.171615  0  2.869457  29.35571  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.869455  0  5.171618  -31.12671  
+               0  13.11024  0  8.69141  
+               -5.171615  0  2.869457  29.29832  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(4)
+         transform: 
+            2.869455  0  5.171618  -37.31107  
+            0  13.11024  0  8.69141  
+            -5.171615  0  2.869457  40.6882  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.869455  0  5.171618  -37.41451  
+               0  13.11024  0  8.69141  
+               -5.171615  0  2.869457  40.63081  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(5)
+         transform: 
+            2.049611  0  3.694013  -35.49169  
+            0  9.364458  0  12.10511  
+            -3.694011  0  2.049612  37.40912  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.049611  0  3.694013  -35.56557  
+               0  9.364458  0  12.10511  
+               -3.694011  0  2.049612  37.36813  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(6)
+         transform: 
+            2.049611  0  3.004776  -32.37597  
+            0  11.9615  0  11.39577  
+            -3.694011  0  1.667191  35.3182  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.049611  0  3.004776  -32.43607  
+               0  11.9615  0  11.39577  
+               -3.694011  0  1.667191  35.28485  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(7)
+         transform: 
+            1.273851  0  2.295861  -32.2101  
+            0  5.820092  0  10.55343  
+            -2.295861  0  1.273852  33.123  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               1.273851  0  2.295861  -32.25602  
+               0  5.820092  0  10.55343  
+               -2.295861  0  1.273852  33.09752  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Cubes_GB(7)
+      transform: 
+         1  0  0  -12.8  
+         0  2.216687  0  12.8  
+         0  0  1  56.9  
+         0  0  0  1  
+      no_mesh
+
+      COMPONENTS:
+
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+      GAMEOBJECT:
+         name Cube_greybox
+         transform: 
+            2.62558  0  0  -5.44  
+            0  5.820092  0  4.753427  
+            0  0  2.625581  38.61  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.62558  0  0  -5.44  
+               0  5.820092  0  4.753427  
+               0  0  2.625581  38.55749  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(1)
+         transform: 
+            4.224526  0  0  -7.44  
+            0  9.364458  0  4.753427  
+            0  0  4.224529  36.86  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               4.224526  0  0  -7.44  
+               0  9.364458  0  4.753427  
+               0  0  4.224529  36.77551  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(2)
+         transform: 
+            4.224526  0  0  -10.78  
+            0  9.364458  0  6.305107  
+            0  0  4.224529  37.82  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               4.224526  0  0  -10.78  
+               0  9.364458  0  6.305107  
+               0  0  4.224529  37.73551  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(3)
+         transform: 
+            5.914336  0  0  -14.53  
+            0  13.11024  0  2.89141  
+            0  0  5.91434  37.82  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               5.914336  0  0  -14.53  
+               0  13.11024  0  2.89141  
+               0  0  5.91434  37.70171  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(4)
+         transform: 
+            5.914336  0  0  -27.49  
+            0  13.11024  0  2.89141  
+            0  0  5.91434  37.82  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               5.914336  0  0  -27.49  
+               0  13.11024  0  2.89141  
+               0  0  5.91434  37.70171  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(5)
+         transform: 
+            4.224526  0  0  -23.74  
+            0  9.364458  0  6.305107  
+            0  0  4.224529  37.82  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               4.224526  0  0  -23.74  
+               0  9.364458  0  6.305107  
+               0  0  4.224529  37.73551  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(6)
+         transform: 
+            4.224526  0  0  -20.4  
+            0  11.9615  0  5.595767  
+            0  0  3.436307  39.53  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               4.224526  0  0  -20.4  
+               0  11.9615  0  5.595767  
+               0  0  3.436307  39.46127  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(7)
+         transform: 
+            2.62558  0  0  -18.4  
+            0  5.820092  0  4.753427  
+            0  0  2.625581  38.61  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.62558  0  0  -18.4  
+               0  5.820092  0  4.753427  
+               0  0  2.625581  38.55749  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Cubes_GB(6)
+      transform: 
+         -0.2213451  0  -0.9751957  -48.3  
+         0  1.746194  0  10.5  
+         0.9751957  0  -0.2213451  23.3  
+         0  0  0  1  
+      no_mesh
+
+      COMPONENTS:
+
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+      GAMEOBJECT:
+         name Cube_greybox
+         transform: 
+            -0.5811592  0  -2.560456  -32.09277  
+            0  4.584775  0  4.161314  
+            2.560455  0  -0.5811595  34.52584  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -0.5811592  0  -2.560456  -32.04156  
+               0  4.584775  0  4.161314  
+               2.560455  0  -0.5811595  34.53746  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(1)
+         transform: 
+            -0.935078  0  -4.119742  -29.94349  
+            0  7.376848  0  4.161314  
+            4.11974  0  -0.9350786  32.9628  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -0.935078  0  -4.119742  -29.86109  
+               0  7.376848  0  4.161314  
+               4.11974  0  -0.9350786  32.98151  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(2)
+         transform: 
+            -0.935078  0  -4.119742  -30.14038  
+            0  7.376848  0  5.383651  
+            4.11974  0  -0.9350786  29.49316  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -0.935078  0  -4.119742  -30.05799  
+               0  7.376848  0  5.383651  
+               4.11974  0  -0.9350786  29.51186  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(3)
+         transform: 
+            -1.309109  0  -5.767639  -29.31034  
+            0  10.32759  0  2.694512  
+            5.767635  0  -1.30911  25.83617  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -1.309109  0  -5.767639  -29.19499  
+               0  10.32759  0  2.694512  
+               5.767635  0  -1.30911  25.86236  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(4)
+         transform: 
+            -1.309109  0  -5.767639  -26.44171  
+            0  10.32759  0  2.694512  
+            5.767635  0  -1.30911  13.19764  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -1.309109  0  -5.767639  -26.32635  
+               0  10.32759  0  2.694512  
+               5.767635  0  -1.30911  13.22382  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(5)
+         transform: 
+            -0.935078  0  -4.119742  -27.27175  
+            0  7.376848  0  5.383651  
+            4.11974  0  -0.9350786  16.85462  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -0.935078  0  -4.119742  -27.18936  
+               0  7.376848  0  5.383651  
+               4.11974  0  -0.9350786  16.87332  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(6)
+         transform: 
+            -0.935078  0  -3.351072  -29.67863  
+            0  9.422664  0  7.618779  
+            4.11974  0  -0.7606096  19.73328  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -0.935078  0  -3.351072  -29.6116  
+               0  9.422664  0  7.618779  
+               4.11974  0  -0.7606096  19.74849  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(7)
+         transform: 
+            -0.5811592  0  -2.560456  -29.22414  
+            0  4.584775  0  4.161314  
+            2.560455  0  -0.5811595  21.8873  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -0.5811592  0  -2.560456  -29.17293  
+               0  4.584775  0  4.161314  
+               2.560455  0  -0.5811595  21.89893  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Cubes_GB(5)
+      transform: 
+         -0.7746985  0  -0.632331  -12.1  
+         0  1.246535  0  8.4  
+         0.632331  0  -0.7746985  16.2  
+         0  0  0  1  
+      no_mesh
+
+      COMPONENTS:
+
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+      GAMEOBJECT:
+         name Cube_greybox
+         transform: 
+            -2.034033  0  -1.660236  -6.236448  
+            0  3.27288  0  3.875076  
+            1.660236  0  -2.034034  35.02319  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -2.034033  0  -1.660236  -6.203243  
+               0  3.27288  0  3.875076  
+               1.660236  0  -2.034034  35.06387  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(1)
+         transform: 
+            -3.272734  0  -2.6713  -3.580471  
+            0  5.266024  0  3.875076  
+            2.671299  0  -3.272736  35.11425  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -3.272734  0  -2.6713  -3.527045  
+               0  5.266024  0  3.875076  
+               2.671299  0  -3.272736  35.17971  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(2)
+         transform: 
+            -3.272734  0  -2.6713  -1.600017  
+            0  5.266024  0  4.747651  
+            2.671299  0  -3.272736  32.25856  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -3.272734  0  -2.6713  -1.546591  
+               0  5.266024  0  4.747651  
+               2.671299  0  -3.272736  32.32401  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(3)
+         transform: 
+            -4.581827  0  -3.73982  1.305102  
+            0  7.372434  0  2.827987  
+            3.739818  0  -4.581831  29.88732  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -4.581827  0  -3.73982  1.379899  
+               0  7.372434  0  2.827987  
+               3.739818  0  -4.581831  29.97895  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(4)
+         transform: 
+            -4.581827  0  -3.73982  11.34519  
+            0  7.372434  0  2.827987  
+            3.739818  0  -4.581831  21.69231  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -4.581827  0  -3.73982  11.41999  
+               0  7.372434  0  2.827987  
+               3.739818  0  -4.581831  21.78394  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(5)
+         transform: 
+            -3.272734  0  -2.6713  8.440077  
+            0  5.266024  0  4.747651  
+            2.671299  0  -3.272736  24.06355  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -3.272734  0  -2.6713  8.493503  
+               0  5.266024  0  4.747651  
+               2.671299  0  -3.272736  24.129  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(6)
+         transform: 
+            -3.272734  0  -2.172883  4.771297  
+            0  6.726447  0  6.343216  
+            2.671299  0  -2.662102  24.8508  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -3.272734  0  -2.172883  4.814755  
+               0  6.726447  0  6.343216  
+               2.671299  0  -2.662102  24.90404  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(7)
+         transform: 
+            -2.034033  0  -1.660236  3.803644  
+            0  3.27288  0  3.875076  
+            1.660236  0  -2.034034  26.82818  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -2.034033  0  -1.660236  3.836849  
+               0  3.27288  0  3.875076  
+               1.660236  0  -2.034034  26.86886  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Cubes_GB(4)
+      transform: 
+         -0.9233718  0  -0.3839072  -26.6  
+         0  1.246535  0  8.4  
+         0.3839073  0  -0.9233714  -10.7  
+         0  0  0  1  
+      no_mesh
+
+      COMPONENTS:
+
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+      GAMEOBJECT:
+         name Cube_greybox
+         transform: 
+            -2.424387  0  -1.00798  -26.37436  
+            0  3.27288  0  3.875076  
+            1.00798  0  -2.424387  9.014022  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -2.424387  0  -1.00798  -26.3542  
+               0  3.27288  0  3.875076  
+               1.00798  0  -2.424387  9.06251  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(1)
+         transform: 
+            -3.900808  0  -1.621827  -23.85577  
+            0  5.266024  0  3.875076  
+            1.621827  0  -3.900809  9.862107  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -3.900808  0  -1.621827  -23.82334  
+               0  5.266024  0  3.875076  
+               1.621827  0  -3.900809  9.940124  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(2)
+         transform: 
+            -3.900808  0  -1.621827  -21.76987  
+            0  5.266024  0  4.747651  
+            1.621827  0  -3.900809  6.179091  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -3.900808  0  -1.621827  -21.73743  
+               0  5.266024  0  4.747651  
+               1.621827  0  -3.900809  6.257108  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(3)
+         transform: 
+            -5.461131  0  -2.270558  -18.89077  
+            0  7.372434  0  2.827987  
+            2.270557  0  -5.461132  3.335913  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -5.461131  0  -2.270558  -18.84535  
+               0  7.372434  0  2.827987  
+               2.270557  0  -5.461132  3.445135  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(4)
+         transform: 
+            -5.461131  0  -2.270558  -6.1215  
+            0  7.372434  0  2.827987  
+            2.270557  0  -5.461132  0.2903204  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -5.461131  0  -2.270558  -6.076089  
+               0  7.372434  0  2.827987  
+               2.270557  0  -5.461132  0.399543  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(5)
+         transform: 
+            -3.900808  0  -1.621827  -10.31741  
+            0  5.266024  0  4.747651  
+            1.621827  0  -3.900809  -0.03366661  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -3.900808  0  -1.621827  -10.28497  
+               0  5.266024  0  4.747651  
+               1.621827  0  -3.900809  0.04434957  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(6)
+         transform: 
+            -3.900808  0  -1.319223  -13.29781  
+            0  6.726447  0  6.343216  
+            1.621827  0  -3.172987  1.497894  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -3.900808  0  -1.319223  -13.27143  
+               0  6.726447  0  6.343216  
+               1.621827  0  -3.172987  1.561354  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(7)
+         transform: 
+            -2.424387  0  -1.00798  -14.40746  
+            0  3.27288  0  3.875076  
+            1.00798  0  -2.424387  4.038583  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -2.424387  0  -1.00798  -14.3873  
+               0  3.27288  0  3.875076  
+               1.00798  0  -2.424387  4.08707  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Cubes_GB(3)
+      transform: 
+         -0.4491311  0  -0.8934659  -0.1  
+         0  1.246535  0  8.4  
+         0.8934659  0  -0.4491311  3.5  
+         0  0  0  1  
+      no_mesh
+
+      COMPONENTS:
+
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+      GAMEOBJECT:
+         name Cube_greybox
+         transform: 
+            -1.17923  0  -2.345867  12.93589  
+            0  3.27288  0  3.875076  
+            2.345866  0  -1.17923  18.29052  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -1.17923  0  -2.345867  12.9828  
+               0  3.27288  0  3.875076  
+               2.345866  0  -1.17923  18.3141  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(1)
+         transform: 
+            -1.897366  0  -3.774472  15.39771  
+            0  5.266024  0  3.875076  
+            3.77447  0  -1.897367  17.28957  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -1.897366  0  -3.774472  15.4732  
+               0  5.266024  0  3.875076  
+               3.77447  0  -1.897367  17.32751  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(2)
+         transform: 
+            -1.897366  0  -3.774472  16.04008  
+            0  5.266024  0  4.747651  
+            3.77447  0  -1.897367  13.87422  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -1.897366  0  -3.774472  16.11557  
+               0  5.266024  0  4.747651  
+               3.77447  0  -1.897367  13.91217  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(3)
+         transform: 
+            -2.656312  0  -5.284261  17.72433  
+            0  7.372434  0  2.827987  
+            5.284257  0  -2.656314  10.52373  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -2.656312  0  -5.284261  17.83001  
+               0  7.372434  0  2.827987  
+               5.284257  0  -2.656314  10.57685  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(4)
+         transform: 
+            -2.656312  0  -5.284261  23.54506  
+            0  7.372434  0  2.827987  
+            5.284257  0  -2.656314  -1.055592  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -2.656312  0  -5.284261  23.65075  
+               0  7.372434  0  2.827987  
+               5.284257  0  -2.656314  -1.002465  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(5)
+         transform: 
+            -1.897366  0  -3.774472  21.86082  
+            0  5.266024  0  4.747651  
+            3.77447  0  -1.897367  2.294906  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -1.897366  0  -3.774472  21.93631  
+               0  5.266024  0  4.747651  
+               3.77447  0  -1.897367  2.332853  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(6)
+         transform: 
+            -1.897366  0  -3.070223  18.8329  
+            0  6.726447  0  6.343216  
+            3.77447  0  -1.543352  4.511068  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -1.897366  0  -3.070223  18.8943  
+               0  6.726447  0  6.343216  
+               3.77447  0  -1.543352  4.541935  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(7)
+         transform: 
+            -1.17923  0  -2.345867  18.75663  
+            0  3.27288  0  3.875076  
+            2.345866  0  -1.17923  6.7112  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               -1.17923  0  -2.345867  18.80354  
+               0  3.27288  0  3.875076  
+               2.345866  0  -1.17923  6.734785  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Cubes_GB(2)
+      transform: 
+         0.02583592  0  -0.9996662  -24.2  
+         0  1.246535  0  8.4  
+         0.9996657  0  0.02583593  -7.3  
+         0  0  0  1  
+      no_mesh
+
+      COMPONENTS:
+
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+      GAMEOBJECT:
+         name Cube_greybox
+         transform: 
+            0.06783428  0  -2.624705  -5.725952  
+            0  3.27288  0  3.875076  
+            2.624703  0  0.06783434  -0.4149995  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               0.06783428  0  -2.624705  -5.673458  
+               0  3.27288  0  3.875076  
+               2.624703  0  0.06783434  -0.4163562  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(1)
+         transform: 
+            0.1091445  0  -4.223118  -4.02821  
+            0  5.266024  0  3.875076  
+            4.223114  0  0.1091446  -2.459544  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               0.1091445  0  -4.223118  -3.943747  
+               0  5.266024  0  3.875076  
+               4.223114  0  0.1091446  -2.461727  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(2)
+         transform: 
+            0.1091445  0  -4.223118  -5.074183  
+            0  5.266024  0  4.747651  
+            4.223114  0  0.1091446  -5.773625  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               0.1091445  0  -4.223118  -4.98972  
+               0  5.266024  0  4.747651  
+               4.223114  0  0.1091446  -5.775808  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(3)
+         transform: 
+            0.1528023  0  -5.912365  -5.171068  
+            0  7.372434  0  2.827987  
+            5.912359  0  0.1528025  -9.522371  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               0.1528023  0  -5.912365  -5.052821  
+               0  7.372434  0  2.827987  
+               5.912359  0  0.1528025  -9.525428  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(4)
+         transform: 
+            0.1528023  0  -5.912365  -5.505901  
+            0  7.372434  0  2.827987  
+            5.912359  0  0.1528025  -22.47804  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               0.1528023  0  -5.912365  -5.387654  
+               0  7.372434  0  2.827987  
+               5.912359  0  0.1528025  -22.48109  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(5)
+         transform: 
+            0.1091445  0  -4.223118  -5.409016  
+            0  5.266024  0  4.747651  
+            4.223114  0  0.1091446  -18.72929  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               0.1091445  0  -4.223118  -5.324553  
+               0  5.266024  0  4.747651  
+               4.223114  0  0.1091446  -18.73148  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(6)
+         transform: 
+            0.1091445  0  -3.435159  -7.032152  
+            0  6.726447  0  6.343216  
+            4.223114  0  0.08878019  -15.34623  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               0.1091445  0  -3.435159  -6.963449  
+               0  6.726447  0  6.343216  
+               4.223114  0  0.08878019  -15.34801  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(7)
+         transform: 
+            0.06783428  0  -2.624705  -6.060787  
+            0  3.27288  0  3.875076  
+            2.624703  0  0.06783434  -13.37067  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               0.06783428  0  -2.624705  -6.008293  
+               0  3.27288  0  3.875076  
+               2.624703  0  0.06783434  -13.37202  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Floor_tiles
+      transform: 
+         1  0  0  25.21172  
+         0  1  0  10.23083  
+         0  0  1  -18.49595  
+         0  0  0  1  
+      no_mesh
+
+      COMPONENTS:
+
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+      GAMEOBJECT:
+         name Floor_tile(1)
+         transform: 
+            40  0  0  0  
+            0  1.328565  0  11.23083  
+            0  0  40  75.60404  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            WALL_COLLIDER:
+               dimensions 2 2 2
+            END_WALL_COLLIDER
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Floor_tile
+         transform: 
+            40  0  0  0  
+            0  2  0  0  
+            0  0  40  0  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            WALL_COLLIDER:
+               dimensions 2 2 2
+            END_WALL_COLLIDER
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Cubes_GB(1)
+      transform: 
+         0.4042689  0  -0.9146401  6.2  
+         0  1.246535  0  8.4  
+         0.9146401  0  0.4042689  -2.2  
+         0  0  0  1  
+      no_mesh
+
+      COMPONENTS:
+
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+      GAMEOBJECT:
+         name Cube_greybox
+         transform: 
+            1.06144  0  -2.401462  25.90419  
+            0  3.27288  0  3.875076  
+            2.401461  0  1.061441  -2.862327  
+            0  0  0  1  
+         no_mesh
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               1.06144  0  -2.401462  25.95222  
+               0  3.27288  0  3.875076  
+               2.401461  0  1.061441  -2.883556  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(1)
+         transform: 
+            1.707844  0  -3.863924  26.69627  
+            0  5.266024  0  3.875076  
+            3.863921  0  1.707846  -5.399078  
+            0  0  0  1  
+         no_mesh
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               1.707844  0  -3.863924  26.77355  
+               0  5.266024  0  3.875076  
+               3.863921  0  1.707846  -5.433235  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(2)
+         transform: 
+            1.707844  0  -3.863924  24.46796  
+            0  5.266024  0  4.747651  
+            3.863921  0  1.707846  -8.065878  
+            0  0  0  1  
+         no_mesh
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               1.707844  0  -3.863924  24.54523  
+               0  5.266024  0  4.747651  
+               3.863921  0  1.707846  -8.100035  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(3)
+         transform: 
+            2.390982  0  -5.409492  22.95195  
+            0  7.372434  0  2.827987  
+            5.409489  0  2.390984  -11.49578  
+            0  0  0  1  
+         no_mesh
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.390982  0  -5.409492  23.06014  
+               0  7.372434  0  2.827987  
+               5.409489  0  2.390984  -11.5436  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(4)
+         transform: 
+            2.390982  0  -5.409492  17.71262  
+            0  7.372434  0  2.827987  
+            5.409489  0  2.390984  -23.34951  
+            0  0  0  1  
+         no_mesh
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.390982  0  -5.409492  17.82081  
+               0  7.372434  0  2.827987  
+               5.409489  0  2.390984  -23.39733  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(5)
+         transform: 
+            1.707844  0  -3.863924  19.22863  
+            0  5.266024  0  4.747651  
+            3.863921  0  1.707846  -19.91961  
+            0  0  0  1  
+         no_mesh
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               1.707844  0  -3.863924  19.30591  
+               0  5.266024  0  4.747651  
+               3.863921  0  1.707846  -19.95377  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(6)
+         transform: 
+            1.707844  0  -3.142984  19.01485  
+            0  6.726447  0  6.343216  
+            3.863921  0  1.389192  -16.17342  
+            0  0  0  1  
+         no_mesh
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               1.707844  0  -3.142984  19.07771  
+               0  6.726447  0  6.343216  
+               3.863921  0  1.389192  -16.2012  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(7)
+         transform: 
+            1.06144  0  -2.401462  20.66486  
+            0  3.27288  0  3.875076  
+            2.401461  0  1.061441  -14.71606  
+            0  0  0  1  
+         no_mesh
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               1.06144  0  -2.401462  20.71289  
+               0  3.27288  0  3.875076  
+               2.401461  0  1.061441  -14.73729  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Cube_Collider
+      transform: 
+         2.309687  0  0  7.68  
+         0  10.07247  0  4.88  
+         0  0  2.29236  -18.07  
+         0  0  0  1  
+      no_mesh
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 1 1 1
+         END_WALL_COLLIDER
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Cubes_GB
+      transform: 
+         1  0  0  9.88  
+         0  1  0  6.25  
+         0  0  1  -7.38  
+         0  0  0  1  
+      no_mesh
+
+      COMPONENTS:
+
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+      GAMEOBJECT:
+         name Cube_greybox
+         transform: 
+            2.62558  0  0  17.24  
+            0  2.625581  0  2.62  
+            0  0  2.625581  -25.67  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.62558  0  0  17.24  
+               0  2.625581  0  2.62  
+               0  0  2.625581  -25.72251  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(1)
+         transform: 
+            4.224526  0  0  15.24  
+            0  4.224529  0  2.62  
+            0  0  4.224529  -27.42  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               4.224526  0  0  15.24  
+               0  4.224529  0  2.62  
+               0  0  4.224529  -27.50449  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(2)
+         transform: 
+            4.224526  0  0  11.9  
+            0  4.224529  0  3.32  
+            0  0  4.224529  -26.46  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               4.224526  0  0  11.9  
+               0  4.224529  0  3.32  
+               0  0  4.224529  -26.54449  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(3)
+         transform: 
+            5.914336  0  0  8.15  
+            0  5.91434  0  1.78  
+            0  0  5.91434  -26.46  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               5.914336  0  0  8.15  
+               0  5.91434  0  1.78  
+               0  0  5.91434  -26.57829  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(4)
+         transform: 
+            5.914336  0  0  -4.809999  
+            0  5.91434  0  1.78  
+            0  0  5.91434  -26.46  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               5.914336  0  0  -4.809999  
+               0  5.91434  0  1.78  
+               0  0  5.91434  -26.57829  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(5)
+         transform: 
+            4.224526  0  0  -1.059999  
+            0  4.224529  0  3.32  
+            0  0  4.224529  -26.46  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               4.224526  0  0  -1.059999  
+               0  4.224529  0  3.32  
+               0  0  4.224529  -26.54449  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(6)
+         transform: 
+            4.224526  0  0  2.28  
+            0  5.396114  0  4.6  
+            0  0  3.436307  -24.75  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               4.224526  0  0  2.28  
+               0  5.396114  0  4.6  
+               0  0  3.436307  -24.81873  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+      GAMEOBJECT:
+         name Cube_greybox(7)
+         transform: 
+            2.62558  0  0  4.28  
+            0  2.625581  0  2.62  
+            0  0  2.625581  -25.67  
+            0  0  0  1  
+         mesh cube_flat.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex sand.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+         GAMEOBJECT:
+            name Cube_Collider(1)
+            transform: 
+               2.62558  0  0  4.28  
+               0  2.625581  0  2.62  
+               0  0  2.625581  -25.72251  
+               0  0  0  1  
+            no_mesh
+
+            COMPONENTS:
+
+               WALL_COLLIDER:
+                  dimensions 1 1 1
+               END_WALL_COLLIDER
+
+            END_COMPONENTS
+
+            CHILDREN:
+
+
+            END_CHILDREN
+
+         END_GAMEOBJECT
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Cube_testMesh
+      transform: 
+         4.514222  0  0  7.68  
+         0  4.51422  0  5.075479  
+         0  0  4.51422  -18  
+         0  0  0  1  
+      no_mesh 
+      COMPONENTS:
+
+         TEXTURE_MATERIAL:
+            diffuseTex testT.jpg
+         END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Character
+      transform: 
+         1  0  0  9.88  
+         0  1  0  5.71  
+         0  0  1  -12.73  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 1
+         END_SPHERE_COLLIDER
+         CHARACTER_CONTROLLER:
+            move_speed 0.2
+            jump_force 0.3
+            gravity 0.3
+         END_CHARACTER_CONTROLLER
+         COLOR_MATERIAL:
+            color 0 1 0.006896496
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+      CAMERA:
+         name Main_Cameralol
+         transform: 
+            -1  0  0  9.88  
+            0  1  0  7.004  
+            0  0  -1  -12.746  
+            0  0  0  1  
+         isMainCamera 1
+
+         COMPONENTS:
+
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+
+         END_CHILDREN
+
+      END_CAMERA
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Cube_test
+      transform: 
+         1  0  0  9.88  
+         0  1  0  7.38  
+         0  0  1  -7.38  
+         0  0  0  1  
+      mesh cube_flat.obj
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+         TEXTURE_MATERIAL:
+            diffuseTex raptor.png
+         END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Cube_testTexture
+      transform: 
+         1  0  0  0  
+         0  1  0  2.07  
+         0  0  1  0  
+         0  0  0  1  
+      mesh cube_flat.obj
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+         TEXTURE_MATERIAL:
+            diffuseTex raptor.png
+         END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+
+   END_CHILDREN
+
+END_GAMEOBJECT
+

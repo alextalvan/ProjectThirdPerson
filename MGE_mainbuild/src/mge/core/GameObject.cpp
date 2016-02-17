@@ -221,14 +221,55 @@ void GameObject::RemoveChild (GameObject* pChild) {
     pChild->setParent(NULL);
 }
 
-void GameObject::setLocalRotation(glm::vec4 xAxis, glm::vec4 yAxis,glm::vec4 zAxis)
+void GameObject::setLocalRotation(glm::vec3 xAxis, glm::vec3 yAxis,glm::vec3 zAxis)
 {
-    _transform[0] = xAxis;
-    _transform[1] = yAxis;
-    _transform[2] = zAxis;
+    using namespace glm;
+    //extract scaling from the current matrix
+    vec3 scale = vec3(length(_transform[0]),length(_transform[1]),length(_transform[2]));
+
+    //apply it to the given vectors
+    _transform[0] = vec4(normalize(xAxis),0) * scale.x;
+    _transform[1] = vec4(normalize(yAxis),0) * scale.y;
+    _transform[2] = vec4(normalize(zAxis),0) * scale.z;
 
     MakeTransformDirty();
 }
+
+//this will use the current "up" as reference
+void GameObject::setLocalRotation(glm::vec3 forward)
+{
+    glm::vec3 currentUp = glm::vec3(_transform[2]);
+    glm::vec3 right = glm::cross (currentUp, forward);
+    glm::vec3 up = glm::cross (forward, right);
+
+    setLocalRotation(right,up,forward);
+}
+
+void GameObject::setWorldRotation(glm::vec3 xAxis, glm::vec3 yAxis,glm::vec3 zAxis)
+{
+    using namespace glm;
+    //extract scaling from the current matrix
+    vec3 scale = vec3(length(_worldTransform[0]),length(_worldTransform[1]),length(_worldTransform[2]));
+
+    //apply it to the given vectors
+    _worldTransform[0] = vec4(normalize(xAxis),0) * scale.x;
+    _worldTransform[1] = vec4(normalize(yAxis),0) * scale.y;
+    _worldTransform[2] = vec4(normalize(zAxis),0) * scale.z;
+
+    _recalculateLocalTransform();
+    MakeChildrenTransformsDirty();
+}
+
+//this will use the global up as a reference
+void GameObject::setWorldRotation(glm::vec3 forward)
+{
+    glm::vec3 right = glm::cross (glm::vec3(0,1,0), forward);
+    glm::vec3 up = glm::cross (forward, right);
+
+    setLocalRotation(right,up,forward);
+}
+
+
 
 ////////////
 
@@ -236,6 +277,14 @@ glm::vec3 GameObject::getWorldPosition()
 {
 	return glm::vec3(getWorldTransform()[3]);
 }
+
+void GameObject::setWorldPosition(glm::vec3 pos)
+{
+    _worldTransform[3] = glm::vec4(pos,1);
+    _recalculateLocalTransform();
+    MakeChildrenTransformsDirty();
+}
+
 
 glm::mat4& GameObject::getWorldTransform()
 {
@@ -255,12 +304,18 @@ void GameObject::setWorldTransform(const glm::mat4& pTransform)
 {
     _worldTransform = pTransform;
 
+    _recalculateLocalTransform();
+
+    MakeTransformDirty();
+}
+
+//this is used when the global transform was directly set and the local one needs to be adjusted
+void GameObject::_recalculateLocalTransform()
+{
     if(_parent!=NULL)
         _transform = glm::inverse(_parent->getWorldTransform()) * _worldTransform;
     else
         _transform = _worldTransform;
-
-    MakeTransformDirty();
 }
 
 
@@ -269,23 +324,20 @@ void GameObject::MakeTransformDirty()
     //mark this world transform dirty and the children ones as well, only if it has not already been marked this frame
     if(!_worldTransformIsDirty)
     {
-        /*
-        for (auto i = _children.begin(); i != _children.end(); ++i)
-        {
-            (*i)->MakeTransformDirty();
-        }
-        */
-
-        DualLinkNode2<ChildList>* cn = _children.startNode;
-        while(cn!=NULL)
-        {
-            ((GameObject*)cn)->MakeTransformDirty();
-            cn = cn->nextNode;
-        }
-
+        MakeChildrenTransformsDirty();
         _worldTransformIsDirty = true;
     }
 
+}
+
+void GameObject::MakeChildrenTransformsDirty()
+{
+    DualLinkNode2<ChildList>* cn = _children.startNode;
+    while(cn!=NULL)
+    {
+        ((GameObject*)cn)->MakeTransformDirty();
+        cn = cn->nextNode;
+    }
 }
 ////////////
 

@@ -40,9 +40,14 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 		void setLocalPosition (glm::vec3 pPosition);
 		glm::vec3 getLocalPosition();
 
-        void setLocalRotation(glm::vec4 xAxis, glm::vec4 yAxis,glm::vec4 zAxis);
-        //get the objects world position by combining transforms
+        void setLocalRotation(glm::vec3 forward);
+        void setLocalRotation(glm::vec3 xAxis, glm::vec3 yAxis,glm::vec3 zAxis);
+        void setWorldRotation(glm::vec3 forward);
+        void setWorldRotation(glm::vec3 xAxis, glm::vec3 yAxis,glm::vec3 zAxis);
+        //get the objects world position
 		glm::vec3 getWorldPosition();
+		void setWorldPosition(glm::vec3 pos);
+
 		virtual glm::mat4& getWorldTransform();
 		void setWorldTransform(const glm::mat4& pTransform);
 
@@ -126,6 +131,8 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
     private:
         bool _worldTransformIsDirty = true;
         void MakeTransformDirty();
+        void MakeChildrenTransformsDirty();
+        void _recalculateLocalTransform();
         void InternalUpdate();
 
          //update children list administration
