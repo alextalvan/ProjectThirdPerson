@@ -99,7 +99,6 @@ vec3 DoPointLight(int lightIndex, vec3 worldNormal, vec3 worldVertex, vec3 viewD
     vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, texCoord)) * diff;
     vec3 specular = (LightArray[lightIndex].color + vec3(texture(material.specularMap, texCoord))) * spec * material.smoothness;
 	// Add attenuation
-	ambient *= attenuation;
     diffuse *= attenuation;
     specular *= attenuation;
     // Combine results
@@ -119,17 +118,15 @@ vec3 DoSpotlight(int lightIndex, vec3 worldNormal, vec3 worldVertex, vec3 viewDi
     vec3 att = LightArray[lightIndex].attenuation;
     float attenuation = 1.0f / (att.x + att.y * distance + att.z * distance * distance);
     // Spotlight intensity
-    float theta = dot(lightDir, normalize(-LightArray[lightIndex].direction)); ///minus dir of fucking plus?!
-    //float epsilon = (LightArray[lightIndex].angle / 5f) - LightArray[lightIndex].angle;
-    //float intensity = clamp((theta - LightArray[lightIndex].angle) / epsilon, 0.0, 1.0);
-    float intensity = 0f;
-    if (theta > LightArray[lightIndex].angle)
-    intensity =  1f;
+    float cutOff = LightArray[lightIndex].angle - LightArray[lightIndex].angle / 5.0f;
+    float outerCutOff = LightArray[lightIndex].angle + LightArray[lightIndex].angle / 5.0f;
+    float theta = dot(lightDir, normalize(-LightArray[lightIndex].direction));
+    float epsilon = cutOff - outerCutOff;
+    float intensity = clamp((theta - outerCutOff) / epsilon, 0.0, 1.0);
     // Combine results
     vec3 ambient = vec3(texture(material.diffuseMap, texCoord)) * material.ambient;
     vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, texCoord)) * diff;
     vec3 specular = (LightArray[lightIndex].color + vec3(texture(material.specularMap, texCoord))) * spec * material.smoothness;
-    ambient *= attenuation * intensity;
     diffuse *= attenuation * intensity;
     specular *= attenuation * intensity;
     return (ambient + diffuse + specular);

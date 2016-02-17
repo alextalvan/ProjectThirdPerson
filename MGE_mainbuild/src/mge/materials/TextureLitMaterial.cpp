@@ -111,7 +111,7 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
         glUniform3fv(loc,1,glm::value_ptr(light->attenuation));
 
         loc = _shader->getUniformLocation("LightArray["+indexString+"].angle");
-        glUniform1f(loc,light->angle);
+        glUniform1f(loc,glm::cos(light->angle)); //????
 
         ++index;
         cn = cn->nextNode;

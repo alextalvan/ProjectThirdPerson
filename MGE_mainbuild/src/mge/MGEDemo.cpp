@@ -98,7 +98,8 @@ void MGEDemo::_initializeScene()
     light3->setLocalPosition(glm::vec3(0,0,2));
     light3->color = glm::vec3(0,0,1);
     light3->attenuation = glm::vec3(0.1f,0.1f,0.1f);
-    light3->direction = glm::vec3(glm::vec3(0,0,1));
+    light3->direction = glm::vec3(glm::vec3(0,0,-1));
+    light3->angle = glm::radians(45.0f);
 }
 
 void MGEDemo::_render() {
