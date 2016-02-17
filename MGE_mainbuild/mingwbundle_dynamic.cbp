@@ -4,14 +4,14 @@
 	<Project>
 		<Option title="project" />
 		<Option pch_mode="2" />
-		<Option compiler="gcc" />
+		<Option compiler="extended" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/game" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="assets" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
-				<Option compiler="gcc" />
+				<Option compiler="extended" />
 				<Compiler>
 					<Add option="-Wnon-virtual-dtor" />
 					<Add option="-Wunreachable-code" />
@@ -176,6 +176,8 @@
 		<Unit filename="src/mge/util/Random.hpp" />
 		<Unit filename="src/mge/util/ResourceCacher.cpp" />
 		<Unit filename="src/mge/util/ResourceCacher.hpp" />
+		<Unit filename="src/mge/util/Timer.cpp" />
+		<Unit filename="src/mge/util/Timer.hpp" />
 		<Unit filename="src/mge/util/list/DualLinkList.cpp" />
 		<Unit filename="src/mge/util/list/DualLinkList.hpp" />
 		<Unit filename="src/mge/util/list/DualLinkNode.cpp" />

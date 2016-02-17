@@ -28,3 +28,8 @@ void ParticleSystem::Update()
 
     //_bufferCount = 0;
 }
+
+void ParticleSystem::Release()
+{
+
+}

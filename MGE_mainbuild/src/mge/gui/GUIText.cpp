@@ -31,7 +31,7 @@ void GUIText::setTextPosition(float pPosX, float pPosY) {
 void GUIText::setTextRotation(float pAngle)
 {
     glm::mat4 rotMat = glm::rotate(glm::radians(pAngle),glm::vec3(0, 0, 1));
-	setLocalRotation(rotMat[0],rotMat[1],rotMat[2]);
+	setLocalRotation(glm::vec3(rotMat[0]),glm::vec3(rotMat[1]),glm::vec3(rotMat[2]));
     glm::vec2 xDir(getWorldTransform()[0].x,getWorldTransform()[0].y);
     float rot = atan2(xDir.y,xDir.x);
     _text.setRotation(glm::degrees(rot));
