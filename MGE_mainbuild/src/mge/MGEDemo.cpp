@@ -54,30 +54,59 @@ void MGEDemo::initialize() {
     //setup the core part
     AbstractGame::initialize();
     //setup the custom part
-	//gui = new GUI();
 	_hud = new DebugHud(_window);
-
 }
 
 //build the game _world
 void MGEDemo::_initializeScene()
 {
-    /*
-    GUISprite * sprite = new GUISprite(_window, *Utils::LoadTexture("bricks.jpg"), 50, 50);
-    GUIText * text = new GUIText(_window, *Utils::LoadFont("Arial.ttf"), 200, 200);
-    _world->AddChild(sprite);
-    sprite->AddChild(text);
-    */
+    Camera* cam = new Camera("cam", glm::vec3(5,5,5));
+    _world->setMainCamera(cam);
+    _world->AddChild(cam);
+
+    Mesh* cubeMesh = Mesh::load(config::MGE_MODEL_PATH + "cube_flat.obj");
+    Texture* brickTex = Texture::load(config::MGE_TEXTURE_PATH + "brickwall.jpg");
+    Texture* brickNorm = Texture::load(config::MGE_TEXTURE_PATH + "brickwall_normal.jpg");
+    TextureLitMaterial* litMat = new TextureLitMaterial(brickTex, 0.5f, 32.0f, 0.1f, brickNorm, brickTex);
+
+    GameObject* planeCube = new GameObject("cube", glm::vec3(0,-2,0));
+    planeCube->setMesh(cubeMesh);
+    planeCube->setMaterial(litMat);
+    planeCube->scale(glm::vec3(5,1,5));
+    _world->AddChild(planeCube);
+
+    GameObject* testCube = new GameObject("cube", glm::vec3(0,0,0));
+    testCube->setMesh(cubeMesh);
+    testCube->setMaterial(litMat);
+    _world->AddChild(testCube);
+    cam->AttachComponent(new LookAt(testCube));
+
+    Light*light1 = new Light();
+    light1->type = MGE_LIGHT_DIRECTIONAL;
+    light1->setLocalPosition(glm::vec3(5,5,5));
+    light1->direction = glm::vec3(testCube->getWorldPosition()-cam->getWorldPosition());
+    light1->color = glm::vec3(1,1,1);
+
+    Light*light2 = new Light();
+    light2->type = MGE_LIGHT_POINT;
+    light2->setLocalPosition(glm::vec3(0,2,0));
+    light2->color = glm::vec3(1,0,0);
+    light2->attenuation = glm::vec3(0.1f,0.1f,0.1f);
+
+    Light*light3 = new Light();
+    light3->type = MGE_LIGHT_SPOTLIGHT;
+    light3->setLocalPosition(glm::vec3(0,0,2));
+    light3->color = glm::vec3(0,0,1);
+    light3->attenuation = glm::vec3(0.1f,0.1f,0.1f);
+    light3->direction = glm::vec3(glm::vec3(0,0,1));
 }
 
 void MGEDemo::_render() {
     AbstractGame::_render();
 
-    ///no idea how to automatically draw all guis attached to world in other way so far. (i know this way is pretty ugly, but all other ways i can think of are as well)
-    //updateGUI();
     _updateHud();
 
-    //_world->renderDebugInfo();
+    _world->renderDebugInfo();
 }
 
 void MGEDemo::_updateHud() {

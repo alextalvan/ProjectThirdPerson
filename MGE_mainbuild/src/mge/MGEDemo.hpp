@@ -4,12 +4,9 @@
 #include <mge/core/AbstractGame.hpp>
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include "mge/lua/LuaScript.hpp"
 
 class Swapper;
-class GameObject;
 class DebugHud;
-//class GUI;
 
 class MGEDemo: public AbstractGame
 {
@@ -29,7 +26,6 @@ class MGEDemo: public AbstractGame
 
 	private:
 		DebugHud* _hud;
-        //LuaScript* luaScript;
         void _updateHud();
 
 };
