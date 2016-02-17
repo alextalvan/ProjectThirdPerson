@@ -81,32 +81,15 @@ void MGEDemo::_initializeScene()
     _world->AddChild(testCube);
     cam->AttachComponent(new LookAt(testCube));
 
-    Light*light1 = new Light();
-    light1->type = MGE_LIGHT_DIRECTIONAL;
-    light1->setLocalPosition(glm::vec3(5,5,5));
-    light1->direction = glm::vec3(testCube->getWorldPosition()-cam->getWorldPosition());
-    light1->color = glm::vec3(1,1,1);
-
-    Light*light2 = new Light();
-    light2->type = MGE_LIGHT_POINT;
-    light2->setLocalPosition(glm::vec3(0,2,0));
-    light2->color = glm::vec3(1,0,0);
-    light2->attenuation = glm::vec3(0.1f,0.1f,0.1f);
-
-    Light*light3 = new Light();
-    light3->type = MGE_LIGHT_SPOTLIGHT;
-    light3->setLocalPosition(glm::vec3(0,0,2));
-    light3->color = glm::vec3(0,0,1);
-    light3->attenuation = glm::vec3(0.1f,0.1f,0.1f);
-    light3->direction = glm::vec3(glm::vec3(0,0,-1));
-    light3->angle = glm::radians(45.0f);
+    Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(5,5,5), testCube->getWorldPosition() - cam->getWorldPosition(), glm::vec3(1,1,1));
+    Light* light2 = new Light(MGE_LIGHT_POINT, glm::vec3(0,2,2), glm::vec3(0,0,0), glm::vec3(1,0,0), glm::vec3(0.1f,0.1f,0.1f));
+    Light* light3 = new Light(MGE_LIGHT_SPOTLIGHT, glm::vec3(0,2,2), glm::vec3(1,0,1), glm::vec3(0,0,1), glm::vec3(0.1f,0.1f,0.1f), 45.0f);
 }
 
-void MGEDemo::_render() {
+void MGEDemo::_render()
+{
     AbstractGame::_render();
-
     _updateHud();
-
     _world->renderDebugInfo();
 }
 

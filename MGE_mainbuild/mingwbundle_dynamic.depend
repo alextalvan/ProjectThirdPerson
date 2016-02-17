@@ -13565,10 +13565,10 @@
 	<glm.hpp>
 	<map>
 
-1455131202 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\light.cpp
+1455706907 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\light.cpp
 	<mge/core/Light.hpp>
 
-1455131202 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\light.hpp
+1455704367 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\light.hpp
 	<mge/core/GameObject.hpp>
 	<glm.hpp>
 	"mge/util/list/DualLinkList.hpp"
@@ -13666,7 +13666,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1455671661 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
+1455706119 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
 	<glm.hpp>
 	"mge/materials/TextureLitMaterial.hpp"
 	"mge/core/Texture.hpp"
@@ -13676,7 +13676,7 @@
 	"mge/core/Light.hpp"
 	<string>
 
-1455659754 c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.hpp
+1455701112 c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.hpp
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
@@ -13814,7 +13814,7 @@
 
 1452188439 c:\github\projectthirdperson\mge_mainbuild\luabridge\detail\namespace.h
 
-1455671518 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
+1455707167 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -16154,7 +16154,7 @@
 	<glm.hpp>
 	"mge/util/Input.hpp"
 
-1455386196 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\firstpersonlook.cpp
+1455704424 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\firstpersonlook.cpp
 	<mge/behaviours/FirstPersonLook.hpp>
 	<mge/util/Input.hpp>
 
@@ -16201,7 +16201,7 @@
 	<SFML/Graphics.hpp>
 	"mge/core/GameObject.hpp"
 
-1455637893 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\editor\levelimporter.cpp
+1455704857 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\editor\levelimporter.cpp
 	<mge/editor/LevelImporter.hpp>
 	<mge/config.hpp>
 	<glm.hpp>

@@ -32,10 +32,7 @@ void FirstPersonLook::Rotation()
 	if (rotationY < -89.0f)
 		rotationY = -89.0f;
 
-
-
     glm::mat4 newTransform;
-
 
     newTransform = glm::translate(newTransform,_owner->getWorldPosition());
     newTransform *= glm::rotate( glm::radians(-rotationX), glm::vec3(0.0f, 1.0f, 0.0f));

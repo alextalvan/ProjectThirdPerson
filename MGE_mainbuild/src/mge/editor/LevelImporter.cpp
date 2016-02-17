@@ -289,8 +289,7 @@ namespace LevelEditor
         f>>s;//"name"
         f>>s;//and the actual name
 
-        Light* obj = new Light();
-        obj->type = MGE_LIGHT_DIRECTIONAL;
+        Light* obj = new Light(MGE_LIGHT_DIRECTIONAL);
         parent->AddChild(obj);
 
         f>>s;//"transform:"
@@ -314,14 +313,13 @@ namespace LevelEditor
         f>>s; g = std::strtof(s.c_str(),nullptr);
         f>>s; b = std::strtof(s.c_str(),nullptr);
 
-        obj->color = glm::vec3(r,g,b);
+        obj->setColor(glm::vec3(r,g,b));
 
         f>>s;//"direction"
         f>>s; r = std::strtof(s.c_str(),nullptr);
         f>>s; g = std::strtof(s.c_str(),nullptr);
         f>>s; b = std::strtof(s.c_str(),nullptr);
-        obj->direction = glm::vec3(r,g,b);
-
+        obj->setDirection(glm::vec3(r,g,b));
 
         ParseComponents(f,obj);
         ParseChildren(f,obj);

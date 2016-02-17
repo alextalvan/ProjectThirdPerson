@@ -60,11 +60,11 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
     glUniform1i (_shader->getUniformLocation("diffuseMap"), 0);
 
     if (normalMap) {
-        //glUniform1i (_shader->getUniformLocation("normalMap"), 0);
+        glUniform1i (_shader->getUniformLocation("normalMap"), 0);
     }
 
     if (specularMap) {
-        //glUniform1i (_shader->getUniformLocation("specularMap"), 0);
+        glUniform1i (_shader->getUniformLocation("specularMap"), 0);
     }
 
 	glUniform1f(_shader->getUniformLocation("material.smoothness"), _smoothness);
@@ -86,32 +86,23 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
         Light* light = (Light*)cn;
         GLuint loc;
 
-        loc = _shader->getUniformLocation("LightArray["+indexString+"].type");
-        glUniform1i(loc,light->type);
+        loc = _shader->getUniformLocation("LightArray[" + indexString + "].type");
+        glUniform1i(loc,light->getType());
 
-        loc = _shader->getUniformLocation("LightArray["+indexString+"].position");
+        loc = _shader->getUniformLocation("LightArray[" + indexString + "].position");
         glUniform3fv(loc,1,glm::value_ptr(light->getWorldPosition()));
 
-        loc = _shader->getUniformLocation("LightArray["+indexString+"].direction");
+        loc = _shader->getUniformLocation("LightArray[" + indexString + "].direction");
+        glUniform3fv(loc,1,glm::value_ptr(light->getDirection()));
 
-        if(light->type == MGE_LIGHT_SPOTLIGHT)
-        {
-            glm::vec3 lightForward = glm::vec3(light->getWorldTransform()[2]);
-            glUniform3fv(loc,1,glm::value_ptr(lightForward));
-        }
-        else
-        {
-            glUniform3fv(loc,1,glm::value_ptr(light->direction));
-        }
+        loc = _shader->getUniformLocation("LightArray[" + indexString + "].color");
+        glUniform3fv(loc,1,glm::value_ptr(light->getColor()));
 
-        loc = _shader->getUniformLocation("LightArray["+indexString+"].color");
-        glUniform3fv(loc,1,glm::value_ptr(light->color));
+        loc = _shader->getUniformLocation("LightArray[" + indexString + "].attenuation");
+        glUniform3fv(loc,1,glm::value_ptr(light->getAttenuation()));
 
-        loc = _shader->getUniformLocation("LightArray["+indexString+"].attenuation");
-        glUniform3fv(loc,1,glm::value_ptr(light->attenuation));
-
-        loc = _shader->getUniformLocation("LightArray["+indexString+"].angle");
-        glUniform1f(loc,glm::cos(light->angle)); //????
+        loc = _shader->getUniformLocation("LightArray[" + indexString + "].angle");
+        glUniform1f(loc,glm::cos(light->getAngle()));
 
         ++index;
         cn = cn->nextNode;
