@@ -13,7 +13,7 @@ class GUIText : public GUI
 		void setTextString (std::string text);
 		void setTextSize (int pTextSize);
 		void setTextColor (sf::Color pColor);
-
+        void Refresh2DTransform() override;
 	protected:
 	    virtual ~GUIText();
 	    void InnerDraw(sf::RenderTarget& target) override;

@@ -19,7 +19,7 @@ using namespace std;
 //debugging by stepping into individual frames
 //bool testBool = false;
 
-AbstractGame::AbstractGame():_window(NULL),_renderer(NULL),_world(NULL),_running(false)
+AbstractGame::AbstractGame():_window(NULL),_renderer(NULL),_world(NULL),_running(false),_world2D(NULL)
 {
     //initialize game systems
 

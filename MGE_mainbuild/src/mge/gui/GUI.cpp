@@ -27,13 +27,10 @@ void GUI::InnerDraw(sf::RenderTarget& t)
 
 }
 
-
-/*
-void GUI::drawCurrent(GUI& target)
+void GUI::Refresh2DTransform()
 {
 
 }
-*/
 
 GUI::~GUI()
 {

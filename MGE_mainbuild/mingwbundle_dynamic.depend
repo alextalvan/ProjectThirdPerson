@@ -15543,7 +15543,7 @@
 	<glm.hpp>
 	<iostream>
 
-1455633952 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
+1455636853 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
 	"AbstractGame.hpp"
 	<iostream>
 	"mge/core/Time.hpp"
@@ -15953,7 +15953,7 @@
 	<mge/behaviours/Component.hpp>
 	<SFML/Graphics.hpp>
 
-1455634910 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
+1455638048 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
 	"mge/lua/LuaScript.hpp"
 	"mge/core/World.hpp"
 	"mge/core/GameObject.hpp"
@@ -16064,30 +16064,30 @@
 1455322248 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\firstpersonlook.hpp
 	<mge/behaviours/Component.hpp>
 
-1455634910 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\gui.hpp
+1455638120 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\gui.hpp
 	<SFML/Graphics.hpp>
 	"mge/core/GameObject.hpp"
 
-1455632248 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guitext.hpp
+1455637947 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guitext.hpp
 	"mge/gui/GUI.hpp"
 
-1455632143 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guisprite.hpp
+1455637530 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guisprite.hpp
 	"mge/gui/GUI.hpp"
 
 1455324393 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\resourcecacher.hpp
 	<SFML/Graphics.hpp>
 
-1455634910 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\gui.cpp
+1455637476 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\gui.cpp
 	"mge/gui/GUI.hpp"
 	"mge/util/list/DualLinkNode.hpp"
 
-1455634910 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guisprite.cpp
+1455638283 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guisprite.cpp
 	<GL/glew.h>
 	<SFML/Graphics.hpp>
 	"mge/gui/GUISprite.hpp"
 	"SFML/Graphics/Transform.hpp"
 
-1455634910 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guitext.cpp
+1455638102 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guitext.cpp
 	<GL/glew.h>
 	<SFML/Graphics/Text.hpp>
 	"mge/gui/GUIText.hpp"
