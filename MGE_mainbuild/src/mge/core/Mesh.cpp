@@ -206,10 +206,10 @@ Mesh* Mesh::cache(string pFileName)
 					return NULL;
 				}
 			}
-
 		}
 
 		file.close();
+        computeTangentBasis(mesh);
 		mesh->_buffer();
 
 		cout << "Mesh loaded and buffered:" << (mesh->_indices.size()/3.0f) << " triangles." << endl;
@@ -220,6 +220,89 @@ Mesh* Mesh::cache(string pFileName)
 		return NULL;
 	}
 }
+
+void Mesh::computeTangentBasis(Mesh* mesh)
+{
+    for ( int i = 0; i < mesh->_vertices.size(); i+=3)
+    {
+        // Shortcuts for vertices
+        glm::vec3 & v0 = mesh->_vertices[i];
+        glm::vec3 & v1 = mesh->_vertices[i+1];
+        glm::vec3 & v2 = mesh->_vertices[i+2];
+
+        // Shortcuts for UVs
+        glm::vec2 & uv0 = mesh->_uvs[i];
+        glm::vec2 & uv1 = mesh->_uvs[i+1];
+        glm::vec2 & uv2 = mesh->_uvs[i+2];
+
+        // Edges of the triangle : postion delta
+        glm::vec3 deltaPos1 = v1-v0;
+        glm::vec3 deltaPos2 = v2-v0;
+
+        // UV delta
+        glm::vec2 deltaUV1 = uv1-uv0;
+        glm::vec2 deltaUV2 = uv2-uv0;
+
+        float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
+        glm::vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y)*r;
+        glm::vec3 bitangent = (deltaPos2 * deltaUV1.x - deltaPos1 * deltaUV2.x)*r;
+
+        // Set the same tangent for all three vertices of the triangle.
+        // They will be merged later, in vboindexer.cpp
+        mesh->_tangents.push_back(tangent);
+        //mesh->_tangents.push_back(tangent);
+        //mesh->_tangents.push_back(tangent);
+
+        // Same thing for binormals
+        mesh->_bitangents.push_back(bitangent);
+        //mesh->_bitangents.push_back(bitangent);
+        //mesh->_bitangents.push_back(bitangent);
+    }
+}
+
+/*
+void Mesh::calcTangentSpace(Mesh* mesh)
+{
+    for (int i = 0; i < mesh->_vertices.size(); i+=3) {
+        // positions
+        glm::vec3 pos1(mesh->_vertices[i]);
+        glm::vec3 pos2(mesh->_vertices[i+1]);
+        glm::vec3 pos3(mesh->_vertices[i+2]);
+        //glm::vec3 pos4(mesh->_vertices[i+3]);
+
+        // texture coordinates
+        glm::vec2 uv1(mesh->_uvs[i]);
+        glm::vec2 uv2(mesh->_uvs[i+1]);
+        glm::vec2 uv3(mesh->_uvs[i+2]);
+        //glm::vec2 uv4(mesh->_uvs[i+3]);
+
+        // normal vector
+        glm::vec3 nm(mesh->_normals[i]);
+
+        glm::vec3 edge1 = pos2 - pos1;
+        glm::vec3 edge2 = pos3 - pos1;
+        glm::vec2 deltaUV1 = uv2 - uv1;
+        glm::vec2 deltaUV2 = uv3 - uv1;
+
+        GLfloat f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+
+        glm::vec3 tangent = glm::vec3(0);
+        tangent.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
+        tangent.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
+        tangent.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
+        tangent = glm::normalize(tangent);
+
+        glm::vec3 bitangent = glm::vec3(0);
+        bitangent.x = f * (-deltaUV2.x * edge1.x + deltaUV1.x * edge2.x);
+        bitangent.y = f * (-deltaUV2.x * edge1.y + deltaUV1.x * edge2.y);
+        bitangent.z = f * (-deltaUV2.x * edge1.z + deltaUV1.x * edge2.z);
+        bitangent = glm::normalize(bitangent);
+
+        mesh->_tangents.push_back(tangent);
+        mesh->_bitangents.push_back(bitangent);
+    }
+}
+*/
 
 void Mesh::_buffer()
 {
@@ -239,26 +322,81 @@ void Mesh::_buffer()
     glBindBuffer( GL_ARRAY_BUFFER, _uvBufferId );
     glBufferData( GL_ARRAY_BUFFER, _uvs.size()*sizeof(glm::vec2), &_uvs[0], GL_STATIC_DRAW );
 
+    glGenBuffers(1, &_tangBufferId);
+    glBindBuffer( GL_ARRAY_BUFFER, _tangBufferId );
+    glBufferData( GL_ARRAY_BUFFER, _tangents.size()*sizeof(glm::vec3), &_tangents[0], GL_STATIC_DRAW );
+
+    glGenBuffers(1, &_bitangBufferId);
+    glBindBuffer( GL_ARRAY_BUFFER, _bitangBufferId );
+    glBufferData( GL_ARRAY_BUFFER, _bitangents.size()*sizeof(glm::vec3), &_bitangents[0], GL_STATIC_DRAW );
+
     glBindBuffer( GL_ARRAY_BUFFER, 0 );
+}
+
+void Mesh::streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUVsAttrib, GLint pTangentAttrib, GLint pBitangentAttrib) {
+    if (pVerticesAttrib != -1) {
+        glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferId);
+        glEnableVertexAttribArray(pVerticesAttrib);
+        glVertexAttribPointer(pVerticesAttrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0 );
+    }
+
+    if (pNormalsAttrib != -1) {
+        glBindBuffer( GL_ARRAY_BUFFER, _normalBufferId);
+        glEnableVertexAttribArray(pNormalsAttrib);
+        glVertexAttribPointer(pNormalsAttrib, 3, GL_FLOAT, GL_TRUE, 0, (void*)0 );
+    }
+
+    if (pUVsAttrib != -1) {
+        glBindBuffer( GL_ARRAY_BUFFER, _uvBufferId);
+        glEnableVertexAttribArray(pUVsAttrib);
+        glVertexAttribPointer(pUVsAttrib, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    }
+
+    if (pTangentAttrib != -1) {
+        glBindBuffer( GL_ARRAY_BUFFER, _tangBufferId);
+        glEnableVertexAttribArray(pTangentAttrib);
+        glVertexAttribPointer(pTangentAttrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    }
+
+    if (pBitangentAttrib != -1) {
+        glBindBuffer( GL_ARRAY_BUFFER, _bitangBufferId);
+        glEnableVertexAttribArray(pBitangentAttrib);
+        glVertexAttribPointer(pBitangentAttrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    }
+
+	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _indexBufferId );
+
+	glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, (GLvoid*)0);
+
+	// no current buffer, to avoid mishaps, very important for performance
+
+	glBindBuffer(GL_ARRAY_BUFFER,0);
+
+	//fix for serious performance issue
+	if (pUVsAttrib != -1) glDisableVertexAttribArray(pUVsAttrib);
+	if (pNormalsAttrib != -1) glDisableVertexAttribArray(pNormalsAttrib);
+	if (pVerticesAttrib != -1) glDisableVertexAttribArray(pVerticesAttrib);
+	if (pTangentAttrib != -1) glDisableVertexAttribArray(pTangentAttrib);
+	if (pBitangentAttrib != -1) glDisableVertexAttribArray(pBitangentAttrib);
 }
 
 void Mesh::streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUVsAttrib) {
     if (pVerticesAttrib != -1) {
         glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferId);
         glEnableVertexAttribArray(pVerticesAttrib);
-        glVertexAttribPointer(pVerticesAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0 );
+        glVertexAttribPointer(pVerticesAttrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0 );
     }
 
     if (pNormalsAttrib != -1) {
         glBindBuffer( GL_ARRAY_BUFFER, _normalBufferId);
         glEnableVertexAttribArray(pNormalsAttrib);
-        glVertexAttribPointer(pNormalsAttrib, 3, GL_FLOAT, GL_TRUE, 0, 0 );
+        glVertexAttribPointer(pNormalsAttrib, 3, GL_FLOAT, GL_TRUE, 0, (void*)0 );
     }
 
     if (pUVsAttrib != -1) {
         glBindBuffer( GL_ARRAY_BUFFER, _uvBufferId);
         glEnableVertexAttribArray(pUVsAttrib);
-        glVertexAttribPointer(pUVsAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
+        glVertexAttribPointer(pUVsAttrib, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
     }
 
 	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _indexBufferId );

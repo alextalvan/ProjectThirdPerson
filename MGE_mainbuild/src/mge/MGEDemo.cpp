@@ -54,30 +54,43 @@ void MGEDemo::initialize() {
     //setup the core part
     AbstractGame::initialize();
     //setup the custom part
-	//gui = new GUI();
 	_hud = new DebugHud(_window);
-
 }
 
 //build the game _world
 void MGEDemo::_initializeScene()
 {
-    /*
-    GUISprite * sprite = new GUISprite(_window, *Utils::LoadTexture("bricks.jpg"), 50, 50);
-    GUIText * text = new GUIText(_window, *Utils::LoadFont("Arial.ttf"), 200, 200);
-    _world->AddChild(sprite);
-    sprite->AddChild(text);
-    */
+    Camera* cam = new Camera("cam", glm::vec3(5,5,5));
+    _world->setMainCamera(cam);
+    _world->AddChild(cam);
+
+    Mesh* cubeMesh = Mesh::load(config::MGE_MODEL_PATH + "cube_flat.obj");
+    Texture* brickTex = Texture::load(config::MGE_TEXTURE_PATH + "brickwall.jpg");
+    Texture* brickNorm = Texture::load(config::MGE_TEXTURE_PATH + "brickwall_normal.jpg");
+    TextureLitMaterial* litMat = new TextureLitMaterial(brickTex, 0.5f, 32.0f, 0.1f, brickTex);
+
+    GameObject* planeCube = new GameObject("cube", glm::vec3(0,-2,0));
+    planeCube->setMesh(cubeMesh);
+    planeCube->setMaterial(litMat);
+    planeCube->scale(glm::vec3(5,1,5));
+    _world->AddChild(planeCube);
+
+    GameObject* testCube = new GameObject("cube", glm::vec3(0,0,0));
+    testCube->setMesh(cubeMesh);
+    testCube->setMaterial(litMat);
+    _world->AddChild(testCube);
+
+    Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(5,3,3), testCube->getWorldPosition() - glm::vec3(5,3,3), glm::vec3(1,1,1));
+    Light* light2 = new Light(MGE_LIGHT_POINT, glm::vec3(0,0,2), glm::vec3(0,1,0), glm::vec3(1,0,0), glm::vec3(0.1f,0.1f,0.1f));
+    //Light* light3 = new Light(MGE_LIGHT_SPOTLIGHT, glm::vec3(0,2,2), glm::vec3(0,-1,0), glm::vec3(0,0,1), glm::vec3(0.1f,0.1f,0.1f), 0.36f);
+    cam->AttachComponent(new LookAt(testCube));
 }
 
-void MGEDemo::_render() {
+void MGEDemo::_render()
+{
     AbstractGame::_render();
-
-    ///no idea how to automatically draw all guis attached to world in other way so far. (i know this way is pretty ugly, but all other ways i can think of are as well)
-    //updateGUI();
     _updateHud();
-
-    //_world->renderDebugInfo();
+    _world->renderDebugInfo();
 }
 
 void MGEDemo::_updateHud() {
