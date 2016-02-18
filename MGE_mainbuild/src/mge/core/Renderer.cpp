@@ -15,7 +15,7 @@ GLuint Renderer::_postProcessVertexAttributeArray;
 Renderer::Renderer(int width, int height) : _screenWidth(width), _screenHeight(height)
 {
 	glEnable( GL_DEPTH_TEST );
-	//glEnable( GL_CULL_FACE ); // default GL_BACK
+	glEnable( GL_CULL_FACE ); // default GL_BACK
 	//glCullFace(GL_FRONT);
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -66,7 +66,7 @@ void Renderer::render (World* pWorld)
 //note, this function assumes there is at least one post process in the list
 void Renderer::DoPostProcessing()
 {
-    glDisable(GL_FRAMEBUFFER_SRGB);
+    //glDisable(GL_FRAMEBUFFER_SRGB);
     glDisable(GL_DEPTH_TEST);
 
     int procListSize = _postProcessList.size();
@@ -112,14 +112,14 @@ void Renderer::DoPostProcessing()
 
     }
     glEnable( GL_DEPTH_TEST );
-    glEnable(GL_FRAMEBUFFER_SRGB);
+    //glEnable(GL_FRAMEBUFFER_SRGB);
 }
 
 
 
 void Renderer::render (World* pWorld, GameObject * pGameObject, Camera * pCamera, bool pRecursive)
 {
-    glEnable(GL_FRAMEBUFFER_SRGB);
+    //glEnable(GL_FRAMEBUFFER_SRGB);
     //we don't render inactive gameobjects
     if(!pGameObject->IsActive())
         return;
@@ -140,7 +140,7 @@ void Renderer::render (World* pWorld, GameObject * pGameObject, Camera * pCamera
     for (int i = 0; i < childCount; i++) {
         render (pWorld, pGameObject->GetChildAt(i), pCamera, pRecursive);
     }
-    glDisable(GL_FRAMEBUFFER_SRGB);
+   // glDisable(GL_FRAMEBUFFER_SRGB);
 }
 
 void Renderer::InitializePostProc()
