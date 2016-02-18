@@ -11,23 +11,40 @@
 class TextureLitMaterial : public AbstractMaterial
 {
     public:
-        TextureLitMaterial (Texture* pDiffuseTexture, float pSmoothness = 0.5f, float pShininess = 32.0f, float pAmbient = 0.1f, Texture * pNormalMapTexture = nullptr, Texture* pSpecularMapTexture = nullptr);
+        TextureLitMaterial (Texture* pDiffuseTexture, float pSmoothness = 0.5f, float pShininess = 32.0f, float pAmbient = 0.1f, Texture* pSpecularMapTexture = nullptr, Texture * pNormalMapTexture = nullptr);
         virtual ~TextureLitMaterial ();
         virtual void render(World* pWorld, GameObject* pGameObject, Camera* pCamera);
         void setDiffuseTexture (Texture* pDiffuseTexture);
-        void setNormalMapTexture (Texture* pNormalMapTexture);
         void setSpecularMapTexture (Texture* pSpecularMapTexture);
+        void setNormalMapTexture (Texture* pNormalMapTexture);
     protected:
     private:
-        bool normalMap = false;
         bool specularMap = false;
+        bool normalMap = false;
         static ShaderProgram* _shader;
         static void _lazyInitializeShader();
 
+        static GLint _projMatLoc;
+        static GLint _viewMatLoc;
+        static GLint _modelMatLoc;
+
+        static GLint _diffMapLoc;
+        static GLint _normalMapLoc;
+        static GLint _specMapLoc;
+
+        static GLint _viewPosLoc;
+
+        static GLint _matSmoothLoc;
+        static GLint _matShineLoc;
+        static GLint _matAmbLoc;
+
+        static GLboolean _hasSpecMapLoc;
+        static GLboolean _hasNormMapLoc;
 
         Texture* _diffuseTexture;
         Texture* _normalMapTexture;
         Texture* _specularMapTexture;
+
         float _smoothness;
         float _shininess;
         float _ambient;

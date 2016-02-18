@@ -45,7 +45,6 @@ void Renderer::setClearColor(int pR, int pG, int pB) {
 
 void Renderer::render (World* pWorld)
 {
-
     if(_postProcessList.size()>0)
     {
         glBindFramebuffer(GL_FRAMEBUFFER,postProc_fbo);
@@ -62,12 +61,12 @@ void Renderer::render (World* pWorld)
        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
        render (pWorld, pWorld, pWorld->getMainCamera(), true);
     }
-
 }
 
 //note, this function assumes there is at least one post process in the list
 void Renderer::DoPostProcessing()
 {
+    glDisable(GL_FRAMEBUFFER_SRGB);
     glDisable(GL_DEPTH_TEST);
 
     int procListSize = _postProcessList.size();
@@ -113,12 +112,14 @@ void Renderer::DoPostProcessing()
 
     }
     glEnable( GL_DEPTH_TEST );
+    glEnable(GL_FRAMEBUFFER_SRGB);
 }
 
 
 
 void Renderer::render (World* pWorld, GameObject * pGameObject, Camera * pCamera, bool pRecursive)
 {
+    glEnable(GL_FRAMEBUFFER_SRGB);
     //we don't render inactive gameobjects
     if(!pGameObject->IsActive())
         return;
@@ -139,6 +140,7 @@ void Renderer::render (World* pWorld, GameObject * pGameObject, Camera * pCamera
     for (int i = 0; i < childCount; i++) {
         render (pWorld, pGameObject->GetChildAt(i), pCamera, pRecursive);
     }
+    glDisable(GL_FRAMEBUFFER_SRGB);
 }
 
 void Renderer::InitializePostProc()

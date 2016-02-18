@@ -16,10 +16,7 @@ void Light::setType(int pType)
 
 void Light::setDirection(glm::vec3 pDir)
 {
-    glm::vec3 eye = getWorldPosition();
-    glm::vec3 center = glm::normalize(pDir) + eye;
-    glm::vec3 up = glm::vec3(0,1,0);
-    setTransform(glm::lookAt(eye, center, up));
+    setWorldRotation(glm::normalize(pDir));
 }
 
 void Light::setColor(glm::vec3 pColor)
@@ -44,7 +41,7 @@ int Light::getType()
 
 glm::vec3 Light::getDirection()
 {
-    return glm::vec3(getTransform()[2]);
+    return glm::normalize(glm::vec3(getWorldTransform()[2]));
 }
 
 glm::vec3 Light::getColor()

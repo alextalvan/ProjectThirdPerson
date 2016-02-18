@@ -4,14 +4,14 @@
 	<Project>
 		<Option title="project" />
 		<Option pch_mode="2" />
-		<Option compiler="extended" />
+		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/game" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="assets" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
-				<Option compiler="extended" />
+				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-Wnon-virtual-dtor" />
 					<Add option="-Wunreachable-code" />
