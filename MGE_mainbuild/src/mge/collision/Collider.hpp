@@ -30,6 +30,7 @@ public:
     virtual bool HitTest(SphereCollider* other) = 0;
     virtual bool HitTest(Collider* other) = 0;
 
+
 protected:
     Collider();
     virtual ~Collider();

@@ -1,5 +1,6 @@
 #include <mge/behaviours/FirstPersonLook.hpp>
 #include <mge/util/Input.hpp>
+#include "SFML/Window.hpp"
 
 FirstPersonLook::FirstPersonLook(float turnSpeed)
 {
@@ -38,16 +39,13 @@ void FirstPersonLook::Rotation()
 
 
     newTransform = glm::translate(newTransform,_owner->getWorldPosition());
+    //newTransform[2] = glm::vec4(0,0,1,0);//debug
+
     newTransform *= glm::rotate( glm::radians(-rotationX), glm::vec3(0.0f, 1.0f, 0.0f));
     newTransform *= glm::rotate( glm::radians(-rotationY), glm::vec3(1.0f, 0.0f, 0.0f));
+
     _owner->setWorldTransform(newTransform);
 
-    //std::cout<<"test";
-
-    //_owner->translate(pos);
-	//rotate the object in its own local space
-	//_owner->rotate( glm::radians(rotationX * _turnSpeed), glm::vec3(0.0f, 1.0f, 0.0f ) );
-	//_owner->rotate( glm::radians(rotationY * _turnSpeed), glm::vec3(1.0f, 0.0f, 0.0f ) );
 }
 
 glm::vec2 FirstPersonLook::GetMouseOffset()
@@ -55,7 +53,8 @@ glm::vec2 FirstPersonLook::GetMouseOffset()
 	glm::vec2 mousePos = glm::vec2(Input::getMouseX(), Input::getMouseY());
 
 	glm::vec2 offset = mousePos - prevMousePos;
-	prevMousePos = mousePos;
+
+	prevMousePos= mousePos;
 
 	return offset;
 }

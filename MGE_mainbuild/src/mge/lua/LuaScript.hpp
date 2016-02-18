@@ -49,6 +49,11 @@ private:
 	static int getMaterial(lua_State * lua);
 	static int setName(lua_State * lua);
 	static int getName(lua_State * lua);
+	static int destroy(lua_State * lua);
+	static int getowner(lua_State * lua);
+	static int findChild(lua_State * lua);
+	static int setScale(lua_State * lua);
+	//static
 
 	//gui
 	static int guiText(lua_State * lua);
@@ -90,6 +95,8 @@ private:
 
 	//levels/scenes
 	static int loadLevel(lua_State * lua);
+
+
 
 
 

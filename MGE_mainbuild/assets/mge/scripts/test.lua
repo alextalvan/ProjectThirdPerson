@@ -16,9 +16,13 @@ function Update()
     --if(GetKeyUp(0)) then
     --print(RandomInRange(0,10)); end
     --("");
+
+    --print(FindChild(world,"Character"))
 end
 
 function OnCollision(otherCollider)
-	--print(GetName(otherCollider));
-	print("trigger");
+	--
+	if(GetName(otherCollider)~="floor") then
+        print(GetName(otherCollider));
+        Destroy(GetOwner(this)); end
 end

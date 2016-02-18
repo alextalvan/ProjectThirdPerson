@@ -213,6 +213,21 @@ void GameObject::_innerRemove (GameObject* pChild)
 
 }
 
+GameObject* GameObject::FindChild(std::string name)
+{
+    DualLinkNode2<ChildList>* cn2 = _children.startNode;
+
+    while(cn2!=NULL)
+    {
+        GameObject* obj = (GameObject*)cn2;
+        if(obj->getName()==name)
+            return obj;
+        cn2 = cn2->nextNode;
+    }
+
+    return NULL;
+}
+
 void GameObject::AddChild (GameObject* pChild) {
     pChild->setParent(this);
 }

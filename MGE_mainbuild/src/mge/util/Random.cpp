@@ -12,7 +12,7 @@ namespace Utils
         return dist(generator);
     }
 
-    float Random::GetValue(float rangeStart, float rangeEnd)
+    float Random::GetFloatValue(float rangeStart, float rangeEnd)
     {
         std::uniform_real_distribution<float> dist(rangeStart,rangeEnd);
         return dist(generator);

@@ -93,6 +93,9 @@ LuaScript::LuaScript(const char * path, World * world, GUI * world2D)
 	lua_register(L, "GUIButton", guiButton);
 	lua_register(L, "SetButtonTexture", setButtonTexture);
 	lua_register(L, "OnClick", onClick);
+	lua_register(L, "Destroy", destroy);
+	lua_register(L, "GetOwner", getowner);
+	lua_register(L, "FindChild", findChild);
 
 	//Set world
 	lua_pushlightuserdata(L, world);
@@ -596,6 +599,24 @@ int LuaScript::getParent(lua_State * lua)
 	return 1;
 }
 
+int LuaScript::getowner(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, lua_gettop(lua))) throw "Expect: component";
+	#endif
+
+	Component * comp = (Component *)lua_touserdata(lua, -1);
+
+    GameObject* owner = comp->getOwner();
+
+    if(owner==NULL)
+        lua_pushnil(lua);
+    else
+        lua_pushlightuserdata(lua, owner);
+
+	return 1;
+}
+
 int LuaScript::getChildCount(lua_State * lua)
 {
     #ifdef MGE_LUA_SAFETY
@@ -1033,6 +1054,58 @@ void LuaScript::InvokeCollisionCallback(GameObject* other)
     lua_getglobal(L, "OnCollision");
     lua_pushlightuserdata(L,other);
 	lua_call(L, 1, 0);
+}
+
+int LuaScript::destroy(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -1)) throw "Expect: game object or component";
+	#endif
+
+    Destroyable* d = (Destroyable*)lua_touserdata(lua,-1);
+    if(d!=NULL)
+        d->Destroy();
+
+	return 0;
+}
+
+int LuaScript::findChild(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+    if (!lua_islightuserdata(lua, -2)) throw "Expect: game object";
+	if (!lua_isstring(lua, -1)) throw "Expect: string";
+	#endif
+
+
+	GameObject* obj = (GameObject*)lua_touserdata(lua, -2);
+	string name = lua_tostring(lua,-1);
+
+    GameObject* child = obj->FindChild(name);
+	if(child==NULL)
+        lua_pushnil(lua);
+    else
+        lua_pushlightuserdata(lua,child);
+
+	return 1;
+}
+
+int LuaScript::setScale(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -4)) throw "Expect: game object";
+	if (!lua_isnumber(lua, -3)) throw "Expect: number";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+	GameObject * obj = (GameObject*)lua_touserdata(lua, -4);
+	float x = lua_tonumber(lua, -3);
+	float y = lua_tonumber(lua, -2);
+	float z = lua_tonumber(lua, -2);
+
+	//obj->
+
+	return 0;
 }
 
 LuaScript::~LuaScript()

@@ -18,4 +18,6 @@ namespace LevelEditor
 
     void ParseDirLight(ifstream& f, GameObject* parent);
 
+    void ProcessModelMatrix(ifstream& f, GameObject* parent, GameObject* child);
+
 }
