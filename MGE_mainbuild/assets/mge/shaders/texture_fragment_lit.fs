@@ -33,7 +33,7 @@ uniform Light LightArray[MGE_MAX_LIGHTS];
 in vec3 FragPos;
 in vec2 TexCoord;
 in vec3 Normal;
-//in mat3 TBN;
+in mat3 TBN;
 
 out vec4 fragment_color;
 
@@ -46,10 +46,10 @@ void main( void )
     vec3 normal = normalize(Normal);
 
     if (material.hasNormalMap) {
-        normal = normalize(Normal); //enabled to prevent stupid error
-        //normal = texture(material.normalMap, TexCoord).rgb;
-        //normal = normalize(normal * 2.0 - 1.0);
-        //normal = normalize(TBN * normal);
+        //normal = normalize(Normal); //enabled to prevent stupid error
+        normal = texture(material.normalMap, TexCoord).rgb;
+        normal = normalize(normal * 2.0 - 1.0);
+        normal = normalize(TBN * normal);
         //normal += texture(material.normalMap, TexCoord).rgb;
         //normal = normalize(normal * 2.0 - 1.0);
         //normal = normalize(modelMatrix * vec4(normal, 0.0f)).xyz;

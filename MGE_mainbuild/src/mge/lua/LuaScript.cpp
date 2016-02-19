@@ -237,9 +237,9 @@ int LuaScript::guiSprite(lua_State * lua)
 	string textureName = lua_tostring(lua, -6);
 	position.x = lua_tonumber(lua, -5);
 	position.y = lua_tonumber(lua, -4);
-	scale.x = lua_tonumber(lua, -3);
-	scale.y = lua_tonumber(lua, -2);
-	float rotation = lua_tonumber(lua, -1);
+	float rotation = lua_tonumber(lua, -3);
+	scale.x = lua_tonumber(lua, -2);
+	scale.y = lua_tonumber(lua, -1);
 
 	lua_getglobal(lua,"GUI");
 	GUI * gui = (GUI*)lua_touserdata(lua,-1);

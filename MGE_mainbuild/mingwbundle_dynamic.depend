@@ -13557,7 +13557,7 @@
 	"mge/core/World.hpp"
 	"mge/behaviours/Component.hpp"
 
-1455838080 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\mesh.hpp
+1455876664 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\mesh.hpp
 	<vector>
 	<cstring>
 	<string>
@@ -13574,7 +13574,7 @@
 	"mge/util/list/DualLinkList.hpp"
 	"mge/util/list/DualLinkNode.hpp"
 
-1455839646 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\mesh.cpp
+1455879863 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\mesh.cpp
 	"mge/core/Mesh.hpp"
 	<iostream>
 	<map>
@@ -13585,7 +13585,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1455840060 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.cpp
+1455875270 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -13814,7 +13814,7 @@
 
 1452188439 c:\github\projectthirdperson\mge_mainbuild\luabridge\detail\namespace.h
 
-1455840337 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
+1455879748 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -15919,7 +15919,7 @@
 	<mge/behaviours/Component.hpp>
 	<SFML/Graphics.hpp>
 
-1455802789 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luascript.cpp
+1455840484 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luascript.cpp
 	"mge/lua/LuaScript.hpp"
 	"mge/core/World.hpp"
 	"mge/core/GameObject.hpp"
@@ -16233,7 +16233,7 @@
 1455670403 c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guisprite.hpp
 	"mge/gui/GUI.hpp"
 
-1455792406 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guisprite.cpp
+1455879711 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guisprite.cpp
 	<GL/glew.h>
 	<SFML/Graphics.hpp>
 	"mge/gui/GUISprite.hpp"

@@ -272,11 +272,11 @@ void Mesh::_calculateTangents(Mesh*mesh)
         glm::vec3& t = tan1[a];
 
         // Gram-Schmidt orthogonalize
-        glm::vec4 tangent = glm::vec4(glm::normalize(t - n * glm::dot(n, t)), 0.0f);
-
-        // Calculate handedness
-        tangent.w = (glm::dot(glm::cross(n, t), tan2[a]) < 0.0f) ? -1.0f : 1.0f;
+        glm::vec3 tangent = glm::normalize(t - n * glm::dot(n, t));
         mesh->_tangents.push_back(tangent);
+        // Calculate handedness
+        //tangent.w = (glm::dot(glm::cross(n, t), tan2[a]) < 0.0f) ? -1.0f : 1.0f;
+        //mesh->_tangents.push_back(tangent);
         std::cout << tangent << std::endl;
     }
 }
@@ -301,7 +301,7 @@ void Mesh::_buffer()
 
     glGenBuffers(1, &_tangentBufferId);
     glBindBuffer( GL_ARRAY_BUFFER, _tangentBufferId );
-    glBufferData( GL_ARRAY_BUFFER, _tangents.size()*sizeof(glm::vec4), &_tangents[0], GL_STATIC_DRAW );
+    glBufferData( GL_ARRAY_BUFFER, _tangents.size()*sizeof(glm::vec3), &_tangents[0], GL_STATIC_DRAW );
 
     glBindBuffer( GL_ARRAY_BUFFER, 0 );
 }
@@ -328,7 +328,7 @@ void Mesh::streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUV
     if (pTangentAttrib != -1) {
         glBindBuffer( GL_ARRAY_BUFFER, _tangentBufferId);
         glEnableVertexAttribArray(pTangentAttrib);
-        glVertexAttribPointer(pTangentAttrib, 4, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        glVertexAttribPointer(pTangentAttrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
     }
 
 	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _indexBufferId );
