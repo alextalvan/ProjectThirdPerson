@@ -222,9 +222,10 @@ Mesh* Mesh::cache(string pFileName)
 
 void Mesh::_calculateTangents(Mesh*mesh)
 {
-    	for ( unsigned int i = 0; i < mesh->_indices.size(); i+=3 ) {
+    //mesh->_tangents = mesh->_vertices; // copy vertices to tangents as placeholders to copy results in
 
-		mesh->_tangents = mesh->_vertices; // copy vertices to tangents as placeholders to copy results in
+    for ( unsigned int i = 0; i < mesh->_indices.size(); i+=3 )
+    {
 		// get the triangle
 		glm::vec3 v0 = mesh->_vertices[ mesh->_indices[ i+0 ] ]; // get triangle points in vertex space
 		glm::vec3 v1 = mesh->_vertices[ mesh->_indices[ i+1 ] ];
@@ -245,10 +246,13 @@ void Mesh::_calculateTangents(Mesh*mesh)
 		glm::vec3 tangent   = glm::normalize( fragment * glm::vec3(  dUB.y * dVA.x - dUA.y * dVB.x,
 																	 dUB.y * dVA.y - dUA.y * dVB.y,
 																	 dUB.y * dVA.z - dUA.y * dVB.z ) );
+
 		mesh->_tangents.push_back(tangent); // every vertex needs its tangent
 		mesh->_tangents.push_back(tangent); // every vertex needs its tangent
 		mesh->_tangents.push_back(tangent); // every vertex needs its tangent
+		//cout << tangent << endl;
 	}
+
 /*
     for (int i = 0; i < mesh->_vertices.size(); i++) {
         glm::vec3 v0 = mesh->_vertices[i];
