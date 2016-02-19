@@ -14,6 +14,7 @@ using namespace std;
 #include <mge/gui/GUI.hpp>
 #include <mge/lua/LuaScript.hpp>
 #include <mge/config.hpp>
+#include <fstream>
 
 
 //debugging by stepping into individual frames
@@ -34,11 +35,21 @@ AbstractGame::~AbstractGame()
 }
 
 void AbstractGame::initialize() {
-    cout << "Initializing engine..." << endl << endl;
-    _initializeWindow();
+    std::cout << "Initializing engine...\n\n";
+    std::cout << "Reading config.txt..\n";
+
+    ifstream f("config.txt");
+    std::string s; int width, height,fullscreen;
+    f>>s; f>>width;
+    f>>s; f>>height;
+    f>>s; f>>fullscreen;
+    std::cout << "config loaded..\n";
+
+
+    _initializeWindow(width,height,fullscreen);
     _printVersionInfo();
     _initializeGlew();
-    _initializeRenderer();
+    _initializeRenderer(width,height);
     _initializeWorld();
     _initializeScene();
 
@@ -49,9 +60,12 @@ void AbstractGame::initialize() {
 
 ///SETUP
 
-void AbstractGame::_initializeWindow() {
+void AbstractGame::_initializeWindow(int width, int height, int fullscreen)
+{
 	cout << "Initializing window..." << endl;
-	_window = new sf::RenderWindow( sf::VideoMode(1366,768), "FairWind Game Engine", sf::Style::Titlebar, sf::ContextSettings(24,8,4,3,3));
+
+	uint32_t style = (fullscreen) ? sf::Style::Fullscreen : sf::Style::Titlebar;
+	_window = new sf::RenderWindow( sf::VideoMode(width,height), "FairWind Game Engine", style , sf::ContextSettings(24,8,4,3,3));
 	//_window->setVerticalSyncEnabled(true);
     cout << "Window initialized." << endl << endl;
 }
@@ -85,10 +99,11 @@ void AbstractGame::_initializeGlew() {
 	cout << "Initialized GLEW, status (1 == OK, 0 == FAILED):" << (glewStatus == GLEW_OK) << endl << endl;
 }
 
-void AbstractGame::_initializeRenderer() {
+void AbstractGame::_initializeRenderer(int width, int height)
+{
     //setup our own renderer
 	cout << "Initializing renderer..." << endl;
-	_renderer = new Renderer(1366,768);
+	_renderer = new Renderer(width,height);
     cout << "Renderer done." << endl << endl;
 }
 

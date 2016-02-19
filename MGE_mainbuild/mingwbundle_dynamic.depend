@@ -13935,7 +13935,7 @@
 	"mge/core/AbstractGame.hpp"
 	"mge/MGEDemo.hpp"
 
-1455632342 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.hpp
+1455877512 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.hpp
 	<SFML/Graphics.hpp>
 	<GL/glew.h>
 	<string>
@@ -15502,7 +15502,7 @@
 	<mge/collision/Collider.hpp>
 	<mge/collision/SphereCollider.hpp>
 
-1455798184 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collider.hpp
+1455880692 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collider.hpp
 	<mge/behaviours/Component.hpp>
 	<mge/util/list/DualLinkNode.hpp>
 	<mge/collision/CollisionManager.hpp>
@@ -15512,9 +15512,10 @@
 1455060673 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\duallinknode.hpp
 	<cstddef>
 
-1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.hpp
+1455883318 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.hpp
 	<mge/util/list/DualLinkList.hpp>
 	<mge/core/AbstractGame.hpp>
+	"glm.hpp"
 
 1455062700 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\duallinklist.hpp
 	<cstddef>
@@ -15542,7 +15543,7 @@
 	<glm.hpp>
 	<iostream>
 
-1455803053 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
+1455877911 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
 	"AbstractGame.hpp"
 	<iostream>
 	"mge/core/Time.hpp"
@@ -15556,6 +15557,7 @@
 	<mge/gui/GUI.hpp>
 	<mge/lua/LuaScript.hpp>
 	<mge/config.hpp>
+	<fstream>
 
 1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\time.hpp
 	<SFML/System.hpp>
@@ -15642,7 +15644,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1455828440 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
+1455879714 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -15752,7 +15754,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1455827555 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
+1455828837 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -15952,7 +15954,7 @@
 	<mge/behaviours/Component.hpp>
 	<SFML/Graphics.hpp>
 
-1455805812 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
+1455877933 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
 	"mge/lua/LuaScript.hpp"
 	"mge/core/World.hpp"
 	"mge/core/GameObject.hpp"
@@ -16032,7 +16034,7 @@
 	"mge/collision/SphereCollider.hpp"
 	"mge/util/Timer.hpp"
 
-1455827298 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
+1455879591 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
 	<mge/editor/LevelImporter.hpp>
 	<mge/config.hpp>
 	<glm.hpp>

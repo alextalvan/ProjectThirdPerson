@@ -21,8 +21,6 @@ namespace LevelEditor
 
     void LoadLevel(std::string fileName, World* world, GUI* world2D)
     {
-
-
         if(world == NULL)
             return;
 
@@ -31,6 +29,8 @@ namespace LevelEditor
 
         //first release the previous level
         world->DestroyChildren();
+
+        std::cout<<"Loading level " + fileName + "...\n";
 
         //open the file stream
         ifstream f(fileName);
@@ -43,6 +43,7 @@ namespace LevelEditor
 
 
         f.close();
+        std::cout<<"Successfully loaded level " + fileName + "\n";
     }
 
     bool ParseAbstractObject(ifstream& f, GameObject* parent)
