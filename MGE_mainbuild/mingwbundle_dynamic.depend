@@ -12400,7 +12400,7 @@
 	<string>
 	"mge/core/GameObject.hpp"
 
-1455707304 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\gameobject.hpp
+1455840060 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\gameobject.hpp
 	<vector>
 	<string>
 	<iostream>
@@ -13445,7 +13445,7 @@
 	<mge/collision/Collider.hpp>
 	<mge/collision/SphereCollider.hpp>
 
-1455037758 c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\collider.hpp
+1455840060 c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\collider.hpp
 	<mge/behaviours/Component.hpp>
 	<mge/util/list/DualLinkNode.hpp>
 	<mge/collision/CollisionManager.hpp>
@@ -13467,11 +13467,11 @@
 1455037758 c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\spherecollider.hpp
 	<mge/collision/Collider.hpp>
 
-1455037758 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\collider.cpp
+1455840060 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\collider.cpp
 	<mge/collision/Collider.hpp>
 	<mge/collision/CollisionManager.hpp>
 
-1455131202 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\collisionmanager.cpp
+1455840060 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\collisionmanager.cpp
 	<mge/collision/CollisionManager.hpp>
 	<mge/util/list/DualLinkNode.hpp>
 	<mge/collision/Collider.hpp>
@@ -13485,7 +13485,7 @@
 	<glm.hpp>
 	<iostream>
 
-1455792528 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\abstractgame.cpp
+1455840060 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\abstractgame.cpp
 	"AbstractGame.hpp"
 	<iostream>
 	"mge/core/Time.hpp"
@@ -13548,7 +13548,7 @@
 	"mge/core/FPS.hpp"
 	"mge/core/Time.hpp"
 
-1455707304 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\gameobject.cpp
+1455840060 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\gameobject.cpp
 	<cassert>
 	<iostream>
 	<glm.hpp>
@@ -13585,7 +13585,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1455743146 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.cpp
+1455840060 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -13666,7 +13666,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1455839194 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
+1455840060 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
 	<glm.hpp>
 	"mge/materials/TextureLitMaterial.hpp"
 	"mge/core/Texture.hpp"
@@ -13676,7 +13676,7 @@
 	"mge/core/Light.hpp"
 	<string>
 
-1455803677 c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.hpp
+1455840060 c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.hpp
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
@@ -13814,7 +13814,7 @@
 
 1452188439 c:\github\projectthirdperson\mge_mainbuild\luabridge\detail\namespace.h
 
-1455839941 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
+1455840337 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -15910,7 +15910,7 @@
 	<mge/util/list/SingleLinkNode.hpp>
 	<mge/core/Destroyable.hpp>
 
-1455637893 c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luascript.hpp
+1455840060 c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luascript.hpp
 	"lua.h"
 	"lauxlib.h"
 	"lualib.h"
@@ -16129,22 +16129,25 @@
 1455819478 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\timer.hpp
 	<SFML/System.hpp>
 
-1455386196 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
+1455840060 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
 	"CharacterController.hpp"
 	"mge/core/GameObject.hpp"
 	"mge/core/Camera.hpp"
 	"mge/core/World.hpp"
 
-1455386196 c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\charactercontroller.hpp
+1455840060 c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\charactercontroller.hpp
 	<mge/behaviours/Component.hpp>
 	<glm.hpp>
 	"mge/util/Input.hpp"
+	"mge/collision/SphereCollider.hpp"
+	"mge/util/Timer.hpp"
 
-1455704424 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\firstpersonlook.cpp
+1455840060 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\firstpersonlook.cpp
 	<mge/behaviours/FirstPersonLook.hpp>
 	<mge/util/Input.hpp>
+	"SFML/Window.hpp"
 
-1455386196 c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\firstpersonlook.hpp
+1455840060 c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\firstpersonlook.hpp
 	<mge/behaviours/Component.hpp>
 
 1455131202 c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\lua.h
@@ -16182,19 +16185,20 @@
 1455131202 c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\wallcollider.hpp
 	"mge/collision/BoxCollider.hpp"
 
-1455707304 c:\github\projectthirdperson\mge_mainbuild\src\mge\particles\particlesystem.hpp
+1455840060 c:\github\projectthirdperson\mge_mainbuild\src\mge\particles\particlesystem.hpp
 	"mge/behaviours/Component.hpp"
 	"mge/core/Mesh.hpp"
 	"glm.hpp"
+	"mge/util/Timer.hpp"
 
-1455634407 c:\github\projectthirdperson\mge_mainbuild\src\mge\util\random.hpp
+1455840060 c:\github\projectthirdperson\mge_mainbuild\src\mge\util\random.hpp
 	<random>
 
 1455670403 c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\gui.hpp
 	<SFML/Graphics.hpp>
 	"mge/core/GameObject.hpp"
 
-1455710123 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\editor\levelimporter.cpp
+1455840060 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\editor\levelimporter.cpp
 	<mge/editor/LevelImporter.hpp>
 	<mge/config.hpp>
 	<glm.hpp>
@@ -16209,7 +16213,7 @@
 	<mge/behaviours/CharacterController.hpp>
 	<mge/lua/LuaScript.hpp>
 
-1455637893 c:\github\projectthirdperson\mge_mainbuild\src\mge\editor\levelimporter.hpp
+1455840060 c:\github\projectthirdperson\mge_mainbuild\src\mge\editor\levelimporter.hpp
 	<fstream>
 	<mge/core/World.hpp>
 
@@ -16246,12 +16250,13 @@
 1455386196 c:\github\projectthirdperson\mge_mainbuild\src\mge\util\resourcecacher.hpp
 	<SFML/Graphics.hpp>
 
-1455707304 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\particles\particlesystem.cpp
+1455840060 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\particles\particlesystem.cpp
 	"mge/particles/ParticleSystem.hpp"
 	"mge/config.hpp"
+	"mge/util/Random.hpp"
 	<iostream>
 
-1455634407 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\util\random.cpp
+1455840060 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\util\random.cpp
 	<mge/util/Random.hpp>
 	<cstdlib>
 	<ctime>
@@ -16262,5 +16267,11 @@
 	<map>
 	"mge/config.hpp"
 
-1455707304 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\util\timer.cpp
+1455840060 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\util\timer.cpp
+	"mge/util/Timer.hpp"
+	<iostream>
+	"mge/core/Time.hpp"
+
+1455840060 c:\github\projectthirdperson\mge_mainbuild\src\mge\util\timer.hpp
+	<SFML/System.hpp>
 

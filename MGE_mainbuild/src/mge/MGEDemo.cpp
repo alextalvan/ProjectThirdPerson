@@ -60,6 +60,7 @@ void MGEDemo::initialize() {
 //build the game _world
 void MGEDemo::_initializeScene()
 {
+    /*
     Camera* cam = new Camera("cam", glm::vec3(5,5,5));
     _world->setMainCamera(cam);
     _world->AddChild(cam);
@@ -92,6 +93,7 @@ void MGEDemo::_initializeScene()
     testCube2->setMaterial(litMat);
     testCube2->scale(glm::vec3(0.15,0.15,0.15));
     _world->AddChild(testCube2);
+    */
 }
 
 void MGEDemo::_render()
