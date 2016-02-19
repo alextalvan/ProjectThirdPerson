@@ -65,34 +65,35 @@ void MGEDemo::_initializeScene()
     _world->setMainCamera(cam);
     _world->AddChild(cam);
 
-    Mesh* cubeMesh = Mesh::load(config::MGE_MODEL_PATH + "cube_flat.obj");
-    Texture* brickTex = Texture::load(config::MGE_TEXTURE_PATH + "brickwall.jpg");
-    Texture* brickNorm = Texture::load(config::MGE_TEXTURE_PATH + "brickwall_normal.jpg");
-    TextureLitMaterial* litMat = new TextureLitMaterial(brickTex, 0.25f, 32.0f, 0.1f, brickTex, brickNorm);
+    Mesh* cubeMesh = Mesh::load(config::MGE_MODEL_PATH + "Rock_1.obj");
+    Texture* brickTex = Texture::load(config::MGE_TEXTURE_PATH + "Rock_1_defaultMat_AlbedoTransparency.jpg");
+    Texture* brickNorm = Texture::load(config::MGE_TEXTURE_PATH + "Rock_1_defaultMat_Normal.png");
+    Texture* brickMet = Texture::load(config::MGE_TEXTURE_PATH + "Rock_1_defaultMat_MetallicSmoothness.png");
+    TextureLitMaterial* litMat = new TextureLitMaterial(brickTex, 0.25f, 32.0f, 0.1f, brickMet, brickNorm);
 
-    GameObject* planeCube = new GameObject("cube1", glm::vec3(0,-6,0));
-    planeCube->setMesh(cubeMesh);
-    planeCube->setMaterial(litMat);
-    planeCube->scale(glm::vec3(5,5,5));
-    //planeCube->rotate(0.45f, glm::vec3(1,0,0));
-    _world->AddChild(planeCube);
+    //GameObject* planeCube = new GameObject("cube1", glm::vec3(0,-6,0));
+    //planeCube->setMesh(cubeMesh);
+    //planeCube->setMaterial(litMat);
+    //planeCube->scale(glm::vec3(5,5,5));
+    //_world->AddChild(planeCube);
 
     GameObject* testCube = new GameObject("cube2", glm::vec3(0,0,0));
     testCube->setMesh(cubeMesh);
     testCube->setMaterial(litMat);
+    testCube->scale(glm::vec3(0.5,0.5,0.5));
     _world->AddChild(testCube);
 
 
     Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(5,3,3), testCube->getWorldPosition() - glm::vec3(5,3,3), glm::vec3(1,1,1));
-    Light* light2 = new Light(MGE_LIGHT_POINT, glm::vec3(0,0,2), glm::vec3(1,1,1), glm::vec3(1,0,0), glm::vec3(0.1f,0.1f,0.1f));
+    Light* light2 = new Light(MGE_LIGHT_POINT, glm::vec3(3,0,3), glm::vec3(1,1,1), glm::vec3(0,1,0), glm::vec3(0.1f,0.1f,0.1f));
     //Light* light3 = new Light(MGE_LIGHT_SPOTLIGHT, glm::vec3(0,2,2), glm::vec3(0,-1,0), glm::vec3(0,0,1), glm::vec3(0.1f,0.1f,0.1f), 0.36f);
     cam->AttachComponent(new LookAt(testCube));
 
-    GameObject* testCube2 = new GameObject("cube3", glm::vec3(0,0,2));
-    testCube2->setMesh(cubeMesh);
-    testCube2->setMaterial(litMat);
-    testCube2->scale(glm::vec3(0.15,0.15,0.15));
-    _world->AddChild(testCube2);
+    //GameObject* testCube2 = new GameObject("cube3", glm::vec3(0,0,2));
+    //testCube2->setMesh(cubeMesh);
+    //testCube2->setMaterial(litMat);
+    //testCube2->scale(glm::vec3(0.15,0.15,0.15));
+    //_world->AddChild(testCube2);
     */
 }
 

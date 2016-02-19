@@ -4,7 +4,6 @@
 
 uniform int lightCount;
 uniform vec3 viewPos;
-//uniform mat4 modelMatrix;
 
 struct Material
 {
@@ -46,13 +45,9 @@ void main( void )
     vec3 normal = normalize(Normal);
 
     if (material.hasNormalMap) {
-        //normal = normalize(Normal); //enabled to prevent stupid error
         normal = texture(material.normalMap, TexCoord).rgb;
         normal = normalize(normal * 2.0 - 1.0);
         normal = normalize(TBN * normal);
-        //normal += texture(material.normalMap, TexCoord).rgb;
-        //normal = normalize(normal * 2.0 - 1.0);
-        //normal = normalize(modelMatrix * vec4(normal, 0.0f)).xyz;
     }
 
     vec3 viewDir = vec3(0,0,0);

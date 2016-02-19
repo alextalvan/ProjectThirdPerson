@@ -13574,7 +13574,7 @@
 	"mge/util/list/DualLinkList.hpp"
 	"mge/util/list/DualLinkNode.hpp"
 
-1455879863 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\mesh.cpp
+1455893493 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\mesh.cpp
 	"mge/core/Mesh.hpp"
 	<iostream>
 	<map>
@@ -13585,7 +13585,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1455875270 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.cpp
+1455880403 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -13814,7 +13814,7 @@
 
 1452188439 c:\github\projectthirdperson\mge_mainbuild\luabridge\detail\namespace.h
 
-1455879748 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
+1455895292 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
