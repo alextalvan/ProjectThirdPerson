@@ -42,12 +42,12 @@ class TextureLitMaterial : public AbstractMaterial
         static GLboolean _hasNormMapLoc;
 
         Texture* _diffuseTexture;
-        Texture* _normalMapTexture;
-        Texture* _specularMapTexture;
-
         float _smoothness;
         float _shininess;
         float _ambient;
+        Texture* _specularMapTexture;
+        Texture* _normalMapTexture;
+
 };
 
 #endif // TextureLitMaterial_H

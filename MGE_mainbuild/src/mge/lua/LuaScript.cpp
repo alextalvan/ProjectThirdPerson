@@ -78,24 +78,24 @@ LuaScript::LuaScript(const char * path, World * world, GUI * world2D)
 	lua_register(L, "WallCollider", wallCollider);//
 	lua_register(L, "LuaScript", luaScript);//
 	lua_register(L, "LoadLevel", loadLevel);//
-	lua_register(L, "Text", guiText);
-	lua_register(L, "SetTextFont", setTextFont);
-	lua_register(L, "SetTextPosition", setTextPosition);
-	lua_register(L, "SetTextRotation", setTextRotation);
-	lua_register(L, "SetTextString", setTextString);
-	lua_register(L, "SetTextSize", setTextSize);
-	lua_register(L, "SetTextColor", setTextColor);
-	lua_register(L, "Sprite", guiSprite);
-	lua_register(L, "SetSpriteTexture", setSpriteTexture);
-	lua_register(L, "SetSpritePosition", setSpritePosition);
-	lua_register(L, "SetSpriteRotation", setSpriteRotation);
-	lua_register(L, "SetSpriteScale", setSpriteScale);
-	lua_register(L, "GUIButton", guiButton);
-	lua_register(L, "SetButtonTexture", setButtonTexture);
-	lua_register(L, "OnClick", onClick);
-	lua_register(L, "Destroy", destroy);
-	lua_register(L, "GetOwner", getowner);
-	lua_register(L, "FindChild", findChild);
+	lua_register(L, "Text", guiText);//
+	lua_register(L, "SetTextFont", setTextFont);//
+	lua_register(L, "SetTextPosition", setTextPosition);//
+	lua_register(L, "SetTextRotation", setTextRotation);//
+	lua_register(L, "SetTextString", setTextString);//
+	lua_register(L, "SetTextSize", setTextSize);//
+	lua_register(L, "SetTextColor", setTextColor);//
+	lua_register(L, "Sprite", guiSprite);//
+	lua_register(L, "SetSpriteTexture", setSpriteTexture);//
+	lua_register(L, "SetSpritePosition", setSpritePosition);//
+	lua_register(L, "SetSpriteRotation", setSpriteRotation);//
+	lua_register(L, "SetSpriteScale", setSpriteScale);//
+	lua_register(L, "Button", guiButton);//
+	lua_register(L, "SetButtonTexture", setButtonTexture);//
+	lua_register(L, "OnClick", onClick);//
+	lua_register(L, "Destroy", destroy);//
+	lua_register(L, "GetOwner", getowner);//
+	lua_register(L, "FindChild", findChild);//
 
 	//Set world
 	lua_pushlightuserdata(L, world);
@@ -223,7 +223,6 @@ int LuaScript::gameObject(lua_State * lua)
 int LuaScript::guiSprite(lua_State * lua)
 {
     #ifdef MGE_LUA_SAFETY
-	if (!lua_islightuserdata(lua, -7)) throw "Expect: GUI";
 	if (!lua_isstring(lua, -6)) throw "Expect: string";
 	if (!lua_isnumber(lua, -5)) throw "Expect: number";
 	if (!lua_isnumber(lua, -4)) throw "Expect: number";
@@ -238,9 +237,9 @@ int LuaScript::guiSprite(lua_State * lua)
 	string textureName = lua_tostring(lua, -6);
 	position.x = lua_tonumber(lua, -5);
 	position.y = lua_tonumber(lua, -4);
-	scale.x = lua_tonumber(lua, -3);
-	scale.y = lua_tonumber(lua, -2);
-	float rotation = lua_tonumber(lua, -1);
+	float rotation = lua_tonumber(lua, -3);
+	scale.x = lua_tonumber(lua, -2);
+	scale.y = lua_tonumber(lua, -1);
 
 	lua_getglobal(lua,"GUI");
 	GUI * gui = (GUI*)lua_touserdata(lua,-1);
@@ -1005,7 +1004,7 @@ int LuaScript::luaScript(lua_State * lua)
     string fileName = lua_tostring(lua, -1);
     lua_getglobal(lua,"world");
     World* world = (World*)lua_touserdata(lua,-1);
-    lua_getglobal(lua,"window");
+    lua_getglobal(lua,"GUI");
     GUI * gui = (GUI*)lua_touserdata(lua,-1);
     LuaScript* script = new LuaScript((config::MGE_SCRIPT_PATH+fileName).c_str(),world, gui);
     lua_pushlightuserdata(lua,script);
@@ -1017,7 +1016,7 @@ int LuaScript::loadLevel(lua_State * lua)
     string fileName = lua_tostring(lua, -1);
     lua_getglobal(lua,"world");
     World* world = (World*)lua_touserdata(lua,-1);
-    lua_getglobal(lua,"window");
+    lua_getglobal(lua,"GUI");
     GUI * gui = (GUI*)lua_touserdata(lua,-1);
     LevelEditor::LoadLevel(config::MGE_LEVEL_PATH + fileName,world,gui);
     return 0;

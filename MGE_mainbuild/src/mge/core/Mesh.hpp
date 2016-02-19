@@ -29,22 +29,20 @@ class Mesh
         /**
          * Streams the mesh to opengl using the given indexes for the different attributes
          */
-        void streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUVsAttrib, GLint pTangentAttrib, GLint pBitangentAttrib);
+        void streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUVsAttrib, GLint pTangentAttrib);
         void streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUVsAttrib);
         void renderDebugInfo(glm::mat4& pModelMatrix, World* pWorld);
-        std::vector<glm::vec3> _tangents;
-        std::vector<glm::vec3> _bitangents;
+		std::vector<glm::vec3> _tangents;       //vec4 tangents
 	protected:
         Mesh(std::string pId);
 	    std::string _id;
 
         //OpenGL id's for the different buffers created for this mesh
-		GLuint _indexBufferId;
-		GLuint _vertexBufferId;
-		GLuint _normalBufferId;
-		GLuint _uvBufferId;
-		GLuint _tangBufferId;
-		GLuint _bitangBufferId;
+		GLuint _indexBufferId = 0;
+		GLuint _vertexBufferId = 0;
+		GLuint _normalBufferId = 0;
+		GLuint _uvBufferId = 0;
+		GLuint _tangentBufferId = 0;
 
 	    //the actual data
 		std::vector<glm::vec3> _vertices;       //vec3 with 3d coords for all vertices
@@ -83,9 +81,7 @@ class Mesh
 
     private:
          static std::map<std::string,Mesh*> _meshCache;
-         static void computeTangentBasis(Mesh* mesh);
-
-
+         static void _calculateTangents(Mesh*mesh);
 };
 
 #endif // MESH_H

@@ -1,7 +1,7 @@
 --Only called once, at instantiation. Do NOT reference myGameObject here
 function Start()
      LoadLevel("out.txt");
-     --a = Sprite("Osama.jpg",100,100,0.5,0.5,0);
+     --a = Sprite("bricks.jpg",100,100,0.5,0.5,0);
      --b = Sprite("Osama.jpg",500,500,1,1,45);
      --SetParent(a,b);
      --SetSpritePosition(b,100,100);
@@ -21,6 +21,7 @@ end
 
 --Called every game logic step
 function Update()
+    --SetSpriteScale(a, 2, 2);
     --Rotate(a,0.15,0.5,0.5,0);
     --if(GetKeyDown(0)) then
     --print(RandomInRange(0,9)) end

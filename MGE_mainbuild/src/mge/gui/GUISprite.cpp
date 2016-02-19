@@ -43,19 +43,16 @@ void GUISprite::setSpriteRotation(float pAngle)
 void GUISprite::setSpriteScale(float pScaleX, float pScaleY) {
     scale(glm::vec3(pScaleX, pScaleY, 0.0f));
 
-    glm::vec4 xVector = getWorldTransform()[0];
-    glm::vec4 yVector = getWorldTransform()[1];
+    //glm::vec4 xVector = getWorldTransform()[0];
+    //glm::vec4 yVector = getWorldTransform()[1];
 
-    _sprite.setScale(glm::length(xVector),glm::length(yVector));
+    _sprite.setScale(pScaleX, pScaleY);//glm::length(xVector),glm::length(yVector));
 }
 
 void GUISprite::InnerDraw(sf::RenderTarget& target)
 {
 	//glDisable( GL_CULL_FACE );
-	glActiveTexture(GL_TEXTURE0);
-    target.pushGLStates();
     target.draw(_sprite);
-	target.popGLStates();
 }
 
 void GUISprite::Refresh2DTransform()
