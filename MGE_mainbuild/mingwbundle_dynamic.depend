@@ -13485,7 +13485,7 @@
 	<glm.hpp>
 	<iostream>
 
-1455670403 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\abstractgame.cpp
+1455792528 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\abstractgame.cpp
 	"AbstractGame.hpp"
 	<iostream>
 	"mge/core/Time.hpp"
@@ -13557,7 +13557,7 @@
 	"mge/core/World.hpp"
 	"mge/behaviours/Component.hpp"
 
-1455745216 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\mesh.hpp
+1455838080 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\mesh.hpp
 	<vector>
 	<cstring>
 	<string>
@@ -13574,7 +13574,7 @@
 	"mge/util/list/DualLinkList.hpp"
 	"mge/util/list/DualLinkNode.hpp"
 
-1455750676 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\mesh.cpp
+1455839646 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\mesh.cpp
 	"mge/core/Mesh.hpp"
 	<iostream>
 	<map>
@@ -13603,7 +13603,7 @@
 	<iostream>
 	<fstream>
 
-1455037758 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\texture.cpp
+1455789363 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\texture.cpp
 	<iostream>
 	<string>
 	<SFML/Graphics.hpp>
@@ -13666,7 +13666,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1455754265 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
+1455839194 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
 	<glm.hpp>
 	"mge/materials/TextureLitMaterial.hpp"
 	"mge/core/Texture.hpp"
@@ -13676,7 +13676,7 @@
 	"mge/core/Light.hpp"
 	<string>
 
-1455754364 c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.hpp
+1455803677 c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.hpp
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
@@ -13705,7 +13705,7 @@
 	<mge/collision/BoxCollider.hpp>
 	<mge/collision/Collider.hpp>
 
-1455386196 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\util\debughud.cpp
+1455792585 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\util\debughud.cpp
 	<cassert>
 	<iostream>
 	<cstdio>
@@ -13814,7 +13814,7 @@
 
 1452188439 c:\github\projectthirdperson\mge_mainbuild\luabridge\detail\namespace.h
 
-1455754041 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
+1455839941 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -15919,7 +15919,7 @@
 	<mge/behaviours/Component.hpp>
 	<SFML/Graphics.hpp>
 
-1455670403 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luascript.cpp
+1455802789 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luascript.cpp
 	"mge/lua/LuaScript.hpp"
 	"mge/core/World.hpp"
 	"mge/core/GameObject.hpp"
@@ -16218,13 +16218,13 @@
 1455670403 c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guisprite.hpp
 	"mge/gui/GUI.hpp"
 
-1455707304 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guisprite.cpp
+1455792406 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guisprite.cpp
 	<GL/glew.h>
 	<SFML/Graphics.hpp>
 	"mge/gui/GUISprite.hpp"
 	"SFML/Graphics/Transform.hpp"
 
-1455707304 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guitext.cpp
+1455792432 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guitext.cpp
 	<GL/glew.h>
 	<SFML/Graphics/Text.hpp>
 	"mge/gui/GUIText.hpp"

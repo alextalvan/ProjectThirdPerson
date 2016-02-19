@@ -54,7 +54,6 @@ void TextureLitMaterial::_lazyInitializeShader() {
         glBindAttribLocation(GL_VERTEX_SHADER, 1, "normal");
         glBindAttribLocation(GL_VERTEX_SHADER, 2, "uv");
         glBindAttribLocation(GL_VERTEX_SHADER, 3, "tangent");
-        glBindAttribLocation(GL_VERTEX_SHADER, 4, "bitangent");
 
         glGetError();
 
@@ -64,9 +63,9 @@ void TextureLitMaterial::_lazyInitializeShader() {
         _viewMatLoc = _shader->getUniformLocation("viewMatrix");
         _modelMatLoc = _shader->getUniformLocation("modelMatrix");
 
-        _diffMapLoc = _shader->getUniformLocation("difuseMap");
-        _normalMapLoc = _shader->getUniformLocation("normalMap");
-        _specMapLoc = _shader->getUniformLocation("specularMap");
+        _diffMapLoc = _shader->getUniformLocation("material.diffuseMap");
+        _normalMapLoc = _shader->getUniformLocation("material.normalMap");
+        _specMapLoc = _shader->getUniformLocation("material.specularMap");
 
         _viewPosLoc = _shader->getUniformLocation("viewPos");
 
@@ -74,8 +73,8 @@ void TextureLitMaterial::_lazyInitializeShader() {
         _matShineLoc = _shader->getUniformLocation("material.shininess");
         _matAmbLoc = _shader->getUniformLocation("material.ambient");
 
-        _hasNormMapLoc = _shader->getUniformLocation("hasNormalMap");
-        _hasSpecMapLoc = _shader->getUniformLocation("hasSpecMap");
+        _hasNormMapLoc = _shader->getUniformLocation("material.hasNormalMap");
+        _hasSpecMapLoc = _shader->getUniformLocation("material.hasSpecMap");
     }
 }
 
@@ -94,20 +93,25 @@ void TextureLitMaterial::setNormalMapTexture (Texture* pNormalMapTexture) {
 }
 
 void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pCamera) {
-    if (!_diffuseTexture) return;
+    if (!_diffuseTexture)
+        return;
 
     _shader->use();
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _diffuseTexture->getId());
-    glUniform1i (_diffMapLoc, _diffuseTexture->getId());
+    glUniform1i (_diffMapLoc, 0);
 
     if (specularMap) {
-        glUniform1i (_specMapLoc, _specularMapTexture->getId());
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, _specularMapTexture->getId());
+        glUniform1i (_specMapLoc, 1);
     }
 
     if (normalMap) {
-        glUniform1i (_normalMapLoc, _normalMapTexture->getId());
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, _normalMapTexture->getId());
+        glUniform1i (_normalMapLoc, 2);
     }
 
 	glUniform1f(_matSmoothLoc, _smoothness);
@@ -163,5 +167,8 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
     glUniformMatrix4fv ( _modelMatLoc, 1, GL_FALSE, glm::value_ptr(pGameObject->getWorldTransform()));
 
     //now inform mesh of where to stream its data
-    pGameObject->getMesh()->streamToOpenGL(0, 1, 2, 3, 4);
+    pGameObject->getMesh()->streamToOpenGL(0, 1, 2, 3);
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }

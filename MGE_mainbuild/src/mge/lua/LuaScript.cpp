@@ -78,21 +78,21 @@ LuaScript::LuaScript(const char * path, World * world, GUI * world2D)
 	lua_register(L, "WallCollider", wallCollider);//
 	lua_register(L, "LuaScript", luaScript);//
 	lua_register(L, "LoadLevel", loadLevel);//
-	lua_register(L, "Text", guiText);
-	lua_register(L, "SetTextFont", setTextFont);
-	lua_register(L, "SetTextPosition", setTextPosition);
-	lua_register(L, "SetTextRotation", setTextRotation);
-	lua_register(L, "SetTextString", setTextString);
-	lua_register(L, "SetTextSize", setTextSize);
-	lua_register(L, "SetTextColor", setTextColor);
-	lua_register(L, "Sprite", guiSprite);
-	lua_register(L, "SetSpriteTexture", setSpriteTexture);
-	lua_register(L, "SetSpritePosition", setSpritePosition);
-	lua_register(L, "SetSpriteRotation", setSpriteRotation);
-	lua_register(L, "SetSpriteScale", setSpriteScale);
-	lua_register(L, "GUIButton", guiButton);
-	lua_register(L, "SetButtonTexture", setButtonTexture);
-	lua_register(L, "OnClick", onClick);
+	lua_register(L, "Text", guiText);//
+	lua_register(L, "SetTextFont", setTextFont);//
+	lua_register(L, "SetTextPosition", setTextPosition);//
+	lua_register(L, "SetTextRotation", setTextRotation);//
+	lua_register(L, "SetTextString", setTextString);//
+	lua_register(L, "SetTextSize", setTextSize);//
+	lua_register(L, "SetTextColor", setTextColor);//
+	lua_register(L, "Sprite", guiSprite);//
+	lua_register(L, "SetSpriteTexture", setSpriteTexture);//
+	lua_register(L, "SetSpritePosition", setSpritePosition);//
+	lua_register(L, "SetSpriteRotation", setSpriteRotation);//
+	lua_register(L, "SetSpriteScale", setSpriteScale);//
+	lua_register(L, "Button", guiButton);//
+	lua_register(L, "SetButtonTexture", setButtonTexture);//
+	lua_register(L, "OnClick", onClick);//
 
 	//Set world
 	lua_pushlightuserdata(L, world);
@@ -220,7 +220,6 @@ int LuaScript::gameObject(lua_State * lua)
 int LuaScript::guiSprite(lua_State * lua)
 {
     #ifdef MGE_LUA_SAFETY
-	if (!lua_islightuserdata(lua, -7)) throw "Expect: GUI";
 	if (!lua_isstring(lua, -6)) throw "Expect: string";
 	if (!lua_isnumber(lua, -5)) throw "Expect: number";
 	if (!lua_isnumber(lua, -4)) throw "Expect: number";
@@ -323,7 +322,7 @@ int LuaScript::setButtonTexture(lua_State * lua)
 {
     #ifdef MGE_LUA_SAFETY
 	if (!lua_islightuserdata(lua, -3)) throw "Expect: game object";
-	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isstring(lua, -2)) throw "Expect: string";
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 

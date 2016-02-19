@@ -5,7 +5,6 @@
 #include <fstream>
 
 using namespace std;
-
 #include "mge/core/Renderer.hpp"
 #include "mge/core/World.hpp"
 #include "mge/core/Camera.hpp"
@@ -14,7 +13,7 @@ using namespace std;
 std::map<std::string,Mesh*> Mesh::_meshCache;
 
 Mesh::Mesh(string pId)
-:	_id(pId), _indexBufferId(0), _vertexBufferId(0), _normalBufferId(0), _uvBufferId(0)
+:	_id(pId), _indexBufferId(0), _vertexBufferId(0), _normalBufferId(0), _uvBufferId(0), _tangentBufferId(0)
 {
 	//ctor
 }
@@ -209,7 +208,7 @@ Mesh* Mesh::cache(string pFileName)
 		}
 
 		file.close();
-        computeTangentBasis(mesh);
+		//_calculateTangents(mesh);
 		mesh->_buffer();
 
 		cout << "Mesh loaded and buffered:" << (mesh->_indices.size()/3.0f) << " triangles." << endl;
@@ -221,88 +220,66 @@ Mesh* Mesh::cache(string pFileName)
 	}
 }
 
-void Mesh::computeTangentBasis(Mesh* mesh)
+void Mesh::_calculateTangents(Mesh*mesh)
 {
-    for ( int i = 0; i < mesh->_vertices.size(); i+=3)
+    long triangleCount = mesh->_indices.size();
+    long vertexCount = mesh->_vertices.size();
+    glm::vec3 tan1[vertexCount * 2];
+    glm::vec3 tan2[vertexCount * 3];
+
+    for (long a = 0; a < triangleCount; a+=3)
     {
-        // Shortcuts for vertices
-        glm::vec3 & v0 = mesh->_vertices[i];
-        glm::vec3 & v1 = mesh->_vertices[i+1];
-        glm::vec3 & v2 = mesh->_vertices[i+2];
+        long i1 = mesh->_indices[a];
+        long i2 = mesh->_indices[a+1];
+        long i3 = mesh->_indices[a+2];
 
-        // Shortcuts for UVs
-        glm::vec2 & uv0 = mesh->_uvs[i];
-        glm::vec2 & uv1 = mesh->_uvs[i+1];
-        glm::vec2 & uv2 = mesh->_uvs[i+2];
+        glm::vec3& v1 = mesh->_vertices[i1];
+        glm::vec3& v2 = mesh->_vertices[i2];
+        glm::vec3& v3 = mesh->_vertices[i3];
 
-        // Edges of the triangle : postion delta
-        glm::vec3 deltaPos1 = v1-v0;
-        glm::vec3 deltaPos2 = v2-v0;
+        glm::vec2& w1 = mesh->_uvs[i1];
+        glm::vec2& w2 = mesh->_uvs[i2];
+        glm::vec2& w3 = mesh->_uvs[i3];
 
-        // UV delta
-        glm::vec2 deltaUV1 = uv1-uv0;
-        glm::vec2 deltaUV2 = uv2-uv0;
+        float x1 = v2.x - v1.x;
+        float x2 = v3.x - v1.x;
+        float y1 = v2.y - v1.y;
+        float y2 = v3.y - v1.y;
+        float z1 = v2.z - v1.z;
+        float z2 = v3.z - v1.z;
 
-        float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
-        glm::vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y)*r;
-        glm::vec3 bitangent = (deltaPos2 * deltaUV1.x - deltaPos1 * deltaUV2.x)*r;
+        float s1 = w2.x - w1.x;
+        float s2 = w3.x - w1.x;
+        float t1 = w2.y - w1.y;
+        float t2 = w3.y - w1.y;
 
-        // Set the same tangent for all three vertices of the triangle.
-        // They will be merged later, in vboindexer.cpp
+        float r = 1.0F / (s1 * t2 - s2 * t1);
+        glm::vec3 sdir((t2 * x1 - t1 * x2) * r, (t2 * y1 - t1 * y2) * r, (t2 * z1 - t1 * z2) * r);
+        glm::vec3 tdir((s1 * x2 - s2 * x1) * r, (s1 * y2 - s2 * y1) * r, (s1 * z2 - s2 * z1) * r);
+
+        tan1[i1] += sdir;
+        tan1[i2] += sdir;
+        tan1[i3] += sdir;
+
+        tan2[i1] += tdir;
+        tan2[i2] += tdir;
+        tan2[i3] += tdir;
+    }
+
+    for (long a = 0; a < vertexCount; a++)
+    {
+        glm::vec3& n = mesh->_normals[a];
+        glm::vec3& t = tan1[a];
+
+        // Gram-Schmidt orthogonalize
+        glm::vec4 tangent = glm::vec4(glm::normalize(t - n * glm::dot(n, t)), 0.0f);
+
+        // Calculate handedness
+        tangent.w = (glm::dot(glm::cross(n, t), tan2[a]) < 0.0f) ? -1.0f : 1.0f;
         mesh->_tangents.push_back(tangent);
-        //mesh->_tangents.push_back(tangent);
-        //mesh->_tangents.push_back(tangent);
-
-        // Same thing for binormals
-        mesh->_bitangents.push_back(bitangent);
-        //mesh->_bitangents.push_back(bitangent);
-        //mesh->_bitangents.push_back(bitangent);
+        std::cout << tangent << std::endl;
     }
 }
-
-/*
-void Mesh::calcTangentSpace(Mesh* mesh)
-{
-    for (int i = 0; i < mesh->_vertices.size(); i+=3) {
-        // positions
-        glm::vec3 pos1(mesh->_vertices[i]);
-        glm::vec3 pos2(mesh->_vertices[i+1]);
-        glm::vec3 pos3(mesh->_vertices[i+2]);
-        //glm::vec3 pos4(mesh->_vertices[i+3]);
-
-        // texture coordinates
-        glm::vec2 uv1(mesh->_uvs[i]);
-        glm::vec2 uv2(mesh->_uvs[i+1]);
-        glm::vec2 uv3(mesh->_uvs[i+2]);
-        //glm::vec2 uv4(mesh->_uvs[i+3]);
-
-        // normal vector
-        glm::vec3 nm(mesh->_normals[i]);
-
-        glm::vec3 edge1 = pos2 - pos1;
-        glm::vec3 edge2 = pos3 - pos1;
-        glm::vec2 deltaUV1 = uv2 - uv1;
-        glm::vec2 deltaUV2 = uv3 - uv1;
-
-        GLfloat f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
-
-        glm::vec3 tangent = glm::vec3(0);
-        tangent.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
-        tangent.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
-        tangent.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
-        tangent = glm::normalize(tangent);
-
-        glm::vec3 bitangent = glm::vec3(0);
-        bitangent.x = f * (-deltaUV2.x * edge1.x + deltaUV1.x * edge2.x);
-        bitangent.y = f * (-deltaUV2.x * edge1.y + deltaUV1.x * edge2.y);
-        bitangent.z = f * (-deltaUV2.x * edge1.z + deltaUV1.x * edge2.z);
-        bitangent = glm::normalize(bitangent);
-
-        mesh->_tangents.push_back(tangent);
-        mesh->_bitangents.push_back(bitangent);
-    }
-}
-*/
 
 void Mesh::_buffer()
 {
@@ -322,18 +299,14 @@ void Mesh::_buffer()
     glBindBuffer( GL_ARRAY_BUFFER, _uvBufferId );
     glBufferData( GL_ARRAY_BUFFER, _uvs.size()*sizeof(glm::vec2), &_uvs[0], GL_STATIC_DRAW );
 
-    glGenBuffers(1, &_tangBufferId);
-    glBindBuffer( GL_ARRAY_BUFFER, _tangBufferId );
-    glBufferData( GL_ARRAY_BUFFER, _tangents.size()*sizeof(glm::vec3), &_tangents[0], GL_STATIC_DRAW );
-
-    glGenBuffers(1, &_bitangBufferId);
-    glBindBuffer( GL_ARRAY_BUFFER, _bitangBufferId );
-    glBufferData( GL_ARRAY_BUFFER, _bitangents.size()*sizeof(glm::vec3), &_bitangents[0], GL_STATIC_DRAW );
+    glGenBuffers(1, &_tangentBufferId);
+    glBindBuffer( GL_ARRAY_BUFFER, _tangentBufferId );
+    glBufferData( GL_ARRAY_BUFFER, _tangents.size()*sizeof(glm::vec4), &_tangents[0], GL_STATIC_DRAW );
 
     glBindBuffer( GL_ARRAY_BUFFER, 0 );
 }
 
-void Mesh::streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUVsAttrib, GLint pTangentAttrib, GLint pBitangentAttrib) {
+void Mesh::streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUVsAttrib, GLint pTangentAttrib) {
     if (pVerticesAttrib != -1) {
         glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferId);
         glEnableVertexAttribArray(pVerticesAttrib);
@@ -353,15 +326,9 @@ void Mesh::streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUV
     }
 
     if (pTangentAttrib != -1) {
-        glBindBuffer( GL_ARRAY_BUFFER, _tangBufferId);
+        glBindBuffer( GL_ARRAY_BUFFER, _tangentBufferId);
         glEnableVertexAttribArray(pTangentAttrib);
-        glVertexAttribPointer(pTangentAttrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-    }
-
-    if (pBitangentAttrib != -1) {
-        glBindBuffer( GL_ARRAY_BUFFER, _bitangBufferId);
-        glEnableVertexAttribArray(pBitangentAttrib);
-        glVertexAttribPointer(pBitangentAttrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        glVertexAttribPointer(pTangentAttrib, 4, GL_FLOAT, GL_FALSE, 0, (void*)0);
     }
 
 	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _indexBufferId );
@@ -377,7 +344,6 @@ void Mesh::streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUV
 	if (pNormalsAttrib != -1) glDisableVertexAttribArray(pNormalsAttrib);
 	if (pVerticesAttrib != -1) glDisableVertexAttribArray(pVerticesAttrib);
 	if (pTangentAttrib != -1) glDisableVertexAttribArray(pTangentAttrib);
-	if (pBitangentAttrib != -1) glDisableVertexAttribArray(pBitangentAttrib);
 }
 
 void Mesh::streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUVsAttrib) {

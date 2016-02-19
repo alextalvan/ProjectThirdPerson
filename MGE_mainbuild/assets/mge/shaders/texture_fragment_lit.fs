@@ -4,23 +4,24 @@
 
 uniform int lightCount;
 uniform vec3 viewPos;
-uniform bool hasNormalMap;
-uniform bool hasSpecMap;
+//uniform mat4 modelMatrix;
 
 struct Material
 {
     sampler2D diffuseMap;
     sampler2D normalMap;
     sampler2D specularMap;
-	float smoothness;
+    float smoothness;
     float shininess;
-	float ambient;
+    float ambient;
+    bool hasNormalMap;
+    bool hasSpecMap;
 };
 uniform Material material;
 
 struct Light
 {
-    int type;//0 = directional, 1= point
+    int type;
     vec3 position;
     vec3 direction;
     vec3 color;
@@ -29,28 +30,34 @@ struct Light
 };
 uniform Light LightArray[MGE_MAX_LIGHTS];
 
-in vec2 texCoord;
-in vec3 worldNormal;
-in vec3 position;
-in mat3 TBN;
+in vec3 FragPos;
+in vec2 TexCoord;
+in vec3 Normal;
+//in mat3 TBN;
 
 out vec4 fragment_color;
 
 vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir);
-vec3 DoPointLight(int lightIndex, vec3 norm, vec3 worldVertex, vec3 viewDir);
-vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 worldVertex, vec3 viewDir);
+vec3 DoPointLight(int lightIndex, vec3 norm, vec3 fragPos, vec3 viewDir);
+vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 fragPos, vec3 viewDir);
 
 void main( void )
 {
-    vec3 normal = normalize(worldNormal);
+    vec3 normal = normalize(Normal);
 
-    if (hasNormalMap) {
-        normal = texture(material.normalMap, texCoord).rgb;
-        normal = normalize(normal * 2.0 - 1.0);
-        normal = normalize(TBN * normal);
+    if (material.hasNormalMap) {
+        normal = normalize(Normal); //enabled to prevent stupid error
+        //normal = texture(material.normalMap, TexCoord).rgb;
+        //normal = normalize(normal * 2.0 - 1.0);
+        //normal = normalize(TBN * normal);
+        //normal += texture(material.normalMap, TexCoord).rgb;
+        //normal = normalize(normal * 2.0 - 1.0);
+        //normal = normalize(modelMatrix * vec4(normal, 0.0f)).xyz;
     }
 
-    vec3 viewDir = normalize(viewPos - position);
+    vec3 viewDir = vec3(0,0,0);
+    if (material.hasSpecMap)
+        viewDir = normalize(viewPos - FragPos);
 
 	vec3 outColor = vec3(0,0,0);
 
@@ -61,13 +68,13 @@ void main( void )
             outColor += DoDirectionalLight(i, normal, viewDir);
 
         if(LightArray[i].type==1)
-            outColor += DoPointLight(i, normal, position, viewDir);
+            outColor += DoPointLight(i, normal, FragPos, viewDir);
 
         //if(LightArray[i].type==2)
-        //    outColor += DoSpotlight(i, normal, position, viewDir);
+        //    outColor += DoSpotlight(i, normal, FragPos, viewDir);
     }
 
-    vec3 ambient = vec3(texture(material.diffuseMap, texCoord)) * material.ambient;
+    vec3 ambient = vec3(texture(material.diffuseMap, TexCoord)) * material.ambient;
     fragment_color = vec4(ambient + outColor,1.0f);
 }
 
@@ -77,68 +84,64 @@ vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir)
 
     // Diffuse shading
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, texCoord)) * diff;
+    vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, TexCoord)) * diff;
 
     // Specular shading
     float spec = 0.0f;
     vec3 specular = vec3(0,0,0);
-    if (hasSpecMap) {
+    if (material.hasSpecMap) {
         vec3 halfwayDir = normalize(lightDir + viewDir);
         spec = pow(max(dot(norm, halfwayDir), 0.0), material.shininess);
-        specular = (LightArray[lightIndex].color + vec3(texture(material.specularMap, texCoord))) * spec * material.smoothness;
+        specular = (LightArray[lightIndex].color + vec3(texture(material.specularMap, TexCoord))) * spec * material.smoothness;
     }
 
     // Combine results
     return (diffuse + specular);
 }
 
-vec3 DoPointLight(int lightIndex, vec3 norm, vec3 worldVertex, vec3 viewDir)
+vec3 DoPointLight(int lightIndex, vec3 norm, vec3 fragPos, vec3 viewDir)
 {
-    vec3 lightDir = normalize(LightArray[lightIndex].position - worldVertex);
+    vec3 lightDir = normalize(LightArray[lightIndex].position - fragPos);
     // Diffuse shading
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, texCoord)) * diff;
+    vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, TexCoord)) * diff;
 
     // Specular shading
     float spec = 0.0f;
     vec3 specular = vec3(0,0,0);
-    if (hasSpecMap) {
+    if (material.hasSpecMap) {
         vec3 halfwayDir = normalize(lightDir + viewDir);
         spec = pow(max(dot(norm, halfwayDir), 0.0), material.shininess);
-        specular = (LightArray[lightIndex].color + vec3(texture(material.specularMap, texCoord))) * spec * material.smoothness;
+        specular = (LightArray[lightIndex].color + vec3(texture(material.specularMap, TexCoord))) * spec * material.smoothness;
     }
 
     // Attenuation
-    float distance = length(LightArray[lightIndex].position - worldVertex);
+    float distance = length(LightArray[lightIndex].position - fragPos);
     vec3 att = LightArray[lightIndex].attenuation;
     float attenuation = 1.0f / (att.x + att.y * distance + att.z * distance * distance);
 
-	// Add attenuation
-    diffuse *= attenuation;
-    specular *= attenuation;
-
-    // Combine results
-    return (diffuse + specular);
+    // Combine results and add attenuation
+    return (diffuse + specular) * attenuation;
 }
 
-vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 worldVertex, vec3 viewDir)
+vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 fragPos, vec3 viewDir)
 {
-    vec3 lightDir = normalize(LightArray[lightIndex].position - worldVertex);
+    vec3 lightDir = normalize(LightArray[lightIndex].position - fragPos);
     // Diffuse shading
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, texCoord)) * diff;
+    vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, TexCoord)) * diff;
 
     // Specular shading
     float spec = 0.0f;
     vec3 specular = vec3(0,0,0);
-    if (hasSpecMap) {
+    if (material.hasSpecMap) {
         vec3 halfwayDir = normalize(lightDir + viewDir);
         float spec = pow(max(dot(norm, halfwayDir), 0.0), material.shininess);
-        vec3 specular = (LightArray[lightIndex].color + vec3(texture(material.specularMap, texCoord))) * spec * material.smoothness;
+        vec3 specular = (LightArray[lightIndex].color + vec3(texture(material.specularMap, TexCoord))) * spec * material.smoothness;
     }
 
     // Attenuation
-    float distance = length(LightArray[lightIndex].position - worldVertex);
+    float distance = length(LightArray[lightIndex].position - fragPos);
     vec3 att = LightArray[lightIndex].attenuation;
     float attenuation = 1.0f / (att.x + att.y * distance + att.z * distance * distance);
 
@@ -149,8 +152,6 @@ vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 worldVertex, vec3 viewDir)
     float epsilon = cutOff - outerCutOff;
     float intensity = clamp((theta - outerCutOff) / epsilon, 0.0, 1.0);
 
-    // Combine results
-    diffuse *= attenuation * intensity;
-    specular *= attenuation * intensity;
-    return (diffuse + specular);
+    // Combine results and add attenuation
+    return (diffuse + specular) * attenuation;
 }
