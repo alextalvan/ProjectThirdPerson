@@ -15,7 +15,7 @@ private:
         void Rotation();
         glm::vec2 GetMouseOffset();
         glm::vec2 prevMousePos;
-        float rotationX = 0.0f;
+        float rotationX = 180.0f;
         float rotationY = 0.0f;
         float _turnSpeed;
 };

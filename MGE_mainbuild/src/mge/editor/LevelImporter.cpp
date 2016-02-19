@@ -82,21 +82,9 @@ namespace LevelEditor
         f>>s;//and the actual name
 
         GameObject* obj = new GameObject(s,glm::vec3(0));
-        parent->AddChild(obj);
 
-        f>>s;//"transform:"
 
-        float val;
-        glm::mat4 mat;
-        for(int i=0;i<4;++i)
-            for(int j=0;j<4;++j)
-            {
-                f>>s;
-                val = std::strtof(s.c_str(),nullptr);
-                mat[j][i] = val;
-            }
-
-        obj->setWorldTransform(mat);
+        ProcessModelMatrix(f,parent,obj);
 
         //mesh
         f>>s;
@@ -107,8 +95,21 @@ namespace LevelEditor
             obj->setMesh(mesh);
         }
 
-        ParseComponents(f,obj);
-        ParseChildren(f,obj);
+
+        //the exporter root is ignored
+        if(obj->getName() == "MGE_exporter_root")
+        {
+            ParseComponents(f,parent);//passing the world
+            ParseChildren(f,parent);
+            obj->Destroy();
+        }
+        else
+        {
+            ParseComponents(f,obj);
+            ParseChildren(f,obj);
+        }
+
+
         f>>s;//END_GAMEOBJECT
 
 
@@ -186,14 +187,18 @@ namespace LevelEditor
                 //f>>s;//"name"
                 //f>>s;//the name
                 f>>s;//"move_speed"
-                float m,j,g;
+                float m,j,g,r,d;
                 f>>s; m = std::strtof(s.c_str(),nullptr);
                 f>>s;//"jump_force"
                 f>>s; j = std::strtof(s.c_str(),nullptr);
+                f>>s;//"jump_duration"
+                f>>s; d = std::strtof(s.c_str(),nullptr);
                 f>>s;//"gravity"
                 f>>s; g = std::strtof(s.c_str(),nullptr);
+                f>>s;//"sphere radius"
+                f>>s; r = std::strtof(s.c_str(),nullptr);
 
-                CharacterController* c = new CharacterController(m,j,g);
+                CharacterController* c = new CharacterController(m,j,g,r,d);
                 owner->AttachComponent(c);
                 f>>s;//end_character
             }
@@ -253,21 +258,9 @@ namespace LevelEditor
         f>>s;//and the actual name
 
         Camera* obj = new Camera(s,glm::vec3(0));
-        parent->AddChild(obj);
 
-        f>>s;//"transform:"
+        ProcessModelMatrix(f,parent,obj);
 
-        float val;
-        glm::mat4 mat;
-        for(int i=0;i<4;++i)
-            for(int j=0;j<4;++j)
-            {
-                f>>s;
-                val = std::strtof(s.c_str(),nullptr);
-                mat[j][i] = val;
-            }
-
-        obj->setWorldTransform(mat);
 
         //mesh
         f>>s;//isMainCamera
@@ -290,21 +283,11 @@ namespace LevelEditor
         f>>s;//and the actual name
 
         Light* obj = new Light(MGE_LIGHT_DIRECTIONAL);
-        parent->AddChild(obj);
+        //obj->type = MGE_LIGHT_DIRECTIONAL;
+        //parent->AddChild(obj);
 
-        f>>s;//"transform:"
 
-        float val;
-        glm::mat4 mat;
-        for(int i=0;i<4;++i)
-            for(int j=0;j<4;++j)
-            {
-                f>>s;
-                val = std::strtof(s.c_str(),nullptr);
-                mat[j][i] = val;
-            }
-
-        obj->setWorldTransform(mat);
+        ProcessModelMatrix(f,parent,obj);
 
         //color
         f>>s;//"color"
@@ -321,12 +304,82 @@ namespace LevelEditor
         f>>s; b = std::strtof(s.c_str(),nullptr);
         obj->setDirection(glm::vec3(r,g,b));
 
+
         ParseComponents(f,obj);
         ParseChildren(f,obj);
         f>>s;//END_LIGHT
     }
 
+    void ProcessModelMatrix(ifstream& f, GameObject* parent, GameObject* child)
+    {
+        string s;
 
+        f>>s;//"transform:"
+
+        float val;
+        glm::mat4 mat;
+        for(int i=0;i<4;++i)
+            for(int j=0;j<4;++j)
+            {
+                f>>s;
+                val = std::strtof(s.c_str(),nullptr);
+
+                mat[i][j] = val;
+            }
+
+            //mat[0] = mat[0] * -1.0f;
+            //mat[2] = mat[2] * -1.0f;
+            //mat[2] = mat[2] * -1.0f;
+
+            mat[0][0] *= -1.0f;
+            mat[1][0] *= -1.0f;
+            mat[2][0] *= -1.0f;
+            mat[3][2] *= -1.0f;
+
+            mat = glm::transpose(mat);
+
+
+            //mat[1] = mat[1] * -1.0f;
+            //mat[2][2] = mat[2][2] * -1.0f;
+        /*
+        f>>s;//"transform:"
+        f>>s;//"position"
+
+        glm::vec3 pos;
+        f>>s; pos.x = std::strtof(s.c_str(),nullptr);
+        f>>s; pos.y = std::strtof(s.c_str(),nullptr);
+        f>>s; pos.z = std::strtof(s.c_str(),nullptr);
+
+        f>>s;//"rotation"
+
+        glm::quat rot;
+        f>>s; rot.x = std::strtof(s.c_str(),nullptr);
+        f>>s; rot.y = std::strtof(s.c_str(),nullptr);
+        f>>s; rot.z = std::strtof(s.c_str(),nullptr);
+        f>>s; rot.w = std::strtof(s.c_str(),nullptr);
+
+        f>>s;//"scale"
+
+        glm::vec3 scale;
+        f>>s; scale.x = std::strtof(s.c_str(),nullptr);
+        f>>s; scale.y = std::strtof(s.c_str(),nullptr);
+        f>>s; scale.z = std::strtof(s.c_str(),nullptr);
+
+        glm::mat4 rotation = glm::mat4_cast(rot);
+
+
+        glm::mat4 model = glm::translate(pos) * rotation * glm::scale(scale);
+        //rotation[0] = rotation[0] * scale.x;
+        //rotation[1] = rotation[1] * scale.y;
+        //rotation[2] = rotation[2] * scale.z;
+
+        //rotation[3] = glm::vec4(pos,1);
+        */
+
+        parent->AddChild(child);
+        child->setWorldTransform(mat);
+
+    }
 
 
 

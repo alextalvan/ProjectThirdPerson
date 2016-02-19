@@ -9,7 +9,7 @@ namespace Utils
     {
     public:
         static int GetValue(int rangeStart, int rangeEnd);
-        static float GetValue(float rangeStart, float rangeEnd);
+        static float GetFloatValue(float rangeStart, float rangeEnd);
         static bool Roll(int sides);
     private:
         static std::mt19937 generator;

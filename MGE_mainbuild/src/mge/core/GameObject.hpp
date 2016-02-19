@@ -106,6 +106,8 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 
         DualLinkList2<ChildList>& GetChildren();
 
+        GameObject* FindChild(std::string name);
+
 	protected:
 	    virtual ~GameObject();
 		std::string _name;

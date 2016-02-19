@@ -2,6 +2,7 @@
 #include "mge/behaviours/Component.hpp"
 #include "mge/core/Mesh.hpp"
 #include "glm.hpp"
+#include "mge/util/Timer.hpp"
 //#include "mge/ut
 
 #define MGE_MAX_PARTICLES_PER_SYSTEM 1024
@@ -20,8 +21,6 @@ namespace particles
 using namespace particles;
 class ParticleSystem : public Component
 {
-
-
 public:
     ParticleSystem();
     static void Initialize();
@@ -35,7 +34,11 @@ public:
     //lifetime range
     float minLifetime = 5, maxLifetime = 5;
 
-    //float
+    //delay between releases
+    float minReleaseDelay = 1, maxReleaseDelay = 1;
+
+    //particles per "burst"
+    int minParticlesPerRelease = 1, maxParticlesPerRelease = 1;
 
 
 protected:
@@ -45,8 +48,13 @@ protected:
 
 private:
     Particle _particles[MGE_MAX_PARTICLES_PER_SYSTEM];
+
     Particle _buffer[MGE_NEW_PARTICLE_BUFFER_SIZE];
     int _bufferCount = 0;
+
+    Timer _releaseTimer;
+
+    glm::vec3 _cachedWorldPos;
 
     static Mesh* _particleQuad;
 };

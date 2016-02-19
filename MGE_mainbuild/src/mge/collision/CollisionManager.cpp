@@ -44,7 +44,7 @@ void CollisionManager::DoCollisions()
     {
         collideri = (Collider*) currentNodei;
 
-        if(!collideri->IsActive())
+        if(!(collideri->IsActive()))
         {
             currentNodei = currentNodei->nextNode;
             continue;
@@ -56,7 +56,7 @@ void CollisionManager::DoCollisions()
         {
             colliderj = (Collider*) currentNodej;
 
-            if(!colliderj->IsActive() || !CheckLayerInteraction(collideri->layer,colliderj->layer))
+            if(!(colliderj->IsActive()) || !CheckLayerInteraction(collideri->layer,colliderj->layer))
             {
                 currentNodej = currentNodej->nextNode;
                 continue;
@@ -83,13 +83,6 @@ void CollisionManager::DoCollisions()
                 }
 
                 //lua callbacks
-                //int compCount;
-
-                //GameObject* g1 = collideri->getOwner();
-                //GameObject* g2 = colliderj->getOwner();
-
-                //compCount = g1->GetComponentsCount();
-                //for()
 
                 LuaScript* l = collideri->getOwner()->GetComponent<LuaScript>();
                 if(l!=NULL)

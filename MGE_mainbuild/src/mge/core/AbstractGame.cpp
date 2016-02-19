@@ -19,7 +19,7 @@ using namespace std;
 //debugging by stepping into individual frames
 //bool testBool = false;
 
-AbstractGame::AbstractGame():_window(NULL),_renderer(NULL),_world(NULL),_running(false),_world2D(NULL)
+AbstractGame::AbstractGame():_window(NULL),_renderer(NULL),_world(NULL),_world2D(NULL),_running(false)
 {
     //initialize game systems
 
@@ -52,7 +52,7 @@ void AbstractGame::initialize() {
 void AbstractGame::_initializeWindow() {
 	cout << "Initializing window..." << endl;
 	_window = new sf::RenderWindow( sf::VideoMode(1366,768), "FairWind Game Engine", sf::Style::Titlebar, sf::ContextSettings(24,8,4,3,3));
-	_window->setVerticalSyncEnabled(true);
+	//_window->setVerticalSyncEnabled(true);
     cout << "Window initialized." << endl << endl;
 }
 

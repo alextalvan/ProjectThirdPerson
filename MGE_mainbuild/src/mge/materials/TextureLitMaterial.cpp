@@ -28,7 +28,14 @@ GLboolean TextureLitMaterial::_hasSpecMapLoc = 0;
 GLboolean TextureLitMaterial::_hasNormMapLoc = 0;
 
 TextureLitMaterial::TextureLitMaterial(Texture * pDiffuseTexture, float pSmoothness, float pShininess, float pAmbient, Texture * pSpecularMapTexture, Texture * pNormalMapTexture)
-:   _diffuseTexture(pDiffuseTexture), _smoothness(pSmoothness), _shininess(pShininess), _ambient(pAmbient), _specularMapTexture(pSpecularMapTexture), _normalMapTexture(pNormalMapTexture) {
+{
+    _diffuseTexture = pDiffuseTexture;
+    _smoothness=pSmoothness;
+    _ambient=pAmbient;
+    _normalMapTexture=pNormalMapTexture;
+    _shininess=pShininess;
+    _specularMapTexture=pSpecularMapTexture;
+
     _lazyInitializeShader();
 
     if (!_specularMapTexture)
