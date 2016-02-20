@@ -208,7 +208,7 @@ Mesh* Mesh::cache(string pFileName)
 		}
 
 		file.close();
-		//_calculateTangents(mesh);
+		_calculateTangents(mesh);
 		mesh->_buffer();
 
 		cout << "Mesh loaded and buffered:" << (mesh->_indices.size()/3.0f) << " triangles." << endl;
@@ -222,10 +222,71 @@ Mesh* Mesh::cache(string pFileName)
 
 void Mesh::_calculateTangents(Mesh*mesh)
 {
+    //mesh->_tangents = mesh->_vertices; // copy vertices to tangents as placeholders to copy results in
+
+    for ( unsigned int i = 0; i < mesh->_indices.size(); i+=3 )
+    {
+		// get the triangle
+		glm::vec3 v0 = mesh->_vertices[ mesh->_indices[ i+0 ] ]; // get triangle points in vertex space
+		glm::vec3 v1 = mesh->_vertices[ mesh->_indices[ i+1 ] ];
+		glm::vec3 v2 = mesh->_vertices[ mesh->_indices[ i+2 ] ];
+		glm::vec2 u0 = mesh->_uvs[ mesh->_indices[ i+0 ] ]; // get triangle points in uv space
+		glm::vec2 u1 = mesh->_uvs[ mesh->_indices[ i+1 ] ];
+		glm::vec2 u2 = mesh->_uvs[ mesh->_indices[ i+2 ] ];
+
+		glm::vec3 dVA = v1 - v0; // first edge of triangle in vertex space
+		glm::vec3 dVB = v2 - v0; // second edge of triangle
+
+		glm::vec2 dUA = u1 - u0; // first edge of triangle in uv space
+		glm::vec2 dUB = u2 - u0; // second edge of triangle
+
+		float fragment = 1.f / ( dUA.x* dUB.y - dUB.x * dUA.y ); // common fragment for invers UV
+
+		// calc tangent for triangle, states how the tex is oriented on triangle
+		glm::vec3 tangent   = glm::normalize( fragment * glm::vec3(  dUB.y * dVA.x - dUA.y * dVB.x,
+																	 dUB.y * dVA.y - dUA.y * dVB.y,
+																	 dUB.y * dVA.z - dUA.y * dVB.z ) );
+
+		mesh->_tangents.push_back(tangent); // every vertex needs its tangent
+		mesh->_tangents.push_back(tangent); // every vertex needs its tangent
+		mesh->_tangents.push_back(tangent); // every vertex needs its tangent
+		//cout << tangent << endl;
+	}
+
+/*
+    for (int i = 0; i < mesh->_vertices.size(); i++) {
+        glm::vec3 v0 = mesh->_vertices[i];
+        glm::vec3 v1 = mesh->_vertices[i+1];
+        glm::vec3 v2 = mesh->_vertices[i+2];
+
+        glm::vec3 edge1 = v1 - v0;
+        glm::vec3 edge2 = v2 - v0;
+
+        glm::vec2 deltaUV1 = mesh->_uvs[i+1] - mesh->_uvs[i];
+        glm::vec2 deltaUV2 = mesh->_uvs[i+2] - mesh->_uvs[i];
+
+        float f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+
+        glm::vec3 tangent;
+        tangent.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
+        tangent.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
+        tangent.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
+        tangent = glm::normalize(tangent);
+
+        mesh->_tangents.push_back(tangent);
+        std::cout << tangent << std::endl;
+
+        //mesh->_tangents[i] += tangent;
+        //mesh->_tangents[i+1] += tangent;
+        //mesh->_tangents[i+2] += tangent;
+
+    }
+*/
+/*
     long triangleCount = mesh->_indices.size();
     long vertexCount = mesh->_vertices.size();
-    glm::vec3 tan1[vertexCount * 2];
-    glm::vec3 tan2[vertexCount * 3];
+    vector<glm::vec3> tan1;
+    vector<glm::vec3> tan2;
 
     for (long a = 0; a < triangleCount; a+=3)
     {
@@ -257,13 +318,21 @@ void Mesh::_calculateTangents(Mesh*mesh)
         glm::vec3 sdir((t2 * x1 - t1 * x2) * r, (t2 * y1 - t1 * y2) * r, (t2 * z1 - t1 * z2) * r);
         glm::vec3 tdir((s1 * x2 - s2 * x1) * r, (s1 * y2 - s2 * y1) * r, (s1 * z2 - s2 * z1) * r);
 
-        tan1[i1] += sdir;
-        tan1[i2] += sdir;
-        tan1[i3] += sdir;
+        tan1.push_back(sdir);
+        tan1.push_back(sdir);
+        tan1.push_back(sdir);
 
-        tan2[i1] += tdir;
-        tan2[i2] += tdir;
-        tan2[i3] += tdir;
+        tan2.push_back(tdir);
+        tan2.push_back(tdir);
+        tan2.push_back(tdir);
+
+        //tan1[i1] += sdir;
+        //tan1[i2] += sdir;
+        //tan1[i3] += sdir;
+
+        //tan2[i1] += tdir;
+        //tan2[i2] += tdir;
+        //tan2[i3] += tdir;
     }
 
     for (long a = 0; a < vertexCount; a++)
@@ -279,6 +348,7 @@ void Mesh::_calculateTangents(Mesh*mesh)
         //mesh->_tangents.push_back(tangent);
         std::cout << tangent << std::endl;
     }
+    */
 }
 
 void Mesh::_buffer()
