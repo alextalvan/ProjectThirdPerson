@@ -51,7 +51,7 @@ void ColorMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pCame
     _shader->use();
 
     //pass in a precalculate mvp matrix (see texture material for the opposite)
-    glm::mat4 mvpMatrix = pCamera->getProjection() * glm::inverse(pCamera->getWorldTransform()) * pGameObject->getWorldTransform();
+    glm::mat4 mvpMatrix = pCamera->getProjection() * pCamera->getView() * pGameObject->getWorldTransform();
     glUniformMatrix4fv ( _uMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
     //set the material color

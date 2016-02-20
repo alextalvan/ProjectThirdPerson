@@ -170,7 +170,7 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
 
     //pass in all MVP matrices separately
     glUniformMatrix4fv ( _projMatLoc,  1, GL_FALSE, glm::value_ptr(pCamera->getProjection()));
-    glUniformMatrix4fv ( _viewMatLoc,  1, GL_FALSE, glm::value_ptr(glm::inverse(pCamera->getWorldTransform())));
+    glUniformMatrix4fv ( _viewMatLoc,  1, GL_FALSE, glm::value_ptr(pCamera->getView()));
     glUniformMatrix4fv ( _modelMatLoc, 1, GL_FALSE, glm::value_ptr(pGameObject->getWorldTransform()));
 
     //now inform mesh of where to stream its data

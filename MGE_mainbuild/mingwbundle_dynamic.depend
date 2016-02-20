@@ -14408,11 +14408,11 @@
 	<SFML/Graphics/RenderWindow.hpp>
 	<SFML/Window/Event.hpp>
 
-1455236552 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.hpp
+1456005568 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.hpp
 	<string>
 	"mge/core/GameObject.hpp"
 
-1455979133 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
+1456005540 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
 	<vector>
 	<string>
 	<iostream>
@@ -15590,7 +15590,7 @@
 1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\activateable.cpp
 	"mge/core/Activateable.hpp"
 
-1455820834 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.cpp
+1456005596 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.cpp
 	<iostream>
 	<glm.hpp>
 	"mge/core/Camera.hpp"

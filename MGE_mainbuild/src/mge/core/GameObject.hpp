@@ -130,13 +130,15 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 
 
 		virtual void Update();
+		virtual void MakeTransformDirty();
+		virtual void _recalculateLocalTransform();
 
 
     private:
         bool _worldTransformIsDirty = true;
-        void MakeTransformDirty();
+
         void MakeChildrenTransformsDirty();
-        void _recalculateLocalTransform();
+
         void InternalUpdate();
 
          //update children list administration
