@@ -300,6 +300,9 @@ bool BoxCollider::InternalHitTest(SphereCollider* other)
 
 bool BoxCollider::HitTest(Collider* other)
 {
+    if(_owner == NULL || other->getOwner()==NULL)
+        return false;
+
     return other->HitTest(this);
 }
 

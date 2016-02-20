@@ -5,6 +5,7 @@
 #include "mge/core/Destroyable.hpp"
 #include "mge/util/list/DualLinkList.hpp"
 #include "mge/util/list/DualLinkNode.hpp"
+#include "mge/lua/LuaObject.hpp"
 #include <string>
 
 class GameObject;
@@ -12,7 +13,7 @@ class GameObject;
 /**
  *Component, just like Unity.
  */
-class Component: public Activateable, public Destroyable, public DualLinkNode<Component>
+class Component: public Activateable, public Destroyable, public DualLinkNode<Component>, public LuaObject
 {
     friend class GameObject;
 	public:
@@ -20,7 +21,7 @@ class Component: public Activateable, public Destroyable, public DualLinkNode<Co
 
 		virtual void Update();
 
-        virtual void Destroy() override;
+        void Destroy() override;
 
         std::string getName() const;
 

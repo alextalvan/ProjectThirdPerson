@@ -53,6 +53,9 @@ void GameObject::DestroyChildren()
         ((GameObject*)cn2)->Destroy();
         cn2 = cn2->nextNode;
     }
+
+    //test fix
+    //_children.Clear();
 }
 
 void GameObject::DestroyComponents()
@@ -425,6 +428,19 @@ int GameObject::GetComponentsCount() {
 
 Component* GameObject::GetComponentAt(int pIndex) {
     return (Component*)(_components.GetAt(pIndex));
+}
+
+Component* GameObject::FindComponent(std::string name)
+{
+    DualLinkNode<Component>* cn = _components.startNode;
+    while(cn!=NULL)
+    {
+        Component* comp = (Component*)cn;
+        if(comp->getName()==name)
+            return comp;
+        cn = cn->nextNode;
+    }
+    return NULL;
 }
 
 

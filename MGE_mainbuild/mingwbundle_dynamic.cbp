@@ -140,6 +140,8 @@
 		<Unit filename="src/mge/gui/GUISprite.hpp" />
 		<Unit filename="src/mge/gui/GUIText.cpp" />
 		<Unit filename="src/mge/gui/GUIText.hpp" />
+		<Unit filename="src/mge/lua/LuaObject.cpp" />
+		<Unit filename="src/mge/lua/LuaObject.hpp" />
 		<Unit filename="src/mge/lua/LuaScript.cpp" />
 		<Unit filename="src/mge/lua/LuaScript.hpp" />
 		<Unit filename="src/mge/lua/lauxlib.h" />

@@ -14382,12 +14382,13 @@
 1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\cameraorbit.hpp
 	<mge/behaviours/Component.hpp>
 
-1455180136 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\component.hpp
+1455933690 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\component.hpp
 	"mge/core/Activateable.hpp"
 	"mge/core/GameObject.hpp"
 	"mge/core/Destroyable.hpp"
 	"mge/util/list/DualLinkList.hpp"
 	"mge/util/list/DualLinkNode.hpp"
+	"mge/lua/LuaObject.hpp"
 	<string>
 
 1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\activateable.hpp
@@ -14411,7 +14412,7 @@
 	<string>
 	"mge/core/GameObject.hpp"
 
-1455796430 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
+1455979133 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
 	<vector>
 	<string>
 	<iostream>
@@ -14421,6 +14422,7 @@
 	"mge/core/AbstractGame.hpp"
 	"mge/util/list/DualLinkList.hpp"
 	"mge/util/list/DualLinkNode.hpp"
+	"mge/lua/LuaObject.hpp"
 
 1455012461 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\glm.hpp
 	<iostream>
@@ -15459,7 +15461,7 @@
 
 1455012451 c:\users\user\documents\projectthirdperson2\mge_mainbuild\luabridge\detail\namespace.h
 
-1455180466 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\component.cpp
+1455933336 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\component.cpp
 	<cassert>
 	<iostream>
 	"mge/behaviours/Component.hpp"
@@ -15491,7 +15493,7 @@
 1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\rotatingbehaviour.hpp
 	"mge/behaviours/Component.hpp"
 
-1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\boxcollider.cpp
+1455974087 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\boxcollider.cpp
 	<mge/collision/BoxCollider.hpp>
 	<mge/collision/SphereCollider.hpp>
 	<mge/core/GameObject.hpp>
@@ -15509,15 +15511,16 @@
 	<functional>
 	<glm.hpp>
 
-1455060673 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\duallinknode.hpp
+1455933191 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\duallinknode.hpp
 	<cstddef>
 
-1455883318 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.hpp
+1455883353 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.hpp
 	<mge/util/list/DualLinkList.hpp>
 	<mge/core/AbstractGame.hpp>
+	<mge/core/GameObject.hpp>
 	"glm.hpp"
 
-1455062700 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\duallinklist.hpp
+1455933191 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\duallinklist.hpp
 	<cstddef>
 	<functional>
 	<mge/util/list/DualLinkNode.hpp>
@@ -15529,21 +15532,21 @@
 	<mge/collision/Collider.hpp>
 	<mge/collision/CollisionManager.hpp>
 
-1455798315 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.cpp
+1455883301 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.cpp
 	<mge/collision/CollisionManager.hpp>
 	<mge/util/list/DualLinkNode.hpp>
 	<mge/collision/Collider.hpp>
 	<mge/lua/LuaScript.hpp>
 	<mge/core/GameObject.hpp>
 
-1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\spherecollider.cpp
+1455974104 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\spherecollider.cpp
 	<mge/collision/SphereCollider.hpp>
 	<mge/collision/BoxCollider.hpp>
 	<mge/core/GameObject.hpp>
 	<glm.hpp>
 	<iostream>
 
-1455877911 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
+1455885967 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
 	"AbstractGame.hpp"
 	<iostream>
 	"mge/core/Time.hpp"
@@ -15607,7 +15610,7 @@
 	"mge/core/FPS.hpp"
 	"mge/core/Time.hpp"
 
-1455796682 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
+1455979456 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
 	<cassert>
 	<iostream>
 	<glm.hpp>
@@ -15616,7 +15619,7 @@
 	"mge/core/World.hpp"
 	"mge/behaviours/Component.hpp"
 
-1455827028 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\mesh.hpp
+1455883431 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\mesh.hpp
 	<vector>
 	<cstring>
 	<string>
@@ -15624,7 +15627,7 @@
 	<glm.hpp>
 	<map>
 
-1455827028 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\light.cpp
+1455883601 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\light.cpp
 	<mge/core/Light.hpp>
 
 1455827028 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\light.hpp
@@ -15633,7 +15636,7 @@
 	"mge/util/list/DualLinkList.hpp"
 	"mge/util/list/DualLinkNode.hpp"
 
-1455827028 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\mesh.cpp
+1455883431 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\mesh.cpp
 	"mge/core/Mesh.hpp"
 	<iostream>
 	<map>
@@ -15644,7 +15647,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1455879714 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
+1455883431 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -15662,7 +15665,7 @@
 	<iostream>
 	<fstream>
 
-1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\texture.cpp
+1455883431 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\texture.cpp
 	<iostream>
 	<string>
 	<SFML/Graphics.hpp>
@@ -15703,7 +15706,7 @@
 	"mge/materials/AbstractMaterial.hpp"
 	<glm.hpp>
 
-1455224483 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\config.hpp
+1455885218 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\config.hpp
 	<string>
 
 1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\postprocessing\postprocess.cpp
@@ -15728,7 +15731,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1455828086 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
+1455883431 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
 	<glm.hpp>
 	"mge/materials/TextureLitMaterial.hpp"
 	"mge/core/Texture.hpp"
@@ -15738,7 +15741,7 @@
 	"mge/core/Light.hpp"
 	<string>
 
-1455827603 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.hpp
+1455883431 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.hpp
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
@@ -15754,7 +15757,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1455828837 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
+1455883431 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -15945,7 +15948,7 @@
 	"mge/gui/GUIButton.hpp"
 	"mge/util/ResourceCacher.hpp"
 
-1455805317 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
+1455990722 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
 	"lua.h"
 	"lauxlib.h"
 	"lualib.h"
@@ -15954,7 +15957,7 @@
 	<mge/behaviours/Component.hpp>
 	<SFML/Graphics.hpp>
 
-1455877933 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
+1455993149 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
 	"mge/lua/LuaScript.hpp"
 	"mge/core/World.hpp"
 	"mge/core/GameObject.hpp"
@@ -15977,6 +15980,7 @@
 	"mge/gui/GUISprite.hpp"
 	"mge/gui/GUIButton.hpp"
 	"mge/util/ResourceCacher.hpp"
+	"mge/lua/LuaObject.hpp"
 
 1455012450 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\lua.h
 	<stdarg.h>
@@ -16034,7 +16038,7 @@
 	"mge/collision/SphereCollider.hpp"
 	"mge/util/Timer.hpp"
 
-1455879591 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
+1455982326 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
 	<mge/editor/LevelImporter.hpp>
 	<mge/config.hpp>
 	<glm.hpp>
@@ -16048,6 +16052,8 @@
 	<mge/core/Light.hpp>
 	<mge/behaviours/CharacterController.hpp>
 	<mge/lua/LuaScript.hpp>
+	<mge/gui/GUI.hpp>
+	<vector>
 
 1455740319 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.hpp
 	<fstream>
@@ -16081,17 +16087,17 @@
 1455324393 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\resourcecacher.hpp
 	<SFML/Graphics.hpp>
 
-1455637476 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\gui.cpp
+1455933197 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\gui.cpp
 	"mge/gui/GUI.hpp"
 	"mge/util/list/DualLinkNode.hpp"
 
-1455706463 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guisprite.cpp
+1455883431 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guisprite.cpp
 	<GL/glew.h>
 	<SFML/Graphics.hpp>
 	"mge/gui/GUISprite.hpp"
 	"SFML/Graphics/Transform.hpp"
 
-1455706463 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guitext.cpp
+1455883431 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guitext.cpp
 	<GL/glew.h>
 	<SFML/Graphics/Text.hpp>
 	"mge/gui/GUIText.hpp"
@@ -16276,4 +16282,9 @@
 
 1455840060 c:\github\projectthirdperson\mge_mainbuild\src\mge\util\timer.hpp
 	<SFML/System.hpp>
+
+1455931898 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luaobject.hpp
+
+1455931890 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luaobject.cpp
+	"mge/lua/LuaObject.hpp"
 

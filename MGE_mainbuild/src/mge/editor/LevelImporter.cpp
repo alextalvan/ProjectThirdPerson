@@ -11,6 +11,8 @@
 #include <mge/core/Light.hpp>
 #include <mge/behaviours/CharacterController.hpp>
 #include <mge/lua/LuaScript.hpp>
+#include <mge/gui/GUI.hpp>
+#include <vector>
 
 
 namespace LevelEditor
@@ -18,10 +20,11 @@ namespace LevelEditor
     using namespace std;
     World* _storedWorld;
     GUI* _storedWorld2D;
+    std::vector<LuaScript*> _storedScripts;
 
     void LoadLevel(std::string fileName, World* world, GUI* world2D)
     {
-        if(world == NULL)
+        if(world == NULL || world2D == NULL)
             return;
 
         _storedWorld = world;
@@ -29,6 +32,7 @@ namespace LevelEditor
 
         //first release the previous level
         world->DestroyChildren();
+        world2D->DestroyChildren();
 
         std::cout<<"Loading level " + fileName + "...\n";
 
@@ -38,12 +42,19 @@ namespace LevelEditor
         //begin by parsing the first element, which is the root object
         ParseAbstractObject(f,world);
 
-
-        //std::cout<<world->GetChildAt(0)->GetChildAt(1)->getWorldTransform();
-
-
         f.close();
         std::cout<<"Successfully loaded level " + fileName + "\n";
+
+
+        //lua level load callbacks
+        ((LuaScript*)(world->FindComponent("LuaScript:main.lua")))->InvokeFunction("OnLevelLoad");
+
+
+        for(unsigned int i=0;i<_storedScripts.size();++i)
+        {
+            _storedScripts[i]->InvokeFunction("OnLevelLoad");
+        }
+        _storedScripts.clear();
     }
 
     bool ParseAbstractObject(ifstream& f, GameObject* parent)
@@ -213,8 +224,9 @@ namespace LevelEditor
                 f>>s;//"script_name"
                 f>>s;//the actual script path
 
-                LuaScript* script = new LuaScript((config::MGE_SCRIPT_PATH + s).c_str(),_storedWorld, _storedWorld2D);
+                LuaScript* script = new LuaScript(s.c_str(),_storedWorld, _storedWorld2D);
                 owner->AttachComponent(script);
+                _storedScripts.push_back(script);
                 f>>s;//end_luascript
             }
 

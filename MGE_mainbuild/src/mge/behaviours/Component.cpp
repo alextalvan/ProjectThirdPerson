@@ -3,7 +3,10 @@
 #include "mge/behaviours/Component.hpp"
 #include "mge/core/GameObject.hpp"
 
-Component::Component():_owner(NULL) {}
+Component::Component():_owner(NULL)
+{
+
+}
 
 Component::~Component()
 {
@@ -20,6 +23,8 @@ void Component::Destroy()
 {
     Destroyable::Destroy();
     SetActive(false);
+    if(_owner!=NULL)
+        _owner->DetachComponent(this);
 }
 std::string Component::getName() const
 {

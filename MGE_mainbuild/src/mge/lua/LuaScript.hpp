@@ -15,10 +15,12 @@ class GameObject;
 class LuaScript : public Component
 {
 public:
-	LuaScript(const char * path, World * world, GUI* world2D);
+	LuaScript(std::string path, World * world, GUI* world2D);
 	void Update() override;
 	void InvokeCollisionCallback(GameObject* other);
 	void setOwner(GameObject* pOwner) override;
+	void InvokeFunction(std::string name);
+	lua_State* getLuaStatePointer();
 protected:
     virtual ~LuaScript();
 private:
@@ -52,6 +54,7 @@ private:
 	static int destroy(lua_State * lua);
 	static int getowner(lua_State * lua);
 	static int findChild(lua_State * lua);
+	static int findComponent(lua_State * lua);
 	static int setScale(lua_State * lua);
 	//static
 
@@ -92,6 +95,11 @@ private:
 	static int boxCollider(lua_State * lua);
 	static int wallCollider(lua_State * lua);
 	static int luaScript(lua_State * lua);
+
+	//lua
+	static int luaInvokeFunction(lua_State * lua);
+	static int luaInvokeFunctionWithArgs(lua_State * lua);
+
 
 	//levels/scenes
 	static int loadLevel(lua_State * lua);
