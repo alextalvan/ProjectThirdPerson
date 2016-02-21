@@ -102,3 +102,10 @@ void CollisionManager::DoCollisions()
     }
 }
 
+bool CollisionManager::Raycast(glm::vec3 origin, glm::vec3 direction, RaycastInfo& output)
+{
+    if(CollisionManager::_colliders.startNode==NULL)
+        return false;
+
+        return false;
+}

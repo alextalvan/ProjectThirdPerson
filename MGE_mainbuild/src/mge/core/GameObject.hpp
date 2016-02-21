@@ -10,6 +10,7 @@
 #include "mge/core/AbstractGame.hpp"
 #include "mge/util/list/DualLinkList.hpp"
 #include "mge/util/list/DualLinkNode.hpp"
+#include "mge/lua/LuaObject.hpp"
 
 class AbstractCollider;
 class Component;
@@ -20,7 +21,7 @@ class Mesh;
 
 class ChildList;
 
-class GameObject : public Activateable, public Destroyable, public DualLinkNode2<ChildList>
+class GameObject : public Activateable, public Destroyable, public DualLinkNode2<ChildList>, public LuaObject
 {
     friend class AbstractGame;
 	public:
@@ -73,6 +74,7 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 
         int GetComponentsCount();
         Component* GetComponentAt (int pIndex);
+        Component* FindComponent(std::string name);
 
         //note that this thing returns the FIRST component of type tp found, if it exists
         template<class T>
@@ -128,13 +130,15 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 
 
 		virtual void Update();
+		virtual void MakeTransformDirty();
+		virtual void _recalculateLocalTransform();
 
 
     private:
         bool _worldTransformIsDirty = true;
-        void MakeTransformDirty();
+
         void MakeChildrenTransformsDirty();
-        void _recalculateLocalTransform();
+
         void InternalUpdate();
 
          //update children list administration

@@ -1,7 +1,7 @@
 #include "AbstractGame.hpp"
 
 #include <iostream>
-using namespace std;
+//using namespace std;
 
 #include "mge/core/Time.hpp"
 #include "mge/core/FPS.hpp"
@@ -14,6 +14,7 @@ using namespace std;
 #include <mge/gui/GUI.hpp>
 #include <mge/lua/LuaScript.hpp>
 #include <mge/config.hpp>
+#include <fstream>
 
 
 //debugging by stepping into individual frames
@@ -34,26 +35,42 @@ AbstractGame::~AbstractGame()
 }
 
 void AbstractGame::initialize() {
-    cout << "Initializing engine..." << endl << endl;
-    _initializeWindow();
+    std::cout << "Initializing engine...\n\n";
+    std::cout << "Reading config.txt..\n";
+
+    ifstream f(config::MGE_ROOT_PATH + "config.txt");
+    std::string s;
+    int width, height,fullscreen;
+    f>>s; f>>width;
+    f>>s; f>>height;
+    f>>s; f>>fullscreen;
+    std::cout << "config loaded.."<<width<<" "<<height<<" "<<fullscreen<<std::endl;//\n";
+
+    f.close();
+
+
+    _initializeWindow(width,height,fullscreen);
     _printVersionInfo();
     _initializeGlew();
-    _initializeRenderer();
+    _initializeRenderer(width,height);
     _initializeWorld();
     _initializeScene();
 
     CollisionManager::Initialize();
     ParticleSystem::Initialize();
-    cout << endl << "Engine initialized." << endl << endl;
+    std::cout << std::endl << "Engine initialized." << std::endl << std::endl;
 }
 
 ///SETUP
 
-void AbstractGame::_initializeWindow() {
-	cout << "Initializing window..." << endl;
-	_window = new sf::RenderWindow( sf::VideoMode(1366,768), "FairWind Game Engine", sf::Style::Titlebar, sf::ContextSettings(24,8,4,3,3));
+void AbstractGame::_initializeWindow(int width, int height, int fullscreen)
+{
+	std::cout << "Initializing window..." << std::endl;
+
+	int style = (fullscreen) ? sf::Style::Fullscreen : sf::Style::Titlebar;
+	_window = new sf::RenderWindow( sf::VideoMode(width,height), "FairWind Game Engine", style , sf::ContextSettings(24,8,4,3,3));
 	//_window->setVerticalSyncEnabled(true);
-    cout << "Window initialized." << endl << endl;
+    std::cout << "Window initialized." << std::endl << std::endl;
 }
 
 void AbstractGame::_printVersionInfo() {
@@ -79,29 +96,30 @@ void AbstractGame::_printVersionInfo() {
 }
 
 void AbstractGame::_initializeGlew() {
-	cout << "Initializing GLEW..." << endl;
+	std::cout << "Initializing GLEW..." << std::endl;
     //initialize the opengl extension wrangler
     GLint glewStatus = glewInit();
-	cout << "Initialized GLEW, status (1 == OK, 0 == FAILED):" << (glewStatus == GLEW_OK) << endl << endl;
+	std::cout << "Initialized GLEW, status (1 == OK, 0 == FAILED):" << (glewStatus == GLEW_OK) << std::endl << std::endl;
 }
 
-void AbstractGame::_initializeRenderer() {
+void AbstractGame::_initializeRenderer(int width, int height)
+{
     //setup our own renderer
-	cout << "Initializing renderer..." << endl;
-	_renderer = new Renderer(1366,768);
-    cout << "Renderer done." << endl << endl;
+	std::cout << "Initializing renderer..." << std::endl;
+	_renderer = new Renderer(width,height);
+    std::cout << "Renderer done." << std::endl << std::endl;
 }
 
 void AbstractGame::_initializeWorld() {
     //setup our own renderer
-	cout << "Initializing world..." << endl;
+	std::cout << "Initializing world..." << std::endl;
 	_world = new World(_window);
 	_world2D = new GUI();
 
-    cout << "Attaching main lua script..." << endl;
-	_world->AttachComponent(new LuaScript((config::MGE_SCRIPT_PATH + "main.lua").c_str(),_world, _world2D));
+    std::cout << "Attaching main lua script..." << std::endl;
+	_world->AttachComponent(new LuaScript("main.lua",_world, _world2D));
 	//_world
-    cout << "World initialized." << endl << endl;
+    std::cout << "World initialized." << std::endl << std::endl;
 }
 
 ///LOOP

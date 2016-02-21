@@ -30,6 +30,9 @@ bool SphereCollider::HitTest(SphereCollider* other)
 
 bool SphereCollider::HitTest(Collider* other)
 {
+    if(_owner == NULL || other->getOwner()==NULL)
+        return false;
+
     return other->HitTest(this);
 }
 

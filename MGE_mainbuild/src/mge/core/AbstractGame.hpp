@@ -37,13 +37,13 @@ class AbstractGame
         //methods above delegate behaviour to the methods below so that you can override it in a subclass
 
         //initialize sfml rendering context
-        virtual void _initializeWindow();
+        virtual void _initializeWindow(int width, int height, int fullscreen);
         //print info about the current driver version etc
         virtual void _printVersionInfo();
         //initialize the extension wrangler
         virtual void _initializeGlew();
         //create our own custom renderer instance
-        virtual void _initializeRenderer();
+        virtual void _initializeRenderer(int width, int height);
         //initialize a scene root to which we can attach/add objects
         virtual void _initializeWorld();
 

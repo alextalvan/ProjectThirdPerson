@@ -56,7 +56,7 @@ glm::vec3 Light::getAttenuation()
 
 float Light::getAngle()
 {
-    float _angle;
+    return _angle;
 }
 
 Light::~Light()

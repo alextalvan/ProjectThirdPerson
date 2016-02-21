@@ -15,11 +15,159 @@ GAMEOBJECT:
    CHILDREN:
 
    GAMEOBJECT:
+      name test
+      transform: 
+         1  0  0  0  
+         0  1  0  6.28  
+         0  0  1  0  
+         0  0  0  1  
+      mesh cube_flat.obj
+
+      COMPONENTS:
+
+         BOX_COLLIDER:
+            dimensions 2 2 2
+         END_BOX_COLLIDER
+         LUA_SCRIPT:
+            scriptName test.lua
+         END_LUA_SCRIPT
+         COLOR_MATERIAL:
+            color 0 0 0
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Character
+      transform: 
+         1  0  0  9.88  
+         0  1  0  5.71  
+         0  0  1  -12.73  
+         0  0  0  1  
+      no_mesh
+
+      COMPONENTS:
+
+         CHARACTER_CONTROLLER:
+            move_speed 0.2
+            jump_force 1
+            jump_duration 0.25
+            gravity 0.3
+            sphere_radius 1
+         END_CHARACTER_CONTROLLER
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+      CAMERA:
+         name Main_Cameralol
+         transform: 
+            1  0  0  9.88  
+            0  1  0  7.004  
+            0  0  1  -12.746  
+            0  0  0  1  
+         isMainCamera 1
+
+         COMPONENTS:
+
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+
+         END_CHILDREN
+
+      END_CAMERA
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Cube(5)
+      transform: 
+         0.2  0  0  1.6  
+         0  18.18  0  -2.246  
+         0  0  0.2  36.4  
+         0  0  0  1  
+      mesh cube_flat.obj
+
+      COMPONENTS:
+
+         TEXTURE_MATERIAL:
+            diffuseTex bricks.jpg
+         END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Raptor(1)
+      transform: 
+         0.0755251  0.9969963  -0.01715916  12.59  
+         -0.02247244  -0.01550221  -0.9996274  6.66  
+         -0.9968907  0.07588258  0.02123404  2.18  
+         0  0  0  1  
+      no_mesh
+
+      COMPONENTS:
+
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+      GAMEOBJECT:
+         name Cube
+         transform: 
+            -0.001715917  0.09969964  -0.00755251  9.224121  
+            -0.09996273  -0.001550221  0.002247256  7.432641  
+            0.002123415  0.007588258  0.09968907  0.04177999  
+            0  0  0  1  
+         mesh raptor.obj
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex Raptor.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
       name floor
       transform: 
-         5  0  0  0  
-         0  0.4721882  -12.89487  4.9  
-         0  0.1644334  37.029  0  
+         -4.768372E-06  0  -40  0  
+         0  2  0  0  
+         40  0  -4.768372E-06  0  
          0  0  0  1  
       mesh cube_flat.obj
 
@@ -111,44 +259,23 @@ GAMEOBJECT:
    END_GAMEOBJECT
 
    GAMEOBJECT:
-      name Raptor(1)
+      name Cube(4)
       transform: 
-         0.0755251  0.9969963  -0.01715916  12.59  
-         -0.02247244  -0.01550221  -0.9996274  6.66  
-         -0.9968907  0.07588258  0.02123404  2.18  
+         0.2  0  0  38.09  
+         0  18.18  0  -2.246  
+         0  0  0.2  2.34  
          0  0  0  1  
-      no_mesh
+      mesh cube_flat.obj
 
       COMPONENTS:
 
+         TEXTURE_MATERIAL:
+            diffuseTex Sand.png
+         END_TEXTURE_MATERIAL
 
       END_COMPONENTS
 
       CHILDREN:
-
-      GAMEOBJECT:
-         name Cube
-         transform: 
-            -0.001715917  0.09969964  -0.00755251  9.224121  
-            -0.09996273  -0.001550221  0.002247256  7.432641  
-            0.002123415  0.007588258  0.09968907  0.04177999  
-            0  0  0  1  
-         mesh raptor.obj
-
-         COMPONENTS:
-
-            TEXTURE_MATERIAL:
-               diffuseTex Raptor.png
-            END_TEXTURE_MATERIAL
-
-         END_COMPONENTS
-
-         CHILDREN:
-
-
-         END_CHILDREN
-
-      END_GAMEOBJECT
 
 
       END_CHILDREN
@@ -225,108 +352,11 @@ GAMEOBJECT:
    END_GAMEOBJECT
 
    GAMEOBJECT:
-      name Cube(5)
-      transform: 
-         0.2  0  0  1.6  
-         0  18.18  0  -2.246  
-         0  0  0.2  36.4  
-         0  0  0  1  
-      mesh cube_flat.obj
-
-      COMPONENTS:
-
-         TEXTURE_MATERIAL:
-            diffuseTex bricks.jpg
-         END_TEXTURE_MATERIAL
-
-      END_COMPONENTS
-
-      CHILDREN:
-
-
-      END_CHILDREN
-
-   END_GAMEOBJECT
-
-   GAMEOBJECT:
-      name Cube(4)
-      transform: 
-         0.2  0  0  38.09  
-         0  18.18  0  -2.246  
-         0  0  0.2  2.34  
-         0  0  0  1  
-      mesh cube_flat.obj
-
-      COMPONENTS:
-
-         TEXTURE_MATERIAL:
-            diffuseTex Sand.png
-         END_TEXTURE_MATERIAL
-
-      END_COMPONENTS
-
-      CHILDREN:
-
-
-      END_CHILDREN
-
-   END_GAMEOBJECT
-
-   GAMEOBJECT:
-      name Character
-      transform: 
-         1  0  0  9.88  
-         0  1  0  5.71  
-         0  0  1  -12.73  
-         0  0  0  1  
-      no_mesh
-
-      COMPONENTS:
-
-         CHARACTER_CONTROLLER:
-            move_speed 0.2
-            jump_force 1
-            jump_duration 0.25
-            gravity 0.3
-            sphere_radius 1
-         END_CHARACTER_CONTROLLER
-
-      END_COMPONENTS
-
-      CHILDREN:
-
-      CAMERA:
-         name Main_Cameralol
-         transform: 
-            1  0  0  9.88  
-            0  1  0  7.004  
-            0  0  1  -12.746  
-            0  0  0  1  
-         isMainCamera 1
-
-         COMPONENTS:
-
-
-         END_COMPONENTS
-
-         CHILDREN:
-
-
-         END_CHILDREN
-
-      END_CAMERA
-
-
-      END_CHILDREN
-
-   END_GAMEOBJECT
-
-   GAMEOBJECT:
       name floor
       transform: 
-         -4.768372E-06  0  -40  0  
-         0  2  0  0  
-         40  0  -4.768372E-06  0  
+         5  0  0  0  
+         0  0.4721882  -12.89487  4.9  
+         0  0.1644334  37.029  0  
          0  0  0  1  
       mesh cube_flat.obj
 

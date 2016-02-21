@@ -30,7 +30,7 @@ public:
     virtual bool HitTest(SphereCollider* other) = 0;
     virtual bool HitTest(Collider* other) = 0;
 
-
+    bool ignoreRaycast = true;
 protected:
     Collider();
     virtual ~Collider();

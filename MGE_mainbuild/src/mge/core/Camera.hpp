@@ -20,9 +20,17 @@ class Camera : public GameObject
 		virtual ~Camera();
 
         glm::mat4& getProjection();
+        glm::mat4& getView();
+    protected:
+        virtual void MakeTransformDirty() override;
+        virtual void _recalculateLocalTransform() override;
 
 	private:
 		glm::mat4 _projection;
+
+		//view matrix is cached instead of recalculated every time
+		glm::mat4 _view;
+		bool _viewMatrixDirty = true;
 
 };
 

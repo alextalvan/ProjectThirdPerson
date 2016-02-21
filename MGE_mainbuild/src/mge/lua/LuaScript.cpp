@@ -24,14 +24,15 @@
 #include "mge/gui/GUISprite.hpp"
 #include "mge/gui/GUIButton.hpp"
 #include "mge/util/ResourceCacher.hpp"
+#include "mge/lua/LuaObject.hpp"
 
 //#define MGE_LUA_SAFETY 1  //comment this define out to remove the lua safety checks but heavily improve performance
 
 
-LuaScript::LuaScript(const char * path, World * world, GUI * world2D)
+LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
 {
 
-    _name = "LuaScript:" + std::string(path);
+    _name = "LuaScript:" + path;
 	//Open lua
 	L = lua_open();
 	//Open libs
@@ -96,24 +97,37 @@ LuaScript::LuaScript(const char * path, World * world, GUI * world2D)
 	lua_register(L, "Destroy", destroy);//
 	lua_register(L, "GetOwner", getowner);//
 	lua_register(L, "FindChild", findChild);//
+	lua_register(L, "FindComponent", findComponent);//
+	lua_register(L, "CallFunction", luaInvokeFunction);//
+	lua_register(L, "CallComplex", luaInvokeFunctionWithArgs);
 
 	//Set world
-	lua_pushlightuserdata(L, world);
+	lua_pushlightuserdata(L, (LuaObject*)world);
 	lua_setglobal(L, "world");
 
 	//Set window
-	lua_pushlightuserdata(L, world2D);
+	lua_pushlightuserdata(L, (LuaObject*)world2D);
 	lua_setglobal(L, "GUI");
 
 	//set self reference
-	lua_pushlightuserdata(L, this);
+	lua_pushlightuserdata(L,((LuaObject*)this));
 	lua_setglobal(L, "this");
 
     //Load file
-	luaL_dofile(L, path);
+	luaL_dofile(L, (config::MGE_SCRIPT_PATH + path).c_str());
 	//Start
-	lua_getglobal(L, "Start");
-	lua_call(L, 0, 0);
+	InvokeFunction("Start");
+}
+
+lua_State* LuaScript::getLuaStatePointer()
+{
+    return L;
+}
+
+void LuaScript::InvokeFunction(std::string name)
+{
+    lua_getglobal(L,name.c_str());
+    lua_call(L,0,0);
 }
 
 void LuaScript::setOwner(GameObject* pOwner)
@@ -126,11 +140,10 @@ void LuaScript::setOwner(GameObject* pOwner)
     }
     else
     {
-        lua_pushlightuserdata(L, pOwner);
+        lua_pushlightuserdata(L, (LuaObject*)pOwner);
         lua_setglobal(L,"myGameObject");
 
-        lua_getglobal(L, "OnAttach");
-        lua_call(L, 0, 0);
+        InvokeFunction("OnAttach");
     }
 }
 
@@ -140,7 +153,8 @@ int LuaScript::loadMesh(lua_State * lua)
 	if (!lua_isstring(lua, lua_gettop(lua))) throw "Expect: string";
 	#endif
 
-	string fileName = lua_tostring(lua, lua_gettop(lua));
+	string fileName = lua_tostring(lua, -1);
+	//lua_pop(lua,1);
 
 
 	Mesh* mesh = Mesh::load(config::MGE_MODEL_PATH + fileName);
@@ -154,7 +168,8 @@ int LuaScript::loadTexture(lua_State * lua)
     #ifdef MGE_LUA_SAFETY
 	if (!lua_isstring(lua, lua_gettop(lua))) throw "Expect: string";
 	#endif
-	string fileName = lua_tostring(lua, lua_gettop(lua));
+	string fileName = lua_tostring(lua, -1);
+	//lua_pop(lua,1);
 
 	Texture * texture = Texture::load(config::MGE_TEXTURE_PATH + fileName);
 	lua_pushlightuserdata(lua, texture);
@@ -174,6 +189,7 @@ int LuaScript::colorMaterial(lua_State * lua)
 	color.x = lua_tonumber(lua, -3);
 	color.y = lua_tonumber(lua, -2);
 	color.z = lua_tonumber(lua, -1);
+	//lua_pop(lua,3);
 
 	AbstractMaterial* newMaterial = new ColorMaterial(color);
 	lua_pushlightuserdata(lua, newMaterial);
@@ -187,7 +203,8 @@ int LuaScript::textureMaterial(lua_State * lua)
 	if (!lua_islightuserdata(lua, lua_gettop(lua))) throw "Expect: texture";
 	#endif
 
-	Texture * texture = (Texture*)lua_touserdata(lua, lua_gettop(lua));
+	Texture * texture = (Texture*)lua_touserdata(lua, -1);
+	//lua_pop(lua,1);
 
 	AbstractMaterial* newMaterial = new TextureMaterial(texture);
 	lua_pushlightuserdata(lua, newMaterial);
@@ -213,9 +230,11 @@ int LuaScript::gameObject(lua_State * lua)
 	GameObject * gameObj = new GameObject(name, position);
 
 	lua_getglobal(lua,"world");
-	World* w = (World*) lua_touserdata(lua,-1);
+	World* w = (World*)(LuaObject*)lua_touserdata(lua,-1);
 	w->AddChild(gameObj);
-	lua_pushlightuserdata(lua, gameObj);
+
+    //lua_pop(lua,5);
+	lua_pushlightuserdata(lua,(LuaObject*)gameObj);
 
 	return 1;
 }
@@ -242,10 +261,10 @@ int LuaScript::guiSprite(lua_State * lua)
 	scale.y = lua_tonumber(lua, -1);
 
 	lua_getglobal(lua,"GUI");
-	GUI * gui = (GUI*)lua_touserdata(lua,-1);
+	GUI * gui = (GUI*)(LuaObject*)lua_touserdata(lua,-1);
 	GUISprite * newGuiSprite = new GUISprite(*Utils::LoadTexture(textureName), position.x , position.y ,rotation, scale.x, scale.y);
 	gui->AddChild(newGuiSprite);
-	lua_pushlightuserdata(lua, newGuiSprite);
+	lua_pushlightuserdata(lua,(LuaObject*) newGuiSprite);
 
 	return 1;
 }
@@ -279,11 +298,11 @@ int LuaScript::guiText(lua_State * lua)
 	int a = lua_tonumber(lua, -1);
 
 	lua_getglobal(lua,"GUI");
-	GUI * gui = (GUI*)lua_touserdata(lua,-1);
+	GUI * gui = (GUI*)(LuaObject*)lua_touserdata(lua,-1);
 	GUIText * newGuiText = new GUIText(*Utils::LoadFont(fontName), text, position.x, position.y, rotation, textSize, sf::Color(r, g, b, a));
 
 	gui->AddChild(newGuiText);
-	lua_pushlightuserdata(lua, newGuiText);
+	lua_pushlightuserdata(lua,(LuaObject*) newGuiText);
 
 	return 1;
 }
@@ -312,11 +331,11 @@ int LuaScript::guiButton(lua_State * lua)
 	float rotation = lua_tonumber(lua, -1);
 
 	lua_getglobal(lua,"GUI");
-	GUI * gui = (GUI*)lua_touserdata(lua, -1);
+	GUI * gui = (GUI*)(LuaObject*)lua_touserdata(lua, -1);
 	GUIButton * newGuiButton = new GUIButton(*Utils::LoadTexture(texture1Name), *Utils::LoadTexture(texture2Name), position.x, position.y, scale.x, scale.y, rotation);
 
 	gui->AddChild(newGuiButton);
-	lua_pushlightuserdata(lua, newGuiButton);
+	lua_pushlightuserdata(lua,(LuaObject*) newGuiButton);
 
 	return 1;
 }
@@ -329,7 +348,7 @@ int LuaScript::setButtonTexture(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
-	GUIButton * guiButton = (GUIButton*)lua_touserdata(lua, -3);
+	GUIButton * guiButton = (GUIButton*)(LuaObject*)lua_touserdata(lua, -3);
 	string textureName = lua_tostring(lua, -2);
 	int index = lua_tonumber(lua, -1);
 
@@ -345,7 +364,7 @@ int LuaScript::setTextFont(lua_State * lua)
 	if (!lua_isstring(lua, -1)) throw "Expect: string";
 	#endif
 
-	GUIText * guiText = (GUIText*)lua_touserdata(lua, -2);
+	GUIText * guiText = (GUIText*)(LuaObject*)lua_touserdata(lua, -2);
 	string fontName = lua_tostring(lua, -1);
 	guiText->setTextFont(*Utils::LoadFont(fontName));
 
@@ -360,7 +379,7 @@ int LuaScript::setTextPosition(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
-	GUIText * guiText = (GUIText*)lua_touserdata(lua, -3);
+	GUIText * guiText = (GUIText*)(LuaObject*)lua_touserdata(lua, -3);
 	float x = lua_tonumber(lua, -2);
 	float y = lua_tonumber(lua, -1);
 	guiText->setTextPosition(x, y);
@@ -375,7 +394,7 @@ int LuaScript::setTextRotation(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
-	GUIText * guiText = (GUIText*)lua_touserdata(lua, -2);
+	GUIText * guiText = (GUIText*)(LuaObject*)lua_touserdata(lua, -2);
 	float rot = lua_tonumber(lua, -1);
 	guiText->setTextRotation(rot);
 
@@ -389,7 +408,7 @@ int LuaScript::setTextSize(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
-	GUIText * guiText = (GUIText*)lua_touserdata(lua, -2);
+	GUIText * guiText = (GUIText*)(LuaObject*)lua_touserdata(lua, -2);
 	int size = lua_tonumber(lua, -1);
 	guiText->setTextSize(size);
 
@@ -403,7 +422,7 @@ int LuaScript::setTextString(lua_State * lua)
 	if (!lua_isstring(lua, -1)) throw "Expect: string";
 	#endif
 
-	GUIText * guiText = (GUIText*)lua_touserdata(lua, -2);
+	GUIText * guiText = (GUIText*)(LuaObject*)lua_touserdata(lua, -2);
 	string text = lua_tostring(lua, -1);
 	guiText->setTextString(text);
 
@@ -420,7 +439,7 @@ int LuaScript::setTextColor(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
-	GUIText * guiText = (GUIText*)lua_touserdata(lua,-5);
+	GUIText * guiText = (GUIText*)(LuaObject*)lua_touserdata(lua,-5);
 	int r = lua_tonumber(lua, -4);
 	int g = lua_tonumber(lua, -3);
 	int b = lua_tonumber(lua, -2);
@@ -437,7 +456,7 @@ int LuaScript::setSpriteTexture(lua_State * lua)
 	if (!lua_isstring(lua, -1)) throw "Expect: string";
 	#endif
 
-	GUISprite * guiSprite = (GUISprite*)lua_touserdata(lua, -2);
+	GUISprite * guiSprite = (GUISprite*)(LuaObject*)lua_touserdata(lua, -2);
 	string textureName = lua_tostring(lua, -1);
 	guiSprite->setSpriteTexture(*Utils::LoadTexture(textureName));
 
@@ -452,7 +471,7 @@ int LuaScript::setSpritePosition(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
-	GUISprite * guiSprite = (GUISprite*)lua_touserdata(lua, -3);
+	GUISprite * guiSprite = (GUISprite*)(LuaObject*)lua_touserdata(lua, -3);
 	float x = lua_tonumber(lua, -2);
 	float y = lua_tonumber(lua, -1);
 	guiSprite->setSpritePosition(x, y);
@@ -468,7 +487,7 @@ int LuaScript::setSpriteScale(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
-	GUISprite * guiSprite = (GUISprite*)lua_touserdata(lua, -3);
+	GUISprite * guiSprite = (GUISprite*)(LuaObject*)lua_touserdata(lua, -3);
 	float x = lua_tonumber(lua, -2);
 	float y = lua_tonumber(lua, -1);
 	guiSprite->setSpriteScale(x, y);
@@ -483,7 +502,7 @@ int LuaScript::setSpriteRotation(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
-	GUISprite * guiSprite = (GUISprite*)lua_touserdata(lua, -2);
+	GUISprite * guiSprite = (GUISprite*)(LuaObject*)lua_touserdata(lua, -2);
 	float rot = lua_tonumber(lua, -1);
 	guiSprite->setSpriteRotation(rot);
 
@@ -496,7 +515,7 @@ int LuaScript::onClick(lua_State * lua)
 	if (!lua_islightuserdata(lua, -1)) throw "Expect: game object";
 	#endif
 
-	GUIButton * guiButton = (GUIButton*)lua_touserdata(lua, -1);
+	GUIButton * guiButton = (GUIButton*)(LuaObject*)lua_touserdata(lua, -1);
 	bool clicked = false;
 	if (guiButton->onClick()) {
         clicked = true;
@@ -525,9 +544,9 @@ int LuaScript::camera(lua_State * lua)
 	Camera * cam = new Camera(name, position);
 
 	lua_getglobal(lua,"world");
-	World* w = (World*) lua_touserdata(lua,-1);
+	World* w = (World*)(LuaObject*) lua_touserdata(lua,-1);
 	w->AddChild(cam);
-	lua_pushlightuserdata(lua, cam);
+	lua_pushlightuserdata(lua, (LuaObject*)cam);
 
 	return 1;
 }
@@ -539,8 +558,8 @@ int LuaScript::addToWorld(lua_State * lua)
 	if (!lua_islightuserdata(lua, -1)) throw "Expect: game object";
 	#endif
 
-	World * world = (World*)lua_touserdata(lua, -2);
-	GameObject * gameObj = (GameObject*)lua_touserdata(lua, -1);
+	World * world = (World*)(LuaObject*)lua_touserdata(lua, -2);
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -1);
 
 	world->AddChild(gameObj);
 
@@ -554,8 +573,8 @@ int LuaScript::setMainCamera(lua_State * lua)
 	if (!lua_islightuserdata(lua, -1)) throw "Expect: camera";
 	#endif
 
-	World * world = (World*)lua_touserdata(lua, -2);
-	Camera * cam = (Camera*)lua_touserdata(lua, -1);
+	World * world = (World*)(LuaObject*)lua_touserdata(lua, -2);
+	Camera * cam = (Camera*)(LuaObject*)lua_touserdata(lua, -1);
 
 	world->setMainCamera(cam);
 
@@ -569,8 +588,8 @@ int LuaScript::setParent(lua_State * lua)
 	if (!lua_islightuserdata(lua, -1)) throw "Expect: game object";
 	#endif
 
-	GameObject * parent = (GameObject*)lua_touserdata(lua, -2);
-	GameObject * child = (GameObject*)lua_touserdata(lua, -1);
+	GameObject * parent = (GameObject*)(LuaObject*)lua_touserdata(lua, -2);
+	GameObject * child = (GameObject*)(LuaObject*)lua_touserdata(lua, -1);
 
 	parent->AddChild(child);
 
@@ -590,10 +609,10 @@ int LuaScript::getParent(lua_State * lua)
 	if (!lua_islightuserdata(lua, lua_gettop(lua))) throw "Expect: game object";
 	#endif
 
-	GameObject * gameObject = (GameObject*)lua_touserdata(lua, lua_gettop(lua));
+	GameObject * gameObject = (GameObject*)(LuaObject*)lua_touserdata(lua, -1);
 	GameObject * parent = gameObject->getParent();
 
-	lua_pushlightuserdata(lua, parent);
+	lua_pushlightuserdata(lua, (LuaObject*)parent);
 
 	return 1;
 }
@@ -604,14 +623,14 @@ int LuaScript::getowner(lua_State * lua)
 	if (!lua_islightuserdata(lua, lua_gettop(lua))) throw "Expect: component";
 	#endif
 
-	Component * comp = (Component *)lua_touserdata(lua, -1);
+	Component * comp = (Component*)(LuaObject*)lua_touserdata(lua, -1);
 
     GameObject* owner = comp->getOwner();
 
     if(owner==NULL)
         lua_pushnil(lua);
     else
-        lua_pushlightuserdata(lua, owner);
+        lua_pushlightuserdata(lua, (LuaObject*)owner);
 
 	return 1;
 }
@@ -622,7 +641,7 @@ int LuaScript::getChildCount(lua_State * lua)
 	if (!lua_islightuserdata(lua, lua_gettop(lua))) throw "Expect: game object";
 	#endif
 
-	GameObject * gameObject = (GameObject*)lua_touserdata(lua, lua_gettop(lua));
+	GameObject * gameObject = (GameObject*)(LuaObject*)lua_touserdata(lua, -1);
 	int count = gameObject->GetChildCount();
 
 	lua_pushnumber(lua, count);
@@ -637,7 +656,7 @@ int LuaScript::getChildAt(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
-	GameObject * gameObject = (GameObject*)lua_touserdata(lua, -2);
+	GameObject * gameObject = (GameObject*)(LuaObject*)lua_touserdata(lua, -2);
 	int index = lua_tonumber(lua, -2);
 	GameObject * child = gameObject->GetChildAt(index);
 
@@ -655,7 +674,7 @@ int LuaScript::setLocalPosition(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
-	GameObject * gameObj = (GameObject*)lua_touserdata(lua, -4);
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -4);
 	glm::vec3 position = glm::vec3(0, 0, 0);
 	position.x = lua_tonumber(lua, -3);
 	position.y = lua_tonumber(lua, -2);
@@ -672,7 +691,7 @@ int LuaScript::getWorldPos(lua_State * lua)
 	if (!lua_islightuserdata(lua, lua_gettop(lua))) throw "Expect: game object";
 	#endif
 
-	GameObject * gameObj = (GameObject*)lua_touserdata(lua, lua_gettop(lua));
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -1);
 
 	glm::vec3 pos = gameObj->getWorldPosition();
 
@@ -689,7 +708,7 @@ int LuaScript::getLocalPos(lua_State * lua)
 	if (!lua_islightuserdata(lua, lua_gettop(lua))) throw "Expect: game object";
 	#endif
 
-	GameObject * gameObj = (GameObject*)lua_touserdata(lua, lua_gettop(lua));
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -1);
 
 	glm::vec3 pos = gameObj->getLocalPosition();
 
@@ -710,7 +729,7 @@ int LuaScript::rotate(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
-	GameObject * gameObj = (GameObject*)lua_touserdata(lua, -5);
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -5);
 	float angle = lua_tonumber(lua, -4);
 	glm::vec3 axis = glm::vec3(0, 0, 0);
 	axis.x = lua_tonumber(lua, -3);
@@ -731,7 +750,7 @@ int LuaScript::scale(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
-	GameObject * gameObj = (GameObject*)lua_touserdata(lua, -4);
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -4);
 	glm::vec3 scalar = glm::vec3(0, 0, 0);
 	scalar.x = lua_tonumber(lua, -3);
 	scalar.y = lua_tonumber(lua, -2);
@@ -751,7 +770,7 @@ int LuaScript::translate(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
-	GameObject * gameObj = (GameObject*)lua_touserdata(lua, -4);
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -4);
 	glm::vec3 translation = glm::vec3(0, 0, 0);
 	translation.x = lua_tonumber(lua, -3);
 	translation.y = lua_tonumber(lua, -2);
@@ -769,7 +788,7 @@ int LuaScript::setMesh(lua_State * lua)
 	if (!lua_islightuserdata(lua, -1)) throw "Expect: mesh";
 	#endif
 
-	GameObject * gameObj = (GameObject*)lua_touserdata(lua, -2);
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -2);
 	Mesh * mesh = (Mesh*)lua_touserdata(lua, -1);
 
 	gameObj->setMesh(mesh);
@@ -783,7 +802,7 @@ int LuaScript::getMesh(lua_State * lua)
 	if (!lua_islightuserdata(lua, lua_gettop(lua))) throw "Expect: game object";
 	#endif
 
-	GameObject * gameObj = (GameObject*)lua_touserdata(lua, lua_gettop(lua));
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -1);
 	Mesh * mesh = gameObj->getMesh();
 
 	lua_pushlightuserdata(lua, mesh);
@@ -798,7 +817,7 @@ int LuaScript::setMaterial(lua_State * lua)
 	if (!lua_islightuserdata(lua, -1)) throw "Expect: material";
 	#endif
 
-	GameObject * gameObj = (GameObject*)lua_touserdata(lua, -2);
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -2);
 	AbstractMaterial * material = (AbstractMaterial*)lua_touserdata(lua, -1);
 
 	gameObj->setMaterial(material);
@@ -812,7 +831,7 @@ int LuaScript::getMaterial(lua_State * lua)
 	if (!lua_islightuserdata(lua, lua_gettop(lua))) throw "Expect: game object";
 	#endif
 
-	GameObject * gameObj = (GameObject*)lua_touserdata(lua, lua_gettop(lua));
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -1);
 	AbstractMaterial * material = gameObj->getMaterial();
 
 	lua_pushlightuserdata(lua, material);
@@ -828,7 +847,7 @@ int LuaScript::setName(lua_State * lua)
 	#endif
 
 	string name = lua_tostring(lua, -1);
-	GameObject * gameObj = (GameObject*)lua_touserdata(lua, -2);
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -2);
 
 	gameObj->setName(name);
 
@@ -841,7 +860,7 @@ int LuaScript::getName(lua_State * lua)
 	if (!lua_islightuserdata(lua, lua_gettop(lua))) throw "Expect: game object";
 	#endif
 
-	GameObject * gameObj = (GameObject*)lua_touserdata(lua, lua_gettop(lua));
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -1);
 	const char * name = gameObj->getName().c_str();
 
 	lua_pushstring(lua, name);
@@ -865,7 +884,7 @@ int LuaScript::keyPressed(lua_State * lua)
 	if (!lua_isnumber(lua, lua_gettop(lua))) throw "Expect: number";
 	#endif
 
-	int keyIndex = lua_tonumber(lua, lua_gettop(lua));
+	int keyIndex = lua_tonumber(lua, -1);
 	lua_pushboolean(lua, Input::GetKey((Input::KeyCode)keyIndex));
 
 	return 1;
@@ -877,7 +896,7 @@ int LuaScript::keyUp(lua_State * lua)
 	if (!lua_isnumber(lua, lua_gettop(lua))) throw "Expect: number";
 	#endif
 
-	int keyIndex = lua_tonumber(lua, lua_gettop(lua));
+	int keyIndex = lua_tonumber(lua, -1);
 	lua_pushboolean(lua, Input::GetKeyUp((Input::KeyCode)keyIndex));
 
 	return 1;
@@ -889,7 +908,7 @@ int LuaScript::keyDown(lua_State * lua)
 	if (!lua_isnumber(lua, lua_gettop(lua))) throw "Expect: number";
 	#endif
 
-	int keyIndex = lua_tonumber(lua, lua_gettop(lua));
+	int keyIndex = lua_tonumber(lua, -1);
 	lua_pushboolean(lua, Input::GetKeyDown((Input::KeyCode)keyIndex));
 
 	return 1;
@@ -901,7 +920,7 @@ int LuaScript::mouseButton(lua_State * lua)
 	if (!lua_isnumber(lua, lua_gettop(lua))) throw "Expect: number";
 	#endif
 
-	int button = lua_tonumber(lua, lua_gettop(lua));
+	int button = lua_tonumber(lua, -1);
 	lua_pushboolean(lua, Input::GetMouseButton(button));
 
 	return 1;
@@ -913,7 +932,7 @@ int LuaScript::mouseButtonUp(lua_State * lua)
 	if (!lua_isnumber(lua, lua_gettop(lua))) throw "Expect: number";
 	#endif
 
-	int button = lua_tonumber(lua, lua_gettop(lua));
+	int button = lua_tonumber(lua, -1);
 	lua_pushboolean(lua, Input::GetMouseButtonUp(button));
 
 	return 1;
@@ -933,6 +952,8 @@ int LuaScript::randomRange(lua_State * lua)
     int r1 = lua_tonumber(lua, -2);
     int r2 = lua_tonumber(lua, -1);
 
+    //lua_pop(lua,2);
+
     lua_pushinteger(lua,Utils::Random::GetValue(r1,r2));
 	return 1;
 }
@@ -941,6 +962,7 @@ int LuaScript::randomRange(lua_State * lua)
 int LuaScript::randomRoll(lua_State * lua)
 {
     int sides = lua_tonumber(lua, -1);
+    //lua_pop(lua,1);
     lua_pushboolean(lua,Utils::Random::Roll(sides));
 	return 1;
 }
@@ -955,8 +977,9 @@ int LuaScript::attachComponent(lua_State * lua)
 	if (!lua_islightuserdata(lua, -1)) throw "Expect: behaviour";
 	#endif
 
-	GameObject * gameObj = (GameObject*)lua_touserdata(lua, -2);
-	Component * comp = (Component*)lua_touserdata(lua, -1);
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -2);
+	Component * comp = (Component*)(LuaObject*)lua_touserdata(lua, -1);
+	//lua_pop(lua,2);
 
 	gameObj->AttachComponent(comp);
 
@@ -968,8 +991,9 @@ int LuaScript::sphereCollider(lua_State * lua)
 {
     SphereCollider* sphere = new SphereCollider();
     float rad = lua_tonumber(lua, -1);
+    //lua_pop(lua,1);
     sphere->radius = rad;
-    lua_pushlightuserdata(lua,sphere);
+    lua_pushlightuserdata(lua,(LuaObject*)sphere);
     return 1;
 }
 
@@ -979,10 +1003,12 @@ int LuaScript::boxCollider(lua_State * lua)
     float x = lua_tonumber(lua, -3);
     float y = lua_tonumber(lua, -2);
     float z = lua_tonumber(lua, -1);
+    //lua_pop(lua,3);
+
     box->xSize = x;
     box->ySize = y;
     box->zSize = z;
-    lua_pushlightuserdata(lua,box);
+    lua_pushlightuserdata(lua,(LuaObject*)box);
     return 1;
 }
 
@@ -992,10 +1018,12 @@ int LuaScript::wallCollider(lua_State * lua)
     float x = lua_tonumber(lua, -3);
     float y = lua_tonumber(lua, -2);
     float z = lua_tonumber(lua, -1);
+    //lua_pop(lua,3);
+
     wall->xSize = x;
     wall->ySize = y;
     wall->zSize = z;
-    lua_pushlightuserdata(lua,wall);
+    lua_pushlightuserdata(lua,(LuaObject*)wall);
     return 1;
 }
 
@@ -1003,21 +1031,29 @@ int LuaScript::luaScript(lua_State * lua)
 {
     string fileName = lua_tostring(lua, -1);
     lua_getglobal(lua,"world");
-    World* world = (World*)lua_touserdata(lua,-1);
+    World* world = (World*)(LuaObject*)lua_touserdata(lua,-1);
     lua_getglobal(lua,"GUI");
-    GUI * gui = (GUI*)lua_touserdata(lua,-1);
-    LuaScript* script = new LuaScript((config::MGE_SCRIPT_PATH+fileName).c_str(),world, gui);
-    lua_pushlightuserdata(lua,script);
+    GUI * gui = (GUI*)(LuaObject*)lua_touserdata(lua,-1);
+
+    //lua_pop(lua,3);
+
+    LuaScript* script = new LuaScript(fileName,world, gui);
+    lua_pushlightuserdata(lua,(LuaObject*)script);
     return 1;
 }
 
 int LuaScript::loadLevel(lua_State * lua)
 {
     string fileName = lua_tostring(lua, -1);
+
     lua_getglobal(lua,"world");
-    World* world = (World*)lua_touserdata(lua,-1);
+    World* world = (World*)(LuaObject*)lua_touserdata(lua,-1);
+
     lua_getglobal(lua,"GUI");
-    GUI * gui = (GUI*)lua_touserdata(lua,-1);
+    GUI * gui = (GUI*)(LuaObject*)lua_touserdata(lua,-1);
+
+    //lua_pop(lua,3);
+
     LevelEditor::LoadLevel(config::MGE_LEVEL_PATH + fileName,world,gui);
     return 0;
 }
@@ -1030,8 +1066,10 @@ int LuaScript::distance(lua_State * lua)
 	if (!lua_islightuserdata(lua, -1)) throw "Expect: game object";
 	#endif
 
-	GameObject * gameObj1 = (GameObject*)lua_touserdata(lua, -2);
-	GameObject * gameObj2 = (GameObject*)lua_touserdata(lua, -1);
+	GameObject * gameObj1 = (GameObject*)(LuaObject*)lua_touserdata(lua, -2);
+	GameObject * gameObj2 = (GameObject*)(LuaObject*)lua_touserdata(lua, -1);
+	//lua_pop(lua,2);
+
 	glm::vec3 pos1 = gameObj1->getWorldPosition();
 	glm::vec3 pos2 = gameObj2->getWorldPosition();
 	float distance = glm::distance(pos1, pos2);
@@ -1045,13 +1083,13 @@ void LuaScript::Update()
 {
 	lua_getglobal(L, "Update");
 	lua_call(L, 0, 0);
-	//cout<<_name<<"\n";
+	//cout<<_name<<" stack size: "<<lua_gettop(L)<<"\n";
 }
 
 void LuaScript::InvokeCollisionCallback(GameObject* other)
 {
     lua_getglobal(L, "OnCollision");
-    lua_pushlightuserdata(L,other);
+    lua_pushlightuserdata(L,(LuaObject*)other);
 	lua_call(L, 1, 0);
 }
 
@@ -1061,9 +1099,14 @@ int LuaScript::destroy(lua_State * lua)
 	if (!lua_islightuserdata(lua, -1)) throw "Expect: game object or component";
 	#endif
 
-    Destroyable* d = (Destroyable*)lua_touserdata(lua,-1);
-    if(d!=NULL)
-        d->Destroy();
+
+    LuaObject* l = (LuaObject*)lua_touserdata(lua,-1);
+
+    GameObject* g = dynamic_cast<GameObject*>(l);
+    if(g!=NULL){g->Destroy(); return 0;}
+
+    Component* c = dynamic_cast<Component*>(l);
+    if(c!=NULL) {c->Destroy(); return 0;}
 
 	return 0;
 }
@@ -1076,16 +1119,134 @@ int LuaScript::findChild(lua_State * lua)
 	#endif
 
 
-	GameObject* obj = (GameObject*)lua_touserdata(lua, -2);
+	GameObject* obj = (GameObject*)(LuaObject*)lua_touserdata(lua, -2);
 	string name = lua_tostring(lua,-1);
 
     GameObject* child = obj->FindChild(name);
 	if(child==NULL)
         lua_pushnil(lua);
     else
-        lua_pushlightuserdata(lua,child);
+        lua_pushlightuserdata(lua,(LuaObject*)child);
 
 	return 1;
+}
+
+int LuaScript::findComponent(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+    if (!lua_islightuserdata(lua, -2)) throw "Expect: game object";
+	if (!lua_isstring(lua, -1)) throw "Expect: string";
+	#endif
+
+	GameObject* obj = (GameObject*)(LuaObject*)lua_touserdata(lua, -2);
+	string name = lua_tostring(lua,-1);
+
+    Component* comp = obj->FindComponent(name);
+	if(comp==NULL)
+        lua_pushnil(lua);
+    else
+        lua_pushlightuserdata(lua,(LuaObject*)comp);
+
+	return 1;
+}
+
+int LuaScript::luaInvokeFunction(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+    if (!lua_islightuserdata(lua, -2)) throw "Expect: component";
+	if (!lua_isstring(lua, -1)) throw "Expect: string";
+	#endif
+
+	LuaScript* comp = (LuaScript*)(LuaObject*)lua_touserdata(lua, -2);
+	string name = lua_tostring(lua,-1);
+
+    comp->InvokeFunction(name);
+
+	return 0;
+}
+
+int LuaScript::luaInvokeFunctionWithArgs(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+    if (!lua_islightuserdata(lua, -2)) throw "Expect: component";
+	if (!lua_isstring(lua, -1)) throw "Expect: string";
+	#endif
+
+	//first take and pop the number of args and results passed by this function
+	int nArg = lua_tonumber(lua,-2);
+	int nRes = lua_tonumber(lua,-1);
+	//lua_pop(lua,2);
+
+	LuaScript* script = (LuaScript*)(LuaObject*)lua_touserdata(lua,-nArg-4);
+	std::string func = lua_tostring(lua,-nArg-3);
+
+	lua_State* otherL = script->getLuaStatePointer();
+
+	float n; std::string s; int b; void* v;
+
+
+	//now pushing the arguments on the target script's stack
+	lua_getglobal(otherL,func.c_str());
+
+	for(int i = -(nArg-1)-3; i<-2; ++i)
+    {
+        int argType = lua_type(lua,i);
+
+        switch(argType)
+        {
+        case LUA_TNUMBER:
+            n = lua_tonumber(lua,i);
+            lua_pushnumber(otherL,n);
+            break;
+        case LUA_TSTRING:
+            s = lua_tostring(lua,i);
+            lua_pushstring(otherL,s.c_str());
+            break;
+        case LUA_TBOOLEAN:
+            b = lua_toboolean(lua,i);
+            lua_pushboolean(otherL,b);
+            break;
+        case LUA_TLIGHTUSERDATA:
+            v = lua_touserdata(lua,i);
+            lua_pushlightuserdata(otherL,v);
+            break;
+        }
+    }
+
+    //the actual function invoke
+
+    lua_call(otherL,nArg,nRes);
+
+    //now popping the results and putting them in the first script
+
+    for(int i = -nRes; i<0; ++i)
+    {
+        int argType = lua_type(otherL,i);
+
+        switch(argType)
+        {
+        case LUA_TNUMBER:
+            n = lua_tonumber(otherL,i);
+            lua_pushnumber(lua,n);
+            break;
+        case LUA_TSTRING:
+            s = lua_tostring(otherL,i);
+            lua_pushstring(lua,s.c_str());
+            break;
+        case LUA_TBOOLEAN:
+            b = lua_toboolean(otherL,i);
+            lua_pushboolean(lua,b);
+            break;
+        case LUA_TLIGHTUSERDATA:
+            v = lua_touserdata(otherL,i);
+            lua_pushlightuserdata(lua,v);
+            break;
+        }
+    }
+
+    lua_pop(otherL,nRes);//without this it leaks memory
+
+	return nRes;
 }
 
 int LuaScript::setScale(lua_State * lua)
@@ -1097,11 +1258,12 @@ int LuaScript::setScale(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
+    /*
 	GameObject * obj = (GameObject*)lua_touserdata(lua, -4);
 	float x = lua_tonumber(lua, -3);
 	float y = lua_tonumber(lua, -2);
 	float z = lua_tonumber(lua, -2);
-
+    */
 	//obj->
 
 	return 0;
