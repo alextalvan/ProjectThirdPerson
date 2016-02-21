@@ -1,7 +1,7 @@
 --Only called once, at instantiation. Do NOT reference myGameObject here
 function Start()
 
-     --a = Sprite("bricks.jpg",100,100,0.5,0.5,0);
+
      --b = Sprite("Osama.jpg",500,500,45,1,1);
      --SetParent(a,b);
      --SetSpritePosition(b,100,100);
@@ -19,7 +19,8 @@ end
 function OnAttach()
     --print(GetName(myGameObject))
     LoadLevel("out.txt");
-    a = GameObject("topkek",123,124,125);
+    --a = GameObject("topkek",123,124,125);
+    a = Sprite("bricks.jpg",683,384,0,0.1,0.1);
 end
 
 --Called every game logic step

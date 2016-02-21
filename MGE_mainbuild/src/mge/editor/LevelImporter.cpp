@@ -235,10 +235,11 @@ namespace LevelEditor
                 //f>>s;//"name"
                 //f>>s;//the name
                 f>>s;//"radius"
-                float r;
+                float r; int ig;
                 f>>s; r = std::strtof(s.c_str(),nullptr);
-                SphereCollider* col = new SphereCollider();
-                col->radius = r;
+                f>>s;//"ignoreRaycast"
+                f>>ig;
+                SphereCollider* col = new SphereCollider(r,ig);
                 owner->AttachComponent(col);
                 f>>s;//end_sphere
             }

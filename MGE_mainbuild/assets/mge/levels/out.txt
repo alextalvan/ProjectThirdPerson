@@ -15,25 +15,23 @@ GAMEOBJECT:
    CHILDREN:
 
    GAMEOBJECT:
-      name test
+      name SphereTest
       transform: 
-         1  0  0  0  
-         0  1  0  6.28  
-         0  0  1  0  
+         2  0  0  21.15  
+         0  2  0  4.34  
+         0  0  2  35.1  
          0  0  0  1  
-      mesh cube_flat.obj
+      mesh sphere_smooth.obj
 
       COMPONENTS:
 
-         BOX_COLLIDER:
-            dimensions 2 2 2
-         END_BOX_COLLIDER
-         LUA_SCRIPT:
-            scriptName test.lua
-         END_LUA_SCRIPT
-         COLOR_MATERIAL:
-            color 0 0 0
-         END_COLOR_MATERIAL
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+         END_SPHERE_COLLIDER
+         TEXTURE_MATERIAL:
+            diffuseTex bricks.jpg
+         END_TEXTURE_MATERIAL
 
       END_COMPONENTS
 
@@ -166,7 +164,7 @@ GAMEOBJECT:
       name floor
       transform: 
          -4.768372E-06  0  -40  0  
-         0  2  0  0  
+         0  2  0  -0.55  
          40  0  -4.768372E-06  0  
          0  0  0  1  
       mesh cube_flat.obj
@@ -321,6 +319,36 @@ GAMEOBJECT:
          END_CHILDREN
 
       END_GAMEOBJECT
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name test
+      transform: 
+         1  0  0  0  
+         0  1  0  6.28  
+         0  0  1  0  
+         0  0  0  1  
+      mesh cube_flat.obj
+
+      COMPONENTS:
+
+         BOX_COLLIDER:
+            dimensions 2 2 2
+         END_BOX_COLLIDER
+         LUA_SCRIPT:
+            scriptName test.lua
+         END_LUA_SCRIPT
+         COLOR_MATERIAL:
+            color 0 0 0
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
 
 
       END_CHILDREN

@@ -7,6 +7,7 @@ using namespace Utils;
 
 bool CollisionManager::collisionMatrix[10][10];
 DualLinkList<Collider> CollisionManager::_colliders;
+DualLinkList<RaycastList> CollisionManager::_raycastTargets;
 
 void CollisionManager::Initialize()
 {
@@ -102,10 +103,38 @@ void CollisionManager::DoCollisions()
     }
 }
 
-bool CollisionManager::Raycast(glm::vec3 origin, glm::vec3 direction, RaycastInfo& output)
+bool CollisionManager::Raycast(const Ray& ray, RaycastInfo& output)
 {
-    if(CollisionManager::_colliders.startNode==NULL)
-        return false;
+    DualLinkNode<RaycastList>* cn = CollisionManager::_raycastTargets.startNode;
 
+    GameObject* bestTarget = NULL;
+    float bestDistance = FLT_MAX;
+
+    float distance;
+
+    while(cn!=NULL)
+    {
+        Collider* colCast = (Collider*)cn;
+
+        if(colCast->IsActive())
+        {
+            bool result = colCast->RayTest(ray,distance);
+            if(result && distance < bestDistance)
+            {
+                bestDistance = distance;
+                bestTarget = colCast->getOwner();
+            }
+        }
+
+        cn = cn->nextNode;
+    }
+
+    if(bestTarget == NULL)
         return false;
+    else
+    {
+        output.object = bestTarget;
+        output.impactPoint = ray.origin + ray.direction * bestDistance;
+        return true;
+    }
 }

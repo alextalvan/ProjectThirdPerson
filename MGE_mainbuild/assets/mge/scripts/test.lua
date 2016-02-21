@@ -14,24 +14,16 @@ function OnAttach()
 end
 
 function Update()
-    if(GetKeyUp(57)) then
-
-        --print(mainScript)
-        --CallComplex(mainScript,"TestFunction",10,"testString","ayy",3,0) end
-        x,y,z = CallComplex(mainScript,"TestFunction4",50,700,2,3);
-        print(x)
-        print(y)
-        print(z)
-        end
 
 end
 
 function OnCollision(otherCollider)
-	--
+	if(GetName(otherCollider)~= "floor") then
+        Destroy(GetOwner(this)) end
 end
 
 function OnLevelLoad()
     --g = FindChild(world,"test");
     --Destroy(g);
-    mainScript = FindComponent(world,"LuaScript:main.lua")
+    --mainScript = FindComponent(world,"LuaScript:main.lua")
 end

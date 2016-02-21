@@ -7,12 +7,20 @@
 using namespace Utils;
 
 class Collider;
+class RaycastList;//dummy class for list templates
 //class GameObject;
 
 struct RaycastInfo
 {
     GameObject* object;
     glm::vec3 impactPoint;
+};
+
+struct Ray
+{
+    glm::vec3 origin;
+    glm::vec3 direction;
+    Ray(glm::vec3 orig,glm::vec3 dir) : origin(orig), direction(dir) {}
 };
 
 class CollisionManager
@@ -26,7 +34,7 @@ public:
     {
         DEFAULT,
         WALLS,
-        LAYER2,
+        IGNORE_RAYCAST,
         LAYER3,
         LAYER4,
         LAYER5,
@@ -39,13 +47,17 @@ public:
     static void SetLayerInteraction(COLLISION_LAYERS l1,COLLISION_LAYERS l2, bool value);
     static bool CheckLayerInteraction(COLLISION_LAYERS l1,COLLISION_LAYERS l2);
 
+    static bool Raycast(const Ray& ray, RaycastInfo& output);//Ray passed by reference but only for performance reasons, so it is read only
+
 private:
     static bool collisionMatrix[10][10];
     static DualLinkList<Collider> _colliders;
     static void Initialize();
     static void DoCollisions();
 
-    static bool Raycast(glm::vec3 origin, glm::vec3 direction, RaycastInfo& output);
+
+    static DualLinkList<RaycastList> _raycastTargets;
+
 };
 
 

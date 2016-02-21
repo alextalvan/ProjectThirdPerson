@@ -19,7 +19,10 @@ struct CollisionMTV
     float magnitude = 0;
 };
 
-class Collider : public Component, private DualLinkNode<Collider>
+//for raycasts - list template dummy class
+class RaycastList;
+
+class Collider : public Component, private DualLinkNode<Collider>, private DualLinkNode<RaycastList>
 {
 friend class CollisionManager;
 public:
@@ -30,11 +33,18 @@ public:
     virtual bool HitTest(SphereCollider* other) = 0;
     virtual bool HitTest(Collider* other) = 0;
 
-    bool ignoreRaycast = true;
+    //Ray passed by reference for performance reasons, so should be read only
+    //The impact point will be modified if the ray intersects the collider
+    virtual bool RayTest(const Ray& ray, float& distance) = 0;
+    void SetRaycastable(bool val);
+
 protected:
     Collider();
     virtual ~Collider();
     static CollisionMTV storedMTV;
+
+private:
+    bool ignoreRaycast = true;
 };
 
 

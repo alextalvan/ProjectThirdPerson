@@ -1,5 +1,6 @@
 #include <mge/behaviours/FirstPersonLook.hpp>
 #include <mge/util/Input.hpp>
+#include <mge/collision/CollisionManager.hpp>
 #include "SFML/Window.hpp"
 
 FirstPersonLook::FirstPersonLook(float turnSpeed)
@@ -33,6 +34,7 @@ void FirstPersonLook::Rotation()
 	if (rotationY < -89.0f)
 		rotationY = -89.0f;
 
+
     glm::mat4 newTransform;
 
     newTransform = glm::translate(newTransform,_owner->getWorldPosition());
@@ -42,6 +44,21 @@ void FirstPersonLook::Rotation()
     newTransform *= glm::rotate( glm::radians(-rotationY), glm::vec3(1.0f, 0.0f, 0.0f));
 
     _owner->setWorldTransform(newTransform);
+    /*
+    //temp testing raycast
+    glm::vec3 origin = glm::vec3(newTransform[3]);
+    glm::vec3 dir = glm::normalize(glm::vec3(newTransform[2])) * -1.0f;
+
+
+    RaycastInfo res;
+    Ray ray(origin,dir);
+    if(CollisionManager::Raycast(ray,res))
+    {
+        std::cout<<res.object->getName()<<"\n";
+    }
+    else
+        std::cout<<"\n";
+        */
 
 }
 

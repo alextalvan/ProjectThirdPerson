@@ -15493,18 +15493,18 @@
 1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\rotatingbehaviour.hpp
 	"mge/behaviours/Component.hpp"
 
-1455974087 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\boxcollider.cpp
+1456082054 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\boxcollider.cpp
 	<mge/collision/BoxCollider.hpp>
 	<mge/collision/SphereCollider.hpp>
 	<mge/core/GameObject.hpp>
 	<glm.hpp>
 	<limits>
 
-1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\boxcollider.hpp
+1456082046 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\boxcollider.hpp
 	<mge/collision/Collider.hpp>
 	<mge/collision/SphereCollider.hpp>
 
-1455880692 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collider.hpp
+1456082032 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collider.hpp
 	<mge/behaviours/Component.hpp>
 	<mge/util/list/DualLinkNode.hpp>
 	<mge/collision/CollisionManager.hpp>
@@ -15514,7 +15514,7 @@
 1455933191 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\list\duallinknode.hpp
 	<cstddef>
 
-1455883353 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.hpp
+1456089177 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.hpp
 	<mge/util/list/DualLinkList.hpp>
 	<mge/core/AbstractGame.hpp>
 	<mge/core/GameObject.hpp>
@@ -15525,28 +15525,30 @@
 	<functional>
 	<mge/util/list/DualLinkNode.hpp>
 
-1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\spherecollider.hpp
+1456082030 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\spherecollider.hpp
 	<mge/collision/Collider.hpp>
+	<mge/util/list/DualLinkNode.hpp>
+	<mge/collision/CollisionManager.hpp>
 
-1455798177 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collider.cpp
+1456061104 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collider.cpp
 	<mge/collision/Collider.hpp>
 	<mge/collision/CollisionManager.hpp>
 
-1455883301 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.cpp
+1456086385 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.cpp
 	<mge/collision/CollisionManager.hpp>
 	<mge/util/list/DualLinkNode.hpp>
 	<mge/collision/Collider.hpp>
 	<mge/lua/LuaScript.hpp>
 	<mge/core/GameObject.hpp>
 
-1455974104 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\spherecollider.cpp
+1456084873 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\spherecollider.cpp
 	<mge/collision/SphereCollider.hpp>
 	<mge/collision/BoxCollider.hpp>
 	<mge/core/GameObject.hpp>
 	<glm.hpp>
 	<iostream>
 
-1455885967 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
+1456088966 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
 	"AbstractGame.hpp"
 	<iostream>
 	"mge/core/Time.hpp"
@@ -15695,7 +15697,7 @@
 1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\abstractmaterial.cpp
 	"mge/materials/AbstractMaterial.hpp"
 
-1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\colormaterial.cpp
+1456007303 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\colormaterial.cpp
 	<glm.hpp>
 	"mge/materials/ColorMaterial.hpp"
 	"mge/config.hpp"
@@ -15719,7 +15721,7 @@
 	"mge/config.hpp"
 	<string>
 
-1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\terrainmaterial.cpp
+1456007335 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\terrainmaterial.cpp
 	<glm.hpp>
 	"mge/materials/TerrainMaterial.hpp"
 	"mge/core/Texture.hpp"
@@ -15731,7 +15733,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1455883431 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
+1456007361 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
 	<glm.hpp>
 	"mge/materials/TextureLitMaterial.hpp"
 	"mge/core/Texture.hpp"
@@ -15745,7 +15747,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturematerial.cpp
+1456008159 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturematerial.cpp
 	<glm.hpp>
 	"mge/materials/TextureMaterial.hpp"
 	"mge/core/Texture.hpp"
@@ -16025,7 +16027,7 @@
 1455106687 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\wallcollider.hpp
 	"mge/collision/BoxCollider.hpp"
 
-1455825110 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
+1456089516 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
 	"CharacterController.hpp"
 	"mge/core/GameObject.hpp"
 	"mge/core/Camera.hpp"
@@ -16038,7 +16040,7 @@
 	"mge/collision/SphereCollider.hpp"
 	"mge/util/Timer.hpp"
 
-1455982326 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
+1456085709 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
 	<mge/editor/LevelImporter.hpp>
 	<mge/config.hpp>
 	<glm.hpp>
@@ -16066,9 +16068,10 @@
 1455310221 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\firstpersonvision.hpp
 	<mge/behaviours/Component.hpp>
 
-1455827028 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\firstpersonlook.cpp
+1456089280 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\firstpersonlook.cpp
 	<mge/behaviours/FirstPersonLook.hpp>
 	<mge/util/Input.hpp>
+	<mge/collision/CollisionManager.hpp>
 	"SFML/Window.hpp"
 
 1455821627 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\firstpersonlook.hpp
