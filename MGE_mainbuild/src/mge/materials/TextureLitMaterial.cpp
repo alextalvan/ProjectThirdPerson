@@ -6,6 +6,7 @@
 #include "mge/core/Mesh.hpp"
 #include "mge/config.hpp"
 #include "mge/core/Light.hpp"
+#include "mge/core/Renderer.hpp"
 #include <string>
 
 ShaderProgram* TextureLitMaterial::_shader = NULL;
@@ -13,10 +14,12 @@ ShaderProgram* TextureLitMaterial::_shader = NULL;
 GLint TextureLitMaterial::_projMatLoc = 0;
 GLint TextureLitMaterial::_viewMatLoc = 0;
 GLint TextureLitMaterial::_modelMatLoc = 0;
+GLint TextureLitMaterial::_lightMatLoc = 0;
 
 GLint TextureLitMaterial::_diffMapLoc = 0;
 GLint TextureLitMaterial::_normalMapLoc = 0;
 GLint TextureLitMaterial::_specMapLoc = 0;
+GLint TextureLitMaterial::_shadowMapLoc = 0;
 
 GLint TextureLitMaterial::_viewPosLoc = 0;
 
@@ -69,10 +72,12 @@ void TextureLitMaterial::_lazyInitializeShader() {
         _projMatLoc = _shader->getUniformLocation("projectionMatrix");
         _viewMatLoc = _shader->getUniformLocation("viewMatrix");
         _modelMatLoc = _shader->getUniformLocation("modelMatrix");
+        _lightMatLoc = _shader->getUniformLocation("lightMatrix");
 
         _diffMapLoc = _shader->getUniformLocation("material.diffuseMap");
         _normalMapLoc = _shader->getUniformLocation("material.normalMap");
         _specMapLoc = _shader->getUniformLocation("material.specularMap");
+        _shadowMapLoc = _shader->getUniformLocation("shadowMap");
 
         _viewPosLoc = _shader->getUniformLocation("viewPos");
 
@@ -100,8 +105,8 @@ void TextureLitMaterial::setNormalMapTexture (Texture* pNormalMapTexture) {
 }
 
 void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pCamera) {
-    if (!_diffuseTexture)
-        return;
+    if (!_diffuseTexture) return;
+    if (!Renderer::getDepthMap()) return;
 
     _shader->use();
 
@@ -109,16 +114,20 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
     glBindTexture(GL_TEXTURE_2D, _diffuseTexture->getId());
     glUniform1i (_diffMapLoc, 0);
 
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, Renderer::getDepthMap());
+    glUniform1i (_shadowMapLoc, 1);
+
     if (specularMap) {
-        glActiveTexture(GL_TEXTURE1);
+        glActiveTexture(GL_TEXTURE2);
         glBindTexture(GL_TEXTURE_2D, _specularMapTexture->getId());
-        glUniform1i (_specMapLoc, 1);
+        glUniform1i (_specMapLoc, 2);
     }
 
     if (normalMap) {
-        glActiveTexture(GL_TEXTURE2);
+        glActiveTexture(GL_TEXTURE3);
         glBindTexture(GL_TEXTURE_2D, _normalMapTexture->getId());
-        glUniform1i (_normalMapLoc, 2);
+        glUniform1i (_normalMapLoc, 3);
     }
 
 	glUniform1f(_matSmoothLoc, _smoothness);
@@ -135,6 +144,8 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
     glUniform1i(_shader->getUniformLocation("lightCount"),list.GetCount());
 
     DualLinkNode<Light>* cn = list.startNode;
+
+    GLfloat near_plane = 1.0f, far_plane = 25.0f;
 
     while(cn!=NULL && index < MGE_MAX_LIGHTS)
     {
@@ -160,9 +171,20 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
         loc = _shader->getUniformLocation("LightArray[" + indexString + "].angle");
         glUniform1f(loc,glm::cos(light->getAngle()));
 
+        if (light->getType() == MGE_LIGHT_DIRECTIONAL) {
+            glm::mat4 lightProjection, lightView;
+            glm::mat4 lightSpaceMatrix;
+            GLfloat near_plane = 1.0f, far_plane = 50.0f;
+            lightProjection = glm::ortho(-25.0f, 25.0f, -25.0f, 25.0f, near_plane, far_plane);
+            //lightProjection = glm::perspective(45.0f, (GLfloat)1024 / (GLfloat)768, near_plane, far_plane);
+            // Note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene.
+            lightView = light->getWorldTransform();
+            lightSpaceMatrix = lightProjection * lightView;
+            glUniformMatrix4fv(_lightMatLoc, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
+        }
+
         ++index;
         cn = cn->nextNode;
-
     }
 
 	//set view pos

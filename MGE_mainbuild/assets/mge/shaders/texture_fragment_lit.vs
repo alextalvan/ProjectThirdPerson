@@ -5,6 +5,7 @@
 uniform	mat4 projectionMatrix;
 uniform	mat4 viewMatrix;
 uniform	mat4 modelMatrix;
+uniform mat4 lightMatrix;
 
 layout (location = 0) in vec3 vertex;
 layout (location = 1) in vec3 normal;
@@ -12,6 +13,7 @@ layout (location = 2) in vec2 uv;
 layout (location = 3) in vec3 tangent;
 
 out vec3 FragPos;
+out vec4 FragPosLightSpace;
 out vec2 TexCoord;
 out vec3 Normal;
 out mat3 TBN;
@@ -32,6 +34,7 @@ void main( void )
     // then retrieve perpendicular vector B with the cross product of T and N
     vec3 B = cross(T, N);
     TBN = mat3(T, B, N);
+	FragPosLightSpace = lightMatrix * vec4(FragPos, 1.0);
 }
 
 

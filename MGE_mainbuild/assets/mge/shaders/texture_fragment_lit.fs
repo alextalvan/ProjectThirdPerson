@@ -4,6 +4,7 @@
 
 uniform int lightCount;
 uniform vec3 viewPos;
+uniform sampler2D shadowMap;
 
 struct Material
 {
@@ -30,12 +31,14 @@ struct Light
 uniform Light LightArray[MGE_MAX_LIGHTS];
 
 in vec3 FragPos;
+in vec4 FragPosLightSpace;
 in vec2 TexCoord;
 in vec3 Normal;
 in mat3 TBN;
 
 out vec4 fragment_color;
 
+float ShadowCalculation(vec4 pFragPosLightSpace, vec3 norm, vec3 lightDir);
 vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir);
 vec3 DoPointLight(int lightIndex, vec3 norm, vec3 fragPos, vec3 viewDir);
 vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 fragPos, vec3 viewDir);
@@ -73,9 +76,42 @@ void main( void )
     fragment_color = vec4(ambient + outColor,1.0f);
 }
 
+float ShadowCalculation(vec4 pFragPosLightSpace, vec3 norm, vec3 lightDir)
+{
+    // perform perspective divide
+    vec3 projCoords = pFragPosLightSpace.xyz / pFragPosLightSpace.w;
+    // Transform to [0,1] range
+    projCoords = projCoords * 0.5 + 0.5;
+    // Get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
+    float closestDepth = texture(shadowMap, projCoords.xy).r;
+    // Get depth of current fragment from light's perspective
+    float currentDepth = projCoords.z;
+    // Check whether current frag pos is in shadow
+    float bias = max(0.05 * (1.0 - dot(norm, lightDir)), 0.005);
+    //float shadow = currentDepth - bias > closestDepth  ? 1.0 : 0.0;
+
+    float shadow = 0.0;
+    vec2 texelSize = 1.0 / textureSize(shadowMap, 0);
+    for(int x = -1; x <= 1; ++x)
+    {
+        for(int y = -1; y <= 1; ++y)
+        {
+            float pcfDepth = texture(shadowMap, projCoords.xy + vec2(x, y) * texelSize).r;
+            shadow += currentDepth - bias > pcfDepth  ? 1.0 : 0.0;
+        }
+    }
+    shadow /= 9.0;
+
+    // Keep the shadow at 0.0 when outside the far_plane region of the light's frustum.
+    if(projCoords.z > 1.0)
+        shadow = 0.0;
+
+    return 1.0 - shadow;
+}
+
 vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir)
 {
-    vec3 lightDir = normalize(-LightArray[lightIndex].direction);
+    vec3 lightDir = normalize(-LightArray[lightIndex].direction); //!!!
 
     // Diffuse shading
     float diff = max(dot(norm, lightDir), 0.0);
@@ -90,8 +126,10 @@ vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir)
         specular = (LightArray[lightIndex].color + vec3(texture(material.specularMap, TexCoord))) * spec * material.smoothness;
     }
 
+    float shadow = ShadowCalculation(FragPosLightSpace, norm, lightDir);
+
     // Combine results
-    return (diffuse + specular);
+    return (diffuse + specular) * shadow;
 }
 
 vec3 DoPointLight(int lightIndex, vec3 norm, vec3 fragPos, vec3 viewDir)

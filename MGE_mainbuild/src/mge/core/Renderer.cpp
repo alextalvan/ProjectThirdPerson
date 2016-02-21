@@ -6,11 +6,15 @@
 #include "mge/core/World.hpp"
 #include "mge/core/Camera.hpp"
 #include "mge/materials/AbstractMaterial.hpp"
+#include "mge/util/list/DualLinkNode.hpp"
+#include "mge/core/Light.hpp"
+#include "mge/materials/ShadowMaterial.hpp"
 
 #include <iostream>
 using namespace std;
 
 GLuint Renderer::_postProcessVertexAttributeArray;
+GLuint Renderer::depthMap;
 
 Renderer::Renderer(int width, int height) : _screenWidth(width), _screenHeight(height)
 {
@@ -31,8 +35,10 @@ Renderer::Renderer(int width, int height) : _screenWidth(width), _screenHeight(h
 Renderer::~Renderer()
 {
     glDeleteRenderbuffers(1, &postProc_rbo_depth);
+    glDeleteRenderbuffers(1, &depthMapFBO);
     glDeleteTextures(1, &postProc_fbo_texture0);
     glDeleteTextures(1, &postProc_fbo_texture1);
+    glDeleteTextures(1, &depthMap);
     glDeleteFramebuffers(1, &postProc_fbo);
 }
 
@@ -40,11 +46,33 @@ void Renderer::setClearColor(int pR, int pG, int pB) {
     glClearColor((float)pR/0xff, (float)pG/0xff, (float)pB/0xff, 1.0f );
 }
 
+Light* Renderer::getDirLight()
+{
+    DualLinkNode<Light>* l = Light::GetLightList().startNode;
+    while (l != NULL) {
+            Light* light = (Light*)l;
+        if (light->getType() == MGE_LIGHT_DIRECTIONAL)
+            return light;
+        l = l -> nextNode;
+    }
+    return NULL;
+}
 
-
+GLuint Renderer::getDepthMap()
+{
+    return depthMap;
+}
 
 void Renderer::render (World* pWorld)
 {
+    ///shadow mapping (render depth map)
+    glViewport(0, 0, _screenWidth, _screenHeight);
+    glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+    glClear(GL_DEPTH_BUFFER_BIT);
+    //glCullFace(GL_FRONT);
+    renderShadowDepth (pWorld, pWorld, getDirLight(), true);
+    //glCullFace(GL_BACK);
+
     if(_postProcessList.size()>0)
     {
         glBindFramebuffer(GL_FRAMEBUFFER,postProc_fbo);
@@ -115,7 +143,29 @@ void Renderer::DoPostProcessing()
     //glEnable(GL_FRAMEBUFFER_SRGB);
 }
 
+void Renderer::renderShadowDepth (World* pWorld, GameObject * pGameObject, Light * light, bool pRecursive)
+{
+    //we don't render inactive gameobjects
+    if(!pGameObject->IsActive())
+        return;
 
+    ShadowMaterial* material = new ShadowMaterial();
+
+    //our material (shader + settings) determines how we actually look
+    if (pGameObject->getMesh() && material != NULL) {
+        material->render(pWorld, pGameObject, light);
+    }
+
+    if (!pRecursive) return;
+
+    int childCount = pGameObject->GetChildCount();
+    if (childCount < 1) return;
+
+    //note that with a loop like this, deleting children during rendering is not a good idea :)
+    for (int i = 0; i < childCount; i++) {
+        renderShadowDepth (pWorld, pGameObject->GetChildAt(i), light, pRecursive);
+    }
+}
 
 void Renderer::render (World* pWorld, GameObject * pGameObject, Camera * pCamera, bool pRecursive)
 {
@@ -168,6 +218,31 @@ void Renderer::InitializePostProc()
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _screenWidth, _screenHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
       glBindTexture(GL_TEXTURE_2D, 0);
+
+      ///depth map (shadow mapping)
+      //generate depth map texture
+      glActiveTexture(GL_TEXTURE0);
+      glGenTextures(1, &depthMap);
+      glBindTexture(GL_TEXTURE_2D, depthMap);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, _screenWidth, _screenHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+      //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+      //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+      GLfloat borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
+      glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+      glBindTexture(GL_TEXTURE_2D, 0);
+
+      ///depth buffer (shadow mapping)
+      //attach depth map texture to depth buffer
+      glGenFramebuffers(1, &depthMapFBO);
+      glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+      glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
+      glDrawBuffer(GL_NONE);
+      glReadBuffer(GL_NONE);
+      glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
       /* Depth buffer */
       glGenRenderbuffers(1, &postProc_rbo_depth);

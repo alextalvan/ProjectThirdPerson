@@ -17896,7 +17896,7 @@
 	<string>
 	<GL/glew.h>
 
-1455386195 d:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.hpp
+1455929043 d:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.hpp
 	<GL/glew.h>
 	<vector>
 	<mge/materials/PostProcessing/PostProcess.hpp>
@@ -18041,7 +18041,7 @@
 	<mge/core/Destroyable.hpp>
 	<mge/core/Light.hpp>
 
-1455907495 d:\github\projectthirdperson\mge_mainbuild\src\mge\core\light.hpp
+1455996339 d:\github\projectthirdperson\mge_mainbuild\src\mge\core\light.hpp
 	<mge/core/GameObject.hpp>
 	<glm.hpp>
 	"mge/util/list/DualLinkList.hpp"
@@ -18173,10 +18173,10 @@
 	"mge/core/World.hpp"
 	"mge/behaviours/Component.hpp"
 
-1455907495 source:d:\github\projectthirdperson\mge_mainbuild\src\mge\core\light.cpp
+1455996699 source:d:\github\projectthirdperson\mge_mainbuild\src\mge\core\light.cpp
 	<mge/core/Light.hpp>
 
-1455907495 source:d:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.cpp
+1456091558 source:d:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -18184,9 +18184,12 @@
 	"mge/core/World.hpp"
 	"mge/core/Camera.hpp"
 	"mge/materials/AbstractMaterial.hpp"
+	"mge/util/list/DualLinkNode.hpp"
+	"mge/core/Light.hpp"
+	"mge/materials/ShadowMaterial.hpp"
 	<iostream>
 
-1455907495 source:d:\github\projectthirdperson\mge_mainbuild\src\mge\core\texture.cpp
+1456091369 source:d:\github\projectthirdperson\mge_mainbuild\src\mge\core\texture.cpp
 	<iostream>
 	<string>
 	<SFML/Graphics.hpp>
@@ -18275,7 +18278,7 @@
 	"mge/gui/GUIButton.hpp"
 	"mge/util/ResourceCacher.hpp"
 
-1455907495 source:d:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
+1456090727 source:d:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
 	<glm.hpp>
 	"mge/materials/TextureLitMaterial.hpp"
 	"mge/core/Texture.hpp"
@@ -18283,9 +18286,10 @@
 	"mge/core/Mesh.hpp"
 	"mge/config.hpp"
 	"mge/core/Light.hpp"
+	"mge/core/Renderer.hpp"
 	<string>
 
-1455907495 d:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.hpp
+1455932956 d:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.hpp
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
@@ -18305,7 +18309,7 @@
 	<iostream>
 	"mge/core/Time.hpp"
 
-1455911738 source:d:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
+1456091913 source:d:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -18330,7 +18334,6 @@
 	<mge/collision/SphereCollider.hpp>
 	<mge/test/TestSphereCol.hpp>
 	<mge/collision/WallCollider.hpp>
-	<mge/behaviours/CameraOrbit.hpp>
 	<mge/sound/SoundManager.hpp>
 	<mge/sound/SoundChannel.hpp>
 	<mge/editor/LevelImporter.hpp>
@@ -18348,5 +18351,26 @@
 	"mge/core/Renderer.hpp"
 	"mge/core/World.hpp"
 	"mge/core/Camera.hpp"
+	"glm.hpp"
+
+1456090722 source:d:\github\projectthirdperson\mge_mainbuild\src\mge\materials\shadowmaterial.cpp
+	"mge/materials/ShadowMaterial.hpp"
+	<glm.hpp>
+	"mge/materials/ShadowMaterial.hpp"
+	"mge/core/Mesh.hpp"
+	"mge/config.hpp"
+	"mge/core/Light.hpp"
+	<string>
+
+1455932841 d:\github\projectthirdperson\mge_mainbuild\src\mge\materials\shadowmaterial.hpp
+	"mge/core/ShaderProgram.hpp"
+
+1456016157 source:d:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\orbitcomponent.cpp
+	"mge/behaviours/OrbitComponent.hpp"
+	"mge/core/GameObject.hpp"
+	"SFML/Window.hpp"
+
+1456016048 d:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\orbitcomponent.hpp
+	"mge/behaviours/Component.hpp"
 	"glm.hpp"
 

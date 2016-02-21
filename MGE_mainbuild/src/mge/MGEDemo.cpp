@@ -32,7 +32,6 @@ using namespace std;
 #include <mge/collision/SphereCollider.hpp>
 #include <mge/test/TestSphereCol.hpp>
 #include <mge/collision/WallCollider.hpp>
-#include <mge/behaviours/CameraOrbit.hpp>
 
 #include <mge/sound/SoundManager.hpp>
 #include <mge/sound/SoundChannel.hpp>
@@ -61,39 +60,42 @@ void MGEDemo::initialize() {
 void MGEDemo::_initializeScene()
 {
     /*
-    Camera* cam = new Camera("cam", glm::vec3(3,3,3));
+    Camera* cam = new Camera("cam", glm::vec3(10,10,10));
     _world->setMainCamera(cam);
     _world->AddChild(cam);
 
+    Mesh* planeMesh = Mesh::load(config::MGE_MODEL_PATH + "plane20x20_2tris_aligned_uvs.obj");
     Mesh* cubeMesh = Mesh::load(config::MGE_MODEL_PATH + "cube_flat.obj");
     Texture* brickTex = Texture::load(config::MGE_TEXTURE_PATH + "brickwall.jpg");
     Texture* brickNorm = Texture::load(config::MGE_TEXTURE_PATH + "brickwall_normal.jpg");
     Texture* brickMet = Texture::load(config::MGE_TEXTURE_PATH + "brickwall.jpg");
-    TextureLitMaterial* litMat = new TextureLitMaterial(brickTex, 0.25f, 32.0f, 0.1f, brickMet, brickNorm);
+    TextureLitMaterial* litMat = new TextureLitMaterial(brickTex, 0.2f, 32.0f, 0.1f, brickMet, brickNorm);
 
-    //GameObject* planeCube = new GameObject("cube1", glm::vec3(0,-6,0));
-    //planeCube->setMesh(cubeMesh);
-    //planeCube->setMaterial(litMat);
-    //planeCube->scale(glm::vec3(5,5,5));
-    //_world->AddChild(planeCube);
+    GameObject* plane = new GameObject("plane", glm::vec3(0,-1,0));
+    plane->setMesh(planeMesh);
+    plane->setMaterial(litMat);
+    plane->scale(glm::vec3(1,1,1));
+    _world->AddChild(plane);
 
-    GameObject* testCube = new GameObject("cube2", glm::vec3(0,0,0));
+    GameObject* testCube = new GameObject("cube", glm::vec3(0,0,0));
     testCube->setMesh(cubeMesh);
     testCube->setMaterial(litMat);
     //testCube->scale(glm::vec3(0.5,0.5,0.5));
     _world->AddChild(testCube);
 
 
-    Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(50,50,50), testCube->getWorldPosition() - glm::vec3(5,3,3), glm::vec3(1,1,1));
-    Light* light2 = new Light(MGE_LIGHT_POINT, glm::vec3(2,0,2), glm::vec3(1,1,1), glm::vec3(0,1,1), glm::vec3(0.1f,0.1f,0.1f));
+    GameObject* testCube1 = new GameObject("cube1", glm::vec3(-5,0,3));
+    testCube1->setMesh(cubeMesh);
+    testCube1->setMaterial(litMat);
+    testCube1->rotate(0.46, glm::vec3(0,1,0));
+    _world->AddChild(testCube1);
+
+    Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-5,5,-5), testCube->getWorldPosition() - glm::vec3(-5,5,-5), glm::vec3(1,1,1));
+    Light* light2 = new Light(MGE_LIGHT_POINT, glm::vec3(0,0.5,2), glm::vec3(1,1,1), glm::vec3(1,0,0), glm::vec3(0.1f,0.1f,0.1f));
     //Light* light3 = new Light(MGE_LIGHT_SPOTLIGHT, glm::vec3(0,2,2), glm::vec3(0,-1,0), glm::vec3(0,0,1), glm::vec3(0.1f,0.1f,0.1f), 0.36f);
     cam->AttachComponent(new LookAt(testCube));
-
-    //GameObject* testCube2 = new GameObject("cube3", glm::vec3(0,0,2));
-    //testCube2->setMesh(cubeMesh);
-    //testCube2->setMaterial(litMat);
-    //testCube2->scale(glm::vec3(0.15,0.15,0.15));
-    //_world->AddChild(testCube2);
+    testCube1->AttachComponent(new KeysBehaviour(0.1,1));
+    _world->AddChild(light1);
     */
 }
 
