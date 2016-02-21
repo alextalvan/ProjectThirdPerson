@@ -11,10 +11,11 @@
 class Light : public GameObject, public DualLinkNode<Light>
 {
 public:
-    Light(int pType, glm::vec3 pPos = glm::vec3(0), glm::vec3 pDir = glm::vec3(0), glm::vec3 pColor = glm::vec3(1), glm::vec3 pAtt = glm::vec3(0.1f), float pAngle = 0.36f);
     #define MGE_LIGHT_DIRECTIONAL 0
     #define MGE_LIGHT_POINT 1
     #define MGE_LIGHT_SPOTLIGHT 2
+    Light(int pType = MGE_LIGHT_DIRECTIONAL, glm::vec3 pPos = glm::vec3(0), glm::vec3 pDir = glm::vec3(0), glm::vec3 pColor = glm::vec3(1), glm::vec3 pAtt = glm::vec3(0.1f), float pAngle = 0.36f);
+
     static DualLinkList<Light> const GetLightList();
     void setType(int pType);
     void setDirection(glm::vec3 pDir);
@@ -30,7 +31,7 @@ protected:
     virtual ~Light();
 private:
     static DualLinkList<Light> _lightList;
-    int _type = MGE_LIGHT_DIRECTIONAL;
+    int _type;
     glm::vec3 _color;
     glm::vec3 _attenuation;
     float _angle;//45 deg, angle for spotlights

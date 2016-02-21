@@ -65,6 +65,8 @@
 		<Unit filename="assets/mge/shaders/PostProcessing/identity.vs" />
 		<Unit filename="assets/mge/shaders/color.fs" />
 		<Unit filename="assets/mge/shaders/color.vs" />
+		<Unit filename="assets/mge/shaders/depth_shader.fs" />
+		<Unit filename="assets/mge/shaders/depth_shader.vs" />
 		<Unit filename="assets/mge/shaders/terrain.fs" />
 		<Unit filename="assets/mge/shaders/terrain.vs" />
 		<Unit filename="assets/mge/shaders/texture.fs" />
@@ -155,6 +157,8 @@
 		<Unit filename="src/mge/materials/ColorMaterial.hpp" />
 		<Unit filename="src/mge/materials/PostProcessing/PostProcess.cpp" />
 		<Unit filename="src/mge/materials/PostProcessing/PostProcess.hpp" />
+		<Unit filename="src/mge/materials/ShadowMaterial.cpp" />
+		<Unit filename="src/mge/materials/ShadowMaterial.hpp" />
 		<Unit filename="src/mge/materials/TerrainMaterial.cpp" />
 		<Unit filename="src/mge/materials/TerrainMaterial.hpp" />
 		<Unit filename="src/mge/materials/TextureLitMaterial.cpp" />
