@@ -14,24 +14,18 @@ GAMEOBJECT:
 
    CHILDREN:
 
-   GAMEOBJECT:
-      name SphereTest
+
+   DIRECTIONAL_LIGHT:
+      name Light
       transform: 
-         2  0  0  21.15  
-         0  2  0  4.34  
-         0  0  2  35.1  
+         1  0  0  0  
+         0  0.6632938  -0.748359  100  
+         0  0.748359  0.6632938  0  
          0  0  0  1  
-      mesh sphere_smooth.obj
+      color 1 1 1
+      direction 0 -0.748359 0.6632938
 
       COMPONENTS:
-
-         SPHERE_COLLIDER:
-            radius 2
-            ignore_Raycast 0
-         END_SPHERE_COLLIDER
-         TEXTURE_MATERIAL:
-            diffuseTex bricks.jpg
-         END_TEXTURE_MATERIAL
 
       END_COMPONENTS
 
@@ -40,7 +34,7 @@ GAMEOBJECT:
 
       END_CHILDREN
 
-   END_GAMEOBJECT
+   END_DIRECTIONAL_LIGHT
 
    GAMEOBJECT:
       name Character
@@ -250,6 +244,34 @@ GAMEOBJECT:
          END_CHILDREN
 
       END_GAMEOBJECT
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest
+      transform: 
+         2  0  0  21.15  
+         0  2  0  4.34  
+         0  0  2  35.1  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+         END_SPHERE_COLLIDER
+         TEXTURE_MATERIAL:
+            diffuseTex bricks.jpg
+         END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
 
 
       END_CHILDREN

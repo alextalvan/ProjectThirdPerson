@@ -44,6 +44,7 @@ void FirstPersonLook::Rotation()
     newTransform *= glm::rotate( glm::radians(-rotationY), glm::vec3(1.0f, 0.0f, 0.0f));
 
     _owner->setWorldTransform(newTransform);
+
     /*
     //temp testing raycast
     glm::vec3 origin = glm::vec3(newTransform[3]);
@@ -52,13 +53,13 @@ void FirstPersonLook::Rotation()
 
     RaycastInfo res;
     Ray ray(origin,dir);
-    if(CollisionManager::Raycast(ray,res))
+    if(Input::GetKey(Input::J) &&CollisionManager::Raycast(ray,res))
     {
         std::cout<<res.object->getName()<<"\n";
     }
     else
         std::cout<<"\n";
-        */
+    */
 
 }
 
