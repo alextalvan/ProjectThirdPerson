@@ -165,8 +165,8 @@ void AbstractGame::TimedStep()
     while(_timeAccumultor>= _targetFrameTime)
     {
         _processEvents();
-        _update();
         CollisionManager::DoCollisions();
+        _update();
         logicUpdated = true;
         _timeAccumultor -= _targetFrameTime;
         Input::EndLoopReset();

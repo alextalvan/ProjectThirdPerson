@@ -19,8 +19,8 @@ GLuint Renderer::depthMap;
 Renderer::Renderer(int width, int height) : _screenWidth(width), _screenHeight(height)
 {
 	glEnable( GL_DEPTH_TEST );
-	//glEnable( GL_CULL_FACE ); // default GL_BACK
-	//glCullFace(GL_FRONT);
+	glEnable( GL_CULL_FACE ); // default GL_BACK
+	glCullFace(GL_FRONT);
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glClearColor((float)0x2d/0xff, (float)0x6b/0xff, (float)0xce/0xff, 1.0f );
@@ -66,12 +66,15 @@ GLuint Renderer::getDepthMap()
 void Renderer::render (World* pWorld)
 {
     ///shadow mapping (render depth map)
-    glViewport(0, 0, _screenWidth, _screenHeight);
+    glViewport(0, 0, _screenWidth*2, _screenHeight*2);
     glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
     glClear(GL_DEPTH_BUFFER_BIT);
-    //glCullFace(GL_FRONT);
-    renderShadowDepth (pWorld, pWorld, getDirLight(), true);
-    //glCullFace(GL_BACK);
+    glCullFace(GL_BACK);
+    Light * dirLight = getDirLight();
+    if (dirLight)
+        renderShadowDepth (pWorld, pWorld, dirLight, true);
+    glCullFace(GL_FRONT);
+    glViewport(0, 0, _screenWidth, _screenHeight);
 
     if(_postProcessList.size()>0)
     {
@@ -224,7 +227,7 @@ void Renderer::InitializePostProc()
       glActiveTexture(GL_TEXTURE0);
       glGenTextures(1, &depthMap);
       glBindTexture(GL_TEXTURE_2D, depthMap);
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, _screenWidth, _screenHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, _screenWidth*2, _screenHeight*2, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
       //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

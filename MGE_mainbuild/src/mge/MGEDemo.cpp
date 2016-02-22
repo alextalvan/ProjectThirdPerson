@@ -59,8 +59,7 @@ void MGEDemo::initialize() {
 //build the game _world
 void MGEDemo::_initializeScene()
 {
-    /*
-    Camera* cam = new Camera("cam", glm::vec3(10,10,10));
+    Camera* cam = new Camera("cam", glm::vec3(15,15,15));
     _world->setMainCamera(cam);
     _world->AddChild(cam);
 
@@ -84,19 +83,72 @@ void MGEDemo::_initializeScene()
     _world->AddChild(testCube);
 
 
-    GameObject* testCube1 = new GameObject("cube1", glm::vec3(-5,0,3));
+    GameObject* testCube1 = new GameObject("cube1", glm::vec3(3,0,3));
     testCube1->setMesh(cubeMesh);
     testCube1->setMaterial(litMat);
     testCube1->rotate(0.46, glm::vec3(0,1,0));
     _world->AddChild(testCube1);
 
-    Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-5,5,-5), testCube->getWorldPosition() - glm::vec3(-5,5,-5), glm::vec3(1,1,1));
+
+    testCube1 = new GameObject("cube1", glm::vec3(3,0,3));
+    testCube1->setMesh(cubeMesh);
+    testCube1->setMaterial(litMat);
+    testCube1->rotate(0.46, glm::vec3(0,1,0));
+    _world->AddChild(testCube1);
+
+
+    testCube1 = new GameObject("cube1", glm::vec3(3,0,3));
+    testCube1->setMesh(cubeMesh);
+    testCube1->setMaterial(litMat);
+    testCube1->rotate(0.46, glm::vec3(0,1,0));
+    _world->AddChild(testCube1);
+
+
+    testCube1 = new GameObject("cube1", glm::vec3(3,0,3));
+    testCube1->setMesh(cubeMesh);
+    testCube1->setMaterial(litMat);
+    testCube1->rotate(0.46, glm::vec3(0,1,0));
+    _world->AddChild(testCube1);
+
+    testCube1 = new GameObject("cube1", glm::vec3(3,0,3));
+    testCube1->setMesh(cubeMesh);
+    testCube1->setMaterial(litMat);
+    testCube1->rotate(0.46, glm::vec3(0,1,0));
+    _world->AddChild(testCube1);
+
+
+    testCube1 = new GameObject("cube1", glm::vec3(7,0,3));
+    testCube1->setMesh(cubeMesh);
+    testCube1->setMaterial(litMat);
+    testCube1->rotate(0.46, glm::vec3(0,1,0));
+    _world->AddChild(testCube1);
+
+
+    testCube1 = new GameObject("cube1", glm::vec3(10,0,-5));
+    testCube1->setMesh(cubeMesh);
+    testCube1->setMaterial(litMat);
+    testCube1->rotate(0.46, glm::vec3(0,1,0));
+    _world->AddChild(testCube1);
+
+
+    testCube1 = new GameObject("cube1", glm::vec3(-3,0,-3));
+    testCube1->setMesh(cubeMesh);
+    testCube1->setMaterial(litMat);
+    testCube1->rotate(0.46, glm::vec3(0,1,0));
+    _world->AddChild(testCube1);
+
+
+    testCube1 = new GameObject("cube1", glm::vec3(5,0,5));
+    testCube1->setMesh(cubeMesh);
+    testCube1->setMaterial(litMat);
+    testCube1->rotate(0.46, glm::vec3(0,1,0));
+    _world->AddChild(testCube1);
+
+    Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -1, 1), glm::vec3(1,1,1));
     Light* light2 = new Light(MGE_LIGHT_POINT, glm::vec3(0,0.5,2), glm::vec3(1,1,1), glm::vec3(1,0,0), glm::vec3(0.1f,0.1f,0.1f));
     //Light* light3 = new Light(MGE_LIGHT_SPOTLIGHT, glm::vec3(0,2,2), glm::vec3(0,-1,0), glm::vec3(0,0,1), glm::vec3(0.1f,0.1f,0.1f), 0.36f);
     cam->AttachComponent(new LookAt(testCube));
     testCube1->AttachComponent(new KeysBehaviour(0.1,1));
-    _world->AddChild(light1);
-    */
 }
 
 void MGEDemo::_render()

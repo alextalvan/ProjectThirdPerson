@@ -7,13 +7,21 @@ CollisionMTV Collider::storedMTV;
 
 Collider::Collider()
 {
-    CollisionManager::_colliders.Add(this);
+    CollisionManager::_colliders.Add((DualLinkNode<Collider>*)this);
 }
 
 Collider::~Collider()
 {
-    CollisionManager::_colliders.Remove(this);
+    CollisionManager::_colliders.Remove((DualLinkNode<Collider>*)this);
 }
 
 
+void Collider::SetRaycastable(bool val)
+{
+    ignoreRaycast = !val;
 
+    if(val)
+        CollisionManager::_raycastTargets.Add((DualLinkNode<RaycastList>*)this);
+    else
+        CollisionManager::_raycastTargets.Remove((DualLinkNode<RaycastList>*)this);
+}

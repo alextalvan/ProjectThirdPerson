@@ -40,8 +40,8 @@ out vec4 fragment_color;
 
 float ShadowCalculation(vec4 pFragPosLightSpace, vec3 norm, vec3 lightDir);
 vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir);
-vec3 DoPointLight(int lightIndex, vec3 norm, vec3 fragPos, vec3 viewDir);
-vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 fragPos, vec3 viewDir);
+vec3 DoPointLight(int lightIndex, vec3 norm, vec3 viewDir);
+vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 viewDir);
 
 void main( void )
 {
@@ -66,10 +66,10 @@ void main( void )
             outColor += DoDirectionalLight(i, normal, viewDir);
 
         if(LightArray[i].type==1)
-            outColor += DoPointLight(i, normal, FragPos, viewDir);
+            outColor += DoPointLight(i, normal, viewDir);
 
         //if(LightArray[i].type==2)
-        //    outColor += DoSpotlight(i, normal, FragPos, viewDir);
+        //    outColor += DoSpotlight(i, normal, viewDir);
     }
 
     vec3 ambient = vec3(texture(material.diffuseMap, TexCoord)) * material.ambient;
@@ -79,20 +79,20 @@ void main( void )
 float ShadowCalculation(vec4 pFragPosLightSpace, vec3 norm, vec3 lightDir)
 {
     // perform perspective divide
-    vec3 projCoords = pFragPosLightSpace.xyz / pFragPosLightSpace.w;
+    vec3 projCoords = pFragPosLightSpace.xyz;
     // Transform to [0,1] range
     projCoords = projCoords * 0.5 + 0.5;
     // Get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
-    float closestDepth = texture(shadowMap, projCoords.xy).r;
+    float closestDepth = texture(shadowMap, vec2(projCoords.x,projCoords.y)).r;
     // Get depth of current fragment from light's perspective
     float currentDepth = projCoords.z;
     // Check whether current frag pos is in shadow
-    float bias = max(0.05 * (1.0 - dot(norm, lightDir)), 0.005);
+    float bias = max(0.00001 * (1.0 - dot(norm, lightDir)), 0.00001);
     //float shadow = currentDepth - bias > closestDepth  ? 1.0 : 0.0;
 
     float shadow = 0.0;
     vec2 texelSize = 1.0 / textureSize(shadowMap, 0);
-    for(int x = -1; x <= 1; ++x)
+    for(float x = -1; x <= 1; ++x)
     {
         for(int y = -1; y <= 1; ++y)
         {
@@ -132,9 +132,9 @@ vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir)
     return (diffuse + specular) * shadow;
 }
 
-vec3 DoPointLight(int lightIndex, vec3 norm, vec3 fragPos, vec3 viewDir)
+vec3 DoPointLight(int lightIndex, vec3 norm, vec3 viewDir)
 {
-    vec3 lightDir = normalize(LightArray[lightIndex].position - fragPos);
+    vec3 lightDir = normalize(LightArray[lightIndex].position - FragPos);
     // Diffuse shading
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, TexCoord)) * diff;
@@ -149,7 +149,7 @@ vec3 DoPointLight(int lightIndex, vec3 norm, vec3 fragPos, vec3 viewDir)
     }
 
     // Attenuation
-    float distance = length(LightArray[lightIndex].position - fragPos);
+    float distance = length(LightArray[lightIndex].position - FragPos);
     vec3 att = LightArray[lightIndex].attenuation;
     float attenuation = 1.0f / (att.x + att.y * distance + att.z * distance * distance);
 
@@ -157,9 +157,9 @@ vec3 DoPointLight(int lightIndex, vec3 norm, vec3 fragPos, vec3 viewDir)
     return (diffuse + specular) * attenuation;
 }
 
-vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 fragPos, vec3 viewDir)
+vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 viewDir)
 {
-    vec3 lightDir = normalize(LightArray[lightIndex].position - fragPos);
+    vec3 lightDir = normalize(LightArray[lightIndex].position - FragPos);
     // Diffuse shading
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, TexCoord)) * diff;
@@ -174,7 +174,7 @@ vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 fragPos, vec3 viewDir)
     }
 
     // Attenuation
-    float distance = length(LightArray[lightIndex].position - fragPos);
+    float distance = length(LightArray[lightIndex].position - FragPos);
     vec3 att = LightArray[lightIndex].attenuation;
     float attenuation = 1.0f / (att.x + att.y * distance + att.z * distance * distance);
 

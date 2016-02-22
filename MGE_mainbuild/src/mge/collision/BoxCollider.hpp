@@ -17,6 +17,7 @@ protected:
     bool HitTest(SphereCollider* other) override;
     bool HitTest(BoxCollider* other) override;
     bool HitTest(Collider* other) override;
+    bool RayTest(const Ray& ray, float& distance) override;
 
 private:
     bool InternalHitTest(SphereCollider* other);

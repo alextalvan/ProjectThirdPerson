@@ -153,25 +153,21 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
         Light* light = (Light*)cn;
         GLuint loc;
 
+        int lightType = light->getType();
         loc = _shader->getUniformLocation("LightArray[" + indexString + "].type");
-        glUniform1i(loc,light->getType());
-
-        loc = _shader->getUniformLocation("LightArray[" + indexString + "].position");
-        glUniform3fv(loc,1,glm::value_ptr(light->getWorldPosition()));
-
-        loc = _shader->getUniformLocation("LightArray[" + indexString + "].direction");
-        glUniform3fv(loc,1,glm::value_ptr(light->getDirection()));
+        glUniform1i(loc,lightType);
 
         loc = _shader->getUniformLocation("LightArray[" + indexString + "].color");
         glUniform3fv(loc,1,glm::value_ptr(light->getColor()));
 
-        loc = _shader->getUniformLocation("LightArray[" + indexString + "].attenuation");
-        glUniform3fv(loc,1,glm::value_ptr(light->getAttenuation()));
+        if (lightType == MGE_LIGHT_DIRECTIONAL) {
+            //glm::vec3 shadowLightDir = glm::vec3(shadowMat[2]);
 
-        loc = _shader->getUniformLocation("LightArray[" + indexString + "].angle");
-        glUniform1f(loc,glm::cos(light->getAngle()));
+            //loc = _shader->getUniformLocation("shadowDir");
+            //glUniform3fv(loc,1,glm::value_ptr(shadowLightDir));
+            loc = _shader->getUniformLocation("LightArray[" + indexString + "].direction");
+            glUniform3fv(loc,1,glm::value_ptr(light->getDirection()));
 
-        if (light->getType() == MGE_LIGHT_DIRECTIONAL) {
             glm::mat4 lightProjection, lightView;
             glm::mat4 lightSpaceMatrix;
             GLfloat near_plane = 1.0f, far_plane = 50.0f;
@@ -181,6 +177,18 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
             lightView = light->getWorldTransform();
             lightSpaceMatrix = lightProjection * lightView;
             glUniformMatrix4fv(_lightMatLoc, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
+        } else if (lightType == MGE_LIGHT_POINT) {
+            loc = _shader->getUniformLocation("LightArray[" + indexString + "].position");
+            glUniform3fv(loc,1,glm::value_ptr(light->getWorldPosition()));
+            loc = _shader->getUniformLocation("LightArray[" + indexString + "].attenuation");
+            glUniform3fv(loc,1,glm::value_ptr(light->getAttenuation()));
+        } else {
+            loc = _shader->getUniformLocation("LightArray[" + indexString + "].position");
+            glUniform3fv(loc,1,glm::value_ptr(light->getWorldPosition()));
+            loc = _shader->getUniformLocation("LightArray[" + indexString + "].direction");
+            glUniform3fv(loc,1,glm::value_ptr(light->getDirection()));
+            loc = _shader->getUniformLocation("LightArray[" + indexString + "].angle");
+            glUniform1f(loc,glm::cos(light->getAngle()));
         }
 
         ++index;

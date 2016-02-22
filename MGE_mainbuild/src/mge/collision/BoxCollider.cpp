@@ -307,6 +307,9 @@ bool BoxCollider::HitTest(Collider* other)
 }
 
 
-
+bool BoxCollider::RayTest(const Ray& ray, float& distance)
+{
+    return false;//unimplemented
+}
 
 

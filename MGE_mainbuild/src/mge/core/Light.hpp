@@ -35,6 +35,7 @@ private:
     glm::vec3 _color;
     glm::vec3 _attenuation;
     float _angle;//45 deg, angle for spotlights
+    glm::vec3 _direction;
 };
 
 #endif // LIGHT_H

@@ -4,9 +4,13 @@
 #include <glm.hpp>
 #include <iostream>
 
-SphereCollider::SphereCollider()
+SphereCollider::SphereCollider(float r, bool ignorRay)
 {
     _name = "Sphere Collider";
+    radius = r;
+
+    if(!ignorRay)
+        SetRaycastable(true);
 }
 
 bool SphereCollider::HitTest(BoxCollider* other)
@@ -36,7 +40,39 @@ bool SphereCollider::HitTest(Collider* other)
     return other->HitTest(this);
 }
 
+bool SphereCollider::RayTest(const Ray& ray, float& distance)
+{
+    using namespace glm;
+    //algorithm taken from the 3D Math Primer by Fletcher Dunn, 1st edition
+
+    vec3 diff = _owner->getWorldPosition() - ray.origin;
+
+    float a = dot(ray.direction,diff);
+
+    if(a<0.0f) //ray points opposite of sphere
+        return false;
+
+    float diffSquared = dot(diff,diff);
+    float radSquared = radius * radius;
+
+    //check if the ray originates inside the sphere, we will consider this a miss
+    if(diffSquared < radSquared)
+        return false;
+
+    float fSquared = radSquared - diffSquared + a * a;
+
+    if(fSquared < 0.0f) //no intersection
+        return false;
+    else
+    {
+        distance = a - glm::sqrt(fSquared);
+        return true;
+    }
+    //return false;
+}
+
 SphereCollider::~SphereCollider()
 {
 
 }
+
