@@ -11954,7 +11954,7 @@
 	"mge/core/AbstractGame.hpp"
 	"mge/MGEDemo.hpp"
 
-1455637893 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\abstractgame.hpp
+1456132492 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\abstractgame.hpp
 	<SFML/Graphics.hpp>
 	<GL/glew.h>
 	<string>
@@ -12371,12 +12371,13 @@
 1455037758 c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\cameraorbit.hpp
 	<mge/behaviours/Component.hpp>
 
-1455386196 c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\component.hpp
+1456132492 c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\component.hpp
 	"mge/core/Activateable.hpp"
 	"mge/core/GameObject.hpp"
 	"mge/core/Destroyable.hpp"
 	"mge/util/list/DualLinkList.hpp"
 	"mge/util/list/DualLinkNode.hpp"
+	"mge/lua/LuaObject.hpp"
 	<string>
 
 1455037758 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\activateable.hpp
@@ -12396,11 +12397,11 @@
 	<SFML/Graphics/RenderWindow.hpp>
 	<SFML/Window/Event.hpp>
 
-1455386196 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\camera.hpp
+1456132492 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\camera.hpp
 	<string>
 	"mge/core/GameObject.hpp"
 
-1455840060 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\gameobject.hpp
+1456132492 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\gameobject.hpp
 	<vector>
 	<string>
 	<iostream>
@@ -12410,6 +12411,7 @@
 	"mge/core/AbstractGame.hpp"
 	"mge/util/list/DualLinkList.hpp"
 	"mge/util/list/DualLinkNode.hpp"
+	"mge/lua/LuaObject.hpp"
 
 1455037758 c:\github\projectthirdperson\mge_mainbuild\src\glm.hpp
 	<iostream>
@@ -13441,11 +13443,11 @@
 	<glm.hpp>
 	<limits>
 
-1455037758 c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\boxcollider.hpp
+1456132492 c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\boxcollider.hpp
 	<mge/collision/Collider.hpp>
 	<mge/collision/SphereCollider.hpp>
 
-1455840060 c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\collider.hpp
+1456132492 c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\collider.hpp
 	<mge/behaviours/Component.hpp>
 	<mge/util/list/DualLinkNode.hpp>
 	<mge/collision/CollisionManager.hpp>
@@ -13455,17 +13457,21 @@
 1455131202 c:\github\projectthirdperson\mge_mainbuild\src\mge\util\list\duallinknode.hpp
 	<cstddef>
 
-1455037758 c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\collisionmanager.hpp
+1456132492 c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\collisionmanager.hpp
 	<mge/util/list/DualLinkList.hpp>
 	<mge/core/AbstractGame.hpp>
+	<mge/core/GameObject.hpp>
+	"glm.hpp"
 
 1455131202 c:\github\projectthirdperson\mge_mainbuild\src\mge\util\list\duallinklist.hpp
 	<cstddef>
 	<functional>
 	<mge/util/list/DualLinkNode.hpp>
 
-1455037758 c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\spherecollider.hpp
+1456132492 c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\spherecollider.hpp
 	<mge/collision/Collider.hpp>
+	<mge/util/list/DualLinkNode.hpp>
+	<mge/collision/CollisionManager.hpp>
 
 1455840060 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\collider.cpp
 	<mge/collision/Collider.hpp>
@@ -13505,7 +13511,7 @@
 
 1455037758 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\fps.hpp
 
-1455386196 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.hpp
+1456132492 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.hpp
 	<GL/glew.h>
 	<vector>
 	<mge/materials/PostProcessing/PostProcess.hpp>
@@ -13568,7 +13574,7 @@
 1455711422 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\light.cpp
 	<mge/core/Light.hpp>
 
-1455704367 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\light.hpp
+1456132492 c:\github\projectthirdperson\mge_mainbuild\src\mge\core\light.hpp
 	<mge/core/GameObject.hpp>
 	<glm.hpp>
 	"mge/util/list/DualLinkList.hpp"
@@ -13641,7 +13647,7 @@
 	"mge/materials/AbstractMaterial.hpp"
 	<glm.hpp>
 
-1455386196 c:\github\projectthirdperson\mge_mainbuild\src\mge\config.hpp
+1456132492 c:\github\projectthirdperson\mge_mainbuild\src\mge\config.hpp
 	<string>
 
 1455037758 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\postprocessing\postprocess.cpp
@@ -15920,7 +15926,7 @@
 	<mge/util/list/SingleLinkNode.hpp>
 	<mge/core/Destroyable.hpp>
 
-1455840060 c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luascript.hpp
+1456132492 c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luascript.hpp
 	"lua.h"
 	"lauxlib.h"
 	"lualib.h"
@@ -16305,4 +16311,6 @@
 	"mge/config.hpp"
 	"mge/core/Light.hpp"
 	<string>
+
+1456132492 c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luaobject.hpp
 

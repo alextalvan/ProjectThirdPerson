@@ -70,7 +70,9 @@ void Renderer::render (World* pWorld)
     glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
     glClear(GL_DEPTH_BUFFER_BIT);
     //glCullFace(GL_FRONT);
-    renderShadowDepth (pWorld, pWorld, getDirLight(), true);
+    Light * dirLight = getDirLight();
+    if (dirLight)
+        renderShadowDepth (pWorld, pWorld, dirLight, true);
     //glCullFace(GL_BACK);
 
     if(_postProcessList.size()>0)
