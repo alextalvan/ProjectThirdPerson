@@ -1,19 +1,19 @@
-//DIFFUSE TEXTURE VERTEX SHADER
-#version 330 // for glsl version (12 is for older versions , say opengl 2.1
+#version 330
 
-uniform mat4 vpMatrix;
-uniform	mat4 rotationMatrix;
-uniform vec3 position;
+uniform mat4 vpMatrix;//view and projection combined
+uniform	mat4 rotationMatrix;//camera orientation
+uniform vec3 position;//this is passed separately for each particle
+//uniform mat4 debug;
 
 in vec3 vertex;
 in vec3 normal;
 in vec2 uv;
 
-out vec2 texCoord; //make sure the texture coord is interpolated
+out vec2 texCoord; //interpolated uv
 
 void main( void )
 {
     vec4 pos = rotationMatrix * vec4(vertex,1.0f) + vec4(position,0.0f);
-	gl_Position = vp * pos;
+	gl_Position = vpMatrix * pos;
 	texCoord = uv;
 }

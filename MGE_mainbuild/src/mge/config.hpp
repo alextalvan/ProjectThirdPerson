@@ -1,3 +1,5 @@
+#pragma once
+
 namespace config {
     #include <string>
     const std::string MGE_MODEL_PATH ("mge/models/");

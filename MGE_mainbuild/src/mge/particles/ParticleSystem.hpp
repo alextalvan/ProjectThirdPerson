@@ -3,6 +3,7 @@
 #include "mge/core/Mesh.hpp"
 #include "glm.hpp"
 #include "mge/util/Timer.hpp"
+#include "mge/core/Texture.hpp"
 //#include "mge/ut
 
 #define MGE_MAX_PARTICLES_PER_SYSTEM 1024
@@ -25,7 +26,7 @@ class ParticleSystem : public GameObject
 {
 friend class ParticleMaterial;
 public:
-    ParticleSystem();
+    ParticleSystem(Texture* particleTex);
     //static void Initialize();
 
     //start position
@@ -48,6 +49,7 @@ protected:
     virtual ~ParticleSystem();
     void Update();
     virtual void Release();
+    void UpdateParticles();
 
 private:
     Particle _particles[MGE_MAX_PARTICLES_PER_SYSTEM];
@@ -58,6 +60,8 @@ private:
     Timer _releaseTimer;
 
     glm::vec3 _cachedWorldPos;
+
+    float _lastTime;
 
     //static Mesh* _particleQuad;
 };

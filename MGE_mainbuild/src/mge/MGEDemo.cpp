@@ -43,6 +43,8 @@ using namespace std;
 #include "mge/gui/GUISprite.hpp"
 #include "mge/util/ResourceCacher.hpp"
 
+#include "mge/particles/ParticleSystem.hpp"
+
 //construct the game class into _window, _renderer and hud (other parts are initialized by build)
 MGEDemo::MGEDemo():AbstractGame ()
 {
@@ -63,6 +65,7 @@ void MGEDemo::_initializeScene()
     Camera* cam = new Camera("cam", glm::vec3(15,15,15));
     _world->setMainCamera(cam);
     _world->AddChild(cam);
+
 
     Mesh* planeMesh = Mesh::load(config::MGE_MODEL_PATH + "plane20x20_2tris_aligned_uvs.obj");
     Mesh* cubeMesh = Mesh::load(config::MGE_MODEL_PATH + "cube_flat.obj");
@@ -137,11 +140,28 @@ void MGEDemo::_initializeScene()
     testCube1->rotate(0.46, glm::vec3(0,1,0));
     _world->AddChild(testCube1);
 
-    Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -2, 1), glm::vec3(1,1,1));
+
+    Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(15,15,15), glm::vec3(-1, -2, -1), glm::vec3(1,1,1));
     Light* light2 = new Light(MGE_LIGHT_POINT, glm::vec3(0,0.5,2), glm::vec3(1,1,1), glm::vec3(1,0,0), glm::vec3(0.1f,0.1f,0.1f));
     //Light* light3 = new Light(MGE_LIGHT_SPOTLIGHT, glm::vec3(0,2,2), glm::vec3(0,-1,0), glm::vec3(0,0,1), glm::vec3(0.1f,0.1f,0.1f), 0.36f);
     cam->AttachComponent(new LookAt(testCube));
-    testCube1->AttachComponent(new KeysBehaviour(0.1,1));
+    testCube->AttachComponent(new KeysBehaviour(0.1,1));
+
+
+    Texture* water = Texture::load(config::MGE_TEXTURE_PATH + "osama.jpg");
+    //std::cout<<glGetError()<<"------------";
+
+    ParticleSystem* part = new ParticleSystem(water);
+    part->minLifetime = part->maxLifetime = 1.0f;
+    part->minParticlesPerRelease = part->maxParticlesPerRelease = 1;
+    part->minReleaseDelay = 0.5f; part->maxReleaseDelay = 1.0f;
+    part->speedMinX = part->speedMinZ = part->speedMaxX = part->speedMaxZ = 0.0f;
+    part->speedMinY = 0.01f; part->speedMaxY = 0.02f;
+    part->setWorldPosition(glm::vec3(0,10,0));
+    _world->AddChild(part);
+
+    std::cout<<"particles";
+
 
 }
 

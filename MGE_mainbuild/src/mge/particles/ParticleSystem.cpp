@@ -1,6 +1,9 @@
 #include "mge/particles/ParticleSystem.hpp"
 #include "mge/config.hpp"
 #include "mge/util/Random.hpp"
+#include "mge/core/Time.hpp"
+
+#include "mge/materials/Particles/ParticleMaterial.hpp"
 #include <iostream>
 
 
@@ -15,9 +18,13 @@ void ParticleSystem::Initialize()
 }
 */
 
-ParticleSystem::ParticleSystem()
+ParticleSystem::ParticleSystem(Texture* particleTex)
 {
     setMesh(Mesh::load(config::MGE_MODEL_PATH + "particleQuad.obj"));//this is useless for actual rendering but I do it so the recursive render method lets it draw (if mesh!=NULL && material!=NULL)
+    _lastTime = Time::now();
+    setMaterial(new ParticleMaterial(particleTex));
+    _releaseTimer.SetDuration(0.0f);
+    _releaseTimer.Reset();
 }
 
 ParticleSystem::~ParticleSystem()
@@ -27,7 +34,7 @@ ParticleSystem::~ParticleSystem()
 
 void ParticleSystem::Update()
 {
-
+    UpdateParticles();
     if(_releaseTimer.isFinished())
     {
         _releaseTimer.SetDuration(Utils::Random::GetFloatValue(minReleaseDelay,maxReleaseDelay));
@@ -37,7 +44,7 @@ void ParticleSystem::Update()
         Release();
     }
 
-    _bufferCount = 0;
+    //_bufferCount = 0;
 }
 
 void ParticleSystem::Release()
@@ -57,5 +64,23 @@ void ParticleSystem::Release()
         _buffer[i].speed.x = Utils::Random::GetFloatValue(speedMinX,speedMaxX);
         _buffer[i].speed.y = Utils::Random::GetFloatValue(speedMinY,speedMaxY);
         _buffer[i].speed.z = Utils::Random::GetFloatValue(speedMinZ,speedMaxZ);
+    }
+
+    _bufferCount = amount;
+    //std::cout<<"realease\n";
+}
+
+void ParticleSystem::UpdateParticles()
+{
+    float delta = Time::now() - _lastTime;
+    _lastTime = Time::now();
+    for(int i=0;i<MGE_MAX_PARTICLES_PER_SYSTEM;++i)
+    {
+        _particles[i].lifeTime -= delta;
+
+        if(_particles[i].lifeTime>0.0f)
+        {
+            _particles[i].position += _particles[i].speed;
+        }
     }
 }
