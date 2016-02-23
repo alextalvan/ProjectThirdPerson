@@ -14,7 +14,7 @@ function OnAttach()
 end
 
 function Update()
-print("update")
+--print("update")
 end
 
 function OnCollision(otherCollider)
@@ -35,7 +35,7 @@ function OnLevelLoad()
 end
 
 function OnInteract()
-    print("interact");
-    SetActive(this,false);
+    --print("interact");
+    --SetActive(this,false);
     --active = not active;
 end

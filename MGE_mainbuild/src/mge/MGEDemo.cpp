@@ -59,6 +59,7 @@ void MGEDemo::initialize() {
 //build the game _world
 void MGEDemo::_initializeScene()
 {
+
     Camera* cam = new Camera("cam", glm::vec3(15,15,15));
     _world->setMainCamera(cam);
     _world->AddChild(cam);
@@ -141,6 +142,7 @@ void MGEDemo::_initializeScene()
     //Light* light3 = new Light(MGE_LIGHT_SPOTLIGHT, glm::vec3(0,2,2), glm::vec3(0,-1,0), glm::vec3(0,0,1), glm::vec3(0.1f,0.1f,0.1f), 0.36f);
     cam->AttachComponent(new LookAt(testCube));
     testCube1->AttachComponent(new KeysBehaviour(0.1,1));
+
 }
 
 void MGEDemo::_render()
