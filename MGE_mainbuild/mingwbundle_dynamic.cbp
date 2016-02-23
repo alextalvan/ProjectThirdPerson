@@ -61,10 +61,15 @@
 		<Unit filename="assets/mge/scripts/template.lua" />
 		<Unit filename="assets/mge/scripts/test.lua" />
 		<Unit filename="assets/mge/shaders/PostProcessing/cut_screen.fs" />
+		<Unit filename="assets/mge/shaders/PostProcessing/hdr_shader.fs" />
+		<Unit filename="assets/mge/shaders/PostProcessing/hdr_shader.vs" />
 		<Unit filename="assets/mge/shaders/PostProcessing/identity.fs" />
 		<Unit filename="assets/mge/shaders/PostProcessing/identity.vs" />
 		<Unit filename="assets/mge/shaders/color.fs" />
 		<Unit filename="assets/mge/shaders/color.vs" />
+		<Unit filename="assets/mge/shaders/depth_cube_shader.fs" />
+		<Unit filename="assets/mge/shaders/depth_cube_shader.gs" />
+		<Unit filename="assets/mge/shaders/depth_cube_shader.vs" />
 		<Unit filename="assets/mge/shaders/depth_shader.fs" />
 		<Unit filename="assets/mge/shaders/depth_shader.vs" />
 		<Unit filename="assets/mge/shaders/terrain.fs" />
@@ -157,6 +162,8 @@
 		<Unit filename="src/mge/materials/ColorMaterial.hpp" />
 		<Unit filename="src/mge/materials/PostProcessing/PostProcess.cpp" />
 		<Unit filename="src/mge/materials/PostProcessing/PostProcess.hpp" />
+		<Unit filename="src/mge/materials/ShadowCubeMaterial.cpp" />
+		<Unit filename="src/mge/materials/ShadowCubeMaterial.hpp" />
 		<Unit filename="src/mge/materials/ShadowMaterial.cpp" />
 		<Unit filename="src/mge/materials/ShadowMaterial.hpp" />
 		<Unit filename="src/mge/materials/TerrainMaterial.cpp" />

@@ -6,6 +6,7 @@ uniform	mat4 projectionMatrix;
 uniform	mat4 viewMatrix;
 uniform	mat4 modelMatrix;
 uniform mat4 lightMatrix;
+uniform bool hasNormalMap;
 
 layout (location = 0) in vec3 vertex;
 layout (location = 1) in vec3 normal;
@@ -24,17 +25,21 @@ void main( void )
     mat4 mvp = projectionMatrix * viewMatrix * modelMatrix;
 	gl_Position = mvp * vec4(vertex, 1.f);
 	FragPos = vec3(modelMatrix * vec4(vertex, 1.f));
-	Normal = normalize(modelMatrix * vec4(normal,0.0f)).xyz;
+	//Normal = normalize(modelMatrix * vec4(normal,0.0f)).xyz;
+	Normal = mat3(transpose(inverse(modelMatrix))) * normal;
 	TexCoord = uv;
 
-	vec3 T = normalize(vec3(modelMatrix * vec4(tangent, 0.0)));
-    vec3 N = normalize(vec3(modelMatrix * vec4(normal, 0.0)));
-    // re-orthogonalize T with respect to N
-    T = normalize(T - dot(T, N) * N);
-    // then retrieve perpendicular vector B with the cross product of T and N
-    vec3 B = cross(T, N);
-    TBN = mat3(T, B, N);
-	FragPosLightSpace = lightMatrix * vec4(FragPos, 1.0);
+    if (hasNormalMap) {
+        vec3 T = normalize(vec3(modelMatrix * vec4(tangent, 0.0)));
+        vec3 N = Normal; //normalize(vec3(modelMatrix * vec4(normal, 0.0))); //might be possible to replace with Normal
+        // re-orthogonalize T with respect to N
+        T = normalize(T - dot(T, N) * N);
+        // then retrieve perpendicular vector B with the cross product of T and N
+        vec3 B = cross(T, N);
+        TBN = mat3(T, B, N);
+    }
+
+    FragPosLightSpace = lightMatrix * vec4(FragPos, 1.0);
 }
 
 

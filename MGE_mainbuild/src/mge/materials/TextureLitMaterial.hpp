@@ -32,7 +32,8 @@ class TextureLitMaterial : public AbstractMaterial
         static GLint _diffMapLoc;
         static GLint _normalMapLoc;
         static GLint _specMapLoc;
-        static GLint _shadowMapLoc;
+        static GLint _depthMapLoc;
+        static GLint _depthCubeMapLoc;
 
         static GLint _viewPosLoc;
 

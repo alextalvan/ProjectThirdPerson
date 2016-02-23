@@ -1,7 +1,5 @@
 #include "mge/materials/ShadowMaterial.hpp"
 #include <glm.hpp>
-
-#include "mge/materials/ShadowMaterial.hpp"
 #include "mge/core/Mesh.hpp"
 #include "mge/config.hpp"
 #include "mge/core/Light.hpp"
