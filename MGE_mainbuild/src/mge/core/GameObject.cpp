@@ -391,7 +391,11 @@ void GameObject::InternalUpdate()
     {
         Component* cast = ((Component*)cn);
         if(cast->IsActive())
+        {
             cast->Update();
+            //std::cout<<cast->getName()<<"\n";
+        }
+
 
         cn = cn->nextNode;
     }
@@ -441,6 +445,11 @@ Component* GameObject::FindComponent(std::string name)
         cn = cn->nextNode;
     }
     return NULL;
+}
+
+DualLinkList<Component>& GameObject::GetComponents()
+{
+    return _components;
 }
 
 

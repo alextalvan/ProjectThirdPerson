@@ -4,18 +4,20 @@
 #include <iostream>
 
 
-Mesh* ParticleSystem::_particleQuad;// = Mesh::load("particleQuad");
+//Mesh* ParticleSystem::_particleQuad;// = Mesh::load("particleQuad");
 
+/*
 void ParticleSystem::Initialize()
 {
     std::cout<<"Initializing particle systems...\n";
     _particleQuad = Mesh::load(config::MGE_MODEL_PATH + "particleQuad.obj");
     std::cout<<"Particle systems initialized\n";
 }
+*/
 
 ParticleSystem::ParticleSystem()
 {
-
+    setMesh(Mesh::load(config::MGE_MODEL_PATH + "particleQuad.obj"));//this is useless for actual rendering but I do it so the recursive render method lets it draw (if mesh!=NULL && material!=NULL)
 }
 
 ParticleSystem::~ParticleSystem()
@@ -30,7 +32,7 @@ void ParticleSystem::Update()
     {
         _releaseTimer.SetDuration(Utils::Random::GetFloatValue(minReleaseDelay,maxReleaseDelay));
         _releaseTimer.Reset();
-        _cachedWorldPos = _owner->getWorldPosition();
+        _cachedWorldPos = getWorldPosition();
 
         Release();
     }
@@ -47,7 +49,6 @@ void ParticleSystem::Release()
         amount = MGE_NEW_PARTICLE_BUFFER_SIZE;
         std::cout<<"Particle buffer overflow! You are spawning too many particles per frame. max: "<<MGE_NEW_PARTICLE_BUFFER_SIZE<<"\n";
     }
-
 
     for(int i=0;i<amount;++i)
     {

@@ -1,6 +1,9 @@
 #include <mge/behaviours/FirstPersonLook.hpp>
 #include <mge/util/Input.hpp>
 #include <mge/collision/CollisionManager.hpp>
+#include <mge/util/list/DualLinkList.hpp>
+#include <mge/util/list/DualLinkNode.hpp>
+#include <mge/lua/LuaScript.hpp>
 #include "SFML/Window.hpp"
 
 FirstPersonLook::FirstPersonLook(float turnSpeed)
@@ -45,21 +48,27 @@ void FirstPersonLook::Rotation()
 
     _owner->setWorldTransform(newTransform);
 
-    /*
-    //temp testing raycast
+
+    float reach = 10.0f;
+
     glm::vec3 origin = glm::vec3(newTransform[3]);
     glm::vec3 dir = glm::normalize(glm::vec3(newTransform[2])) * -1.0f;
 
 
     RaycastInfo res;
     Ray ray(origin,dir);
-    if(Input::GetKey(Input::J) &&CollisionManager::Raycast(ray,res))
+    if(Input::GetKeyDown(Input::E) && CollisionManager::Raycast(ray,res) && res.distance <= reach)
     {
-        std::cout<<res.object->getName()<<"\n";
+        DualLinkNode<Component>* cn = res.object->GetComponents().startNode;
+        while(cn!=NULL)
+        {
+            LuaScript* script = dynamic_cast<LuaScript*>((Component*)cn);
+            if(script!=NULL && script->IsActive())
+                script->InvokeFunction("OnInteract");
+            cn = cn->nextNode;
+        }
+        //std::cout<<"distance: "<<res.distance<<"\n";
     }
-    else
-        std::cout<<"\n";
-    */
 
 }
 

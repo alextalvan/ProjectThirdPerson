@@ -20,12 +20,15 @@ namespace LevelEditor
     using namespace std;
     World* _storedWorld;
     GUI* _storedWorld2D;
+    //dummy class
     std::vector<LuaScript*> _storedScripts;
 
     void LoadLevel(std::string fileName, World* world, GUI* world2D)
     {
         if(world == NULL || world2D == NULL)
             return;
+
+        _storedScripts.clear();
 
         _storedWorld = world;
         _storedWorld2D = world2D;
@@ -224,7 +227,7 @@ namespace LevelEditor
                 f>>s;//"script_name"
                 f>>s;//the actual script path
 
-                LuaScript* script = new LuaScript(s.c_str(),_storedWorld, _storedWorld2D);
+                LuaScript* script = new LuaScript(s,_storedWorld, _storedWorld2D);
                 owner->AttachComponent(script);
                 _storedScripts.push_back(script);
                 f>>s;//end_luascript

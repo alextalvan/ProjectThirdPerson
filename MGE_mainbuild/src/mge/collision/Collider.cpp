@@ -13,6 +13,9 @@ Collider::Collider()
 Collider::~Collider()
 {
     CollisionManager::_colliders.Remove((DualLinkNode<Collider>*)this);
+
+    if(!ignoreRaycast)
+        CollisionManager::_raycastTargets.Remove((DualLinkNode<RaycastList>*)this);
 }
 
 

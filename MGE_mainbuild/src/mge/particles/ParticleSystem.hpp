@@ -18,12 +18,15 @@ namespace particles
     };
 }
 
+class ParticleMaterial;
+
 using namespace particles;
-class ParticleSystem : public Component
+class ParticleSystem : public GameObject
 {
+friend class ParticleMaterial;
 public:
     ParticleSystem();
-    static void Initialize();
+    //static void Initialize();
 
     //start position
     //float startMinX = 0, startMaxX = 0, startMinY = 0, startMaxY = 0, startMinZ = 0, startMaxZ = 0;
@@ -56,7 +59,7 @@ private:
 
     glm::vec3 _cachedWorldPos;
 
-    static Mesh* _particleQuad;
+    //static Mesh* _particleQuad;
 };
 
 

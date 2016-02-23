@@ -56,7 +56,8 @@ private:
 	static int findChild(lua_State * lua);
 	static int findComponent(lua_State * lua);
 	static int setScale(lua_State * lua);
-	//static
+	static int setActive(lua_State * lua);
+	static int getActive(lua_State * lua);
 
 	//gui
 	static int guiText(lua_State * lua);
@@ -103,8 +104,8 @@ private:
 
 	//levels/scenes
 	static int loadLevel(lua_State * lua);
-
-
+    static int playMusic(lua_State * lua);
+    static int playSFX(lua_State * lua);
 
 
 

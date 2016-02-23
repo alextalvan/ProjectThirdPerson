@@ -57,7 +57,6 @@ void AbstractGame::initialize() {
     _initializeScene();
 
     CollisionManager::Initialize();
-    ParticleSystem::Initialize();
     std::cout << std::endl << "Engine initialized." << std::endl << std::endl;
 }
 

@@ -17,7 +17,11 @@ void GUI::DrawTo(sf::RenderTarget& t)
     DualLinkNode2<ChildList>* g = _children.startNode;
     while(g!=NULL)
     {
-        ((GUI*)g)->DrawTo(t);
+        GUI* cast = (GUI*)g;
+
+        if(cast->IsActive())
+            cast->DrawTo(t);
+
         g = g->nextNode;
     }
 }

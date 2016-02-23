@@ -14,28 +14,6 @@ GAMEOBJECT:
 
    CHILDREN:
 
-
-   DIRECTIONAL_LIGHT:
-      name Light
-      transform: 
-         1  0  0  0  
-         0  0.6632938  -0.748359  100  
-         0  0.748359  0.6632938  0  
-         0  0  0  1  
-      color 1 1 1
-      direction 0 -0.748359 0.6632938
-
-      COMPONENTS:
-
-      END_COMPONENTS
-
-      CHILDREN:
-
-
-      END_CHILDREN
-
-   END_DIRECTIONAL_LIGHT
-
    GAMEOBJECT:
       name Character
       transform: 
@@ -268,6 +246,9 @@ GAMEOBJECT:
          TEXTURE_MATERIAL:
             diffuseTex bricks.jpg
          END_TEXTURE_MATERIAL
+         LUA_SCRIPT:
+            scriptName test.lua
+         END_LUA_SCRIPT
 
       END_COMPONENTS
 
@@ -361,9 +342,6 @@ GAMEOBJECT:
          BOX_COLLIDER:
             dimensions 2 2 2
          END_BOX_COLLIDER
-         LUA_SCRIPT:
-            scriptName test.lua
-         END_LUA_SCRIPT
          COLOR_MATERIAL:
             color 0 0 0
          END_COLOR_MATERIAL
@@ -376,6 +354,28 @@ GAMEOBJECT:
       END_CHILDREN
 
    END_GAMEOBJECT
+
+
+   DIRECTIONAL_LIGHT:
+      name Light
+      transform: 
+         1  0  0  0  
+         0  0.6632938  -0.748359  100  
+         0  0.748359  0.6632938  0  
+         0  0  0  1  
+      color 1 1 1
+      direction 0 -0.748359 0.6632938
+
+      COMPONENTS:
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_DIRECTIONAL_LIGHT
 
    GAMEOBJECT:
       name Cube(4)
