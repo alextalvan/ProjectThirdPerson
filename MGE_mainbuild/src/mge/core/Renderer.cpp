@@ -9,12 +9,14 @@
 #include "mge/util/list/DualLinkNode.hpp"
 #include "mge/core/Light.hpp"
 #include "mge/materials/ShadowMaterial.hpp"
+#include "mge/materials/ShadowCubeMaterial.hpp"
 
 #include <iostream>
 using namespace std;
 
 GLuint Renderer::_postProcessVertexAttributeArray;
 GLuint Renderer::depthMap;
+GLuint Renderer::depthCubeMap;
 
 Renderer::Renderer(int width, int height) : _screenWidth(width), _screenHeight(height)
 {
@@ -24,10 +26,12 @@ Renderer::Renderer(int width, int height) : _screenWidth(width), _screenHeight(h
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glClearColor((float)0x2d/0xff, (float)0x6b/0xff, (float)0xce/0xff, 1.0f );
+    shadowMat = new ShadowMaterial();
+    //shadowCubeMat = new ShadowCubeMaterial(_screenWidth, _screenHeight);
 
 	InitializePostProc();
 
-    //_postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/cut_screen.fs"));
+    //_postProcessList.push_back(new PostProcess("PostProcessing/hdr_shader.vs","PostProcessing/hdr_shader.fs"));
     //_postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/identity.fs"));
 	//_postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/cut_screen.fs"));
 }
@@ -36,9 +40,11 @@ Renderer::~Renderer()
 {
     glDeleteRenderbuffers(1, &postProc_rbo_depth);
     glDeleteRenderbuffers(1, &depthMapFBO);
+    //glDeleteRenderbuffers(1, &depthCubeMapFBO);
     glDeleteTextures(1, &postProc_fbo_texture0);
     glDeleteTextures(1, &postProc_fbo_texture1);
     glDeleteTextures(1, &depthMap);
+    //glDeleteTextures(1, &depthCubeMap);
     glDeleteFramebuffers(1, &postProc_fbo);
 }
 
@@ -46,32 +52,20 @@ void Renderer::setClearColor(int pR, int pG, int pB) {
     glClearColor((float)pR/0xff, (float)pG/0xff, (float)pB/0xff, 1.0f );
 }
 
-Light* Renderer::getDirLight()
-{
-    DualLinkNode<Light>* l = Light::GetLightList().startNode;
-    while (l != NULL) {
-            Light* light = (Light*)l;
-        if (light->getType() == MGE_LIGHT_DIRECTIONAL)
-            return light;
-        l = l -> nextNode;
-    }
-    return NULL;
-}
-
 GLuint Renderer::getDepthMap()
 {
     return depthMap;
 }
 
+GLuint Renderer::getDepthCubeMap()
+{
+    return depthCubeMap;
+}
+
 void Renderer::render (World* pWorld)
 {
-    ///shadow mapping (render depth map)
-    glViewport(0, 0, _screenWidth, _screenHeight);
-    glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-    glClear(GL_DEPTH_BUFFER_BIT);
-    //glCullFace(GL_FRONT);
-    renderShadowDepth (pWorld, pWorld, getDirLight(), true);
-    //glCullFace(GL_BACK);
+    renderDirLightDepthMap(pWorld);
+    //renderPointLightDepthCubeMap(pWorld);
 
     if(_postProcessList.size()>0)
     {
@@ -88,6 +82,46 @@ void Renderer::render (World* pWorld)
        glBindFramebuffer(GL_FRAMEBUFFER,0);
        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
        render (pWorld, pWorld, pWorld->getMainCamera(), true);
+    }
+}
+
+void Renderer::renderDirLightDepthMap (World* pWorld)
+{
+    DualLinkNode<Light>* l = Light::GetLightList().startNode;
+    while (l != NULL) {
+            Light* light = (Light*)l;
+        if (light->getType() == MGE_LIGHT_DIRECTIONAL) {
+            ///shadow mapping (render depth map)
+            glViewport(0, 0, _screenWidth*2, _screenHeight*2);
+            glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+            glClear(GL_DEPTH_BUFFER_BIT);
+            //glCullFace(GL_BACK);
+            renderDepthMap (pWorld, pWorld, light, MGE_LIGHT_DIRECTIONAL, true);
+            //glCullFace(GL_FRONT);
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+            glViewport(0, 0, _screenWidth, _screenHeight);
+        }
+        l = l -> nextNode;
+    }
+}
+
+void Renderer::renderPointLightDepthCubeMap (World* pWorld)
+{
+    DualLinkNode<Light>* l = Light::GetLightList().startNode;
+    while (l != NULL) {
+            Light* light = (Light*)l;
+        if (light->getType() == MGE_LIGHT_POINT) {
+            ///shadow mapping (render depth cube map)
+            glViewport(0, 0, _screenWidth, _screenHeight);
+            glBindFramebuffer(GL_FRAMEBUFFER, depthCubeMapFBO);
+            glClear(GL_DEPTH_BUFFER_BIT);
+            glCullFace(GL_BACK);
+            renderDepthMap (pWorld, pWorld, light, MGE_LIGHT_POINT, true);
+            glCullFace(GL_FRONT);
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+            glViewport(0, 0, _screenWidth, _screenHeight);
+        }
+        l = l -> nextNode;
     }
 }
 
@@ -143,17 +177,23 @@ void Renderer::DoPostProcessing()
     //glEnable(GL_FRAMEBUFFER_SRGB);
 }
 
-void Renderer::renderShadowDepth (World* pWorld, GameObject * pGameObject, Light * light, bool pRecursive)
+void Renderer::renderDepthMap (World* pWorld, GameObject * pGameObject, Light * light, int type, bool pRecursive)
 {
     //we don't render inactive gameobjects
     if(!pGameObject->IsActive())
         return;
 
-    ShadowMaterial* material = new ShadowMaterial();
-
-    //our material (shader + settings) determines how we actually look
-    if (pGameObject->getMesh() && material != NULL) {
-        material->render(pWorld, pGameObject, light);
+    if (type == MGE_LIGHT_DIRECTIONAL) {
+        //our material (shader + settings) determines how we actually look
+        if (pGameObject->getMesh() && shadowMat != NULL) {
+            shadowMat->render(pWorld, pGameObject, light);
+        }
+    }
+    else if (type == MGE_LIGHT_POINT) {
+        //our material (shader + settings) determines how we actually look
+        if (pGameObject->getMesh() && shadowCubeMat != NULL) {
+            shadowCubeMat->render(pWorld, pGameObject, light);
+        }
     }
 
     if (!pRecursive) return;
@@ -163,7 +203,7 @@ void Renderer::renderShadowDepth (World* pWorld, GameObject * pGameObject, Light
 
     //note that with a loop like this, deleting children during rendering is not a good idea :)
     for (int i = 0; i < childCount; i++) {
-        renderShadowDepth (pWorld, pGameObject->GetChildAt(i), light, pRecursive);
+        renderDepthMap (pWorld, pGameObject->GetChildAt(i), light, type, pRecursive);
     }
 }
 
@@ -205,7 +245,8 @@ void Renderer::InitializePostProc()
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _screenWidth, _screenHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, _screenWidth, _screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+      //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _screenWidth, _screenHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
       glBindTexture(GL_TEXTURE_2D, 0);
 
       //texture1
@@ -219,22 +260,50 @@ void Renderer::InitializePostProc()
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _screenWidth, _screenHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
       glBindTexture(GL_TEXTURE_2D, 0);
 
+
       ///depth map (shadow mapping)
       //generate depth map texture
-      glActiveTexture(GL_TEXTURE0);
       glGenTextures(1, &depthMap);
       glBindTexture(GL_TEXTURE_2D, depthMap);
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, _screenWidth, _screenHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, _screenWidth*2, _screenHeight*2, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-      //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-      //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
       GLfloat borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
       glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
-      glBindTexture(GL_TEXTURE_2D, 0);
 
+/*
+        glGenFramebuffers(1, &hdrFBO);
+        glGenTextures(1, &colorBuffer);
+        glBindTexture(GL_TEXTURE_2D, colorBuffer);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, _screenWidth, _screenWidth, 0, GL_RGB, GL_FLOAT, NULL);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glGenRenderbuffers(1, &rboDepth);
+        glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, _screenWidth, _screenWidth);
+        // - Attach buffers
+        glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorBuffer, 0);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
+        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+            std::cout << "Framebuffer not complete!" << std::endl;
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+*/
+/*
+      glGenTextures(1, &depthCubeMap);
+      glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubeMap);
+      for (GLuint i = 0; i < 6; ++i)
+          glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_DEPTH_COMPONENT, _screenWidth, _screenHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+      glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+      glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+      glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+*/
       ///depth buffer (shadow mapping)
       //attach depth map texture to depth buffer
       glGenFramebuffers(1, &depthMapFBO);
@@ -243,6 +312,18 @@ void Renderer::InitializePostProc()
       glDrawBuffer(GL_NONE);
       glReadBuffer(GL_NONE);
       glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+/*
+      glGenFramebuffers(1, &depthCubeMapFBO);
+      glBindFramebuffer(GL_FRAMEBUFFER, depthCubeMapFBO);
+      glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthCubeMap, 0);
+      glDrawBuffer(GL_NONE);
+      glReadBuffer(GL_NONE);
+      if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+        std::cout << "Framebuffer not complete!" << std::endl;
+      glBindFramebuffer(GL_FRAMEBUFFER, 0);
+      glGetError();
+*/
 
       /* Depth buffer */
       glGenRenderbuffers(1, &postProc_rbo_depth);
@@ -274,7 +355,6 @@ void Renderer::InitializePostProc()
       glBindBuffer(GL_ARRAY_BUFFER, _postProcessVertexAttributeArray);
       glBufferData(GL_ARRAY_BUFFER, sizeof(fbo_vertices), fbo_vertices, GL_STATIC_DRAW);
       glBindBuffer(GL_ARRAY_BUFFER, 0);
-
 
       //_postProcessProgram = new PostProcess(postProc_fbo_texture0,_postProcessVertexAttributeArray);
 }

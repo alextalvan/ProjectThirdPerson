@@ -1,3 +1,4 @@
+#version 330
 uniform sampler2D frameTexture;
 varying vec2 uv;
 

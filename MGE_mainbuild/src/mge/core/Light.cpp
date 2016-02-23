@@ -16,7 +16,14 @@ void Light::setType(int pType)
 
 void Light::setDirection(glm::vec3 pDir)
 {
-    setWorldRotation(glm::normalize(pDir));
+    //glm::vec3 forward = glm::normalize(getWorldPosition() - getWorldPosition() + pDir);
+    //glm::vec3 right = glm::cross (glm::vec3(0,1,0), forward);
+    //glm::vec3 up = glm::cross (forward, right);
+
+    //setWorldTransform( glm::mat4 (glm::vec4(right,0), glm::vec4(up,0), glm::vec4(forward,0), glm::vec4(getWorldPosition(),1) ) );
+    setWorldTransform(glm::lookAt(getWorldPosition(), getWorldPosition() + pDir, glm::vec3(getWorldTransform()[1])));
+    _direction = glm::normalize(pDir);
+    //setWorldRotation(glm::normalize(pDir));
 }
 
 void Light::setColor(glm::vec3 pColor)
@@ -41,7 +48,7 @@ int Light::getType()
 
 glm::vec3 Light::getDirection()
 {
-    return glm::normalize(glm::vec3(getWorldTransform()[2]));
+    return _direction;
 }
 
 glm::vec3 Light::getColor()

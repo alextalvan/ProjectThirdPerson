@@ -1,3 +1,4 @@
+#version 330
 attribute vec2 vertex;
 uniform sampler2D frameTexture;
 varying vec2 uv;
