@@ -210,8 +210,8 @@ Mesh* Mesh::cache(string pFileName)
 		file.close();
 		_calculateTangents(mesh);
 		mesh->_buffer();
-
-		cout << "Mesh loaded and buffered:" << (mesh->_indices.size()/3.0f) << " triangles." << endl;
+        mesh->triangleCount = (int)(mesh->_indices.size()/3.0f);
+		cout << "Mesh loaded and buffered:" << mesh->triangleCount<< " triangles." << endl;
 		return mesh;
 	} else {
 		cout << "Could not read " << pFileName << endl;
@@ -405,6 +405,9 @@ void Mesh::streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUV
 
 	glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, (GLvoid*)0);
 
+    //stats
+	Renderer::debugInfo.drawCallCount++;
+    Renderer::debugInfo.triangleCount+=triangleCount;
 	// no current buffer, to avoid mishaps, very important for performance
 
 	glBindBuffer(GL_ARRAY_BUFFER,0);
@@ -438,10 +441,53 @@ void Mesh::streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUV
 	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _indexBufferId );
 
 	glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, (GLvoid*)0);
-
+    //stats
+	Renderer::debugInfo.drawCallCount++;
+	Renderer::debugInfo.triangleCount+=triangleCount;
 	// no current buffer, to avoid mishaps, very important for performance
 
 	glBindBuffer(GL_ARRAY_BUFFER,0);
+
+	//fix for serious performance issue
+	if (pUVsAttrib != -1) glDisableVertexAttribArray(pUVsAttrib);
+	if (pNormalsAttrib != -1) glDisableVertexAttribArray(pNormalsAttrib);
+	if (pVerticesAttrib != -1) glDisableVertexAttribArray(pVerticesAttrib);
+}
+
+void Mesh::enableInOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUVsAttrib)
+{
+    if (pVerticesAttrib != -1) {
+        glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferId);
+        glEnableVertexAttribArray(pVerticesAttrib);
+        glVertexAttribPointer(pVerticesAttrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0 );
+    }
+
+    if (pNormalsAttrib != -1) {
+        glBindBuffer( GL_ARRAY_BUFFER, _normalBufferId);
+        glEnableVertexAttribArray(pNormalsAttrib);
+        glVertexAttribPointer(pNormalsAttrib, 3, GL_FLOAT, GL_TRUE, 0, (void*)0 );
+    }
+
+    if (pUVsAttrib != -1) {
+        glBindBuffer( GL_ARRAY_BUFFER, _uvBufferId);
+        glEnableVertexAttribArray(pUVsAttrib);
+        glVertexAttribPointer(pUVsAttrib, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    }
+
+    glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _indexBufferId );
+}
+
+void Mesh::drawInOpenGL()
+{
+    glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, (GLvoid*)0);
+    //stats
+	Renderer::debugInfo.drawCallCount++;
+	Renderer::debugInfo.triangleCount+=triangleCount;
+}
+
+void Mesh::disableInOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUVsAttrib)
+{
+    glBindBuffer(GL_ARRAY_BUFFER,0);
 
 	//fix for serious performance issue
 	if (pUVsAttrib != -1) glDisableVertexAttribArray(pUVsAttrib);

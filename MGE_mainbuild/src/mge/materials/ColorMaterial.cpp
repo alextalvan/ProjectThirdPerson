@@ -8,16 +8,18 @@
 ShaderProgram* ColorMaterial::_shader = NULL;
 
 GLint ColorMaterial::_uMVPMatrix = 0;
-GLint ColorMaterial::_uDiffuseColor = 0;
+GLint ColorMaterial::_colorLoc = 0;
 
 GLint ColorMaterial::_aVertex = 0;
 GLint ColorMaterial::_aNormal = 0;
 GLint ColorMaterial::_aUV = 0;
 
-ColorMaterial::ColorMaterial(glm::vec3 pDiffuseColor):_diffuseColor (pDiffuseColor)
+ColorMaterial::ColorMaterial(glm::vec3 pDiffuseColor)
 {
     //every time we create an instance of colormaterial we check if the corresponding shader has already been loaded
     _lazyInitializeShader();
+
+    color = pDiffuseColor;
 }
 
 void ColorMaterial::_lazyInitializeShader() {
@@ -30,7 +32,8 @@ void ColorMaterial::_lazyInitializeShader() {
 
         //cache all the uniform and attribute indexes
         _uMVPMatrix=  _shader->getUniformLocation("mvpMatrix");
-        _uDiffuseColor =    _shader->getUniformLocation("diffuseColor");
+        //_uDiffuseColor =    _shader->getUniformLocation("diffuseColor");
+        _colorLoc = _shader->getUniformLocation("color");
 
         _aVertex = _shader->getAttribLocation("vertex");
         _aNormal = _shader->getAttribLocation("normal");
@@ -43,10 +46,6 @@ ColorMaterial::~ColorMaterial()
     //dtor
 }
 
-void ColorMaterial::setDiffuseColor(glm::vec3 pDiffuseColor) {
-    _diffuseColor = pDiffuseColor;
-}
-
 void ColorMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pCamera) {
     _shader->use();
 
@@ -55,7 +54,7 @@ void ColorMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pCame
     glUniformMatrix4fv ( _uMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
     //set the material color
-    glUniform3fv (_uDiffuseColor, 1, glm::value_ptr(_diffuseColor));
+    glUniform3fv (_colorLoc, 1, glm::value_ptr(this->color));
 
     //now inform mesh of where to stream its data
     pGameObject->getMesh()->streamToOpenGL(_aVertex, _aNormal, _aUV);

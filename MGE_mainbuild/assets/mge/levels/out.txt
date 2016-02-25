@@ -6,6 +6,7 @@ GAMEOBJECT:
       0  0  1  0  
       0  0  0  1  
    no_mesh
+   cast_shadows 0
 
    COMPONENTS:
 
@@ -22,6 +23,7 @@ GAMEOBJECT:
          0  0  1  -12.73  
          0  0  0  1  
       no_mesh
+      cast_shadows 0
 
       COMPONENTS:
 
@@ -71,6 +73,7 @@ GAMEOBJECT:
          0  0  0.2  36.4  
          0  0  0  1  
       mesh cube_flat.obj
+      cast_shadows 0
 
       COMPONENTS:
 
@@ -88,51 +91,6 @@ GAMEOBJECT:
    END_GAMEOBJECT
 
    GAMEOBJECT:
-      name Raptor(1)
-      transform: 
-         0.0755251  0.9969963  -0.01715916  12.59  
-         -0.02247244  -0.01550221  -0.9996274  6.66  
-         -0.9968907  0.07588258  0.02123404  2.18  
-         0  0  0  1  
-      no_mesh
-
-      COMPONENTS:
-
-
-      END_COMPONENTS
-
-      CHILDREN:
-
-      GAMEOBJECT:
-         name Cube
-         transform: 
-            -0.001715917  0.09969964  -0.00755251  9.224121  
-            -0.09996273  -0.001550221  0.002247256  7.432641  
-            0.002123415  0.007588258  0.09968907  0.04177999  
-            0  0  0  1  
-         mesh raptor.obj
-
-         COMPONENTS:
-
-            TEXTURE_MATERIAL:
-               diffuseTex Raptor.png
-            END_TEXTURE_MATERIAL
-
-         END_COMPONENTS
-
-         CHILDREN:
-
-
-         END_CHILDREN
-
-      END_GAMEOBJECT
-
-
-      END_CHILDREN
-
-   END_GAMEOBJECT
-
-   GAMEOBJECT:
       name floor
       transform: 
          -4.768372E-06  0  -40  0  
@@ -140,6 +98,7 @@ GAMEOBJECT:
          40  0  -4.768372E-06  0  
          0  0  0  1  
       mesh cube_flat.obj
+      cast_shadows 0
 
       COMPONENTS:
 
@@ -167,6 +126,7 @@ GAMEOBJECT:
          0.5504848  -0.301649  -0.7784438  -24.1  
          0  0  0  1  
       no_mesh
+      cast_shadows 0
 
       COMPONENTS:
 
@@ -183,6 +143,7 @@ GAMEOBJECT:
             -0.07784438  -0.0301649  -0.05504847  -21.41966  
             0  0  0  1  
          mesh raptor.obj
+         cast_shadows 0
 
          COMPONENTS:
 
@@ -202,11 +163,12 @@ GAMEOBJECT:
       GAMEOBJECT:
          name default
          transform: 
-            -0.4361315  0.1309988  0.9717225  -6.675954  
-            0.6071895  -0.9443768  0.1826083  12.07298  
-            -2.090338  -0.301649  -0.1496989  -22.54349  
+            0.4361315  0.1309988  0.9717225  -6.675954  
+            -0.6071895  -0.9443768  0.1826083  12.07298  
+            2.090338  -0.301649  -0.1496989  -22.54349  
             0  0  0  1  
          mesh cube_flat.obj
+         cast_shadows 0
 
          COMPONENTS:
 
@@ -232,10 +194,11 @@ GAMEOBJECT:
       name SphereTest
       transform: 
          2  0  0  21.15  
-         0  2  0  4.34  
+         0  2  0  3.49  
          0  0  2  35.1  
          0  0  0  1  
       mesh sphere_smooth.obj
+      cast_shadows 0
 
       COMPONENTS:
 
@@ -243,12 +206,12 @@ GAMEOBJECT:
             radius 2
             ignore_Raycast 0
          END_SPHERE_COLLIDER
-         TEXTURE_MATERIAL:
-            diffuseTex bricks.jpg
-         END_TEXTURE_MATERIAL
          LUA_SCRIPT:
             scriptName test.lua
          END_LUA_SCRIPT
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
 
       END_COMPONENTS
 
@@ -267,6 +230,7 @@ GAMEOBJECT:
          0  0  0.2  2.34  
          0  0  0  1  
       mesh cube_flat.obj
+      cast_shadows 0
 
       COMPONENTS:
 
@@ -291,6 +255,7 @@ GAMEOBJECT:
          -0.4645733  -0.765722  0.4447937  0  
          0  0  0  1  
       no_mesh
+      cast_shadows 0
 
       COMPONENTS:
 
@@ -307,6 +272,7 @@ GAMEOBJECT:
             0.04447937  -0.0765722  0.04645732  1.500849  
             0  0  0  1  
          mesh raptor.obj
+         cast_shadows 0
 
          COMPONENTS:
 
@@ -336,6 +302,7 @@ GAMEOBJECT:
          0  0  1  0  
          0  0  0  1  
       mesh cube_flat.obj
+      cast_shadows 0
 
       COMPONENTS:
 
@@ -343,7 +310,7 @@ GAMEOBJECT:
             dimensions 2 2 2
          END_BOX_COLLIDER
          COLOR_MATERIAL:
-            color 0 0 0
+            color 0 1 1
          END_COLOR_MATERIAL
 
       END_COMPONENTS
@@ -385,11 +352,37 @@ GAMEOBJECT:
          0  0  0.2  2.34  
          0  0  0  1  
       mesh cube_flat.obj
+      cast_shadows 0
 
       COMPONENTS:
 
          TEXTURE_MATERIAL:
             diffuseTex Sand.png
+         END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Raptor(1)
+      transform: 
+         -0.001715922  0.0996994  -0.007552511  9.22413  
+         -0.09996273  -0.001550206  0.002247259  7.432641  
+         0.002123429  0.007588239  0.09968907  0.04178047  
+         0  0  0  1  
+      mesh raptor.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         TEXTURE_MATERIAL:
+            diffuseTex Raptor.png
          END_TEXTURE_MATERIAL
 
       END_COMPONENTS
@@ -409,6 +402,7 @@ GAMEOBJECT:
          0  0.1644334  37.029  0  
          0  0  0  1  
       mesh cube_flat.obj
+      cast_shadows 0
 
       COMPONENTS:
 
@@ -436,6 +430,7 @@ GAMEOBJECT:
          38.11351  0  -1.985367E-06  75.60405  
          0  0  0  1  
       mesh cube_flat.obj
+      cast_shadows 0
 
       COMPONENTS:
 

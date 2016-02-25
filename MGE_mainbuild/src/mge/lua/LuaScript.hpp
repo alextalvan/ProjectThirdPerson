@@ -58,6 +58,7 @@ private:
 	static int setScale(lua_State * lua);
 	static int setActive(lua_State * lua);
 	static int getActive(lua_State * lua);
+	static int setColor(lua_State * lua);
 
 	//gui
 	static int guiText(lua_State * lua);
@@ -81,6 +82,9 @@ private:
 	static int distance(lua_State * lua);
 	static int randomRange(lua_State * lua);
 	static int randomRoll(lua_State * lua);
+	static int makeTimer(lua_State * lua);
+	static int resetTimer(lua_State * lua);
+	static int checkTimer(lua_State * lua);
 
 	//input
 	static int keyPressed(lua_State * lua);

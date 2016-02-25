@@ -31,11 +31,20 @@ class Mesh
          */
         void streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUVsAttrib, GLint pTangentAttrib);
         void streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUVsAttrib);
+
+        //for particles mostly
+        void enableInOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUVsAttrib);
+        void drawInOpenGL();
+        void disableInOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUVsAttrib);
+
+
         void renderDebugInfo(glm::mat4& pModelMatrix, World* pWorld);
 		std::vector<glm::vec3> _tangents;       //vec4 tangents
 	protected:
         Mesh(std::string pId);
 	    std::string _id;
+
+	    int triangleCount = 0;
 
         //OpenGL id's for the different buffers created for this mesh
 		GLuint _indexBufferId = 0;

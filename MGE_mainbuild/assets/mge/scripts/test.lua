@@ -6,6 +6,7 @@ function Start()
     --SetMesh(a,LoadMesh("cube_flat.obj"));
     --SetMaterial(a,ColorMaterial(1,0.5,1));
     --SetParent(world,a);
+    clock = Timer(0);
 end
 
 function OnAttach()
@@ -14,6 +15,11 @@ function OnAttach()
 end
 
 function Update()
+    if(not CheckTimer(clock)) then
+      --SetColor(myGameObject,1,0,0);
+    else
+      --SetColor(myGameObject,1,1,1);
+    end
 --print("update")
 end
 
@@ -24,7 +30,8 @@ end
 --active = false;
 
 function OnLevelLoad()
-    --g = FindChild(world,"test");
+    g = FindChild(world,"Raptor(1)");
+    SetColor(g,1,1,0);
     --Destroy(g);
     --mainScript = FindComponent(world,"LuaScript:main.lua")
     --SetActive(world,true);
@@ -35,6 +42,9 @@ function OnLevelLoad()
 end
 
 function OnInteract()
+
+
+    ResetTimer(clock,5);
     --print("interact");
     --SetActive(this,false);
     --active = not active;

@@ -1,18 +1,14 @@
-# OBJ written from /Users/Kaa/Dropbox/Utopia_C_Project/Sprint2_GeryBox/Props/Plane3.obj
-# Units	meters
 
 o Mesh
-v -0.5 0.5 0
 v 0.5 0.5 0
-v 0.5 -0.5 0
+v -0.5 0.5 0
 v -0.5 -0.5 0
+v 0.5 -0.5 0
 vn 0 0 1
 vt 0 1
 vt 0 0
 vt 1 1
 vt 1 0
-mtllib Plane3.mtl
-usemtl Default
 g Default
-f 1/1/1 4/2/1 2/3/1
-f 3/4/1 2/3/1 4/2/1
+f 2/3/1 4/2/1 1/1/1
+f 4/2/1 2/3/1 3/4/1

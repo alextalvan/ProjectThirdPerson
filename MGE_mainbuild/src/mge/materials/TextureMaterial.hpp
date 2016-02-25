@@ -23,6 +23,9 @@ class TextureMaterial : public AbstractMaterial
         static void _lazyInitializeShader();
 
         Texture* _diffuseTexture;
+
+        static GLuint _diffuseLoc;
+        static GLuint _colorLoc;
 };
 
 #endif // TEXTUREMATERIAL_H

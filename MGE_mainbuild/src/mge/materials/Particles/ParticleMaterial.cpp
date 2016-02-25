@@ -10,6 +10,7 @@ ParticleMaterial::ParticleMaterial(Texture * pDiffuseTexture):_diffuseTexture(pD
     _rotMatrixLoc = _shader->getUniformLocation("rotationMatrix");
     _vpMatrixLoc = _shader->getUniformLocation("vpMatrix");
     _posVectorLoc = _shader->getUniformLocation("position");
+    _scaleVectorLoc = _shader->getUniformLocation("scale");
 
     _vertLoc = _shader->getAttribLocation("vertex");
     _normalLoc = _shader->getAttribLocation("normal");
@@ -37,7 +38,7 @@ void ParticleMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pC
     if (!_diffuseTexture) return;
     using namespace glm;
     //return;
-
+    glDepthMask(GL_FALSE);
     _shader->use();
 
     //pass in one ofs
@@ -45,14 +46,11 @@ void ParticleMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pC
     glBindTexture(GL_TEXTURE_2D, _diffuseTexture->getId());
     glUniform1i (_shader->getUniformLocation("textureDiffuse"), 0);
 
-    glm::mat4 projection = glm::ortho(0.0f, 1366.0f, 768.0f, 0.0f, -1.0f, 1.0f);
     mat4 vp = pCamera->getProjection() * pCamera->getView();//pCamera->getProjection() * pCamera->getView();
     mat4 rot = pCamera->getWorldTransform();
-    rot[3] = vec4(0,0,0,1);//cancelling translation
+    rot[3] = vec4(0,0,0,1);//canceling translation
     glUniformMatrix4fv (_vpMatrixLoc,1, GL_FALSE, glm::value_ptr(vp));
     glUniformMatrix4fv (_rotMatrixLoc,1,GL_FALSE, glm::value_ptr(rot));
-
-
     //debug
     //mat4 debug = pCamera->getProjection() * pCamera->getView() * pGameObject->getWorldTransform();
     //glUniformMatrix4fv (_shader->getUniformLocation("debug"),1,GL_FALSE, glm::value_ptr(debug));
@@ -63,6 +61,7 @@ void ParticleMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pC
     int newPartIndex = 0;
 
     Mesh* quad = pSys->_mesh;
+    quad->enableInOpenGL(_vertLoc,_normalLoc,_uvLoc);
 
     for(int i=0;i<MGE_MAX_PARTICLES_PER_SYSTEM;++i)
     {
@@ -72,8 +71,9 @@ void ParticleMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pC
             pSys->_particles[i] = pSys->_buffer[newPartIndex];//copying by value
 
             glUniform3fv(_posVectorLoc,1,glm::value_ptr(pSys->_particles[i].position));
+            glUniform2fv(_scaleVectorLoc,1,glm::value_ptr(pSys->_particles[i].scale));
             //draw call
-            quad->streamToOpenGL(_vertLoc,_normalLoc,_uvLoc);
+            quad->drawInOpenGL();
 
             newPartIndex++;
         }
@@ -81,15 +81,17 @@ void ParticleMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pC
         if(pSys->_particles[i].lifeTime > 0.0f)
         {
             glUniform3fv(_posVectorLoc,1,glm::value_ptr(pSys->_particles[i].position));
+            glUniform2fv(_scaleVectorLoc,1,glm::value_ptr(pSys->_particles[i].scale));
             //draw call
-            quad->streamToOpenGL(_vertLoc,_normalLoc,_uvLoc);
+            quad->drawInOpenGL();
         }
     }
 
 
     pSys->_bufferCount = 0;
 
+    quad->disableInOpenGL(_vertLoc,_normalLoc,_uvLoc);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, 0);
-
+    glDepthMask(GL_TRUE);
 }

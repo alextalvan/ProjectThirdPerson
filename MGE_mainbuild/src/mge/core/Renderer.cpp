@@ -18,11 +18,14 @@ GLuint Renderer::_postProcessVertexAttributeArray;
 GLuint Renderer::depthMap;
 GLuint Renderer::depthCubeMap;
 
+
+RendererDebugInfo Renderer::debugInfo;
+
 Renderer::Renderer(int width, int height) : _screenWidth(width), _screenHeight(height)
 {
 	glEnable( GL_DEPTH_TEST );
 	glEnable( GL_CULL_FACE ); // default GL_BACK
-	glCullFace(GL_FRONT);
+	//glCullFace(GL_FRONT);
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glClearColor((float)0x2d/0xff, (float)0x6b/0xff, (float)0xce/0xff, 1.0f );
@@ -64,6 +67,8 @@ GLuint Renderer::getDepthCubeMap()
 
 void Renderer::render (World* pWorld)
 {
+    debugInfo.drawCallCount = debugInfo.triangleCount = 0;
+
     renderDirLightDepthMap(pWorld);
     //renderPointLightDepthCubeMap(pWorld);
 
@@ -92,14 +97,14 @@ void Renderer::renderDirLightDepthMap (World* pWorld)
             Light* light = (Light*)l;
         if (light->getType() == MGE_LIGHT_DIRECTIONAL) {
             ///shadow mapping (render depth map)
-            glViewport(0, 0, _screenWidth*2, _screenHeight*2);
+            //glViewport(0, 0, _screenWidth, _screenHeight);
             glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
             glClear(GL_DEPTH_BUFFER_BIT);
             //glCullFace(GL_BACK);
             renderDepthMap (pWorld, pWorld, light, MGE_LIGHT_DIRECTIONAL, true);
             //glCullFace(GL_FRONT);
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
-            glViewport(0, 0, _screenWidth, _screenHeight);
+            //glViewport(0, 0, _screenWidth, _screenHeight);
         }
         l = l -> nextNode;
     }
@@ -130,7 +135,7 @@ void Renderer::DoPostProcessing()
 {
     //glDisable(GL_FRAMEBUFFER_SRGB);
     glDisable(GL_DEPTH_TEST);
-    glCullFace(GL_BACK);
+    //glCullFace(GL_BACK);
 
     int procListSize = _postProcessList.size();
     //setup
@@ -175,7 +180,7 @@ void Renderer::DoPostProcessing()
 
     }
     glEnable( GL_DEPTH_TEST );
-    glCullFace(GL_FRONT);
+    //glCullFace(GL_FRONT);
     //glEnable(GL_FRAMEBUFFER_SRGB);
 }
 
@@ -186,22 +191,23 @@ void Renderer::renderDepthMap (World* pWorld, GameObject * pGameObject, Light * 
         return;
 
     if (type == MGE_LIGHT_DIRECTIONAL) {
-        //our material (shader + settings) determines how we actually look
-        if (pGameObject->getMesh() && shadowMat != NULL) {
+
+        if (pGameObject->getMesh() && pGameObject->castShadows) {
             shadowMat->render(pWorld, pGameObject, light);
         }
     }
+    /*
     else if (type == MGE_LIGHT_POINT) {
         //our material (shader + settings) determines how we actually look
         if (pGameObject->getMesh() && shadowCubeMat != NULL) {
             shadowCubeMat->render(pWorld, pGameObject, light);
         }
-    }
+    }*/
 
     if (!pRecursive) return;
 
     int childCount = pGameObject->GetChildCount();
-    if (childCount < 1) return;
+    //if (childCount < 1) return;
 
     //note that with a loop like this, deleting children during rendering is not a good idea :)
     for (int i = 0; i < childCount; i++) {
@@ -226,7 +232,7 @@ void Renderer::render (World* pWorld, GameObject * pGameObject, Camera * pCamera
     if (!pRecursive) return;
 
     int childCount = pGameObject->GetChildCount();
-    if (childCount < 1) return;
+    //if (childCount < 1) return;
 
     //note that with a loop like this, deleting children during rendering is not a good idea :)
     for (int i = 0; i < childCount; i++) {
@@ -267,7 +273,7 @@ void Renderer::InitializePostProc()
       //generate depth map texture
       glGenTextures(1, &depthMap);
       glBindTexture(GL_TEXTURE_2D, depthMap);
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, _screenWidth*2, _screenHeight*2, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, _screenWidth, _screenHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

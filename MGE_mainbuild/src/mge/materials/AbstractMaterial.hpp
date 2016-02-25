@@ -2,6 +2,7 @@
 #define ABSTRACTMATERIAL_H
 
 #include "mge/core/ShaderProgram.hpp"
+#include "glm.hpp"
 class World;
 class Camera;
 class GameObject;
@@ -28,6 +29,7 @@ class AbstractMaterial
          * The world provides access to the lights.
          */
         virtual void render(World* pWorld, GameObject* pGameObject, Camera* pCamera) = 0;
+        glm::vec3 color = glm::vec3(1);
 };
 
 #endif // ABSTRACTMATERIAL_H

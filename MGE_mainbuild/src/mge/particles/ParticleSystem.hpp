@@ -16,6 +16,7 @@ namespace particles
         float lifeTime = -1.0f;
         glm::vec3 position;
         glm::vec3 speed;
+        glm::vec2 scale;
     };
 }
 
@@ -28,21 +29,27 @@ friend class ParticleMaterial;
 public:
     ParticleSystem(Texture* particleTex);
     //static void Initialize();
-
     //start position
     //float startMinX = 0, startMaxX = 0, startMinY = 0, startMaxY = 0, startMinZ = 0, startMaxZ = 0;
+    glm::vec3 startOffset1, startOffset2;
 
     //variable speed
-    float speedMinX = 0, speedMaxX = 0, speedMinY = 0, speedMaxY = 0, speedMinZ = 0, speedMaxZ = 0;
+    //float speedMinX = 0, speedMaxX = 0, speedMinY = 0, speedMaxY = 0, speedMinZ = 0, speedMaxZ = 0;
+    glm::vec3 speedMin, speedMax;
 
     //lifetime range
-    float minLifetime = 5, maxLifetime = 5;
+    //float minLifetime = 5, maxLifetime = 5;
+    glm::vec2 lifeTimeRange;
 
     //delay between releases
-    float minReleaseDelay = 1, maxReleaseDelay = 1;
+    //float minReleaseDelay = 1, maxReleaseDelay = 1;
+    glm::vec2 releaseDelay;
 
     //particles per "burst"
-    int minParticlesPerRelease = 1, maxParticlesPerRelease = 1;
+    //int minParticlesPerRelease = 1, maxParticlesPerRelease = 1;
+    glm::vec2 releaseCount;
+
+    glm::vec2 scaleRange1, scaleRange2;
 
 
 protected:

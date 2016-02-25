@@ -25,6 +25,7 @@ class ParticleMaterial : public AbstractMaterial
         GLuint _vpMatrixLoc;
         GLuint _rotMatrixLoc;
         GLuint _posVectorLoc;
+        GLuint _scaleVectorLoc;
         GLuint _vertLoc;
         GLuint _normalLoc;
         GLuint _uvLoc;

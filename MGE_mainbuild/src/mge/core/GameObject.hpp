@@ -20,6 +20,7 @@ class Mesh;
 //class Activateable;
 
 class ChildList;
+//class TransparencyList;
 
 class GameObject : public Activateable, public Destroyable, public DualLinkNode2<ChildList>, public LuaObject
 {
@@ -77,6 +78,9 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
         Component* FindComponent(std::string name);
         DualLinkList<Component>& GetComponents();
 
+        //void setTransparent(bool val);
+        //bool isTransparent();
+
         //note that this thing returns the FIRST component of type tp found, if it exists
         template<class T>
         T* GetComponent()
@@ -110,6 +114,8 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
         DualLinkList2<ChildList>& GetChildren();
 
         GameObject* FindChild(std::string name);
+
+        bool castShadows = true;
 
 	protected:
 	    virtual ~GameObject();

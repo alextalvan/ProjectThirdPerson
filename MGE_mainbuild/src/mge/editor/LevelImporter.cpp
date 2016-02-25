@@ -110,6 +110,12 @@ namespace LevelEditor
             obj->setMesh(mesh);
         }
 
+        //shadow toggle
+        f>>s;
+        int shadow;
+        f>>shadow;
+        obj->castShadows = shadow;
+
 
         //the exporter root is ignored
         if(obj->getName() == "MGE_exporter_root")
@@ -351,9 +357,15 @@ namespace LevelEditor
             mat[0][0] *= -1.0f;
             mat[1][0] *= -1.0f;
             mat[2][0] *= -1.0f;
-            mat[3][2] *= -1.0f;
+            //mat[3][2] *= -1.0f;
 
             mat = glm::transpose(mat);
+
+
+            //mat[3][2] *= -1.0f;
+
+
+             //mat[3][2] *= -1.0f;
 
 
             //mat[1] = mat[1] * -1.0f;

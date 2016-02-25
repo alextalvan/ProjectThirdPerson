@@ -22,6 +22,7 @@
 #include "mge/util/ResourceCacher.hpp"
 #include "mge/lua/LuaObject.hpp"
 #include "mge/sound/SoundManager.hpp"
+#include "mge/util/Timer.hpp"
 
 //#define MGE_LUA_SAFETY 1  //comment this define out to remove the lua safety checks but heavily improve performance
 
@@ -102,6 +103,10 @@ LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
 	lua_register(L, "PlaySFX", playSFX);//
 	lua_register(L, "SetActive", setActive);//
 	lua_register(L, "GetActive", getActive);//
+	lua_register(L, "SetColor", setColor);//
+	lua_register(L, "Timer", makeTimer);//
+	lua_register(L, "ResetTimer", resetTimer);//
+	lua_register(L, "CheckTimer", checkTimer);//
 
 	//Set world
 	lua_pushlightuserdata(L, (LuaObject*)world);
@@ -199,6 +204,28 @@ int LuaScript::colorMaterial(lua_State * lua)
 	lua_pushlightuserdata(lua, newMaterial);
 
 	return 1;
+}
+
+int LuaScript::setColor(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_isnumber(lua, -3)) throw "Expect: number";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+    GameObject* obj = (GameObject*)(LuaObject*)lua_touserdata(lua,-4);
+	glm::vec3 color = glm::vec3(0, 0, 0);
+	color.x = lua_tonumber(lua, -3);
+	color.y = lua_tonumber(lua, -2);
+	color.z = lua_tonumber(lua, -1);
+	//lua_pop(lua,3);
+
+	//std::string s = obj->getName();
+
+	obj->getMaterial()->color = color;
+
+	return 0;
 }
 
 int LuaScript::textureMaterial(lua_State * lua)
@@ -1335,6 +1362,45 @@ int LuaScript::setScale(lua_State * lua)
 	//obj->
 
 	return 0;
+}
+
+int LuaScript::makeTimer(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	#endif
+
+    float dur = lua_tonumber(lua,-1);
+    Timer* t = new Timer(dur);
+    t->Reset();
+
+	lua_pushlightuserdata(lua, t);
+
+	return 1;
+}
+
+int LuaScript::resetTimer(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	#endif
+
+    Timer* t = (Timer*)lua_touserdata(lua,-2);
+    float dur = lua_tonumber(lua,-1);
+    t->SetDuration(dur);
+    t->Reset();
+
+	return 0;
+}
+
+int LuaScript::checkTimer(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	#endif
+
+    Timer* t = (Timer*)lua_touserdata(lua,-1);
+
+    lua_pushboolean(lua,t->isFinished());
+
+	return 1;
 }
 
 LuaScript::~LuaScript()
