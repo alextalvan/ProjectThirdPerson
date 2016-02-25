@@ -57,6 +57,7 @@ LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
 	lua_register(L, "GetChildAt", getChildAt);
 	lua_register(L, "SetLocalPos", setLocalPosition);//
 	lua_register(L, "GetWorldPos", getWorldPos);//
+	lua_register(L, "SetWorldPos", setWorldPos);//
 	lua_register(L, "GetLocalPos", getLocalPos);//
 	lua_register(L, "Rotate", rotate);//
 	lua_register(L, "Scale", scale);//
@@ -731,6 +732,23 @@ int LuaScript::getWorldPos(lua_State * lua)
 	lua_pushnumber(lua, pos.z);
 
 	return 3;
+}
+
+int LuaScript::setWorldPos(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, lua_gettop(lua))) throw "Expect: game object";
+	#endif
+
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -4);
+	glm::vec3 position = glm::vec3(0, 0, 0);
+	position.x = lua_tonumber(lua, -3);
+	position.y = lua_tonumber(lua, -2);
+	position.z = lua_tonumber(lua, -1);
+
+	gameObj->setWorldPosition(position);
+
+	return 0;
 }
 
 int LuaScript::getLocalPos(lua_State * lua)

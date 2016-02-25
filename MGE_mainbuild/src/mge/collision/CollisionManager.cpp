@@ -16,6 +16,7 @@ void CollisionManager::Initialize()
             CollisionManager::collisionMatrix[i][j] = true;
 
     SetLayerInteraction(CollisionManager::WALLS,CollisionManager::WALLS,false);
+    SetLayerInteraction(CollisionManager::WALLS,CollisionManager::IGNORE_WALLS,false);
 }
 
 

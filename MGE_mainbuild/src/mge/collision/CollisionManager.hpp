@@ -35,7 +35,7 @@ public:
     {
         DEFAULT,
         WALLS,
-        IGNORE_RAYCAST,
+        IGNORE_WALLS,
         LAYER3,
         LAYER4,
         LAYER5,

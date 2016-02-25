@@ -184,6 +184,11 @@ namespace LevelEditor
                 f>>s; b = std::strtof(s.c_str(),nullptr);
                 BoxCollider* box = new BoxCollider();
                 box->xSize = r; box->ySize = g; box->zSize = b;
+                f>>s;//"collision_layer"
+                int layer;
+                f>>layer;
+                box->layer = (CollisionManager::COLLISION_LAYERS)layer;
+
                 owner->AttachComponent(box);
                 f>>s;//end_boxcollider
             }
@@ -248,7 +253,13 @@ namespace LevelEditor
                 f>>s; r = std::strtof(s.c_str(),nullptr);
                 f>>s;//"ignoreRaycast"
                 f>>ig;
+                f>>s;//"collision_layer"
+                int layer;
+                f>>layer;
+
+
                 SphereCollider* col = new SphereCollider(r,ig);
+                col->layer = (CollisionManager::COLLISION_LAYERS)layer;
                 owner->AttachComponent(col);
                 f>>s;//end_sphere
             }

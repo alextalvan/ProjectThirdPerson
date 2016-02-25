@@ -1,5 +1,6 @@
 #include "mge/gui/GUI.hpp"
 #include "mge/util/list/DualLinkNode.hpp"
+#include "mge/core/Renderer.hpp"
 
 using namespace std;
 
@@ -20,7 +21,11 @@ void GUI::DrawTo(sf::RenderTarget& t)
         GUI* cast = (GUI*)g;
 
         if(cast->IsActive())
+        {
             cast->DrawTo(t);
+            Renderer::debugInfo.drawCallCount++;
+        }
+
 
         g = g->nextNode;
     }

@@ -29,7 +29,7 @@ function Update()
     --Rotate(a,0.15,0.5,0.5,0);
     --if(GetKeyDown(0)) then
      --   Destroy(b); end
-
+    --a = Sprite("bricks.jpg",683,384,0,0.1,0.1);
 end
 
 --Collision callback, the argument is the GameObject you are overlapping with

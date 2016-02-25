@@ -194,7 +194,7 @@ GAMEOBJECT:
       name SphereTest
       transform: 
          2  0  0  21.15  
-         0  2  0  3.49  
+         0  2  0  1.87  
          0  0  2  35.1  
          0  0  0  1  
       mesh sphere_smooth.obj
@@ -205,6 +205,7 @@ GAMEOBJECT:
          SPHERE_COLLIDER:
             radius 2
             ignore_Raycast 0
+            collision_layer 2
          END_SPHERE_COLLIDER
          LUA_SCRIPT:
             scriptName test.lua
@@ -308,6 +309,7 @@ GAMEOBJECT:
 
          BOX_COLLIDER:
             dimensions 2 2 2
+            collision_layer 0
          END_BOX_COLLIDER
          COLOR_MATERIAL:
             color 0 1 1
@@ -372,9 +374,9 @@ GAMEOBJECT:
    GAMEOBJECT:
       name Raptor(1)
       transform: 
-         -0.001715922  0.0996994  -0.007552511  9.22413  
-         -0.09996273  -0.001550206  0.002247259  7.432641  
-         0.002123429  0.007588239  0.09968907  0.04178047  
+         -0.001715922  0.09969946  -0.007552511  9.22413  
+         -0.09996273  -0.001550207  0.002247259  7.432641  
+         0.002123429  0.007588244  0.09968907  0.04178047  
          0  0  0  1  
       mesh raptor.obj
       cast_shadows 0
