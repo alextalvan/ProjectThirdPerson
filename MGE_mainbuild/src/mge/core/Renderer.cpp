@@ -43,7 +43,7 @@ Renderer::Renderer(int width, int height) : _screenWidth(width), _screenHeight(h
 	InitializePostProc();
 
     //_postProcessList.push_back(new PostProcess("PostProcessing/hdr_shader.vs","PostProcessing/hdr_shader.fs"));
-    _postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/identity.fs"));
+    //_postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/identity.fs"));
 	//_postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/cut_screen.fs"));
 }
 
@@ -107,16 +107,16 @@ void Renderer::render (World* pWorld)
 void Renderer::renderSkyBox(World* pWorld)
 {
     glDepthFunc(GL_LEQUAL);  // Change depth function so depth test passes when values are equal to depth buffer's content
-    _shader->use();
+    _skyBoxShader->use();
     glm::mat4 view = glm::mat4(glm::mat3(pWorld->getMainCamera()->getView()));	// Remove any translation component of the view matrix
     glm::mat4 projection = pWorld->getMainCamera()->getProjection();//glm::perspective(glm::radians(60.0f), (float)_screenWidth/(float)_screenHeight, 0.1f, 100.0f);
-    glUniformMatrix4fv(_shader->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(view));
-    glUniformMatrix4fv(_shader->getUniformLocation("projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniformMatrix4fv(_skyBoxShader->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(view));
+    glUniformMatrix4fv(_skyBoxShader->getUniformLocation("projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
     // skybox cube
     glActiveTexture(GL_TEXTURE0);
     glBindVertexArray(skyboxVAO);
-    glUniform1i(_shader->getUniformLocation("skybox"), 0);
+    glUniform1i(_skyBoxShader->getUniformLocation("skybox"), 0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
@@ -277,10 +277,10 @@ void Renderer::render (World* pWorld, GameObject * pGameObject, Camera * pCamera
 
 void Renderer::InitializeSkyBox()
 {
-    _shader = new ShaderProgram();
-    _shader->addShader(GL_VERTEX_SHADER, config::MGE_SHADER_PATH + "skybox_shader.vs");
-    _shader->addShader(GL_FRAGMENT_SHADER, config::MGE_SHADER_PATH + "skybox_shader.fs");
-    _shader->finalize();
+    _skyBoxShader = new ShaderProgram();
+    _skyBoxShader->addShader(GL_VERTEX_SHADER, config::MGE_SHADER_PATH + "skybox_shader.vs");
+    _skyBoxShader->addShader(GL_FRAGMENT_SHADER, config::MGE_SHADER_PATH + "skybox_shader.fs");
+    _skyBoxShader->finalize();
 
     GLfloat skyboxVertices[] = {
         // Positions

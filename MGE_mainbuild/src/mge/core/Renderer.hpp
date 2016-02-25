@@ -46,7 +46,7 @@ class Renderer
     private:
         //general settings
         int _screenWidth, _screenHeight;
-        ShaderProgram * _shader;
+        ShaderProgram * _skyBoxShader;
         ///shadow mapping
         static GLuint depthMap;
         static GLuint depthCubeMap;
