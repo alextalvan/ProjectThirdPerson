@@ -19,6 +19,12 @@ GUIText::~GUIText()
 	//dtor
 }
 
+void GUIText::setOrigin(float x, float y)
+{
+    sf::FloatRect textRect = _text.getLocalBounds();
+    _text.setOrigin(textRect.left + x, textRect.top + y);
+}
+
 void GUIText::setTextString(std::string pText) {
     _text.setString(pText);
 }

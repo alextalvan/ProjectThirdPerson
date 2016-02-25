@@ -14,7 +14,7 @@ public:
     #define MGE_LIGHT_DIRECTIONAL 0
     #define MGE_LIGHT_POINT 1
     #define MGE_LIGHT_SPOTLIGHT 2
-    Light(int pType = MGE_LIGHT_DIRECTIONAL, glm::vec3 pPos = glm::vec3(0), glm::vec3 pDir = glm::vec3(0), glm::vec3 pColor = glm::vec3(1), glm::vec3 pAtt = glm::vec3(0.1f), float pAngle = 0.36f);
+    Light(int pType = MGE_LIGHT_DIRECTIONAL, glm::vec3 pPos = glm::vec3(0), glm::vec3 pDir = glm::vec3(1), glm::vec3 pColor = glm::vec3(1), glm::vec3 pAtt = glm::vec3(0.1f), float pAngle = 0.36f);
 
     static DualLinkList<Light> const GetLightList();
     void setType(int pType);

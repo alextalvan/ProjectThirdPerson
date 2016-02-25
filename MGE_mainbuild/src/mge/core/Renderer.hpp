@@ -12,6 +12,7 @@ class Camera;
 class Light;
 class ShadowMaterial;
 class ShadowCubeMaterial;
+class ShaderProgram;
 
 struct RendererDebugInfo
 {
@@ -40,23 +41,28 @@ class Renderer
         static GLuint GetPostProcessVertexAttrib();
         static GLuint getDepthMap();
         static GLuint getDepthCubeMap();
-    //framebuffer object used for post processing
-
+        //framebuffer object used for post processing
         static RendererDebugInfo debugInfo;
     private:
         //general settings
         int _screenWidth, _screenHeight;
-
+        ShaderProgram * _skyBoxShader;
         ///shadow mapping
         static GLuint depthMap;
         static GLuint depthCubeMap;
         GLuint depthMapFBO;
         GLuint depthCubeMapFBO;
-
+        // Setup skybox VAO
+        GLuint skyboxVAO, skyboxVBO;
+        GLuint cubemapTexture;
         ///post processing
         GLuint postProc_fbo, postProc_fbo_texture0,postProc_fbo_texture1, postProc_rbo_depth;//frame buffer object with depth buffer
+
+        void InitializeSkyBox();
+        void InitializeDepthMaps();
         void InitializePostProc();
 
+        void renderSkyBox(World* pWorld);
         void renderDirLightDepthMap(World* World);
         void renderPointLightDepthCubeMap(World* pWorld);
 
@@ -68,11 +74,10 @@ class Renderer
 
         //one single post processing material for now, replace with list and optimize later
         std::vector<PostProcess*> _postProcessList;
-
+        GLuint loadCubemap(vector<const GLchar*> faces);
         void DoPostProcessing();
 
         //PostProcess* _postProcessProgram;
-
 };
 
 #endif // RENDERER_H

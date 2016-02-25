@@ -12,13 +12,18 @@ GUISprite::GUISprite(sf::Texture& pTexture, float pPosX, float pPosY, float pRot
     _sprite.setOrigin(spriteRect.left + spriteRect.width/2.0f, spriteRect.top  + spriteRect.height/2.0f);
     setSpriteRotation(pRotation);
 	setSpritePosition (pPosX, pPosY);
-
 	setSpriteScale(pScaleX, pScaleY);
 }
 
 GUISprite::~GUISprite()
 {
 	//dtor
+}
+
+void GUISprite::setOrigin(float x, float y)
+{
+    sf::FloatRect spriteRect = _sprite.getLocalBounds();
+    _sprite.setOrigin(spriteRect.left + x, spriteRect.top + y);
 }
 
 void GUISprite::setSpriteTexture(sf::Texture& pTexture) {

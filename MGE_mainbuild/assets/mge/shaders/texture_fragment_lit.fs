@@ -175,10 +175,10 @@ vec3 DoPointLight(int lightIndex, vec3 norm, vec3 viewDir)
     vec3 att = LightArray[lightIndex].attenuation;
     float attenuation = 1.0f / (att.x + att.y * distance + att.z * distance * distance);
 
-    float shadow = ShadowCubeCalculation(FragPos, LightArray[lightIndex].position);
+    //float shadow = ShadowCubeCalculation(FragPos, LightArray[lightIndex].position);
 
     // Combine results and add attenuation
-    return (diffuse + specular) * shadow * attenuation;
+    return (diffuse + specular) * attenuation;//* shadow
 }
 
 vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 viewDir)

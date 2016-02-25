@@ -74,6 +74,8 @@
 		<Unit filename="assets/mge/shaders/depth_cube_shader.vs" />
 		<Unit filename="assets/mge/shaders/depth_shader.fs" />
 		<Unit filename="assets/mge/shaders/depth_shader.vs" />
+		<Unit filename="assets/mge/shaders/skybox_shader.fs" />
+		<Unit filename="assets/mge/shaders/skybox_shader.vs" />
 		<Unit filename="assets/mge/shaders/terrain.fs" />
 		<Unit filename="assets/mge/shaders/terrain.vs" />
 		<Unit filename="assets/mge/shaders/texture.fs" />
@@ -170,6 +172,8 @@
 		<Unit filename="src/mge/materials/ShadowCubeMaterial.hpp" />
 		<Unit filename="src/mge/materials/ShadowMaterial.cpp" />
 		<Unit filename="src/mge/materials/ShadowMaterial.hpp" />
+		<Unit filename="src/mge/materials/SkyboxMaterial.cpp" />
+		<Unit filename="src/mge/materials/SkyboxMaterial.hpp" />
 		<Unit filename="src/mge/materials/TerrainMaterial.cpp" />
 		<Unit filename="src/mge/materials/TerrainMaterial.hpp" />
 		<Unit filename="src/mge/materials/TextureLitMaterial.cpp" />

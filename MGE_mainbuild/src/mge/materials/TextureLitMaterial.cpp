@@ -191,7 +191,9 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
             glUniform3fv(loc,1,glm::value_ptr(light->getWorldPosition()));
             loc = _shader->getUniformLocation("LightArray[" + indexString + "].attenuation");
             glUniform3fv(loc,1,glm::value_ptr(light->getAttenuation()));
-        } else {
+        }
+        /*
+        else if (lightType == MGE_LIGHT_SPOTLIGHT) {
             loc = _shader->getUniformLocation("LightArray[" + indexString + "].position");
             glUniform3fv(loc,1,glm::value_ptr(light->getWorldPosition()));
             loc = _shader->getUniformLocation("LightArray[" + indexString + "].attenuation");
@@ -201,7 +203,7 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
             loc = _shader->getUniformLocation("LightArray[" + indexString + "].angle");
             glUniform1f(loc,glm::cos(light->getAngle()));
         }
-
+        */
         ++index;
         cn = cn->nextNode;
     }
