@@ -14,6 +14,12 @@ class ShadowMaterial;
 class ShadowCubeMaterial;
 class ShaderProgram;
 
+struct RendererDebugInfo
+{
+    int drawCallCount = 0;
+    int triangleCount = 0;
+};
+
 /**
  * Renderer implements a default single pass forward renderer.
  */
@@ -35,7 +41,8 @@ class Renderer
         static GLuint GetPostProcessVertexAttrib();
         static GLuint getDepthMap();
         static GLuint getDepthCubeMap();
-    //framebuffer object used for post processing
+        //framebuffer object used for post processing
+        static RendererDebugInfo debugInfo;
     private:
         //general settings
         int _screenWidth, _screenHeight;

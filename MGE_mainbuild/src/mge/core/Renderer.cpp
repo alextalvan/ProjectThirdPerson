@@ -130,14 +130,14 @@ void Renderer::renderDirLightDepthMap (World* pWorld)
             Light* light = (Light*)l;
         if (light->getType() == MGE_LIGHT_DIRECTIONAL) {
             ///shadow mapping (render depth map)
-            //glViewport(0, 0, _screenWidth, _screenHeight);
+            glViewport(0, 0, _screenWidth, _screenHeight);
             glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
             glClear(GL_DEPTH_BUFFER_BIT);
             //glCullFace(GL_BACK);
             renderDepthMap (pWorld, pWorld, light, MGE_LIGHT_DIRECTIONAL, true);
             //glCullFace(GL_FRONT);
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
-            //glViewport(0, 0, _screenWidth, _screenHeight);
+            glViewport(0, 0, _screenWidth, _screenHeight);
         }
         l = l -> nextNode;
     }
