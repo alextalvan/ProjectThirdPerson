@@ -18,7 +18,7 @@ end
 --myGameObject is safe to reference here without having to do nil checks
 function OnAttach()
     --print(GetName(myGameObject))
-    LoadLevel("out.txt");
+    --LoadLevel("out.txt");
     --a = GameObject("topkek",123,124,125);
     --a = Sprite("bricks.jpg",683,384,0,0.1,0.1);
 end

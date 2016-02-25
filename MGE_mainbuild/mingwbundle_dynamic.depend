@@ -13593,7 +13593,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1456400220 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.cpp
+1456405653 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -13832,7 +13832,7 @@
 
 1452188439 c:\github\projectthirdperson\mge_mainbuild\luabridge\detail\namespace.h
 
-1456402565 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
+1456405811 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -15937,7 +15937,7 @@
 	<mge/util/list/SingleLinkNode.hpp>
 	<mge/core/Destroyable.hpp>
 
-1456401934 c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luascript.hpp
+1456406751 c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luascript.hpp
 	"lua.h"
 	"lauxlib.h"
 	"lualib.h"
@@ -16262,30 +16262,30 @@
 	"mge/gui/GUI.hpp"
 	"mge/util/list/DualLinkNode.hpp"
 
-1456220097 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guibutton.cpp
+1456406353 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guibutton.cpp
 	<GL/glew.h>
 	<SFML/Graphics.hpp>
 	"mge/gui/GUIButton.hpp"
 	"mge/util/Input.hpp"
 
-1456220097 c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guibutton.hpp
+1456406349 c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guibutton.hpp
 	"mge/gui/GUISprite.hpp"
 
-1456220097 c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guisprite.hpp
+1456406332 c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guisprite.hpp
 	"mge/gui/GUI.hpp"
 
-1456220097 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guisprite.cpp
+1456406452 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guisprite.cpp
 	<GL/glew.h>
 	<SFML/Graphics.hpp>
 	"mge/gui/GUISprite.hpp"
 	"SFML/Graphics/Transform.hpp"
 
-1456220097 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guitext.cpp
+1456406417 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guitext.cpp
 	<GL/glew.h>
 	<SFML/Graphics/Text.hpp>
 	"mge/gui/GUIText.hpp"
 
-1456220097 c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guitext.hpp
+1456406330 c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\guitext.hpp
 	"mge/gui/GUI.hpp"
 
 1456220095 c:\github\projectthirdperson\mge_mainbuild\src\mge\util\resourcecacher.hpp

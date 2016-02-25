@@ -107,12 +107,14 @@ LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
 	lua_register(L, "Timer", makeTimer);//
 	lua_register(L, "ResetTimer", resetTimer);//
 	lua_register(L, "CheckTimer", checkTimer);//
+	lua_register(L, "SetTextOrigin", setTextOrigin);//
+	lua_register(L, "SetSpriteOrigin", setSpriteOrigin);//
 
 	//Set world
 	lua_pushlightuserdata(L, (LuaObject*)world);
 	lua_setglobal(L, "world");
 
-	//Set window
+	//Set gui
 	lua_pushlightuserdata(L, (LuaObject*)world2D);
 	lua_setglobal(L, "GUI");
 
@@ -555,6 +557,38 @@ int LuaScript::onClick(lua_State * lua)
     lua_pushboolean(lua, clicked);
 
 	return 1;
+}
+
+int LuaScript::setSpriteOrigin(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -3)) throw "Expect: game object";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+	GUISprite * guiSprite = (GUISprite*)(LuaObject*)lua_touserdata(lua, -3);
+	float x = lua_tonumber(lua, -2);
+	float y = lua_tonumber(lua, -1);
+	guiSprite->setOrigin(x, y);
+
+	return 0;
+}
+
+int LuaScript::setTextOrigin(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -3)) throw "Expect: game object";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+	GUIText * guiText = (GUIText*)(LuaObject*)lua_touserdata(lua, -3);
+	float x = lua_tonumber(lua, -2);
+	float y = lua_tonumber(lua, -1);
+	guiText->setOrigin(x, y);
+
+	return 0;
 }
 
 int LuaScript::camera(lua_State * lua)

@@ -139,7 +139,7 @@ void MGEDemo::_initializeScene()
     Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -2, 1), glm::vec3(1,1,1));
     Light* light2 = new Light(MGE_LIGHT_POINT, glm::vec3(0,0.5,2), glm::vec3(0,0,1), glm::vec3(1,0,0), glm::vec3(0.1f,0.1f,0.1f));
     //Light* light3 = new Light(MGE_LIGHT_SPOTLIGHT, glm::vec3(0,2,2), glm::vec3(0,-1,0), glm::vec3(0,0,1), glm::vec3(0.1f,0.1f,0.1f), 0.36f);
-    //cam->AttachComponent(new LookAt(testCube));
+    cam->AttachComponent(new LookAt(testCube));
     testCube1->AttachComponent(new KeysBehaviour(0.1,1));
 }
 

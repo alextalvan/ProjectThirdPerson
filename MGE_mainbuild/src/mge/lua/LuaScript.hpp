@@ -76,6 +76,8 @@ private:
     static int guiButton (lua_State * lua);
     static int setButtonTexture (lua_State * lua);
     static int onClick (lua_State * lua);
+    static int setSpriteOrigin (lua_State * lua);
+    static int setTextOrigin (lua_State * lua);
 
 	//utils
 	static int getTime(lua_State * lua);
