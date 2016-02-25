@@ -32,6 +32,8 @@ class AbstractGame
         //run the actual process of updating all objects, rendering them and processing events
         virtual void run();
 
+        static sf::RenderWindow* const GetWindow();
+
     protected:
 
         //methods above delegate behaviour to the methods below so that you can override it in a subclass
@@ -57,7 +59,7 @@ class AbstractGame
         //process any sfml window events (see SystemEventDispatcher/Listener)
         virtual void _processEvents();
 
-		sf::RenderWindow* _window;  //sfml window to render into
+		static sf::RenderWindow* _window;  //sfml window to render into
 		Renderer* _renderer;        //the renderer class to render the world
 		World* _world;              //the root game object that represents our scene
 		GUI* _world2D;

@@ -43,9 +43,13 @@ class Renderer
         static GLuint getDepthCubeMap();
         //framebuffer object used for post processing
         static RendererDebugInfo debugInfo;
+
+        static glm::vec2 GetScreenSize();
     private:
         //general settings
-        int _screenWidth, _screenHeight;
+        static int _screenWidth, _screenHeight;
+
+        ///skybox
         ShaderProgram * _skyBoxShader;
         ///shadow mapping
         static GLuint depthMap;
@@ -72,12 +76,13 @@ class Renderer
         //vertex attribute array for the post processing
         static GLuint _postProcessVertexAttributeArray;
 
-        //one single post processing material for now, replace with list and optimize later
+
         std::vector<PostProcess*> _postProcessList;
-        GLuint loadCubemap(vector<const GLchar*> faces);
         void DoPostProcessing();
 
-        //PostProcess* _postProcessProgram;
+        GLuint loadCubemap(vector<const GLchar*> faces);
+
+
 };
 
 #endif // RENDERER_H

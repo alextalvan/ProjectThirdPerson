@@ -22,11 +22,17 @@ GLuint Renderer::_postProcessVertexAttributeArray;
 GLuint Renderer::depthMap;
 GLuint Renderer::depthCubeMap;
 
-
 RendererDebugInfo Renderer::debugInfo;
 
-Renderer::Renderer(int width, int height) : _screenWidth(width), _screenHeight(height)
+int Renderer::_screenWidth;
+int Renderer::_screenHeight;
+
+
+Renderer::Renderer(int width, int height)
 {
+    _screenWidth = width;
+    _screenHeight = height;
+
 	glEnable( GL_DEPTH_TEST );
 	glEnable( GL_CULL_FACE ); // default GL_BACK
 	//glCullFace(GL_FRONT);
@@ -60,6 +66,11 @@ Renderer::~Renderer()
     glDeleteTextures(1, &cubemapTexture);
     //glDeleteTextures(1, &depthCubeMap);
     glDeleteFramebuffers(1, &postProc_fbo);
+}
+
+glm::vec2 Renderer::GetScreenSize()
+{
+    return glm::vec2(_screenWidth,_screenHeight);
 }
 
 void Renderer::setClearColor(int pR, int pG, int pB) {

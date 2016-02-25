@@ -20,11 +20,18 @@
 //debugging by stepping into individual frames
 //bool testBool = false;
 
-AbstractGame::AbstractGame():_window(NULL),_renderer(NULL),_world(NULL),_world2D(NULL),_running(false)
+sf::RenderWindow* AbstractGame::_window = 0;
+
+AbstractGame::AbstractGame():_renderer(NULL),_world(NULL),_world2D(NULL),_running(false)
 {
     //initialize game systems
 
 }
+sf::RenderWindow* const AbstractGame::GetWindow()
+{
+    return _window;
+}
+
 
 AbstractGame::~AbstractGame()
 {
@@ -68,6 +75,7 @@ void AbstractGame::_initializeWindow(int width, int height, int fullscreen)
 
 	int style = (fullscreen) ? sf::Style::Fullscreen : sf::Style::Titlebar;
 	_window = new sf::RenderWindow( sf::VideoMode(width,height), "FairWind Game Engine", style , sf::ContextSettings(24,8,4,3,3));
+	_window->setMouseCursorVisible(false);
 	//_window->setVerticalSyncEnabled(true);
     std::cout << "Window initialized." << std::endl << std::endl;
 }

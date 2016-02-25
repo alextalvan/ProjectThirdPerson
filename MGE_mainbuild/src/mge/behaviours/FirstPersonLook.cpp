@@ -5,6 +5,7 @@
 #include <mge/util/list/DualLinkNode.hpp>
 #include <mge/lua/LuaScript.hpp>
 #include "SFML/Window.hpp"
+#include <mge/core/Renderer.hpp>
 
 FirstPersonLook::FirstPersonLook(float turnSpeed)
 {
@@ -78,7 +79,20 @@ glm::vec2 FirstPersonLook::GetMouseOffset()
 
 	glm::vec2 offset = mousePos - prevMousePos;
 
-	prevMousePos= mousePos;
+    float newX = mousePos.x;
+    glm::vec2 screenSize = Renderer::GetScreenSize();
+
+	if(mousePos.x > screenSize.x * 0.75f || mousePos.x < screenSize.x * 0.25f) newX = screenSize.x * 0.5f;
+
+	float newY = mousePos.y;
+	if(mousePos.y > screenSize.y * 0.75f || mousePos.y < screenSize.y * 0.25f) newY = screenSize.y * 0.5f;
+
+    sf::Mouse::setPosition(sf::Vector2i((int)newX,(int)newY),*AbstractGame::GetWindow());
+
+    mousePos.x = newX;
+    mousePos.y = newY;
+
+	prevMousePos = mousePos;
 
 	return offset;
 }
