@@ -24,7 +24,7 @@ bool BoxCollider::HitTest(BoxCollider* other)
     glm::mat4 otherMat = other->getOwner()->getWorldTransform();
 
     glm::vec3 MTVaxis;
-    float MTVlowestMagnitude = 1e+10f;
+    float MTVlowestMagnitude = FLT_MAX;
 
     myVerts[0] = myMat * glm::vec4(xSize*0.5f,ySize*0.5f,zSize * 0.5f, 1);//
     myVerts[1] = myMat * glm::vec4(xSize*0.5f,ySize*0.5f,-zSize * 0.5f, 1);//
@@ -154,7 +154,7 @@ bool BoxCollider::InternalHitTest(SphereCollider* other)
     glm::mat4 myMat = _owner->getWorldTransform();
 
     glm::vec3 MTVaxis;
-    float MTVlowestMagnitude = 1e+10f;
+    float MTVlowestMagnitude = FLT_MAX;
 
     myVerts[0] = glm::vec3(myMat * glm::vec4(xSize*0.5f,ySize*0.5f,zSize * 0.5f, 1));//
     myVerts[1] = glm::vec3(myMat * glm::vec4(xSize*0.5f,ySize*0.5f,-zSize * 0.5f, 1));//

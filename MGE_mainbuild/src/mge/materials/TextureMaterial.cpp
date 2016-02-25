@@ -7,6 +7,8 @@
 #include "mge/config.hpp"
 
 ShaderProgram* TextureMaterial::_shader = NULL;
+GLuint TextureMaterial::_colorLoc = 0;
+GLuint TextureMaterial::_diffuseLoc = 0;
 
 TextureMaterial::TextureMaterial(Texture * pDiffuseTexture):_diffuseTexture(pDiffuseTexture) {
     _lazyInitializeShader();
@@ -20,6 +22,9 @@ void TextureMaterial::_lazyInitializeShader() {
         _shader->addShader(GL_VERTEX_SHADER, config::MGE_SHADER_PATH+"texture.vs");
         _shader->addShader(GL_FRAGMENT_SHADER, config::MGE_SHADER_PATH+"texture.fs");
         _shader->finalize();
+
+        _colorLoc = _shader->getUniformLocation("color");
+        _diffuseLoc = _shader->getUniformLocation("textureDiffuse");
     }
 }
 
@@ -35,7 +40,10 @@ void TextureMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pCa
     //setup texture slot 0
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _diffuseTexture->getId());
-    glUniform1i (_shader->getUniformLocation("textureDiffuse"), 0);
+    glUniform1i (_diffuseLoc, 0);
+
+    //color
+    glUniform3fv (_colorLoc, 1, glm::value_ptr(color));
 
     //pass in all MVP matrices separately
     glUniformMatrix4fv ( _shader->getUniformLocation("projectionMatrix"),   1, GL_FALSE, glm::value_ptr(pCamera->getProjection()));

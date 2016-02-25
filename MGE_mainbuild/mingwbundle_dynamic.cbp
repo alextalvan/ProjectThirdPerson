@@ -60,6 +60,8 @@
 		<Unit filename="assets/mge/scripts/main.lua" />
 		<Unit filename="assets/mge/scripts/template.lua" />
 		<Unit filename="assets/mge/scripts/test.lua" />
+		<Unit filename="assets/mge/shaders/Particles/particle.fs" />
+		<Unit filename="assets/mge/shaders/Particles/particle.vs" />
 		<Unit filename="assets/mge/shaders/PostProcessing/cut_screen.fs" />
 		<Unit filename="assets/mge/shaders/PostProcessing/hdr_shader.fs" />
 		<Unit filename="assets/mge/shaders/PostProcessing/hdr_shader.vs" />
@@ -162,6 +164,8 @@
 		<Unit filename="src/mge/materials/AbstractMaterial.hpp" />
 		<Unit filename="src/mge/materials/ColorMaterial.cpp" />
 		<Unit filename="src/mge/materials/ColorMaterial.hpp" />
+		<Unit filename="src/mge/materials/Particles/ParticleMaterial.cpp" />
+		<Unit filename="src/mge/materials/Particles/ParticleMaterial.hpp" />
 		<Unit filename="src/mge/materials/PostProcessing/PostProcess.cpp" />
 		<Unit filename="src/mge/materials/PostProcessing/PostProcess.hpp" />
 		<Unit filename="src/mge/materials/ShadowCubeMaterial.cpp" />

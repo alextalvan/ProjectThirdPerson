@@ -20,12 +20,15 @@ namespace LevelEditor
     using namespace std;
     World* _storedWorld;
     GUI* _storedWorld2D;
+    //dummy class
     std::vector<LuaScript*> _storedScripts;
 
     void LoadLevel(std::string fileName, World* world, GUI* world2D)
     {
         if(world == NULL || world2D == NULL)
             return;
+
+        _storedScripts.clear();
 
         _storedWorld = world;
         _storedWorld2D = world2D;
@@ -106,6 +109,12 @@ namespace LevelEditor
             Mesh* mesh = Mesh::load(config::MGE_MODEL_PATH + s);
             obj->setMesh(mesh);
         }
+
+        //shadow toggle
+        f>>s;
+        int shadow;
+        f>>shadow;
+        obj->castShadows = shadow;
 
 
         //the exporter root is ignored
@@ -224,7 +233,7 @@ namespace LevelEditor
                 f>>s;//"script_name"
                 f>>s;//the actual script path
 
-                LuaScript* script = new LuaScript(s.c_str(),_storedWorld, _storedWorld2D);
+                LuaScript* script = new LuaScript(s,_storedWorld, _storedWorld2D);
                 owner->AttachComponent(script);
                 _storedScripts.push_back(script);
                 f>>s;//end_luascript
@@ -348,9 +357,15 @@ namespace LevelEditor
             mat[0][0] *= -1.0f;
             mat[1][0] *= -1.0f;
             mat[2][0] *= -1.0f;
-            mat[3][2] *= -1.0f;
+            //mat[3][2] *= -1.0f;
 
             mat = glm::transpose(mat);
+
+
+            //mat[3][2] *= -1.0f;
+
+
+             //mat[3][2] *= -1.0f;
 
 
             //mat[1] = mat[1] * -1.0f;

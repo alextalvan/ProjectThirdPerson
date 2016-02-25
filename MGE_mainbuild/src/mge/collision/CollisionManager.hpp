@@ -14,6 +14,7 @@ struct RaycastInfo
 {
     GameObject* object;
     glm::vec3 impactPoint;
+    float distance;
 };
 
 struct Ray

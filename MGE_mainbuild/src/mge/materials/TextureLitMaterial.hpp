@@ -44,6 +44,8 @@ class TextureLitMaterial : public AbstractMaterial
         static GLboolean _hasSpecMapLoc;
         static GLboolean _hasNormMapLoc;
 
+        static GLuint _colorLoc;
+
         Texture* _diffuseTexture;
         float _smoothness;
         float _shininess;

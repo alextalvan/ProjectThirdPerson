@@ -135,6 +135,7 @@ bool CollisionManager::Raycast(const Ray& ray, RaycastInfo& output)
     {
         output.object = bestTarget;
         output.impactPoint = ray.origin + ray.direction * bestDistance;
+        output.distance = bestDistance;
         return true;
     }
 }

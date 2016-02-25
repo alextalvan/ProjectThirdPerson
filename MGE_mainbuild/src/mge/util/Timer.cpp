@@ -16,8 +16,6 @@ bool Timer::isFinished()
 {
     float dur = (Time::now() - _startTime);
     return dur > _duration;
-
-    std::cout<<dur<<"\n";
 }
 
 void Timer::Reset()

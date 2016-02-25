@@ -6,11 +6,7 @@
 #include "mge/materials/ColorMaterial.hpp"
 #include "mge/materials/TextureMaterial.hpp"
 #include "mge/behaviours/KeysBehaviour.hpp"
-//#include "mge/behaviours/OrbitBehaviour.hpp"
 #include "mge/behaviours/LookAt.hpp"
-//#include "WobblingMaterial.hpp"
-//#include "LitColorMaterial.hpp"
-//#include "LitTextureMaterial.hpp"
 #include "mge/config.hpp"
 #include "mge/util/Input.hpp"
 #include "mge/util/Random.hpp"
@@ -25,6 +21,8 @@
 #include "mge/gui/GUIButton.hpp"
 #include "mge/util/ResourceCacher.hpp"
 #include "mge/lua/LuaObject.hpp"
+#include "mge/sound/SoundManager.hpp"
+#include "mge/util/Timer.hpp"
 
 //#define MGE_LUA_SAFETY 1  //comment this define out to remove the lua safety checks but heavily improve performance
 
@@ -99,7 +97,16 @@ LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
 	lua_register(L, "FindChild", findChild);//
 	lua_register(L, "FindComponent", findComponent);//
 	lua_register(L, "CallFunction", luaInvokeFunction);//
-	lua_register(L, "CallComplex", luaInvokeFunctionWithArgs);
+	lua_register(L, "CallComplex", luaInvokeFunctionWithArgs);//
+	lua_register(L, "PlayMusic", playMusic);//
+	lua_register(L, "PlaySFX", playSFX);//
+	lua_register(L, "PlaySFX", playSFX);//
+	lua_register(L, "SetActive", setActive);//
+	lua_register(L, "GetActive", getActive);//
+	lua_register(L, "SetColor", setColor);//
+	lua_register(L, "Timer", makeTimer);//
+	lua_register(L, "ResetTimer", resetTimer);//
+	lua_register(L, "CheckTimer", checkTimer);//
 
 	//Set world
 	lua_pushlightuserdata(L, (LuaObject*)world);
@@ -140,10 +147,12 @@ void LuaScript::setOwner(GameObject* pOwner)
     }
     else
     {
+        InvokeFunction("OnAttach");
+
         lua_pushlightuserdata(L, (LuaObject*)pOwner);
         lua_setglobal(L,"myGameObject");
 
-        InvokeFunction("OnAttach");
+
     }
 }
 
@@ -195,6 +204,28 @@ int LuaScript::colorMaterial(lua_State * lua)
 	lua_pushlightuserdata(lua, newMaterial);
 
 	return 1;
+}
+
+int LuaScript::setColor(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_isnumber(lua, -3)) throw "Expect: number";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+    GameObject* obj = (GameObject*)(LuaObject*)lua_touserdata(lua,-4);
+	glm::vec3 color = glm::vec3(0, 0, 0);
+	color.x = lua_tonumber(lua, -3);
+	color.y = lua_tonumber(lua, -2);
+	color.z = lua_tonumber(lua, -1);
+	//lua_pop(lua,3);
+
+	//std::string s = obj->getName();
+
+	obj->getMaterial()->color = color;
+
+	return 0;
 }
 
 int LuaScript::textureMaterial(lua_State * lua)
@@ -1150,6 +1181,70 @@ int LuaScript::findComponent(lua_State * lua)
 	return 1;
 }
 
+int LuaScript::playMusic(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_isstring(lua, -3)) throw "Expect: string";
+	#endif
+
+	bool loop = lua_toboolean(lua,-1);
+	float vol = lua_tonumber(lua,-2);
+	string name = lua_tostring(lua,-3);
+
+    Sound::PlayMusic((config::MGE_SOUND_PATH + name).c_str(),vol,loop);
+
+	return 0;
+}
+
+int LuaScript::playSFX(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	#endif
+
+	float vol = lua_tonumber(lua,-1);
+	string name = lua_tostring(lua,-2);
+
+    Sound::PlaySFX((config::MGE_SOUND_PATH + name).c_str(),vol);
+
+	return 0;
+}
+
+int LuaScript::setActive(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -1)) throw "Expect: game object or component";
+	#endif
+
+
+    LuaObject* l = (LuaObject*)lua_touserdata(lua,-2);
+    bool val = lua_toboolean(lua,-1);
+
+    GameObject* g = dynamic_cast<GameObject*>(l);
+    if(g!=NULL){g->SetActive(val); return 0;}
+
+    Component* c = dynamic_cast<Component*>(l);
+    if(c!=NULL) {c->SetActive(val); return 0;}
+
+    return 0;
+}
+
+int LuaScript::getActive(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -1)) throw "Expect: game object or component";
+	#endif
+
+    LuaObject* l = (LuaObject*)lua_touserdata(lua,-1);
+
+    GameObject* g = dynamic_cast<GameObject*>(l);
+    if(g!=NULL){lua_pushboolean(lua,g->IsActive()); return 1;}
+
+    Component* c = dynamic_cast<Component*>(l);
+    if(c!=NULL){lua_pushboolean(lua,c->IsActive()); return 1;}
+
+    return 0;
+}
+
 int LuaScript::luaInvokeFunction(lua_State * lua)
 {
     #ifdef MGE_LUA_SAFETY
@@ -1267,6 +1362,45 @@ int LuaScript::setScale(lua_State * lua)
 	//obj->
 
 	return 0;
+}
+
+int LuaScript::makeTimer(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	#endif
+
+    float dur = lua_tonumber(lua,-1);
+    Timer* t = new Timer(dur);
+    t->Reset();
+
+	lua_pushlightuserdata(lua, t);
+
+	return 1;
+}
+
+int LuaScript::resetTimer(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	#endif
+
+    Timer* t = (Timer*)lua_touserdata(lua,-2);
+    float dur = lua_tonumber(lua,-1);
+    t->SetDuration(dur);
+    t->Reset();
+
+	return 0;
+}
+
+int LuaScript::checkTimer(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	#endif
+
+    Timer* t = (Timer*)lua_touserdata(lua,-1);
+
+    lua_pushboolean(lua,t->isFinished());
+
+	return 1;
 }
 
 LuaScript::~LuaScript()

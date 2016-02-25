@@ -2,6 +2,8 @@
 #version 330 // for glsl version (12 is for older versions , say opengl 2.1
 #define MGE_MAX_LIGHTS 8
 
+uniform vec3 color;
+
 uniform int lightCount;
 uniform vec3 viewPos;
 uniform sampler2D depthMap;
@@ -75,7 +77,7 @@ void main( void )
         //    outColor += DoSpotlight(i, normal, viewDir);
     }
 
-    vec3 ambient = vec3(texture(material.diffuseMap, TexCoord)) * material.ambient;
+    vec3 ambient = vec3(texture(material.diffuseMap, TexCoord)) * material.ambient * color;
     fragment_color = vec4(ambient + outColor,1.0f);
 }
 
