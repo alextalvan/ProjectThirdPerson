@@ -222,8 +222,6 @@ Mesh* Mesh::cache(string pFileName)
 
 void Mesh::_calculateTangents(Mesh*mesh)
 {
-    //mesh->_tangents = mesh->_vertices; // copy vertices to tangents as placeholders to copy results in
-
     for ( unsigned int i = 0; i < mesh->_indices.size(); i+=3 )
     {
 		// get the triangle
@@ -250,105 +248,7 @@ void Mesh::_calculateTangents(Mesh*mesh)
 		mesh->_tangents.push_back(tangent); // every vertex needs its tangent
 		mesh->_tangents.push_back(tangent); // every vertex needs its tangent
 		mesh->_tangents.push_back(tangent); // every vertex needs its tangent
-		//cout << tangent << endl;
 	}
-
-/*
-    for (int i = 0; i < mesh->_vertices.size(); i++) {
-        glm::vec3 v0 = mesh->_vertices[i];
-        glm::vec3 v1 = mesh->_vertices[i+1];
-        glm::vec3 v2 = mesh->_vertices[i+2];
-
-        glm::vec3 edge1 = v1 - v0;
-        glm::vec3 edge2 = v2 - v0;
-
-        glm::vec2 deltaUV1 = mesh->_uvs[i+1] - mesh->_uvs[i];
-        glm::vec2 deltaUV2 = mesh->_uvs[i+2] - mesh->_uvs[i];
-
-        float f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
-
-        glm::vec3 tangent;
-        tangent.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
-        tangent.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
-        tangent.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
-        tangent = glm::normalize(tangent);
-
-        mesh->_tangents.push_back(tangent);
-        std::cout << tangent << std::endl;
-
-        //mesh->_tangents[i] += tangent;
-        //mesh->_tangents[i+1] += tangent;
-        //mesh->_tangents[i+2] += tangent;
-
-    }
-*/
-/*
-    long triangleCount = mesh->_indices.size();
-    long vertexCount = mesh->_vertices.size();
-    vector<glm::vec3> tan1;
-    vector<glm::vec3> tan2;
-
-    for (long a = 0; a < triangleCount; a+=3)
-    {
-        long i1 = mesh->_indices[a];
-        long i2 = mesh->_indices[a+1];
-        long i3 = mesh->_indices[a+2];
-
-        glm::vec3& v1 = mesh->_vertices[i1];
-        glm::vec3& v2 = mesh->_vertices[i2];
-        glm::vec3& v3 = mesh->_vertices[i3];
-
-        glm::vec2& w1 = mesh->_uvs[i1];
-        glm::vec2& w2 = mesh->_uvs[i2];
-        glm::vec2& w3 = mesh->_uvs[i3];
-
-        float x1 = v2.x - v1.x;
-        float x2 = v3.x - v1.x;
-        float y1 = v2.y - v1.y;
-        float y2 = v3.y - v1.y;
-        float z1 = v2.z - v1.z;
-        float z2 = v3.z - v1.z;
-
-        float s1 = w2.x - w1.x;
-        float s2 = w3.x - w1.x;
-        float t1 = w2.y - w1.y;
-        float t2 = w3.y - w1.y;
-
-        float r = 1.0F / (s1 * t2 - s2 * t1);
-        glm::vec3 sdir((t2 * x1 - t1 * x2) * r, (t2 * y1 - t1 * y2) * r, (t2 * z1 - t1 * z2) * r);
-        glm::vec3 tdir((s1 * x2 - s2 * x1) * r, (s1 * y2 - s2 * y1) * r, (s1 * z2 - s2 * z1) * r);
-
-        tan1.push_back(sdir);
-        tan1.push_back(sdir);
-        tan1.push_back(sdir);
-
-        tan2.push_back(tdir);
-        tan2.push_back(tdir);
-        tan2.push_back(tdir);
-
-        //tan1[i1] += sdir;
-        //tan1[i2] += sdir;
-        //tan1[i3] += sdir;
-
-        //tan2[i1] += tdir;
-        //tan2[i2] += tdir;
-        //tan2[i3] += tdir;
-    }
-
-    for (long a = 0; a < vertexCount; a++)
-    {
-        glm::vec3& n = mesh->_normals[a];
-        glm::vec3& t = tan1[a];
-
-        // Gram-Schmidt orthogonalize
-        glm::vec3 tangent = glm::normalize(t - n * glm::dot(n, t));
-        mesh->_tangents.push_back(tangent);
-        // Calculate handedness
-        //tangent.w = (glm::dot(glm::cross(n, t), tan2[a]) < 0.0f) ? -1.0f : 1.0f;
-        //mesh->_tangents.push_back(tangent);
-        std::cout << tangent << std::endl;
-    }
-    */
 }
 
 void Mesh::_buffer()
