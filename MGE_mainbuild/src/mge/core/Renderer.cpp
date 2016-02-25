@@ -43,7 +43,7 @@ Renderer::Renderer(int width, int height) : _screenWidth(width), _screenHeight(h
 	InitializePostProc();
 
     //_postProcessList.push_back(new PostProcess("PostProcessing/hdr_shader.vs","PostProcessing/hdr_shader.fs"));
-    //_postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/identity.fs"));
+    _postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/identity.fs"));
 	//_postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/cut_screen.fs"));
 }
 
@@ -90,6 +90,7 @@ void Renderer::render (World* pWorld)
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );//clear previous frame
         render (pWorld, pWorld, pWorld->getMainCamera(), true);//scene pass
 
+        renderSkyBox(pWorld);
         //post processing
         DoPostProcessing();
     }
@@ -98,9 +99,9 @@ void Renderer::render (World* pWorld)
        glBindFramebuffer(GL_FRAMEBUFFER,0);
        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
        render (pWorld, pWorld, pWorld->getMainCamera(), true);
+        renderSkyBox(pWorld);
     }
 
-    renderSkyBox(pWorld);
 }
 
 void Renderer::renderSkyBox(World* pWorld)
