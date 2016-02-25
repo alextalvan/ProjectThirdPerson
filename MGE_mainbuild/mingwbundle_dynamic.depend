@@ -15569,7 +15569,7 @@
 
 1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\fps.hpp
 
-1456309949 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.hpp
+1456431365 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.hpp
 	<GL/glew.h>
 	"glm.hpp"
 	<vector>
@@ -15633,13 +15633,13 @@
 1456251789 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\light.cpp
 	<mge/core/Light.hpp>
 
-1456251789 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\light.hpp
+1456431365 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\light.hpp
 	<mge/core/GameObject.hpp>
 	<glm.hpp>
 	"mge/util/list/DualLinkList.hpp"
 	"mge/util/list/DualLinkNode.hpp"
 
-1456310469 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\mesh.cpp
+1456431365 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\mesh.cpp
 	"mge/core/Mesh.hpp"
 	<iostream>
 	<map>
@@ -15650,7 +15650,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1456330638 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
+1456432473 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -15662,6 +15662,10 @@
 	"mge/core/Light.hpp"
 	"mge/materials/ShadowMaterial.hpp"
 	"mge/materials/ShadowCubeMaterial.hpp"
+	"mge/core/Texture.hpp"
+	<SFML/Graphics.hpp>
+	"mge/config.hpp"
+	"mge/core/ShaderProgram.hpp"
 	<iostream>
 
 1456318957 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\abstractmaterial.hpp
@@ -15739,7 +15743,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1456319630 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
+1456431365 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
 	<glm.hpp>
 	"mge/materials/TextureLitMaterial.hpp"
 	"mge/core/Texture.hpp"
@@ -15766,7 +15770,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1456392860 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
+1456434209 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -15957,7 +15961,7 @@
 	"mge/gui/GUIButton.hpp"
 	"mge/util/ResourceCacher.hpp"
 
-1456413518 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
+1456431365 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
 	"lua.h"
 	"lauxlib.h"
 	"lualib.h"
@@ -15966,7 +15970,7 @@
 	<mge/behaviours/Component.hpp>
 	<SFML/Graphics.hpp>
 
-1456413622 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
+1456431365 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
 	"mge/lua/LuaScript.hpp"
 	"mge/core/World.hpp"
 	"mge/core/GameObject.hpp"
@@ -16089,31 +16093,31 @@
 1455821627 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\firstpersonlook.hpp
 	<mge/behaviours/Component.hpp>
 
-1455638120 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\gui.hpp
+1456431365 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\gui.hpp
 	<SFML/Graphics.hpp>
 	"mge/core/GameObject.hpp"
 
-1455637947 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guitext.hpp
+1456431365 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guitext.hpp
 	"mge/gui/GUI.hpp"
 
-1455637530 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guisprite.hpp
+1456431365 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guisprite.hpp
 	"mge/gui/GUI.hpp"
 
 1455324393 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\resourcecacher.hpp
 	<SFML/Graphics.hpp>
 
-1456408948 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\gui.cpp
+1456431595 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\gui.cpp
 	"mge/gui/GUI.hpp"
 	"mge/util/list/DualLinkNode.hpp"
 	"mge/core/Renderer.hpp"
 
-1455883431 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guisprite.cpp
+1456431365 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guisprite.cpp
 	<GL/glew.h>
 	<SFML/Graphics.hpp>
 	"mge/gui/GUISprite.hpp"
 	"SFML/Graphics/Transform.hpp"
 
-1455883431 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guitext.cpp
+1456431365 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guitext.cpp
 	<GL/glew.h>
 	<SFML/Graphics/Text.hpp>
 	"mge/gui/GUIText.hpp"
@@ -16340,4 +16344,6 @@
 	"mge/config.hpp"
 	"mge/core/Light.hpp"
 	<string>
+
+1456431365 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\skyboxmaterial.cpp
 

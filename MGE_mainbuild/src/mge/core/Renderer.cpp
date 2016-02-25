@@ -29,7 +29,7 @@ Renderer::Renderer(int width, int height) : _screenWidth(width), _screenHeight(h
 {
 	glEnable( GL_DEPTH_TEST );
 	glEnable( GL_CULL_FACE ); // default GL_BACK
-	glCullFace(GL_FRONT);
+	//glCullFace(GL_FRONT);
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glClearColor((float)0x2d/0xff, (float)0x6b/0xff, (float)0xce/0xff, 1.0f );
@@ -106,6 +106,7 @@ void Renderer::render (World* pWorld)
 
 void Renderer::renderSkyBox(World* pWorld)
 {
+    glCullFace(GL_FRONT);
     glDepthFunc(GL_LEQUAL);  // Change depth function so depth test passes when values are equal to depth buffer's content
     _skyBoxShader->use();
     glm::mat4 view = glm::mat4(glm::mat3(pWorld->getMainCamera()->getView()));	// Remove any translation component of the view matrix
@@ -122,6 +123,7 @@ void Renderer::renderSkyBox(World* pWorld)
     glBindVertexArray(0);
     glDepthFunc(GL_LESS); // Set depth function back to default
     glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+    glCullFace(GL_BACK);
 }
 
 void Renderer::renderDirLightDepthMap (World* pWorld)
@@ -134,9 +136,9 @@ void Renderer::renderDirLightDepthMap (World* pWorld)
             glViewport(0, 0, _screenWidth, _screenHeight);
             glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
             glClear(GL_DEPTH_BUFFER_BIT);
-            glCullFace(GL_BACK);
-            renderDepthMap (pWorld, pWorld, light, MGE_LIGHT_DIRECTIONAL, true);
             glCullFace(GL_FRONT);
+            renderDepthMap (pWorld, pWorld, light, MGE_LIGHT_DIRECTIONAL, true);
+            glCullFace(GL_BACK);
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
             glViewport(0, 0, _screenWidth, _screenHeight);
         }
@@ -154,9 +156,9 @@ void Renderer::renderPointLightDepthCubeMap (World* pWorld)
             glViewport(0, 0, _screenWidth, _screenHeight);
             glBindFramebuffer(GL_FRAMEBUFFER, depthCubeMapFBO);
             glClear(GL_DEPTH_BUFFER_BIT);
-            glCullFace(GL_BACK);
-            renderDepthMap (pWorld, pWorld, light, MGE_LIGHT_POINT, true);
             glCullFace(GL_FRONT);
+            renderDepthMap (pWorld, pWorld, light, MGE_LIGHT_POINT, true);
+            glCullFace(GL_BACK);
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
             glViewport(0, 0, _screenWidth, _screenHeight);
         }
@@ -169,7 +171,7 @@ void Renderer::DoPostProcessing()
 {
     //glDisable(GL_FRAMEBUFFER_SRGB);
     glDisable(GL_DEPTH_TEST);
-    glCullFace(GL_BACK);
+    //glCullFace(GL_BACK);
 
     int procListSize = _postProcessList.size();
     //setup
@@ -214,7 +216,7 @@ void Renderer::DoPostProcessing()
 
     }
     glEnable( GL_DEPTH_TEST );
-    glCullFace(GL_FRONT);
+    //glCullFace(GL_FRONT);
     //glEnable(GL_FRAMEBUFFER_SRGB);
 }
 

@@ -10,6 +10,12 @@ GUI::GUI(std::string pName, float pPosX, float pPosY)
 
 }
 
+void GUI::SetGUIActive(bool active)
+{
+    SetActive(active);
+}
+
+
 void GUI::DrawTo(sf::RenderTarget& t)
 {
     InnerDraw(t);
