@@ -13593,7 +13593,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1456405653 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.cpp
+1456407506 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -15937,7 +15937,7 @@
 	<mge/util/list/SingleLinkNode.hpp>
 	<mge/core/Destroyable.hpp>
 
-1456406751 c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luascript.hpp
+1456409829 c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luascript.hpp
 	"lua.h"
 	"lauxlib.h"
 	"lualib.h"
@@ -15946,7 +15946,7 @@
 	<mge/behaviours/Component.hpp>
 	<SFML/Graphics.hpp>
 
-1456406769 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luascript.cpp
+1456410116 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\lua\luascript.cpp
 	"mge/lua/LuaScript.hpp"
 	"mge/core/World.hpp"
 	"mge/core/GameObject.hpp"
@@ -16233,7 +16233,7 @@
 1456220095 c:\github\projectthirdperson\mge_mainbuild\src\mge\util\random.hpp
 	<random>
 
-1456220097 c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\gui.hpp
+1456409651 c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\gui.hpp
 	<SFML/Graphics.hpp>
 	"mge/core/GameObject.hpp"
 
@@ -16258,7 +16258,7 @@
 	<fstream>
 	<mge/core/World.hpp>
 
-1456401934 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\gui.cpp
+1456409700 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\gui\gui.cpp
 	"mge/gui/GUI.hpp"
 	"mge/util/list/DualLinkNode.hpp"
 

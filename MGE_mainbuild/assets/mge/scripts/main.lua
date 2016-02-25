@@ -20,7 +20,6 @@ function OnAttach()
     --print(GetName(myGameObject))
     --LoadLevel("out.txt");
     --a = GameObject("topkek",123,124,125);
-    --a = Sprite("bricks.jpg",683,384,0,0.1,0.1);
 end
 
 --Called every game logic step
@@ -29,7 +28,6 @@ function Update()
     --Rotate(a,0.15,0.5,0.5,0);
     --if(GetKeyDown(0)) then
      --   Destroy(b); end
-
 end
 
 --Collision callback, the argument is the GameObject you are overlapping with

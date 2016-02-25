@@ -9,20 +9,27 @@ GUI::GUI(std::string pName, float pPosX, float pPosY)
 
 }
 
+void GUI::SetGUIActive(bool active)
+{
+    _active = active;
+}
+
 void GUI::DrawTo(sf::RenderTarget& t)
 {
-    InnerDraw(t);
+    if (_active) {
+        InnerDraw(t);
 
 
-    DualLinkNode2<ChildList>* g = _children.startNode;
-    while(g!=NULL)
-    {
-        GUI* cast = (GUI*)g;
+        DualLinkNode2<ChildList>* g = _children.startNode;
+        while(g!=NULL)
+        {
+            GUI* cast = (GUI*)g;
 
-        if(cast->IsActive())
-            cast->DrawTo(t);
+            if(cast->IsActive())
+                cast->DrawTo(t);
 
-        g = g->nextNode;
+            g = g->nextNode;
+        }
     }
 }
 
