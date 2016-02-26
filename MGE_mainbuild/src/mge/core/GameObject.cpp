@@ -287,6 +287,24 @@ void GameObject::setWorldRotation(glm::vec3 forward)
     setLocalRotation(right,up,forward);
 }
 
+glm::vec3 GameObject::getLocalScale()
+{
+    using namespace glm;
+	return vec3(length(_transform[0]),length(_transform[1]),length(_transform[2]));
+}
+
+void GameObject::setLocalScale(glm::vec3 scale)
+{
+    using namespace glm;
+
+    //apply it to the given vectors
+    _transform[0] = normalize(_transform[0]) * scale.x;
+    _transform[1] = normalize(_transform[1]) * scale.y;
+    _transform[2] = normalize(_transform[2]) * scale.z;
+
+    MakeTransformDirty();
+}
+
 
 
 ////////////

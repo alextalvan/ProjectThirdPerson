@@ -14412,7 +14412,7 @@
 	<string>
 	"mge/core/GameObject.hpp"
 
-1456330948 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
+1456481408 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
 	<vector>
 	<string>
 	<iostream>
@@ -15493,7 +15493,7 @@
 1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\rotatingbehaviour.hpp
 	"mge/behaviours/Component.hpp"
 
-1456136690 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\boxcollider.cpp
+1456489957 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\boxcollider.cpp
 	<mge/collision/BoxCollider.hpp>
 	<mge/collision/SphereCollider.hpp>
 	<mge/core/GameObject.hpp>
@@ -15548,7 +15548,7 @@
 	<glm.hpp>
 	<iostream>
 
-1456435448 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
+1456436235 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
 	"AbstractGame.hpp"
 	<iostream>
 	"mge/core/Time.hpp"
@@ -15613,7 +15613,7 @@
 	"mge/core/FPS.hpp"
 	"mge/core/Time.hpp"
 
-1456233171 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
+1456481928 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
 	<cassert>
 	<iostream>
 	<glm.hpp>
@@ -15650,7 +15650,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1456435944 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
+1456490053 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -15961,7 +15961,7 @@
 	"mge/gui/GUIButton.hpp"
 	"mge/util/ResourceCacher.hpp"
 
-1456431365 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
+1456481250 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
 	"lua.h"
 	"lauxlib.h"
 	"lualib.h"
@@ -15970,7 +15970,7 @@
 	<mge/behaviours/Component.hpp>
 	<SFML/Graphics.hpp>
 
-1456431365 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
+1456483930 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
 	"mge/lua/LuaScript.hpp"
 	"mge/core/World.hpp"
 	"mge/core/GameObject.hpp"

@@ -99,9 +99,10 @@ void Renderer::render (World* pWorld)
         glBindFramebuffer(GL_FRAMEBUFFER,postProc_fbo);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, postProc_fbo_texture0, 0);
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );//clear previous frame
+        renderSkyBox(pWorld);
         render (pWorld, pWorld, pWorld->getMainCamera(), true);//scene pass
 
-        renderSkyBox(pWorld);
+
         //post processing
         DoPostProcessing();
     }
@@ -109,8 +110,9 @@ void Renderer::render (World* pWorld)
     {
        glBindFramebuffer(GL_FRAMEBUFFER,0);
        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+       renderSkyBox(pWorld);
        render (pWorld, pWorld, pWorld->getMainCamera(), true);
-        renderSkyBox(pWorld);
+
     }
 
 }

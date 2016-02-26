@@ -56,7 +56,8 @@ private:
 	static int getowner(lua_State * lua);
 	static int findChild(lua_State * lua);
 	static int findComponent(lua_State * lua);
-	static int setScale(lua_State * lua);
+	static int setLocalScale(lua_State * lua);
+	static int getLocalScale(lua_State * lua);
 	static int setActive(lua_State * lua);
 	static int getActive(lua_State * lua);
 	static int setColor(lua_State * lua);

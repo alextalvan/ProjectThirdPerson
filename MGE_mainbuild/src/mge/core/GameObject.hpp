@@ -50,6 +50,10 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 		glm::vec3 getWorldPosition();
 		void setWorldPosition(glm::vec3 pos);
 
+
+		glm::vec3 getLocalScale();
+		void setLocalScale(glm::vec3 pos);
+
 		virtual glm::mat4& getWorldTransform();
 		void setWorldTransform(const glm::mat4& pTransform);
 

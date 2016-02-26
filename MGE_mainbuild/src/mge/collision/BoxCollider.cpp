@@ -149,9 +149,8 @@ bool BoxCollider::HitTest(SphereCollider* other)
 
 bool BoxCollider::InternalHitTest(SphereCollider* other)
 {
-
-    glm::vec3 myVerts[8];
     glm::mat4 myMat = _owner->getWorldTransform();
+    glm::vec3 myVerts[8];
 
     glm::vec3 MTVaxis;
     float MTVlowestMagnitude = FLT_MAX;

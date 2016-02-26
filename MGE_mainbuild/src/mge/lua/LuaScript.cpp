@@ -111,6 +111,8 @@ LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
 	lua_register(L, "SetTextOrigin", setTextOrigin);
 	lua_register(L, "SetSpriteOrigin", setSpriteOrigin);
 	lua_register(L, "SetGUIActive", setGUIActive);
+	lua_register(L, "SetLocalScale", setLocalScale);
+	lua_register(L, "GetLocalScale", getLocalScale);
 
 	//Set world
 	lua_pushlightuserdata(L, (LuaObject*)world);
@@ -151,12 +153,9 @@ void LuaScript::setOwner(GameObject* pOwner)
     }
     else
     {
-        InvokeFunction("OnAttach");
-
         lua_pushlightuserdata(L, (LuaObject*)pOwner);
         lua_setglobal(L,"myGameObject");
-
-
+        InvokeFunction("OnAttach");
     }
 }
 
@@ -1411,7 +1410,7 @@ int LuaScript::luaInvokeFunctionWithArgs(lua_State * lua)
 	return nRes;
 }
 
-int LuaScript::setScale(lua_State * lua)
+int LuaScript::setLocalScale(lua_State * lua)
 {
     #ifdef MGE_LUA_SAFETY
 	if (!lua_islightuserdata(lua, -4)) throw "Expect: game object";
@@ -1420,15 +1419,38 @@ int LuaScript::setScale(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
-    /*
-	GameObject * obj = (GameObject*)lua_touserdata(lua, -4);
+
+	GameObject * obj = (GameObject*)(LuaObject*)lua_touserdata(lua, -4);
 	float x = lua_tonumber(lua, -3);
 	float y = lua_tonumber(lua, -2);
-	float z = lua_tonumber(lua, -2);
-    */
+	float z = lua_tonumber(lua, -1);
+
+    obj->setLocalScale(glm::vec3(x,y,z));
 	//obj->
 
 	return 0;
+}
+
+int LuaScript::getLocalScale(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -4)) throw "Expect: game object";
+	if (!lua_isnumber(lua, -3)) throw "Expect: number";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+
+	GameObject * obj = (GameObject*)(LuaObject*)lua_touserdata(lua, -1);
+
+    glm::vec3 scale = obj->getLocalScale();
+
+    lua_pushnumber(lua,scale.x);
+    lua_pushnumber(lua,scale.y);
+    lua_pushnumber(lua,scale.z);
+	//obj->
+
+	return 3;
 }
 
 int LuaScript::makeTimer(lua_State * lua)

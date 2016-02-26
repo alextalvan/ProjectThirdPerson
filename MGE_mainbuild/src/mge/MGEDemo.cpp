@@ -61,7 +61,7 @@ void MGEDemo::initialize() {
 //build the game _world
 void MGEDemo::_initializeScene()
 {
-    return;
+    //return;
 
 
     //return;
@@ -154,7 +154,7 @@ void MGEDemo::_initializeScene()
     _world->AddChild(testCube1);
 
 
-    Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -3, 1), glm::vec3(0.5f,0.5f,0.5f));
+    Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -1.0f, 1), glm::vec3(1.0f,1.0f,1.0f));
     Light* light2 = new Light(MGE_LIGHT_POINT, glm::vec3(0,0.5,2), glm::vec3(1,1,1), glm::vec3(1,0,0), glm::vec3(0.1f,0.1f,0.1f));
     //Light* light3 = new Light(MGE_LIGHT_SPOTLIGHT, glm::vec3(0,2,2), glm::vec3(0,-1,0), glm::vec3(0,0,1), glm::vec3(0.1f,0.1f,0.1f), 0.36f);
     cam->AttachComponent(new LookAt(testCube));
