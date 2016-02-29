@@ -61,7 +61,7 @@ void MGEDemo::initialize() {
 //build the game _world
 void MGEDemo::_initializeScene()
 {
-    //return;
+    return;
 
 
     //return;

@@ -8,6 +8,14 @@
  * Camera is just a GameObject with an additional perspective matrix.
  * The camera's own transform is used to generate a world to view matrix by taking the inverse of the camera transform.
  */
+
+ struct FrustrumCheckCache
+ {
+     //glm::vec3 camPos, nearPos, farPos;
+     glm::vec3 leftNorm, rightNorm, upNorm, downNorm, backNorm, forwardNorm;
+     float leftOrigin, rightOrigin, upOrigin, downOrigin, backOrigin, forwardOrigin;
+ };
+
 class Camera : public GameObject
 {
 	public:
@@ -21,6 +29,9 @@ class Camera : public GameObject
 
         glm::mat4& getProjection();
         glm::mat4& getView();
+
+        void RecalculateFrustumCache();
+        bool FrustumCheck(GameObject* obj);
     protected:
         virtual void MakeTransformDirty() override;
         virtual void _recalculateLocalTransform() override;
@@ -31,6 +42,10 @@ class Camera : public GameObject
 		//view matrix is cached instead of recalculated every time
 		glm::mat4 _view;
 		bool _viewMatrixDirty = true;
+
+
+		//frustrum culling
+		FrustrumCheckCache _cullingCache;
 
 };
 

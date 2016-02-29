@@ -91,6 +91,9 @@ void Renderer::render (World* pWorld)
 {
     debugInfo.drawCallCount = debugInfo.triangleCount = 0;
 
+    //used for frustrum culling
+    pWorld->getMainCamera()->RecalculateFrustumCache();
+
     renderDirLightDepthMap(pWorld);
     //renderPointLightDepthCubeMap(pWorld);
 
@@ -274,7 +277,7 @@ void Renderer::render (World* pWorld, GameObject * pGameObject, Camera * pCamera
     AbstractMaterial* material = pGameObject->getMaterial();
 
     //our material (shader + settings) determines how we actually look
-    if (pGameObject->getMesh() && material != NULL) {
+    if (pGameObject->getMesh() && material != NULL && pCamera->FrustumCheck(pGameObject)) {
         material->render(pWorld, pGameObject, pCamera);
     }
 

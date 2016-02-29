@@ -42,7 +42,7 @@ Mesh* Mesh::load(string pFileName)
     else
     {
         ret = _meshCache[pFileName];
-        std::cout<<"Returning cached mesh "<< pFileName<<".\n";
+        //std::cout<<"Returning cached mesh "<< pFileName<<".\n";
     }
     return ret;
 }
@@ -97,7 +97,7 @@ Mesh* Mesh::load(string pFileName)
  */
 Mesh* Mesh::cache(string pFileName)
 {
-    cout << "Loading " << pFileName << "...";
+    //cout << "Loading " << pFileName << "...";
 
 	Mesh* mesh = new Mesh(pFileName);
 
@@ -211,7 +211,9 @@ Mesh* Mesh::cache(string pFileName)
 		_calculateTangents(mesh);
 		mesh->_buffer();
         mesh->triangleCount = (int)(mesh->_indices.size()/3.0f);
-		cout << "Mesh loaded and buffered:" << mesh->triangleCount<< " triangles." << endl;
+        mesh->CalculateBound();
+		//cout << "Mesh loaded and buffered:" << mesh->triangleCount<< " triangles." << endl;
+		//getchar();
 		return mesh;
 	} else {
 		cout << "Could not read " << pFileName << endl;
@@ -433,6 +435,29 @@ void Mesh::renderDebugInfo(glm::mat4& pModelMatrix, World* pWorld) {
     }
     glEnd();
 }
+
+
+
+void Mesh::CalculateBound()
+{
+    _boundRadius = 0.0f;
+
+    for(unsigned int i=0;i<_vertices.size();++i)
+    {
+        glm::vec3 v = _vertices[i];
+        float l = glm::length(v);
+        if(l > _boundRadius) _boundRadius = l;
+    }
+
+    //debug
+    //std::cout<<"\nMesh bound: "<<_boundRadius<<"\n";
+}
+
+float Mesh::GetBoundRadius()
+{
+    return _boundRadius;
+}
+
 
 
 

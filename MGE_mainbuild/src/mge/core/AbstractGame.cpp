@@ -184,11 +184,16 @@ void AbstractGame::TimedStep()
     {
         Destroyable::CollectGarbage();
 
+//        Time::updateRenderTime();
+//        FPS::update();
+//        _render();
+//        _window->display();
+    }
+        //have this here for unlocked framerate
         Time::updateRenderTime();
         FPS::update();
         _render();
         _window->display();
-    }
 
 }
 

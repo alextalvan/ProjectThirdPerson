@@ -158,7 +158,7 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
 
     DualLinkNode<Light>* cn = list.startNode;
 
-    GLfloat near_plane = 1.0f, far_plane = 25.0f;
+    //GLfloat near_plane = 1.0f, far_plane = 25.0f;
 
     while(cn!=NULL && index < MGE_MAX_LIGHTS)
     {

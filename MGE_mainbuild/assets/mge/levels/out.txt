@@ -16,11 +16,1496 @@ GAMEOBJECT:
    CHILDREN:
 
    GAMEOBJECT:
+      name floor(3)
+      transform: 
+         24  0  0  264  
+         0  2  0  -1  
+         0  0  24  -155  
+         0  0  0  1  
+      no_mesh
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name floor(2)
+      transform: 
+         24  0  0  360  
+         0  2  0  -1  
+         0  0  24  -155  
+         0  0  0  1  
+      no_mesh
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name floor(1)
+      transform: 
+         24  0  0  312  
+         0  2  0  -1  
+         0  0  24  -155  
+         0  0  0  1  
+      no_mesh
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(47)
+      transform: 
+         2  0  0  259.88  
+         0  2  0  32.8  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(46)
+      transform: 
+         2  0  0  277.38  
+         0  2  0  32.8  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(45)
+      transform: 
+         2  0  0  277.38  
+         0  2  0  32.8  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(44)
+      transform: 
+         2  0  0  260.18  
+         0  2  0  32.8  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(43)
+      transform: 
+         2  0  0  260.18  
+         0  2  0  49.6  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(42)
+      transform: 
+         2  0  0  277.38  
+         0  2  0  49.6  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(41)
+      transform: 
+         2  0  0  277.38  
+         0  2  0  49.6  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(40)
+      transform: 
+         2  0  0  259.88  
+         0  2  0  49.6  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(39)
+      transform: 
+         2  0  0  294.62  
+         0  2  0  49.6  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(38)
+      transform: 
+         2  0  0  312.12  
+         0  2  0  49.6  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(37)
+      transform: 
+         2  0  0  312.12  
+         0  2  0  49.6  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(36)
+      transform: 
+         2  0  0  294.92  
+         0  2  0  49.6  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(35)
+      transform: 
+         2  0  0  294.92  
+         0  2  0  32.8  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(34)
+      transform: 
+         2  0  0  312.12  
+         0  2  0  32.8  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(33)
+      transform: 
+         2  0  0  312.12  
+         0  2  0  32.8  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(32)
+      transform: 
+         2  0  0  294.62  
+         0  2  0  32.8  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(31)
+      transform: 
+         2  0  0  331.9  
+         0  2  0  32.8  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(30)
+      transform: 
+         2  0  0  349.4  
+         0  2  0  32.8  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(29)
+      transform: 
+         2  0  0  349.4  
+         0  2  0  32.8  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(28)
+      transform: 
+         2  0  0  332.2  
+         0  2  0  32.8  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(27)
+      transform: 
+         2  0  0  332.2  
+         0  2  0  49.6  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(26)
+      transform: 
+         2  0  0  349.4  
+         0  2  0  49.6  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(25)
+      transform: 
+         2  0  0  349.4  
+         0  2  0  49.6  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(24)
+      transform: 
+         2  0  0  331.9  
+         0  2  0  49.6  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(23)
+      transform: 
+         2  0  0  331.9  
+         0  2  0  20.6  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(22)
+      transform: 
+         2  0  0  349.4  
+         0  2  0  20.6  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(21)
+      transform: 
+         2  0  0  349.4  
+         0  2  0  20.6  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(20)
+      transform: 
+         2  0  0  332.2  
+         0  2  0  20.6  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(19)
+      transform: 
+         2  0  0  332.2  
+         0  2  0  3.85  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(18)
+      transform: 
+         2  0  0  349.4  
+         0  2  0  3.85  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(17)
+      transform: 
+         2  0  0  349.4  
+         0  2  0  3.85  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(16)
+      transform: 
+         2  0  0  331.9  
+         0  2  0  3.85  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(15)
+      transform: 
+         2  0  0  295.1  
+         0  2  0  3.85  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(14)
+      transform: 
+         2  0  0  312.6  
+         0  2  0  3.85  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(13)
+      transform: 
+         2  0  0  312.6  
+         0  2  0  3.85  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(12)
+      transform: 
+         2  0  0  295.4  
+         0  2  0  3.85  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(11)
+      transform: 
+         2  0  0  295.4  
+         0  2  0  20.6  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(10)
+      transform: 
+         2  0  0  312.6  
+         0  2  0  20.6  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(9)
+      transform: 
+         2  0  0  312.6  
+         0  2  0  20.6  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(8)
+      transform: 
+         2  0  0  295.1  
+         0  2  0  20.6  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(7)
+      transform: 
+         2  0  0  258.8  
+         0  2  0  20.6  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(6)
+      transform: 
+         2  0  0  276.34  
+         0  2  0  20.6  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(5)
+      transform: 
+         2  0  0  276.34  
+         0  2  0  20.6  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(4)
+      transform: 
+         2  0  0  259.1  
+         0  2  0  20.6  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(3)
+      transform: 
+         2  0  0  259.1  
+         0  2  0  3.85  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(2)
+      transform: 
+         2  0  0  276.34  
+         0  2  0  3.85  
+         0  0  2  -295.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name SphereTest(1)
+      transform: 
+         2  0  0  276.34  
+         0  2  0  3.85  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
       name Character
       transform: 
-         1  0  0  9.88  
-         0  1  0  5.71  
-         0  0  1  -12.73  
+         1  0  0  305.3  
+         0  1  0  2.13  
+         0  0  1  -225.7  
          0  0  0  1  
       no_mesh
       cast_shadows 0
@@ -31,7 +1516,7 @@ GAMEOBJECT:
             move_speed 0.2
             jump_force 1
             jump_duration 0.25
-            gravity 0.3
+            gravity 0
             sphere_radius 1
          END_CHARACTER_CONTROLLER
 
@@ -42,9 +1527,9 @@ GAMEOBJECT:
       CAMERA:
          name Main_Cameralol
          transform: 
-            1  0  0  9.88  
-            0  1  0  7.004  
-            0  0  1  -12.746  
+            1  0  0  305.3  
+            0  1  0  3.424  
+            0  0  1  -225.716  
             0  0  0  1  
          isMainCamera 1
 
@@ -93,8 +1578,61 @@ GAMEOBJECT:
    GAMEOBJECT:
       name floor
       transform: 
+         24  0  0  312  
+         0  2  0  -1  
+         0  0  24  -299  
+         0  0  0  1  
+      no_mesh
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Chunk(1)
+      transform: 
+         2  0  0  79.37  
+         0  1  0  0  
+         0  0  2  0  
+         0  0  0  1  
+      mesh cube_flat.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+         TEXTURE_MATERIAL:
+            diffuseTex bricks.jpg
+         END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name floor
+      transform: 
          -4.768372E-06  0  -40  0  
-         0  2  0  -0.55  
+         0  2  0  -1  
          40  0  -4.768372E-06  0  
          0  0  0  1  
       mesh cube_flat.obj
@@ -191,6 +1729,115 @@ GAMEOBJECT:
    END_GAMEOBJECT
 
    GAMEOBJECT:
+      name Chunk(4)
+      transform: 
+         16  0  0  175.3  
+         0  1  0  0  
+         0  0  16  0  
+         0  0  0  1  
+      mesh cube_flat.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+         TEXTURE_MATERIAL:
+            diffuseTex bricks.jpg
+         END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Chunk(3)
+      transform: 
+         8  0  0  133.6  
+         0  1  0  0  
+         0  0  8  0  
+         0  0  0  1  
+      mesh cube_flat.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+         TEXTURE_MATERIAL:
+            diffuseTex bricks.jpg
+         END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name floor
+      transform: 
+         24  0  0  360  
+         0  2  0  -1  
+         0  0  24  -251  
+         0  0  0  1  
+      no_mesh
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Chunk(6)
+      transform: 
+         64  0  0  554.3  
+         0  1  0  0  
+         0  0  64  0  
+         0  0  0  1  
+      mesh cube_flat.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+         TEXTURE_MATERIAL:
+            diffuseTex bricks.jpg
+         END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
       name SphereTest
       transform: 
          2  0  0  21.15  
@@ -213,6 +1860,84 @@ GAMEOBJECT:
          COLOR_MATERIAL:
             color 0.2043685 0.5147059 0.257875
          END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name invis
+      transform: 
+         256  0  0  247.7  
+         0  1  0  0  
+         0  0  64  0  
+         0  0  0  1  
+      no_mesh
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Chunk(2)
+      transform: 
+         4  0  0  100.7  
+         0  1  0  0  
+         0  0  4  0  
+         0  0  0  1  
+      mesh cube_flat.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+         TEXTURE_MATERIAL:
+            diffuseTex bricks.jpg
+         END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name floor
+      transform: 
+         24  0  0  312  
+         0  2  0  -1  
+         0  0  24  -203  
+         0  0  0  1  
+      no_mesh
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
 
       END_COMPONENTS
 
@@ -296,6 +2021,36 @@ GAMEOBJECT:
    END_GAMEOBJECT
 
    GAMEOBJECT:
+      name SphereTest(1)
+      transform: 
+         2  0  0  258.8  
+         0  2  0  3.85  
+         0  0  2  -315.8  
+         0  0  0  1  
+      mesh sphere_smooth.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         SPHERE_COLLIDER:
+            radius 2
+            ignore_Raycast 0
+            collision_layer 2
+         END_SPHERE_COLLIDER
+         COLOR_MATERIAL:
+            color 0.2043685 0.5147059 0.257875
+         END_COLOR_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
       name test
       transform: 
          1  0  0  0  
@@ -347,6 +2102,56 @@ GAMEOBJECT:
    END_DIRECTIONAL_LIGHT
 
    GAMEOBJECT:
+      name floor
+      transform: 
+         24  0  0  360  
+         0  2  0  -1  
+         0  0  24  -299  
+         0  0  0  1  
+      no_mesh
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Chunk(5)
+      transform: 
+         24  0  0  264  
+         0  2  0  -1  
+         0  0  24  -299  
+         0  0  0  1  
+      mesh cube_flat.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
       name Cube(4)
       transform: 
          0.2  0  0  11.26  
@@ -374,9 +2179,9 @@ GAMEOBJECT:
    GAMEOBJECT:
       name Raptor(1)
       transform: 
-         -0.001715922  0.09969946  -0.007552511  9.22413  
-         -0.09996273  -0.001550207  0.002247259  7.432641  
-         0.002123429  0.007588244  0.09968907  0.04178047  
+         -0.001715922  0.09969962  -0.007552511  9.22413  
+         -0.09996273  -0.001550209  0.002247259  7.432641  
+         0.002123429  0.007588256  0.09968907  0.04178047  
          0  0  0  1  
       mesh raptor.obj
       cast_shadows 0
@@ -386,6 +2191,109 @@ GAMEOBJECT:
          TEXTURE_MATERIAL:
             diffuseTex Raptor.png
          END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name floor
+      transform: 
+         24  0  0  360  
+         0  2  0  -1  
+         0  0  24  -203  
+         0  0  0  1  
+      no_mesh
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name floor
+      transform: 
+         24  0  0  264  
+         0  2  0  -1  
+         0  0  24  -251  
+         0  0  0  1  
+      no_mesh
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Chunk
+      transform: 
+         1  0  0  61.43  
+         0  1  0  0  
+         0  0  1  0  
+         0  0  0  1  
+      mesh cube_flat.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+         TEXTURE_MATERIAL:
+            diffuseTex bricks.jpg
+         END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name floor
+      transform: 
+         24  0  0  264  
+         0  2  0  -1  
+         0  0  24  -203  
+         0  0  0  1  
+      no_mesh
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
 
       END_COMPONENTS
 
@@ -427,6 +2335,31 @@ GAMEOBJECT:
    GAMEOBJECT:
       name floor
       transform: 
+         24  0  0  312  
+         0  2  0  -1  
+         0  0  24  -251  
+         0  0  0  1  
+      no_mesh
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name floor
+      transform: 
          -4.543485E-06  0  -16.65446  -20.98828  
          0  1.328565  0  10.73083  
          38.11351  0  -1.985367E-06  75.60405  
@@ -441,6 +2374,34 @@ GAMEOBJECT:
          END_WALL_COLLIDER
          TEXTURE_MATERIAL:
             diffuseTex sand.png
+         END_TEXTURE_MATERIAL
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
+      name Chunk(5)
+      transform: 
+         32  0  0  249.3  
+         0  1  0  0  
+         0  0  32  0  
+         0  0  0  1  
+      mesh cube_flat.obj
+      cast_shadows 0
+
+      COMPONENTS:
+
+         WALL_COLLIDER:
+            dimensions 2 2 2
+         END_WALL_COLLIDER
+         TEXTURE_MATERIAL:
+            diffuseTex bricks.jpg
          END_TEXTURE_MATERIAL
 
       END_COMPONENTS

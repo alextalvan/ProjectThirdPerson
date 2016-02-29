@@ -14408,7 +14408,7 @@
 	<SFML/Graphics/RenderWindow.hpp>
 	<SFML/Window/Event.hpp>
 
-1456005568 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.hpp
+1456715204 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.hpp
 	<string>
 	"mge/core/GameObject.hpp"
 
@@ -15548,7 +15548,7 @@
 	<glm.hpp>
 	<iostream>
 
-1456436235 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
+1456675816 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
 	"AbstractGame.hpp"
 	<iostream>
 	"mge/core/Time.hpp"
@@ -15593,13 +15593,14 @@
 1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\activateable.cpp
 	"mge/core/Activateable.hpp"
 
-1456324737 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.cpp
+1456715204 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.cpp
 	<iostream>
 	<glm.hpp>
 	"mge/core/Camera.hpp"
 	<mge/behaviours/Component.hpp>
 	<mge/core/GameObject.hpp>
 	<mge/behaviours/FirstPersonLook.hpp>
+	<mge/core/Mesh.hpp>
 
 1455061927 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\destroyable.cpp
 	<mge/core/Destroyable.hpp>
@@ -15622,7 +15623,7 @@
 	"mge/core/World.hpp"
 	"mge/behaviours/Component.hpp"
 
-1456310302 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\mesh.hpp
+1456689038 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\mesh.hpp
 	<vector>
 	<cstring>
 	<string>
@@ -15639,7 +15640,7 @@
 	"mge/util/list/DualLinkList.hpp"
 	"mge/util/list/DualLinkNode.hpp"
 
-1456431365 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\mesh.cpp
+1456697142 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\mesh.cpp
 	"mge/core/Mesh.hpp"
 	<iostream>
 	<map>
@@ -15650,7 +15651,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1456490053 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
+1456715204 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -15677,7 +15678,7 @@
 	<iostream>
 	<fstream>
 
-1456259937 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\texture.cpp
+1456681429 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\texture.cpp
 	<iostream>
 	<string>
 	<SFML/Graphics.hpp>
@@ -15743,7 +15744,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1456431365 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
+1456682514 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
 	<glm.hpp>
 	"mge/materials/TextureLitMaterial.hpp"
 	"mge/core/Texture.hpp"
@@ -15770,7 +15771,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1456434209 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
+1456682546 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -16031,7 +16032,7 @@
 	<cstdlib>
 	<ctime>
 
-1455109540 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\wallcollider.cpp
+1456618292 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\wallcollider.cpp
 	<mge/collision/WallCollider.hpp>
 	<mge/collision/CollisionManager.hpp>
 	<mge/core/GameObject.hpp>
@@ -16040,7 +16041,7 @@
 1455106687 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\wallcollider.hpp
 	"mge/collision/BoxCollider.hpp"
 
-1456089516 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
+1456618149 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
 	"CharacterController.hpp"
 	"mge/core/GameObject.hpp"
 	"mge/core/Camera.hpp"

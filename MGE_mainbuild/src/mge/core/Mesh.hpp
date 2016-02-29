@@ -13,6 +13,7 @@ class World;
  * A mesh represents an .OBJ file. It knows how it is constructed, how its data should be buffered to OpenGL
  * and how it should be streamed to OpenGL
  */
+
 class Mesh
 {
 	public:
@@ -39,7 +40,7 @@ class Mesh
 
 
         void renderDebugInfo(glm::mat4& pModelMatrix, World* pWorld);
-		std::vector<glm::vec3> _tangents;       //vec4 tangents
+        float GetBoundRadius();
 	protected:
         Mesh(std::string pId);
 	    std::string _id;
@@ -57,6 +58,8 @@ class Mesh
 		std::vector<glm::vec3> _vertices;       //vec3 with 3d coords for all vertices
 		std::vector<glm::vec3> _normals;        //vec3 with 3d normal data
 		std::vector<glm::vec2> _uvs;            //vec2 for uv
+
+		std::vector<glm::vec3> _tangents;       //vec4 tangents
 
 		//references to the vertices/normals & uvs in previous vectors
 		std::vector<unsigned> _indices;
@@ -91,6 +94,9 @@ class Mesh
     private:
          static std::map<std::string,Mesh*> _meshCache;
          static void _calculateTangents(Mesh*mesh);
+
+         float _boundRadius;
+         void CalculateBound();
 };
 
 #endif // MESH_H
