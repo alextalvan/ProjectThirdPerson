@@ -24,14 +24,14 @@ function Update()
 end
 
 function OnCollision(otherCollider)
-
+--print("collision")
 end
 
 --active = false;
 
 function OnLevelLoad()
-    g = FindChild(world,"Raptor(1)");
-    SetColor(g,1,1,0);
+    --g = FindChild(world,"Raptor(1)");
+    --SetColor(g,1,1,0);
     --Destroy(g);
     --mainScript = FindComponent(world,"LuaScript:main.lua")
     --SetActive(world,true);
@@ -45,7 +45,7 @@ function OnInteract()
 
 
     ResetTimer(clock,5);
-    --print("interact");
+    print("interact");
     --SetActive(this,false);
     --active = not active;
 end

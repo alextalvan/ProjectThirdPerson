@@ -3,9 +3,11 @@
 #include <mge/collision/CollisionManager.hpp>
 #include <mge/util/list/DualLinkList.hpp>
 #include <mge/util/list/DualLinkNode.hpp>
+#include <mge/collision/Collider.hpp>
 #include <mge/lua/LuaScript.hpp>
 #include "SFML/Window.hpp"
 #include <mge/core/Renderer.hpp>
+#include<mge/collision/QuadTree.hpp>
 
 FirstPersonLook::FirstPersonLook(float turnSpeed)
 {
@@ -68,6 +70,7 @@ void FirstPersonLook::Rotation()
                 script->InvokeFunction("OnInteract");
             cn = cn->nextNode;
         }
+        //std::cout<<"\n"<<res.object->GetComponent<Collider>()->quadTreeOwner->_depth;
         //std::cout<<"distance: "<<res.distance<<"\n";
     }
 

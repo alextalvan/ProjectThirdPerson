@@ -18,6 +18,7 @@ class SphereCollider : public Collider
         bool HitTest(BoxCollider* other) override;
         bool HitTest(Collider* other) override;
         bool RayTest(const Ray& ray, float& distance) override;
+        void RefreshBoundingSphere() override;
 
 };
 

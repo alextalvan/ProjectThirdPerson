@@ -7,22 +7,27 @@
 WallCollider::WallCollider()
 {
     _name = "Wall Collider";
-    OnCollision = [this](Collider* other, CollisionMTV mtv) { CollisionCallback(other, mtv);};
+    OnCollision = [this](Collider* other, CollisionMTV& mtv) { CollisionCallback(other, mtv);};
     layer = CollisionManager::WALLS;
 }
 
-void WallCollider::CollisionCallback(Collider* other, CollisionMTV mtv)
+void WallCollider::CollisionCallback(Collider* other, CollisionMTV& mtv)
 {
     GameObject* otherOwner = other->getOwner();
     glm::vec3 relativeDir = otherOwner->getWorldPosition() - _owner->getWorldPosition();
 
-    if(glm::dot(relativeDir,mtv.axis)<0)
-        mtv.axis *= -1;
+    glm::vec3 axis = mtv.axis;
 
+    if(glm::dot(relativeDir,axis)<0)
+       axis *= -1;
+
+    if(ignoreXaxis) axis.x = 0.0f;
+    if(ignoreYaxis) axis.y = 0.0f;
+    if(ignoreZaxis) axis.z = 0.0f;
 
     glm::mat4 newtransform = otherOwner->getWorldTransform();
     glm::vec4 loc = newtransform[3];
-    loc += glm::vec4(mtv.axis * mtv.magnitude * 1.01f,0);
+    loc += glm::vec4(axis * mtv.magnitude * 1.01f,0);
     //loc.y = 0;
     newtransform[3] = loc;
     otherOwner->setWorldTransform(newtransform);

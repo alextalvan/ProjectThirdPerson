@@ -202,8 +202,20 @@ namespace LevelEditor
                 f>>s; r = std::strtof(s.c_str(),nullptr);
                 f>>s; g = std::strtof(s.c_str(),nullptr);
                 f>>s; b = std::strtof(s.c_str(),nullptr);
+
+                int igX,igY,igZ;
+                f>>s;//"ig axis"
+                f>>igX;
+                f>>s;//"ig axis"
+                f>>igY;
+                f>>s;//"ig axis"
+                f>>igZ;
+
                 WallCollider* box = new WallCollider();
-                 box->xSize = r; box->ySize = g; box->zSize = b;
+                box->xSize = r; box->ySize = g; box->zSize = b;
+                box->ignoreXaxis = igX;
+                box->ignoreYaxis = igY;
+                box->ignoreZaxis = igZ;
                 owner->AttachComponent(box);
                 f>>s;//end_wall
             }

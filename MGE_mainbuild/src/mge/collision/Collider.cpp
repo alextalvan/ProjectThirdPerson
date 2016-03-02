@@ -28,3 +28,29 @@ void Collider::SetRaycastable(bool val)
     else
         CollisionManager::_raycastTargets.Remove((DualLinkNode<RaycastList>*)this);
 }
+
+const ColliderBoundingSphere& Collider::GetBoundingSphere()
+{
+    return _bound;
+}
+
+bool Collider::BoundingSphereCheck(Collider* other)
+{
+    ColliderBoundingSphere otherB = other->GetBoundingSphere();
+    float dist = glm::distance(_bound.position,otherB.position);
+
+    if(dist<=_bound.radius + otherB.radius)
+        return true;
+    else
+        return false;
+}
+
+bool Collider::IsStatic()
+{
+    return isStatic;
+}
+
+void Collider::SetStatic(bool val)
+{
+    isStatic = val;
+}

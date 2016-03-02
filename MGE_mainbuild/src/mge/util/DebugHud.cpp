@@ -32,7 +32,7 @@ void DebugHud::_createDebugHud() {
     _debugText.setString("");
     _debugText.setFont(_font);
 	_debugText.setCharacterSize(16);
-	_debugText.setColor(sf::Color::White);
+	_debugText.setColor(sf::Color::Black);
 }
 
 void DebugHud::setDebugInfo(std::string pInfo) {

@@ -15,13 +15,36 @@ BoxCollider::~BoxCollider()
 
 }
 
+void BoxCollider::RefreshBoundingSphere()
+{
+
+    if(_owner==NULL)
+        return;
+
+    glm::mat4 objMat = _owner->getWorldTransform();
+    _bound.position = glm::vec3(objMat[3]);
+
+    float xRad = glm::length(objMat[0] * xSize * 0.5f);
+    float yRad = glm::length(objMat[1] * ySize * 0.5f);
+    float zRad = glm::length(objMat[2] * zSize * 0.5f);
+
+    _bound.radius = max(xRad,max(yRad,zRad));
+
+}
+
 bool BoxCollider::HitTest(BoxCollider* other)
 {
-    glm::vec4 myVerts[8];
-    glm::vec4 otherVerts[8];
+
+    bool sphereResult = this->BoundingSphereCheck(other);
+    if(!sphereResult)
+        return false;
+
 
     glm::mat4 myMat = _owner->getWorldTransform();
     glm::mat4 otherMat = other->getOwner()->getWorldTransform();
+
+    glm::vec4 myVerts[8];
+    glm::vec4 otherVerts[8];
 
     glm::vec3 MTVaxis;
     float MTVlowestMagnitude = FLT_MAX;

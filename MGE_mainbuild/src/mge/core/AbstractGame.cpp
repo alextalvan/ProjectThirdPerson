@@ -76,6 +76,7 @@ void AbstractGame::_initializeWindow(int width, int height, int fullscreen)
 	int style = (fullscreen) ? sf::Style::Fullscreen : sf::Style::Titlebar;
 	_window = new sf::RenderWindow( sf::VideoMode(width,height), "FairWind Game Engine", style , sf::ContextSettings(24,8,4,3,3));
 	_window->setMouseCursorVisible(false);
+	_window->setFramerateLimit(0);
 	//_window->setVerticalSyncEnabled(true);
     std::cout << "Window initialized." << std::endl << std::endl;
 }
@@ -140,27 +141,15 @@ void AbstractGame::run()
 
 	while (_running)
     {
-        //debug
-        /*
-        std::cout<<"newframe\n";
+		//this is used internally for calling update routines and throttling FPS (when enabled)
+		Time::gameLoopUpdate();
 
-        if(testBool)
-        {
-            if(getchar() == 'a')
-                testBool = !testBool;
-        }
-        if(Input::GetKeyUp(Input::A))
-            testBool = !testBool;
-
-        */
-        //enddebug
-
-        //_processEvents();
-
+		//this is the time used by everything else. Time::update() is always ok to call to force a timestamp refresh
+		//(for example when counting how many seconds one function takes)
 		Time::update();
 
+
         TimedStep();
-		//cout<<"Game frame time: "<<Time::gameLoopDelta()<<" Render frame time: "<<Time::renderDelta()<<'\n';
 	}
 }
 
@@ -184,16 +173,14 @@ void AbstractGame::TimedStep()
     {
         Destroyable::CollectGarbage();
 
-//        Time::updateRenderTime();
 //        FPS::update();
 //        _render();
 //        _window->display();
     }
         //have this here for unlocked framerate
-        Time::updateRenderTime();
-        FPS::update();
         _render();
         _window->display();
+        FPS::update();
 
 }
 

@@ -18,6 +18,7 @@ struct RendererDebugInfo
 {
     int drawCallCount = 0;
     int triangleCount = 0;
+    float time;
 };
 
 /**

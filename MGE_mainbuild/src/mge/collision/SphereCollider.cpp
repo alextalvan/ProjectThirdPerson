@@ -20,16 +20,24 @@ bool SphereCollider::HitTest(BoxCollider* other)
 
 bool SphereCollider::HitTest(SphereCollider* other)
 {
-    glm::vec3 myPos = _owner->getWorldPosition();
-    glm::vec3 otherPos = other->getOwner()->getWorldPosition();
+    return (this->BoundingSphereCheck(other));
+}
 
-    float dist = glm::distance(myPos,otherPos);
+void SphereCollider::RefreshBoundingSphere()
+{
+    if(_owner==NULL)
+        return;
 
-    if(dist<=this->radius + other->radius)
-        return true;
-    else
-        return false;
+    glm::mat4 objMat = _owner->getWorldTransform();
+    _bound.position = glm::vec3(objMat[3]);
 
+    float maxScale = glm::length(objMat[0]);
+    float newScale = glm::length(objMat[1]);
+    if(newScale > maxScale) maxScale = newScale;
+    newScale = glm::length(objMat[2]);
+    if(newScale > maxScale) maxScale = newScale;
+
+    _bound.radius = maxScale * radius;
 }
 
 bool SphereCollider::HitTest(Collider* other)
@@ -45,7 +53,7 @@ bool SphereCollider::RayTest(const Ray& ray, float& distance)
     using namespace glm;
     //algorithm taken from the 3D Math Primer by Fletcher Dunn, 1st edition
 
-    vec3 diff = _owner->getWorldPosition() - ray.origin;
+    vec3 diff = _bound.position - ray.origin;
 
     float a = dot(ray.direction,diff);
 
@@ -53,7 +61,7 @@ bool SphereCollider::RayTest(const Ray& ray, float& distance)
         return false;
 
     float diffSquared = dot(diff,diff);
-    float radSquared = radius * radius;
+    float radSquared = _bound.radius * _bound.radius;
 
     //check if the ray originates inside the sphere, we will consider this a miss
     if(diffSquared < radSquared)

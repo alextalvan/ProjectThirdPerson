@@ -110,6 +110,10 @@
 		<Unit filename="src/mge/collision/Collider.hpp" />
 		<Unit filename="src/mge/collision/CollisionManager.cpp" />
 		<Unit filename="src/mge/collision/CollisionManager.hpp" />
+		<Unit filename="src/mge/collision/QuadTree.cpp" />
+		<Unit filename="src/mge/collision/QuadTree.hpp" />
+		<Unit filename="src/mge/collision/QuadTreeUtil.cpp" />
+		<Unit filename="src/mge/collision/QuadTreeUtil.hpp" />
 		<Unit filename="src/mge/collision/SphereCollider.cpp" />
 		<Unit filename="src/mge/collision/SphereCollider.hpp" />
 		<Unit filename="src/mge/collision/WallCollider.cpp" />

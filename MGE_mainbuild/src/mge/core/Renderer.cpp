@@ -6,7 +6,6 @@
 #include "mge/core/World.hpp"
 #include "mge/core/Camera.hpp"
 #include "mge/materials/AbstractMaterial.hpp"
-#include "mge/util/list/DualLinkNode.hpp"
 #include "mge/core/Light.hpp"
 #include "mge/materials/ShadowMaterial.hpp"
 #include "mge/materials/ShadowCubeMaterial.hpp"
@@ -14,6 +13,9 @@
 #include <SFML/Graphics.hpp>
 #include "mge/config.hpp"
 #include "mge/core/ShaderProgram.hpp"
+#include "mge/core/Time.hpp"
+#include "mge/util/list/DualLinkList.hpp"
+#include "mge/util/list/DualLinkNode.hpp"
 
 #include <iostream>
 using namespace std;
@@ -90,6 +92,8 @@ GLuint Renderer::getDepthCubeMap()
 void Renderer::render (World* pWorld)
 {
     debugInfo.drawCallCount = debugInfo.triangleCount = 0;
+    Time::update();
+    float startTime = Time::now();
 
     //used for frustrum culling
     pWorld->getMainCamera()->RecalculateFrustumCache();
@@ -118,6 +122,8 @@ void Renderer::render (World* pWorld)
 
     }
 
+    Time::update();
+    debugInfo.time = (Time::now() - startTime) * 1000.0f;
 }
 
 void Renderer::renderSkyBox(World* pWorld)
@@ -257,14 +263,20 @@ void Renderer::renderDepthMap (World* pWorld, GameObject * pGameObject, Light * 
     }*/
 
     if (!pRecursive) return;
-
-    int childCount = pGameObject->GetChildCount();
     //if (childCount < 1) return;
 
-    //note that with a loop like this, deleting children during rendering is not a good idea :)
-    for (int i = 0; i < childCount; i++) {
-        renderDepthMap (pWorld, pGameObject->GetChildAt(i), light, type, pRecursive);
+
+
+
+    DualLinkNode2<ChildList>* cn2 = pGameObject->GetChildren().startNode;
+    while(cn2!=NULL)
+    {
+        renderDepthMap (pWorld, (GameObject*)cn2, light, type, pRecursive);
+        cn2 = cn2->nextNode;
     }
+    //for (int i = 0; i < childCount; i++) {
+    //    renderDepthMap (pWorld, pGameObject->GetChildAt(i), light, type, pRecursive);
+    //}
 }
 
 void Renderer::render (World* pWorld, GameObject * pGameObject, Camera * pCamera, bool pRecursive)
@@ -283,13 +295,18 @@ void Renderer::render (World* pWorld, GameObject * pGameObject, Camera * pCamera
 
     if (!pRecursive) return;
 
-    int childCount = pGameObject->GetChildCount();
+    //int childCount = pGameObject->GetChildCount();
     //if (childCount < 1) return;
 
-    //note that with a loop like this, deleting children during rendering is not a good idea :)
-    for (int i = 0; i < childCount; i++) {
-        render (pWorld, pGameObject->GetChildAt(i), pCamera, pRecursive);
+    DualLinkNode2<ChildList>* cn2 = pGameObject->GetChildren().startNode;
+    while(cn2!=NULL)
+    {
+        render (pWorld, (GameObject*)cn2, pCamera, pRecursive);
+        cn2 = cn2->nextNode;
     }
+    //for (int i = 0; i < childCount; i++) {
+    //    render (pWorld, pGameObject->GetChildAt(i), pCamera, pRecursive);
+    //}
    // glDisable(GL_FRAMEBUFFER_SRGB);
 }
 

@@ -32,6 +32,8 @@ using namespace std;
 #include <mge/collision/SphereCollider.hpp>
 #include <mge/test/TestSphereCol.hpp>
 #include <mge/collision/WallCollider.hpp>
+#include <mge/collision/BoxCollider.hpp>
+#include <mge/collision/CollisionManager.hpp>
 
 #include <mge/sound/SoundManager.hpp>
 #include <mge/sound/SoundChannel.hpp>
@@ -63,119 +65,51 @@ void MGEDemo::_initializeScene()
 {
     return;
 
-
-    //return;
     Camera* cam = new Camera("cam", glm::vec3(15,15,15));
     _world->setMainCamera(cam);
     _world->AddChild(cam);
 
 
-    Mesh* planeMesh = Mesh::load(config::MGE_MODEL_PATH + "plane20x20_2tris_aligned_uvs.obj");
-    Mesh* cubeMesh = Mesh::load(config::MGE_MODEL_PATH + "cube_flat.obj");
-    Texture* brickTex = Texture::load(config::MGE_TEXTURE_PATH + "brickwall.jpg");
-    Texture* brickNorm = Texture::load(config::MGE_TEXTURE_PATH + "brickwall_normal.jpg");
-    Texture* brickMet = Texture::load(config::MGE_TEXTURE_PATH + "brickwall.jpg");
-    TextureLitMaterial* litMat = new TextureLitMaterial(brickTex, 0.2f, 32.0f, 0.1f, brickMet, brickNorm);
+    //Mesh* planeMesh = Mesh::load(config::MGE_MODEL_PATH + "plane20x20_2tris_aligned_uvs.obj");
+    //Mesh* cubeMesh = Mesh::load(config::MGE_MODEL_PATH + "cube_flat.obj");
+    //Texture* brickTex = Texture::load(config::MGE_TEXTURE_PATH + "brickwall.jpg");
+    //Texture* brickNorm = Texture::load(config::MGE_TEXTURE_PATH + "brickwall_normal.jpg");
+    //Texture* brickMet = Texture::load(config::MGE_TEXTURE_PATH + "brickwall.jpg");
+    //TextureLitMaterial* litMat = new TextureLitMaterial(brickTex, 0.2f, 32.0f, 0.1f, brickMet, brickNorm);
 
-    GameObject* plane = new GameObject("plane", glm::vec3(0,-1,0));
-    plane->setMesh(planeMesh);
-    plane->setMaterial(litMat);
-    plane->scale(glm::vec3(-1,1,1));
-    _world->AddChild(plane);
-
-    GameObject* testCube = new GameObject("cube", glm::vec3(0,0,0));
-    testCube->setMesh(cubeMesh);
-    testCube->setMaterial(litMat);
-    testCube->scale(glm::vec3(-1,1,1));
-    //testCube->scale(glm::vec3(0.5,0.5,0.5));
-    _world->AddChild(testCube);
-
-    GameObject* testCube1 = new GameObject("cube1", glm::vec3(3,0,3));
-    testCube1->setMesh(cubeMesh);
-    testCube1->setMaterial(litMat);
-    testCube1->rotate(0.46, glm::vec3(0,1,0));
-    testCube1->scale(glm::vec3(-1,1,1));
-    _world->AddChild(testCube1);
-
-    testCube1 = new GameObject("cube1", glm::vec3(3,0,3));
-    testCube1->setMesh(cubeMesh);
-    testCube1->setMaterial(litMat);
-    testCube1->rotate(0.46, glm::vec3(0,1,0));
-    testCube1->scale(glm::vec3(-1,1,1));
-    _world->AddChild(testCube1);
-
-    testCube1 = new GameObject("cube1", glm::vec3(3,0,3));
-    testCube1->setMesh(cubeMesh);
-    testCube1->setMaterial(litMat);
-    testCube1->rotate(0.46, glm::vec3(0,1,0));
-    testCube1->scale(glm::vec3(-1,1,1));
-    _world->AddChild(testCube1);
-
-    testCube1 = new GameObject("cube1", glm::vec3(3,0,3));
-    testCube1->setMesh(cubeMesh);
-    testCube1->setMaterial(litMat);
-    testCube1->rotate(0.46, glm::vec3(0,1,0));
-    testCube1->scale(glm::vec3(-1,1,1));
-    _world->AddChild(testCube1);
-
-    testCube1 = new GameObject("cube1", glm::vec3(3,0,3));
-    testCube1->setMesh(cubeMesh);
-    testCube1->setMaterial(litMat);
-    testCube1->rotate(0.46, glm::vec3(0,1,0));
-    testCube1->scale(glm::vec3(-1,1,1));
-    _world->AddChild(testCube1);
-
-    testCube1 = new GameObject("cube1", glm::vec3(7,0,3));
-    testCube1->setMesh(cubeMesh);
-    testCube1->setMaterial(litMat);
-    testCube1->rotate(0.46, glm::vec3(0,1,0));
-    testCube1->scale(glm::vec3(-1,1,1));
-    _world->AddChild(testCube1);
-
-    testCube1 = new GameObject("cube1", glm::vec3(10,0,-5));
-    testCube1->setMesh(cubeMesh);
-    testCube1->setMaterial(litMat);
-    testCube1->rotate(0.46, glm::vec3(0,1,0));
-    testCube1->scale(glm::vec3(-1,1,1));
-    _world->AddChild(testCube1);
-
-    testCube1 = new GameObject("cube1", glm::vec3(-3,0,-3));
-    testCube1->setMesh(cubeMesh);
-    testCube1->setMaterial(litMat);
-    testCube1->rotate(0.46, glm::vec3(0,1,0));
-    testCube1->scale(glm::vec3(-1,1,1));
-    _world->AddChild(testCube1);
-
-    testCube1 = new GameObject("cube1", glm::vec3(5,0,5));
-    testCube1->setMesh(cubeMesh);
-    testCube1->setMaterial(litMat);
-    testCube1->rotate(0.46, glm::vec3(0,1,0));
-    testCube1->scale(glm::vec3(-1,1,1));
-    _world->AddChild(testCube1);
+//    for(int i=0;i<20;++i)
+//    {
+//        for(int j=0;j<20;++j)
+//        {
+//            GameObject* obj = new GameObject("box", glm::vec3(i * 10,0,j * 10));
+//            BoxCollider* b = new BoxCollider();
+//            //b->layer = CollisionManager::WALLS;
+//            obj->AttachComponent(b);
+//        }
+//    }
 
 
-    Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -1.0f, 1), glm::vec3(1.0f,1.0f,1.0f));
-    Light* light2 = new Light(MGE_LIGHT_POINT, glm::vec3(0,0.5,2), glm::vec3(1,1,1), glm::vec3(1,0,0), glm::vec3(0.1f,0.1f,0.1f));
+    //Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -1.0f, 1), glm::vec3(1.0f,1.0f,1.0f));
+    //Light* light2 = new Light(MGE_LIGHT_POINT, glm::vec3(0,0.5,2), glm::vec3(1,1,1), glm::vec3(1,0,0), glm::vec3(0.1f,0.1f,0.1f));
     //Light* light3 = new Light(MGE_LIGHT_SPOTLIGHT, glm::vec3(0,2,2), glm::vec3(0,-1,0), glm::vec3(0,0,1), glm::vec3(0.1f,0.1f,0.1f), 0.36f);
-    cam->AttachComponent(new LookAt(testCube));
-    testCube->AttachComponent(new KeysBehaviour(0.1,1));
+    //cam->AttachComponent(new LookAt(testCube));
+    //testCube->AttachComponent(new KeysBehaviour(0.1,1));
 
-     Texture* water = Texture::load(config::MGE_TEXTURE_PATH + "smoke.png");
-    //std::cout<<glGetError()<<"------------";
+    //Texture* water = Texture::load(config::MGE_TEXTURE_PATH + "smoke.png");
 
-    ParticleSystem* part = new ParticleSystem(water);
-    //part->minLifetime = part->maxLifetime = 3.0f;
-    part->lifeTimeRange = glm::vec2(3);
-    part->releaseCount = glm::vec2(128);
-    part->releaseDelay = glm::vec2(0.5f,1.0f);
-    part->speedMin = glm::vec3(-1.0f,0.01f,-1.0f);
-    part->speedMax = glm::vec3(1.0f,0.02f,1.0f);
-    //part->startOffset1 = glm::vec3(-1);
-    //part->startOffset2 = glm::vec3(1);
-    part->scaleRange1 = part->scaleRange2 = glm::vec2(2.0f);
-
-    part->setWorldPosition(glm::vec3(0,5,0));
-    _world->AddChild(part);
+//    ParticleSystem* part = new ParticleSystem(water);
+//    //part->minLifetime = part->maxLifetime = 3.0f;
+//    part->lifeTimeRange = glm::vec2(3);
+//    part->releaseCount = glm::vec2(128);
+//    part->releaseDelay = glm::vec2(0.5f,1.0f);
+//    part->speedMin = glm::vec3(-1.0f,0.01f,-1.0f);
+//    part->speedMax = glm::vec3(1.0f,0.02f,1.0f);
+//    //part->startOffset1 = glm::vec3(-1);
+//    //part->startOffset2 = glm::vec3(1);
+//    part->scaleRange1 = part->scaleRange2 = glm::vec2(2.0f);
+//
+//    part->setWorldPosition(glm::vec3(0,5,0));
+//    _world->AddChild(part);
 
 }
 
@@ -190,7 +124,10 @@ void MGEDemo::_updateHud() {
     string debugInfo = "";
     debugInfo += string ("FPS:") + std::to_string(FPS::getFPS()) +
     "\nDraw calls: " + std::to_string(Renderer::debugInfo.drawCallCount)+
-    "\nTriangles: " + std::to_string(Renderer::debugInfo.triangleCount);
+    "\nTriangles: " + std::to_string(Renderer::debugInfo.triangleCount)+
+    "\nRender time(ms): " + std::to_string(Renderer::debugInfo.time)+
+    "\nCollision tests: " + std::to_string(CollisionManager::debugInfo.tests)+
+    "\nCollision time(ms): " + std::to_string(CollisionManager::debugInfo.time);
 
     _hud->setDebugInfo(debugInfo);
     _hud->draw();

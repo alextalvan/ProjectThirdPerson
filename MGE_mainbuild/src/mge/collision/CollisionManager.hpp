@@ -8,6 +8,7 @@ using namespace Utils;
 
 class Collider;
 class RaycastList;//dummy class for list templates
+class QuadTreeNode;
 //class GameObject;
 
 struct RaycastInfo
@@ -24,10 +25,17 @@ struct Ray
     Ray(glm::vec3 orig,glm::vec3 dir) : origin(orig), direction(dir) {}
 };
 
+struct CollisionDebugInfo
+{
+    int tests;
+    float time;
+};
+
 class CollisionManager
 {
 friend class Collider;
 friend class AbstractGame;
+friend class QuadTreeNode;
 public:
     //up to 10 layers of collision
     //rename these when needed
@@ -49,13 +57,13 @@ public:
     static bool CheckLayerInteraction(COLLISION_LAYERS l1,COLLISION_LAYERS l2);
 
     static bool Raycast(const Ray& ray, RaycastInfo& output);//Ray passed by reference but only for performance reasons, so it is read only
-
+    static CollisionDebugInfo debugInfo;
 private:
     static bool collisionMatrix[10][10];
     static DualLinkList<Collider> _colliders;
     static void Initialize();
     static void DoCollisions();
-
+    static QuadTreeNode* _quadTreeRoot;
 
     static DualLinkList<RaycastList> _raycastTargets;
 

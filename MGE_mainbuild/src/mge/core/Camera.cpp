@@ -117,7 +117,15 @@ bool Camera::FrustumCheck(GameObject* obj)
     mat4 objMat = obj->getWorldTransform();
 
     vec3 objPos = obj->getWorldPosition();
-    float objRadius = glm::length(objMat * vec4(meshRadius,0,0,0));
+
+    //must test for non uniform scaling
+    float maxScale = glm::length(objMat[0]);
+    float newScale = glm::length(objMat[1]);
+    if(newScale > maxScale) maxScale = newScale;
+    newScale = glm::length(objMat[2]);
+    if(newScale > maxScale) maxScale = newScale;
+
+    float objRadius = maxScale * meshRadius;
 
     //back culling first
     if(dot(_cullingCache.backNorm,objPos) > _cullingCache.backOrigin + objRadius)

@@ -27,3 +27,8 @@ void Timer::SetDuration(float dur)
 {
     _duration = dur;
 }
+
+float Timer::GetElapsedTime()
+{
+   return Time::now() - _startTime;
+}

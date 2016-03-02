@@ -11,21 +11,18 @@ class Time
 		static sf::Clock _clock;
 
 		static float _currentTime;
-		static float _gameDeltaTime;
 
-		static float _currentRenderTime;
-		static float _renderDeltaTime;
+		static float _gameLoopLastTime;
+		static float _gameDeltaTime;
 
 	private: // disable creation of time object
 		Time(){}
 
 	public: // functons
 		static void update();
-		static void updateRenderTime();
-
+		static void gameLoopUpdate();
 		static float now();
 		static float gameLoopDelta();
-		static float renderDelta();
 
 };
 

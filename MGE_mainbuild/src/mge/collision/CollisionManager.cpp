@@ -3,11 +3,16 @@
 #include<mge/collision/Collider.hpp>
 #include<mge/lua/LuaScript.hpp>
 #include<mge/core/GameObject.hpp>
+#include<mge/core/Time.hpp>
+#include<mge/collision/QuadTree.hpp>
 using namespace Utils;
 
 bool CollisionManager::collisionMatrix[10][10];
 DualLinkList<Collider> CollisionManager::_colliders;
 DualLinkList<RaycastList> CollisionManager::_raycastTargets;
+QuadTreeNode* CollisionManager::_quadTreeRoot = NULL;
+
+CollisionDebugInfo CollisionManager::debugInfo;
 
 void CollisionManager::Initialize()
 {
@@ -33,15 +38,55 @@ void CollisionManager::SetLayerInteraction(COLLISION_LAYERS l1,COLLISION_LAYERS 
 
 void CollisionManager::DoCollisions()
 {
+    debugInfo.tests = 0;
+
     if(CollisionManager::_colliders.startNode==NULL)
         return;
 
+    Time::update();
+    float startTime = Time::now();
+
 
     DualLinkNode<Collider>* currentNodei = CollisionManager::_colliders.startNode;
-    DualLinkNode<Collider>* currentNodej;
+    //DualLinkNode<Collider>* currentNodej;
     Collider* collideri;
-    Collider* colliderj;
+    //Collider* colliderj;
 
+    //first, rebuild the bounding spheres for all colliders
+    //TODO: enable static colliders that never refresh their bounding spheres
+    while(currentNodei !=NULL)
+    {
+        collideri = (Collider*)currentNodei;
+        collideri->RefreshBoundingSphere();
+
+        currentNodei = currentNodei->nextNode;
+    }
+
+    //for now, releasing the entire old quadtree and creating a new one
+    if(_quadTreeRoot!=NULL)
+       delete _quadTreeRoot;
+
+    _quadTreeRoot = new QuadTreeNode(0,NULL,800,-800,800,-800);
+
+    currentNodei = CollisionManager::_colliders.startNode;
+    while(currentNodei !=NULL)
+    {
+        _quadTreeRoot->Insert((Collider*)currentNodei);
+        currentNodei = currentNodei->nextNode;
+    }
+
+    _quadTreeRoot->DoInternalCollisions();
+
+    currentNodei = CollisionManager::_colliders.startNode;
+    while(currentNodei !=NULL)
+    {
+        Collider* col = (Collider*)currentNodei;
+        col->quadTreeOwner->DoRecursiveCollisionsAgainstCollider(col);
+        //_quadTreeRoot->DoRecursiveCollisionsAgainstCollider((Collider*)currentNodei);
+        currentNodei = currentNodei->nextNode;
+    }
+    /*
+    currentNodei = CollisionManager::_colliders.startNode;
     while(currentNodei !=NULL)
     {
         collideri = (Collider*) currentNodei;
@@ -58,7 +103,7 @@ void CollisionManager::DoCollisions()
         {
             colliderj = (Collider*) currentNodej;
 
-            if(!(colliderj->IsActive()) || !CheckLayerInteraction(collideri->layer,colliderj->layer))
+            if(!(colliderj->IsActive()) || !CheckLayerInteraction(collideri->layer,colliderj->layer) || !QuadTreeNode::BroadTest(collideri,colliderj))
             {
                 currentNodej = currentNodej->nextNode;
                 continue;
@@ -66,6 +111,8 @@ void CollisionManager::DoCollisions()
 
             //at this point the conditions for calculating the collision are met
             bool result = collideri->HitTest(colliderj);
+            //debug
+            debugInfo.tests++;
 
             //trigger callbacks
             if(result)
@@ -102,6 +149,12 @@ void CollisionManager::DoCollisions()
 
         currentNodei = currentNodei->nextNode;
     }
+
+
+    */
+    Time::update();
+    debugInfo.time = (Time::now() - startTime)* 1000.0f;
+
 }
 
 bool CollisionManager::Raycast(const Ray& ray, RaycastInfo& output)

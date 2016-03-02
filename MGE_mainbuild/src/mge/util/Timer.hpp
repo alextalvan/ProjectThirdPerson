@@ -10,6 +10,7 @@ public:
     bool isFinished();
     void Reset();
     void SetDuration(float dur);
+    float GetElapsedTime();
 
 private:
     float _startTime = 0.0f;
