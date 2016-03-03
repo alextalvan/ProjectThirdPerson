@@ -85,6 +85,7 @@ void CharacterController::setOwner(GameObject* owner)
     Component::setOwner(owner);
     _collider = new SphereCollider();
     _collider->radius = _colliderRadius;
+    _collider->SetStatic(false);
     _owner->AttachComponent(_collider);
     _collider->OnCollision = [this](Collider* other, CollisionMTV mtv){ CollisionCallback(other, mtv);};
 }

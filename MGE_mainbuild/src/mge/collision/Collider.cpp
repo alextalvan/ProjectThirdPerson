@@ -53,4 +53,13 @@ bool Collider::IsStatic()
 void Collider::SetStatic(bool val)
 {
     isStatic = val;
+    if(val)
+        RefreshBoundingSphere();
+}
+
+void Collider::setOwner (GameObject* owner)
+{
+    Component::setOwner(owner);
+    if(isStatic)
+        RefreshBoundingSphere();
 }

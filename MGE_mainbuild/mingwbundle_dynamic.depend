@@ -15504,7 +15504,7 @@
 	<mge/collision/Collider.hpp>
 	<mge/collision/SphereCollider.hpp>
 
-1456960439 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collider.hpp
+1457012450 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collider.hpp
 	<mge/behaviours/Component.hpp>
 	<mge/util/list/DualLinkNode.hpp>
 	<mge/collision/CollisionManager.hpp>
@@ -15530,11 +15530,11 @@
 	<mge/util/list/DualLinkNode.hpp>
 	<mge/collision/CollisionManager.hpp>
 
-1456872290 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collider.cpp
+1457012495 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collider.cpp
 	<mge/collision/Collider.hpp>
 	<mge/collision/CollisionManager.hpp>
 
-1456958489 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.cpp
+1457014156 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.cpp
 	<mge/collision/CollisionManager.hpp>
 	<mge/util/list/DualLinkNode.hpp>
 	<mge/collision/Collider.hpp>
@@ -16047,7 +16047,7 @@
 1456840172 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\wallcollider.hpp
 	"mge/collision/BoxCollider.hpp"
 
-1456867769 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
+1457012953 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
 	"CharacterController.hpp"
 	"mge/core/GameObject.hpp"
 	"mge/core/Camera.hpp"
@@ -16060,7 +16060,7 @@
 	"mge/collision/SphereCollider.hpp"
 	"mge/util/Timer.hpp"
 
-1456840832 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
+1457012363 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
 	<mge/editor/LevelImporter.hpp>
 	<mge/config.hpp>
 	<glm.hpp>
@@ -16373,13 +16373,14 @@
 	"glm.hpp"
 	"mge/collision/Collider.hpp"
 
-1456960322 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\quadtree.hpp
+1457010535 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\quadtree.hpp
 	"glm.hpp"
-	"mge/collision/QuadTreeUtil.hpp"
 	"mge/util/list/DualLinkList.hpp"
 	"mge/util/list/DualLinkNode.hpp"
+	<vector>
+	"mge/collision/Collider.hpp"
 
-1456955691 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\quadtree.cpp
+1457009731 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\quadtree.cpp
 	<mge/collision/QuadTree.hpp>
 	<mge/collision/CollisionManager.hpp>
 	<mge/lua/LuaScript.hpp>

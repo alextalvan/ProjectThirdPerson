@@ -64,6 +64,8 @@ protected:
     Collider();
     virtual ~Collider();
 
+    void setOwner (GameObject* owner) override;
+
     static CollisionMTV storedMTV;
     ColliderBoundingSphere _bound;
 

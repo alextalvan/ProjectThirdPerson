@@ -57,16 +57,22 @@ void CollisionManager::DoCollisions()
     while(currentNodei !=NULL)
     {
         collideri = (Collider*)currentNodei;
-        collideri->RefreshBoundingSphere();
+        if(!collideri->IsStatic())
+            collideri->RefreshBoundingSphere();
 
         currentNodei = currentNodei->nextNode;
     }
 
     //for now, releasing the entire old quadtree and creating a new one
-    if(_quadTreeRoot!=NULL)
-       delete _quadTreeRoot;
+    //if(_quadTreeRoot!=NULL)
+    //   delete _quadTreeRoot;
 
-    _quadTreeRoot = new QuadTreeNode(0,NULL,800,-800,800,-800);
+    //reset quad tree cache index
+    QuadTreeNode::_cacheIndex = 0;
+
+    _quadTreeRoot = QuadTreeNode::GrabNewNode();
+    _quadTreeRoot->Reset(0,NULL,400,-400,400,-400);
+    //_quadTreeRoot = new QuadTreeNode(0,NULL,800,-800,800,-800);
 
     currentNodei = CollisionManager::_colliders.startNode;
     while(currentNodei !=NULL)
@@ -75,6 +81,7 @@ void CollisionManager::DoCollisions()
         currentNodei = currentNodei->nextNode;
     }
 
+    //std::cout<<QuadTreeNode::_cacheIndex<<"\n";
     _quadTreeRoot->DoInternalCollisions();
 
     currentNodei = CollisionManager::_colliders.startNode;

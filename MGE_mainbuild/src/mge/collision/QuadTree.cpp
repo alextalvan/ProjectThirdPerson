@@ -3,29 +3,72 @@
 #include <mge/lua/LuaScript.hpp>
 
 
-glm::vec3 red = glm::vec3(1,0,0);
+std::vector<QuadTreeNode*> QuadTreeNode::_cachedNodes;
+unsigned int QuadTreeNode::_cacheIndex = 0;
 
-QuadTreeNode::QuadTreeNode(int depth,QuadTreeNode* parent,float plusX, float minusX,float plusZ, float minusZ) : _boundingBox(plusX, minusX, plusZ, minusZ)
+QuadTreeNode::QuadTreeNode(int depth,QuadTreeNode* parent,float plusX, float minusX,float plusZ, float minusZ)
 {
     _depth = depth;
     _parent = parent;
-
-//    for(int i=0;i<4;++i)
-//        _children[i] = NULL;
+    _plusX = plusX;
+    _minusX = minusX;
+    _plusZ = plusZ;
+    _minusZ = minusZ;
 }
 
 QuadTreeNode::~QuadTreeNode()
 {
+    /*
     if(_hasSplit)
     {
         for(int i=0;i<4;++i)
             delete _children[i];
+    }*/
+}
+
+void QuadTreeNode::Reset(int depth,QuadTreeNode* parent,float plusX, float minusX,float plusZ, float minusZ)
+{
+    _depth = depth;
+    _parent = parent;
+    _plusX = plusX;
+    _minusX = minusX;
+    _plusZ = plusZ;
+    _minusZ = minusZ;
+    _hasSplit = false;
+    _colliders.Clear();
+}
+
+QuadTreeNode* QuadTreeNode::GrabNewNode()
+{
+    if(_cacheIndex==_cachedNodes.size())
+    {
+        QuadTreeNode* newNode = new QuadTreeNode(0,NULL,0,0,0,0);
+        _cachedNodes.push_back(newNode);
+        _cacheIndex++;
+        return newNode;
+    }
+    else
+    {
+        _cacheIndex++;
+        return _cachedNodes[_cacheIndex-1];
     }
 }
 
-QuadAABB& QuadTreeNode::GetBoundingBox()
+bool QuadTreeNode::OverlapCheck(const ColliderBoundingSphere& boundSphere)
 {
-    return _boundingBox;
+    if(boundSphere.position.z + boundSphere.radius < _minusZ )
+        return false;
+
+    if(boundSphere.position.z - boundSphere.radius > _plusZ )
+        return false;
+
+    if(boundSphere.position.x + boundSphere.radius < _minusX )
+        return false;
+
+    if(boundSphere.position.x - boundSphere.radius > _plusX )
+        return false;
+
+    return true;
 }
 
 void QuadTreeNode::Insert(Collider* col)
@@ -37,7 +80,7 @@ void QuadTreeNode::Insert(Collider* col)
 
         for(int i=0;i<4;++i)
         {
-            if((_children[i]->GetBoundingBox()).OverlapCheck(col->GetBoundingSphere()))
+            if(_children[i]->OverlapCheck(col->GetBoundingSphere()))
             {
                 target = _children[i];
                 overlaps++;
@@ -85,22 +128,28 @@ void QuadTreeNode::Split()
 {
     _hasSplit = true;
 
-    //bounds are given as vec4(plusX,minX,plusZ,minZ)
-    glm::vec4 bounds = _boundingBox.GetBounds();
-    float halfX = bounds.y + (bounds.x - bounds.y) * 0.5f;
-    float halfZ = bounds.w + (bounds.z - bounds.w) * 0.5f;
+    float halfX = _minusX + (_plusX - _minusX) * 0.5f;
+    float halfZ = _minusZ + (_plusZ - _minusZ) * 0.5f;
 
     //minusx + minusz
-    _children[0] = new QuadTreeNode(_depth+1,this,halfX,bounds.y,halfZ,bounds.w);
+    //_children[0] = new QuadTreeNode(_depth+1,this,halfX,_minusX,halfZ,_minusZ);
+    _children[0] = GrabNewNode();
+    _children[0]->Reset(_depth+1,this,halfX,_minusX,halfZ,_minusZ);
 
     //plusx + minz
-    _children[1] = new QuadTreeNode(_depth+1,this,bounds.x,halfX,halfZ,bounds.w);
+    //_children[1] = new QuadTreeNode(_depth+1,this,_plusX,halfX,halfZ,_minusZ);
+    _children[1] = GrabNewNode();
+    _children[1]->Reset(_depth+1,this,_plusX,halfX,halfZ,_minusZ);
 
     //plusx + plusz
-    _children[2] = new QuadTreeNode(_depth+1,this,bounds.x,halfX,bounds.z,halfZ);
+    //_children[2] = new QuadTreeNode(_depth+1,this,_plusX,halfX,_plusZ,halfZ);
+    _children[2] = GrabNewNode();
+    _children[2]->Reset(_depth+1,this,_plusX,halfX,_plusZ,halfZ);
 
     //minx + plusz
-    _children[3] = new QuadTreeNode(_depth+1,this,halfX,bounds.y,bounds.z,halfZ);
+    //_children[3] = new QuadTreeNode(_depth+1,this,halfX,_minusX,_plusZ,halfZ);
+    _children[3] = GrabNewNode();
+    _children[3]->Reset(_depth+1,this,halfX,_minusX,_plusZ,halfZ);
 }
 
  DualLinkList<QuadTreeList>& QuadTreeNode::GetColliders()
@@ -244,7 +293,7 @@ void QuadTreeNode::DoRecursiveCollisionsAgainstCollider(Collider* col)
     {
         for(int i=0;i<4;++i)
         {
-            if(_children[i]->GetBoundingBox().OverlapCheck(col->GetBoundingSphere()))
+            if(_children[i]->OverlapCheck(col->GetBoundingSphere()))
                 _children[i]->DoRecursiveCollisionsAgainstCollider(col);
         }
 

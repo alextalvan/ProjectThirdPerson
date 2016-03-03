@@ -189,6 +189,10 @@ namespace LevelEditor
                 f>>layer;
                 box->layer = (CollisionManager::COLLISION_LAYERS)layer;
 
+                f>>s;//"is static"
+                f>>layer;
+                box->SetStatic(layer);
+
                 owner->AttachComponent(box);
                 f>>s;//end_boxcollider
             }
@@ -216,6 +220,11 @@ namespace LevelEditor
                 box->ignoreXaxis = igX;
                 box->ignoreYaxis = igY;
                 box->ignoreZaxis = igZ;
+
+                f>>s;//"is_static"
+                f>>igX;
+                box->SetStatic(igX);
+
                 owner->AttachComponent(box);
                 f>>s;//end_wall
             }
@@ -272,6 +281,12 @@ namespace LevelEditor
 
                 SphereCollider* col = new SphereCollider(r,ig);
                 col->layer = (CollisionManager::COLLISION_LAYERS)layer;
+
+                f>>s;//"is static"
+                f>>layer;
+                col->SetStatic(layer);
+
+
                 owner->AttachComponent(col);
                 f>>s;//end_sphere
             }
