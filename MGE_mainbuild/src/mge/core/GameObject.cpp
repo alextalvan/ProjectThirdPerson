@@ -284,7 +284,7 @@ void GameObject::setWorldRotation(glm::vec3 forward)
     glm::vec3 right = glm::cross (glm::vec3(0,1,0), forward);
     glm::vec3 up = glm::cross (forward, right);
 
-    setLocalRotation(right,up,forward);
+    setWorldRotation(right,up,forward);
 }
 
 glm::vec3 GameObject::getLocalScale()

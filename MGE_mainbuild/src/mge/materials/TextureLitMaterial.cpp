@@ -176,10 +176,14 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
         if (lightType == MGE_LIGHT_DIRECTIONAL) {
             loc = _shader->getUniformLocation("LightArray[" + indexString + "].direction");
             glUniform3fv(loc,1,glm::value_ptr(light->getDirection()));
+            loc = _shader->getUniformLocation("LightArray[" + indexString + "].position");
+            glUniform3fv(loc,1,glm::value_ptr(light->getLocalPosition()));
+
             glm::mat4 lightProjection, lightView;
             glm::mat4 lightSpaceMatrix;
             GLfloat near_plane = 1.0f, far_plane = 50.0f;
-            lightProjection = glm::ortho(-25.0f, 25.0f, -25.0f, 25.0f, near_plane, far_plane);
+            float orthoSize = 25.0f;
+            lightProjection = glm::ortho(-orthoSize, orthoSize, -orthoSize, orthoSize, near_plane, far_plane);
             lightView = light->getWorldTransform();
             lightSpaceMatrix = lightProjection * lightView;
             glUniformMatrix4fv(_lightMatLoc, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));

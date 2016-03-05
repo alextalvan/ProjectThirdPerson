@@ -14382,7 +14382,7 @@
 1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\cameraorbit.hpp
 	<mge/behaviours/Component.hpp>
 
-1455933690 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\component.hpp
+1457139416 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\component.hpp
 	"mge/core/Activateable.hpp"
 	"mge/core/GameObject.hpp"
 	"mge/core/Destroyable.hpp"
@@ -15467,7 +15467,7 @@
 	"mge/behaviours/Component.hpp"
 	"mge/core/GameObject.hpp"
 
-1455134681 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\keysbehaviour.cpp
+1457114959 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\keysbehaviour.cpp
 	"mge/behaviours/KeysBehaviour.hpp"
 	"mge/core/GameObject.hpp"
 	"mge/util/Input.hpp"
@@ -15616,7 +15616,7 @@
 	"mge/core/FPS.hpp"
 	"mge/core/Time.hpp"
 
-1456481928 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
+1457115045 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
 	<cassert>
 	<iostream>
 	<glm.hpp>
@@ -15633,10 +15633,10 @@
 	<glm.hpp>
 	<map>
 
-1456251789 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\light.cpp
+1457180105 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\light.cpp
 	<mge/core/Light.hpp>
 
-1456431365 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\light.hpp
+1457180105 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\light.hpp
 	<mge/core/GameObject.hpp>
 	<glm.hpp>
 	"mge/util/list/DualLinkList.hpp"
@@ -15653,7 +15653,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1456842212 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
+1457180112 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -15748,7 +15748,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1456682514 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
+1457137535 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
 	<glm.hpp>
 	"mge/materials/TextureLitMaterial.hpp"
 	"mge/core/Texture.hpp"
@@ -15775,7 +15775,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1456839009 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
+1457139824 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -15810,6 +15810,7 @@
 	"mge/gui/GUISprite.hpp"
 	"mge/util/ResourceCacher.hpp"
 	"mge/particles/ParticleSystem.hpp"
+	<mge/behaviours/DirLightHelper.hpp>
 
 1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\debughud.hpp
 	<SFML/Graphics.hpp>
@@ -16047,7 +16048,7 @@
 1456840172 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\wallcollider.hpp
 	"mge/collision/BoxCollider.hpp"
 
-1457012953 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
+1457019869 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
 	"CharacterController.hpp"
 	"mge/core/GameObject.hpp"
 	"mge/core/Camera.hpp"
@@ -16324,7 +16325,7 @@
 1456094844 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\shadowmaterial.hpp
 	"mge/core/ShaderProgram.hpp"
 
-1456251789 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\shadowmaterial.cpp
+1457136988 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\shadowmaterial.cpp
 	"mge/materials/ShadowMaterial.hpp"
 	<glm.hpp>
 	"mge/core/Mesh.hpp"
@@ -16380,7 +16381,7 @@
 	<vector>
 	"mge/collision/Collider.hpp"
 
-1457009731 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\quadtree.cpp
+1457018967 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\quadtree.cpp
 	<mge/collision/QuadTree.hpp>
 	<mge/collision/CollisionManager.hpp>
 	<mge/lua/LuaScript.hpp>
@@ -20734,4 +20735,12 @@
 	<mge/collision/QuadTree.hpp>
 	<mge/collision/CollisionManager.hpp>
 	<mge/lua/LuaScript.hpp>
+
+1457140851 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\dirlighthelper.cpp
+	<mge/behaviours/DirLightHelper.hpp>
+
+1457139491 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\dirlighthelper.hpp
+	<glm.hpp>
+	"mge/behaviours/Component.hpp"
+	"mge/core/GameObject.hpp"
 

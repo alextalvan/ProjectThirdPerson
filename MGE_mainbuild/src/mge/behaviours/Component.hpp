@@ -19,13 +19,13 @@ class Component: public Activateable, public Destroyable, public DualLinkNode<Co
 	public:
         GameObject* const getOwner() const;
 
-		virtual void Update();
-
         void Destroy() override;
 
         std::string getName() const;
 
     protected:
+        virtual void Update();
+
         Component();
         virtual void setOwner (GameObject* owner);
         std::string _name = "Unnamed Component";
