@@ -16,6 +16,11 @@ Camera::Camera( std::string pName, glm::vec3 pPosition, glm::mat4 pProjectionMat
 
     FirstPersonLook* vis = new FirstPersonLook();
     AttachComponent(vis);
+
+    fov = 60.0f;
+    aspectRatio = 16.0f/9.0f;
+    near = 0.1f;
+    far = 1000.0f;
 }
 
 Camera::~Camera()
@@ -66,10 +71,10 @@ void Camera::RecalculateFrustumCache()
     vec3 camPos = getWorldPosition(); //vec3(myMat[3]);
     //_cullingCache.camPos = camPos;
 
-    float aspect = 16.0f/9.0f;//aspect ratio
-    float halfTan = glm::tan(glm::radians(30.0f));//tangent of half the fov angle
-    float nearPlane = 0.1f;
-    float farPlane = 1000.0;
+    float aspect = aspectRatio;//aspect ratio
+    float halfTan = glm::tan(glm::radians(fov * 0.5f));//tangent of half the fov angle
+    float nearPlane = near;
+    float farPlane = far;
 
 
     float hNear = 2 * halfTan * nearPlane;

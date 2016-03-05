@@ -32,6 +32,10 @@ class Camera : public GameObject
 
         void RecalculateFrustumCache();
         bool FrustumCheck(GameObject* obj);
+
+        //for now public for ease of use
+        float fov, aspectRatio, near, far;
+
     protected:
         virtual void MakeTransformDirty() override;
         virtual void _recalculateLocalTransform() override;

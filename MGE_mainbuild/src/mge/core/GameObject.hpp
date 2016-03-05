@@ -46,6 +46,8 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
         void setLocalRotation(glm::vec3 xAxis, glm::vec3 yAxis,glm::vec3 zAxis);
         void setWorldRotation(glm::vec3 forward);
         void setWorldRotation(glm::vec3 xAxis, glm::vec3 yAxis,glm::vec3 zAxis);
+
+        glm::mat3 getWorldRotation();
         //get the objects world position
 		glm::vec3 getWorldPosition();
 		void setWorldPosition(glm::vec3 pos);

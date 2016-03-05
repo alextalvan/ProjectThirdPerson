@@ -23,7 +23,7 @@ void CharacterController::Update()
     Movement();
 
     //if was on ground the previous frame, handle jump
-    if(Input::GetKey(Input::Space)&& _isOnGround)
+    if(Input::GetKey(Input::Space))//&& _isOnGround)
     {
         _jumpTimer.Reset();
         jumping = true;

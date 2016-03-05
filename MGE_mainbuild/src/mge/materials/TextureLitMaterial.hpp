@@ -3,6 +3,7 @@
 
 #include "mge/core/Texture.hpp"
 #include "mge/materials/AbstractMaterial.hpp"
+#include "mge/shadow/ShadowCamera.hpp"
 
 /**
  * Simple single texture material, this is a sample which doesn't cache anything upfront and

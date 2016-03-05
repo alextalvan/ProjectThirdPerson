@@ -29,11 +29,15 @@ RendererDebugInfo Renderer::debugInfo;
 int Renderer::_screenWidth;
 int Renderer::_screenHeight;
 
+ShadowCamera* Renderer::_shadowCam;
+
 
 Renderer::Renderer(int width, int height)
 {
     _screenWidth = width;
     _screenHeight = height;
+
+    //_shadowCam = new ShadowCamera();
 
 	glEnable( GL_DEPTH_TEST );
 	glEnable( GL_CULL_FACE ); // default GL_BACK
@@ -153,16 +157,19 @@ void Renderer::renderDirLightDepthMap (World* pWorld)
     DualLinkNode<Light>* l = Light::GetLightList().startNode;
     while (l != NULL) {
             Light* light = (Light*)l;
-        if (light->getType() == MGE_LIGHT_DIRECTIONAL) {
+        if (light->getType() == MGE_LIGHT_DIRECTIONAL)
+        {
+            //_shadowCam->RecalculateFrustum(pWorld->getMainCamera(),light->getDirection());
             ///shadow mapping (render depth map)
-            glViewport(0, 0, _screenWidth, _screenHeight);
+            glViewport(0, 0, 4096, 4096);
             glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
             glClear(GL_DEPTH_BUFFER_BIT);
             glCullFace(GL_FRONT);
-            renderDepthMap (pWorld, pWorld, light, MGE_LIGHT_DIRECTIONAL, true);
+            renderDepthMap (pWorld, pWorld,pWorld->getMainCamera(), light, MGE_LIGHT_DIRECTIONAL, true);
             glCullFace(GL_BACK);
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
             glViewport(0, 0, _screenWidth, _screenHeight);
+            return;
         }
         l = l -> nextNode;
     }
@@ -175,11 +182,11 @@ void Renderer::renderPointLightDepthCubeMap (World* pWorld)
             Light* light = (Light*)l;
         if (light->getType() == MGE_LIGHT_POINT) {
             ///shadow mapping (render depth cube map)
-            glViewport(0, 0, _screenWidth, _screenHeight);
+            glViewport(0, 0, 4096, 4096);
             glBindFramebuffer(GL_FRAMEBUFFER, depthCubeMapFBO);
             glClear(GL_DEPTH_BUFFER_BIT);
             glCullFace(GL_FRONT);
-            renderDepthMap (pWorld, pWorld, light, MGE_LIGHT_POINT, true);
+            renderDepthMap (pWorld, pWorld,pWorld->getMainCamera(), light, MGE_LIGHT_POINT, true);
             glCullFace(GL_BACK);
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
             glViewport(0, 0, _screenWidth, _screenHeight);
@@ -242,7 +249,7 @@ void Renderer::DoPostProcessing()
     //glEnable(GL_FRAMEBUFFER_SRGB);
 }
 
-void Renderer::renderDepthMap (World* pWorld, GameObject * pGameObject, Light * light, int type, bool pRecursive)
+void Renderer::renderDepthMap (World* pWorld, GameObject * pGameObject, Camera* pCamera, Light * light, int type, bool pRecursive)
 {
     //we don't render inactive gameobjects
     if(!pGameObject->IsActive())
@@ -250,7 +257,7 @@ void Renderer::renderDepthMap (World* pWorld, GameObject * pGameObject, Light * 
 
     if (type == MGE_LIGHT_DIRECTIONAL) {
 
-        if (pGameObject->getMesh() && pGameObject->castShadows) {
+        if (pGameObject->getMesh() && pGameObject->castShadows && pCamera->FrustumCheck(pGameObject)) {
             shadowMat->render(pWorld, pGameObject, light);
         }
     }
@@ -271,7 +278,7 @@ void Renderer::renderDepthMap (World* pWorld, GameObject * pGameObject, Light * 
     DualLinkNode2<ChildList>* cn2 = pGameObject->GetChildren().startNode;
     while(cn2!=NULL)
     {
-        renderDepthMap (pWorld, (GameObject*)cn2, light, type, pRecursive);
+        renderDepthMap (pWorld, (GameObject*)cn2,pCamera, light, type, pRecursive);
         cn2 = cn2->nextNode;
     }
     //for (int i = 0; i < childCount; i++) {
@@ -417,7 +424,7 @@ void Renderer::InitializeDepthMaps()
       glActiveTexture(GL_TEXTURE0);
       glGenTextures(1, &depthMap);
       glBindTexture(GL_TEXTURE_2D, depthMap);
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, _screenWidth, _screenHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 4096, 4096, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -527,5 +534,10 @@ void Renderer::InitializePostProc()
 GLuint Renderer::GetPostProcessVertexAttrib()
 {
     return _postProcessVertexAttributeArray;
+}
+
+ShadowCamera* Renderer::GetShadowCamera()
+{
+    return _shadowCam;
 }
 

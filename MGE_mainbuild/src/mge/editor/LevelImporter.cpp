@@ -5,6 +5,7 @@
 #include <mge/core/Mesh.hpp>
 #include <mge/core/Texture.hpp>
 #include <mge/materials/TextureMaterial.hpp>
+#include <mge/materials/TextureLitMaterial.hpp>
 #include <mge/collision/BoxCollider.hpp>
 #include <mge/collision/WallCollider.hpp>
 #include <mge/core/Camera.hpp>
@@ -159,6 +160,44 @@ namespace LevelEditor
                 f>>s;//end_texmat
             }
 
+            if(s=="TEXTURE_ADVANCED_MATERIAL:")
+            {
+                //f>>s;//"name"
+                //f>>s;//the name
+                f>>s;//"diffuseTex
+                f>>s;//the filename
+
+                Texture* diffuse = nullptr;
+                if(s!="missing")
+                diffuse = Texture::load(config::MGE_TEXTURE_PATH + s);
+
+                f>>s;//"normalTex
+                f>>s;//the filename
+
+                Texture* normalMap = nullptr;
+                if(s!="missing")
+                normalMap = Texture::load(config::MGE_TEXTURE_PATH + s);
+
+                f>>s;//"specularTex
+                f>>s;//the filename
+
+                Texture* specularMap = nullptr;
+                if(s!="missing")
+                specularMap = Texture::load(config::MGE_TEXTURE_PATH + s);
+
+                float smooth,shiny,ambient;
+                f>>s;
+                f>>s; smooth = std::strtof(s.c_str(),nullptr);
+                f>>s;
+                f>>s; shiny = std::strtof(s.c_str(),nullptr);
+                f>>s;
+                f>>s; ambient = std::strtof(s.c_str(),nullptr);
+
+                TextureLitMaterial* mat2 = new TextureLitMaterial(diffuse,smooth,shiny,ambient,normalMap,specularMap);
+                owner->setMaterial(mat2);
+                f>>s;//end_texmat
+            }
+
             if(s=="COLOR_MATERIAL:")
             {
                 //f>>s;//"name"
@@ -247,6 +286,10 @@ namespace LevelEditor
 
                 CharacterController* c = new CharacterController(m,j,g,r,d);
                 owner->AttachComponent(c);
+
+                //hard coding this shit
+                Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -3, 1), glm::vec3(1.0f,1.0f,1.0f),glm::vec3(0.1f),0,owner);
+                _storedWorld->AddChild(light1);
                 f>>s;//end_character
             }
 

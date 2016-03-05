@@ -5,6 +5,7 @@
 #include "glm.hpp"
 #include<vector>
 #include<mge/materials/PostProcessing/PostProcess.hpp>
+#include<mge/shadow/ShadowCamera.hpp>
 //#include
 class World;
 class GameObject;
@@ -35,7 +36,7 @@ class Renderer
 
         //render specific game object within the world (using world's light settings etc)
         void render (World* pWorld, GameObject* pGameObject, Camera* pCamera, bool pRecursive);
-        void renderDepthMap (World* pWorld, GameObject * pGameObject, Light * light, int type, bool pRecursive);
+        void renderDepthMap (World* pWorld, GameObject * pGameObject, Camera* pCamera, Light * light, int type, bool pRecursive);
         //utility call
         void setClearColor (int pR, int pG, int pB);
 
@@ -46,6 +47,9 @@ class Renderer
         static RendererDebugInfo debugInfo;
 
         static glm::vec2 GetScreenSize();
+
+        //test
+        static ShadowCamera* GetShadowCamera();
     private:
         //general settings
         static int _screenWidth, _screenHeight;
@@ -60,6 +64,11 @@ class Renderer
         // Setup skybox VAO
         GLuint skyboxVAO, skyboxVBO;
         GLuint cubemapTexture;
+
+        //test
+        static ShadowCamera* _shadowCam;
+
+
         ///post processing
         GLuint postProc_fbo, postProc_fbo_texture0,postProc_fbo_texture1, postProc_rbo_depth;//frame buffer object with depth buffer
 

@@ -2,6 +2,7 @@
 #define SHADOWMATERIAL_HPP
 
 #include "mge/core/ShaderProgram.hpp"
+#include "mge/shadow/ShadowCamera.hpp"
 
 class World;
 class Light;

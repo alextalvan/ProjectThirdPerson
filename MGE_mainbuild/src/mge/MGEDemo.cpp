@@ -63,7 +63,7 @@ void MGEDemo::initialize() {
 //build the game _world
 void MGEDemo::_initializeScene()
 {
-    //return;
+    return;
     Camera* cam = new Camera("cam", glm::vec3(15,15,15));
     _world->setMainCamera(cam);
     _world->AddChild(cam);
@@ -153,15 +153,15 @@ void MGEDemo::_initializeScene()
 
 
 
-    Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -3, 1), glm::vec3(1.0f,1.0f,1.0f));
-    //_world->AddChild(light1);
+    Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -3, 1), glm::vec3(1.0f,1.0f,1.0f),glm::vec3(0.1f),0,testCube);
+    _world->AddChild(light1);
     //light1->AddChild(testCube1);
     //testCube1->setLocalPosition(glm::vec3(0));
     //light1->setLocalPosition(glm::vec3(-30,30,-30));
     //testCube->AddChild(light1);
     //Light* light2 = new Light(MGE_LIGHT_POINT, glm::vec3(0,0.5,2), glm::vec3(1,1,1), glm::vec3(1,0,0), glm::vec3(0.1f,0.1f,0.1f));
     //Light* light3 = new Light(MGE_LIGHT_SPOTLIGHT, glm::vec3(0,2,2), glm::vec3(0,-1,0), glm::vec3(0,0,1), glm::vec3(0.1f,0.1f,0.1f), 0.36f);
-    cam->AttachComponent(new LookAt(testCube));
+    //cam->AttachComponent(new LookAt(testCube));
     testCube->AttachComponent(new KeysBehaviour(0.1,1));
 
     //Texture* water = Texture::load(config::MGE_TEXTURE_PATH + "smoke.png");

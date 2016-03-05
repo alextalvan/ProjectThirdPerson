@@ -287,6 +287,18 @@ void GameObject::setWorldRotation(glm::vec3 forward)
     setWorldRotation(right,up,forward);
 }
 
+glm::mat3 GameObject::getWorldRotation()
+{
+    glm::mat3 ret;
+    glm::mat4 tr = getWorldTransform();
+
+    ret[0] = glm::normalize(glm::vec3(tr[0]));
+    ret[1] = glm::normalize(glm::vec3(tr[1]));
+    ret[2] = glm::normalize(glm::vec3(tr[2]));
+
+    return ret;
+}
+
 glm::vec3 GameObject::getLocalScale()
 {
     using namespace glm;

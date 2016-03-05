@@ -3,6 +3,7 @@
 #include "mge/core/Mesh.hpp"
 #include "mge/config.hpp"
 #include "mge/core/Light.hpp"
+#include "mge/core/Renderer.hpp"
 #include <string>
 
 ShaderProgram* ShadowMaterial::_shader = NULL;
@@ -37,12 +38,17 @@ void ShadowMaterial::render(World* pWorld, GameObject* pGameObject, Light* light
 
     glm::mat4 lightProjection, lightView;
     glm::mat4 lightSpaceMatrix;
-    GLfloat near_plane = 1.0f, far_plane = 50.0f;
+    GLfloat near_plane = 1.0f, far_plane = 100.0f;
 
-    float orthoSize = 25.0f;
+    float orthoSize = 250.0f;
     lightProjection = glm::ortho(-orthoSize, orthoSize, -orthoSize, orthoSize, near_plane, far_plane);
     lightView = light->getWorldTransform();
     lightSpaceMatrix = lightProjection * lightView;
+
+//    ShadowCamera* shadowCam = Renderer::GetShadowCamera();
+//    lightProjection = shadowCam->getProjection();
+//    lightView = shadowCam->getWorldTransform();
+//    lightSpaceMatrix = lightProjection * lightView;
 
     glUniformMatrix4fv(_lightMatLoc, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
     glUniformMatrix4fv(_modelMatLoc, 1, GL_FALSE, glm::value_ptr(pGameObject->getWorldTransform()));

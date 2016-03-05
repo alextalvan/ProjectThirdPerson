@@ -181,10 +181,17 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
 
             glm::mat4 lightProjection, lightView;
             glm::mat4 lightSpaceMatrix;
-            GLfloat near_plane = 1.0f, far_plane = 50.0f;
-            float orthoSize = 25.0f;
+            GLfloat near_plane = 1.0f, far_plane = 100.0f;
+            float orthoSize = 250.0f;
             lightProjection = glm::ortho(-orthoSize, orthoSize, -orthoSize, orthoSize, near_plane, far_plane);
             lightView = light->getWorldTransform();
+
+//            ShadowCamera* shadowCam = Renderer::GetShadowCamera();
+//            lightProjection = shadowCam->getProjection();
+//            lightView = shadowCam->getWorldTransform();
+//            lightSpaceMatrix = lightProjection * lightView;
+
+
             lightSpaceMatrix = lightProjection * lightView;
             glUniformMatrix4fv(_lightMatLoc, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
         } else if (lightType == MGE_LIGHT_POINT) {
