@@ -19,6 +19,7 @@ GLint TextureLitMaterial::_lightMatLoc = 0;
 GLint TextureLitMaterial::_diffMapLoc = 0;
 GLint TextureLitMaterial::_normalMapLoc = 0;
 GLint TextureLitMaterial::_specMapLoc = 0;
+GLint TextureLitMaterial::_tilingLoc = 0;
 GLint TextureLitMaterial::_depthMapLoc = 0;
 
 GLint TextureLitMaterial::_viewPosLoc = 0;
@@ -32,14 +33,15 @@ GLboolean TextureLitMaterial::_hasNormMapLoc = 0;
 
 GLuint TextureLitMaterial::_colorLoc = 0;
 
-TextureLitMaterial::TextureLitMaterial(Texture * pDiffuseTexture, float pSmoothness, float pShininess, float pAmbient, Texture * pNormalMapTexture, Texture * pSpecularMapTexture)
+TextureLitMaterial::TextureLitMaterial(Texture * pDiffuseTexture, float pSmoothness, float pShininess, float pAmbient, Texture * pNormalMapTexture, Texture * pSpecularMapTexture, float pTiling)
 {
-    _diffuseTexture = pDiffuseTexture;
+    _diffuseTexture=pDiffuseTexture;
     _ambient=pAmbient;
     _smoothness=pSmoothness;
     _shininess=pShininess;
     _normalMapTexture=pNormalMapTexture;
     _specularMapTexture=pSpecularMapTexture;
+    _tiling=pTiling;
 
     _lazyInitializeShader();
 
@@ -79,6 +81,7 @@ void TextureLitMaterial::_lazyInitializeShader() {
         _diffMapLoc = _shader->getUniformLocation("material.diffuseMap");
         _normalMapLoc = _shader->getUniformLocation("material.normalMap");
         _specMapLoc = _shader->getUniformLocation("material.specularMap");
+        _tilingLoc = _shader->getUniformLocation("material.tiling");
         _depthMapLoc = _shader->getUniformLocation("depthMap");
 
         _viewPosLoc = _shader->getUniformLocation("viewPos");
@@ -138,6 +141,7 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
 	glUniform1f(_matSmoothLoc, _smoothness);
 	glUniform1f(_matShineLoc, _shininess);
 	glUniform1f(_matAmbLoc, _ambient);
+	glUniform1f(_tilingLoc, _tiling);
     glUniform1f(_hasNormMapLoc, normalMap);
     glUniform1f(_hasSpecMapLoc, specularMap);
 

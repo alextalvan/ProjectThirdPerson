@@ -69,9 +69,6 @@
 		<Unit filename="assets/mge/shaders/PostProcessing/identity.vs" />
 		<Unit filename="assets/mge/shaders/color.fs" />
 		<Unit filename="assets/mge/shaders/color.vs" />
-		<Unit filename="assets/mge/shaders/depth_cube_shader.fs" />
-		<Unit filename="assets/mge/shaders/depth_cube_shader.gs" />
-		<Unit filename="assets/mge/shaders/depth_cube_shader.vs" />
 		<Unit filename="assets/mge/shaders/depth_shader.fs" />
 		<Unit filename="assets/mge/shaders/depth_shader.vs" />
 		<Unit filename="assets/mge/shaders/skybox_shader.fs" />
@@ -170,8 +167,6 @@
 		<Unit filename="src/mge/materials/Particles/ParticleMaterial.hpp" />
 		<Unit filename="src/mge/materials/PostProcessing/PostProcess.cpp" />
 		<Unit filename="src/mge/materials/PostProcessing/PostProcess.hpp" />
-		<Unit filename="src/mge/materials/ShadowCubeMaterial.cpp" />
-		<Unit filename="src/mge/materials/ShadowCubeMaterial.hpp" />
 		<Unit filename="src/mge/materials/ShadowMaterial.cpp" />
 		<Unit filename="src/mge/materials/ShadowMaterial.hpp" />
 		<Unit filename="src/mge/materials/SkyboxMaterial.cpp" />

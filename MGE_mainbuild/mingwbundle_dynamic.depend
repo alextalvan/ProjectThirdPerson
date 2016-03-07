@@ -13477,7 +13477,7 @@
 	<mge/collision/Collider.hpp>
 	<mge/collision/CollisionManager.hpp>
 
-1457343502 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\collisionmanager.cpp
+1457350577 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\collision\collisionmanager.cpp
 	<mge/collision/CollisionManager.hpp>
 	<mge/util/list/DualLinkNode.hpp>
 	<mge/collision/Collider.hpp>
@@ -13493,7 +13493,7 @@
 	<glm.hpp>
 	<iostream>
 
-1457343502 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\abstractgame.cpp
+1457350577 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\abstractgame.cpp
 	"AbstractGame.hpp"
 	<iostream>
 	"mge/core/Time.hpp"
@@ -13555,7 +13555,7 @@
 	<mge/core/GameObject.hpp>
 	<iostream>
 
-1457343502 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\fps.cpp
+1457350577 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\fps.cpp
 	<iostream>
 	"mge/core/FPS.hpp"
 	"mge/core/Time.hpp"
@@ -13598,7 +13598,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1457344580 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.cpp
+1457355973 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -13689,7 +13689,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1457348657 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
+1457358320 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
 	<glm.hpp>
 	"mge/materials/TextureLitMaterial.hpp"
 	"mge/core/Texture.hpp"
@@ -13700,7 +13700,7 @@
 	"mge/core/Renderer.hpp"
 	<string>
 
-1457348458 c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.hpp
+1457358339 c:\github\projectthirdperson\mge_mainbuild\src\mge\materials\texturelitmaterial.hpp
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 	"mge/shadow/ShadowCamera.hpp"
@@ -13839,7 +13839,7 @@
 
 1452188439 c:\github\projectthirdperson\mge_mainbuild\luabridge\detail\namespace.h
 
-1457350263 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
+1457355678 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -16204,7 +16204,7 @@
 1456830268 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\timer.hpp
 	<SFML/System.hpp>
 
-1457343502 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
+1457350577 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
 	"CharacterController.hpp"
 	"mge/core/GameObject.hpp"
 	"mge/core/Camera.hpp"
