@@ -16,8 +16,8 @@ class TextureLitMaterial : public AbstractMaterial
         virtual ~TextureLitMaterial ();
         virtual void render(World* pWorld, GameObject* pGameObject, Camera* pCamera);
         void setDiffuseTexture (Texture* pDiffuseTexture);
-        void setSpecularMapTexture (Texture* pSpecularMapTexture);
         void setNormalMapTexture (Texture* pNormalMapTexture);
+        void setSpecularMapTexture (Texture* pSpecularMapTexture);
     protected:
     private:
         bool specularMap = false;
@@ -34,7 +34,6 @@ class TextureLitMaterial : public AbstractMaterial
         static GLint _normalMapLoc;
         static GLint _specMapLoc;
         static GLint _depthMapLoc;
-        static GLint _depthCubeMapLoc;
 
         static GLint _viewPosLoc;
 
@@ -51,9 +50,8 @@ class TextureLitMaterial : public AbstractMaterial
         float _smoothness;
         float _shininess;
         float _ambient;
-        Texture* _specularMapTexture;
         Texture* _normalMapTexture;
-
+        Texture* _specularMapTexture;
 };
 
 #endif // TextureLitMaterial_H

@@ -20,7 +20,6 @@ GLint TextureLitMaterial::_diffMapLoc = 0;
 GLint TextureLitMaterial::_normalMapLoc = 0;
 GLint TextureLitMaterial::_specMapLoc = 0;
 GLint TextureLitMaterial::_depthMapLoc = 0;
-GLint TextureLitMaterial::_depthCubeMapLoc = 0;
 
 GLint TextureLitMaterial::_viewPosLoc = 0;
 
@@ -33,13 +32,13 @@ GLboolean TextureLitMaterial::_hasNormMapLoc = 0;
 
 GLuint TextureLitMaterial::_colorLoc = 0;
 
-TextureLitMaterial::TextureLitMaterial(Texture * pDiffuseTexture, float pSmoothness, float pShininess, float pAmbient, Texture * pSpecularMapTexture, Texture * pNormalMapTexture)
+TextureLitMaterial::TextureLitMaterial(Texture * pDiffuseTexture, float pSmoothness, float pShininess, float pAmbient, Texture * pNormalMapTexture, Texture * pSpecularMapTexture)
 {
     _diffuseTexture = pDiffuseTexture;
-    _smoothness=pSmoothness;
     _ambient=pAmbient;
-    _normalMapTexture=pNormalMapTexture;
+    _smoothness=pSmoothness;
     _shininess=pShininess;
+    _normalMapTexture=pNormalMapTexture;
     _specularMapTexture=pSpecularMapTexture;
 
     _lazyInitializeShader();
@@ -81,7 +80,6 @@ void TextureLitMaterial::_lazyInitializeShader() {
         _normalMapLoc = _shader->getUniformLocation("material.normalMap");
         _specMapLoc = _shader->getUniformLocation("material.specularMap");
         _depthMapLoc = _shader->getUniformLocation("depthMap");
-        _depthCubeMapLoc = _shader->getUniformLocation("depthCubeMap");
 
         _viewPosLoc = _shader->getUniformLocation("viewPos");
 
@@ -100,14 +98,14 @@ void TextureLitMaterial::setDiffuseTexture (Texture* pDiffuseTexture) {
     _diffuseTexture = pDiffuseTexture;
 }
 
-void TextureLitMaterial::setSpecularMapTexture (Texture* pSpecularMapTexture) {
-    _specularMapTexture = pSpecularMapTexture;
-    specularMap = true;
-}
-
 void TextureLitMaterial::setNormalMapTexture (Texture* pNormalMapTexture) {
     _normalMapTexture = pNormalMapTexture;
     normalMap = true;
+}
+
+void TextureLitMaterial::setSpecularMapTexture (Texture* pSpecularMapTexture) {
+    _specularMapTexture = pSpecularMapTexture;
+    specularMap = true;
 }
 
 void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pCamera) {
@@ -119,16 +117,16 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
     glBindTexture(GL_TEXTURE_2D, _diffuseTexture->getId());
     glUniform1i (_diffMapLoc, 0);
 
-    if (specularMap) {
+    if (normalMap) {
         glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, _specularMapTexture->getId());
-        glUniform1i (_specMapLoc, 1);
+        glBindTexture(GL_TEXTURE_2D, _normalMapTexture->getId());
+        glUniform1i (_normalMapLoc, 1);
     }
 
-    if (normalMap) {
+    if (specularMap) {
         glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D, _normalMapTexture->getId());
-        glUniform1i (_normalMapLoc, 2);
+        glBindTexture(GL_TEXTURE_2D, _specularMapTexture->getId());
+        glUniform1i (_specMapLoc, 2);
     }
 
     if (Renderer::getDepthMap()) {
@@ -137,17 +135,11 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
         glUniform1i (_depthMapLoc, 3);
     }
 
-    if (Renderer::getDepthCubeMap()) {
-        glActiveTexture(GL_TEXTURE4);
-        glBindTexture(GL_TEXTURE_2D, Renderer::getDepthCubeMap());
-        glUniform1i (_depthCubeMapLoc, 4);
-    }
-
 	glUniform1f(_matSmoothLoc, _smoothness);
 	glUniform1f(_matShineLoc, _shininess);
 	glUniform1f(_matAmbLoc, _ambient);
-    glUniform1f(_hasSpecMapLoc, specularMap);
     glUniform1f(_hasNormMapLoc, normalMap);
+    glUniform1f(_hasSpecMapLoc, specularMap);
 
     //pass in light data
     int index = 0;
@@ -195,26 +187,11 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
             lightSpaceMatrix = lightProjection * lightView;
             glUniformMatrix4fv(_lightMatLoc, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
         } else if (lightType == MGE_LIGHT_POINT) {
-            GLfloat far = 25.0f;
-            loc = _shader->getUniformLocation("far_plane");
-            glUniform1f(loc,far);
             loc = _shader->getUniformLocation("LightArray[" + indexString + "].position");
             glUniform3fv(loc,1,glm::value_ptr(light->getWorldPosition()));
             loc = _shader->getUniformLocation("LightArray[" + indexString + "].attenuation");
             glUniform3fv(loc,1,glm::value_ptr(light->getAttenuation()));
         }
-        /*
-        else if (lightType == MGE_LIGHT_SPOTLIGHT) {
-            loc = _shader->getUniformLocation("LightArray[" + indexString + "].position");
-            glUniform3fv(loc,1,glm::value_ptr(light->getWorldPosition()));
-            loc = _shader->getUniformLocation("LightArray[" + indexString + "].attenuation");
-            glUniform3fv(loc,1,glm::value_ptr(light->getAttenuation()));
-            loc = _shader->getUniformLocation("LightArray[" + indexString + "].direction");
-            glUniform3fv(loc,1,glm::value_ptr(light->getDirection()));
-            loc = _shader->getUniformLocation("LightArray[" + indexString + "].angle");
-            glUniform1f(loc,glm::cos(light->getAngle()));
-        }
-        */
         ++index;
         cn = cn->nextNode;
     }

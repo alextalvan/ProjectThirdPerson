@@ -7,10 +7,8 @@ uniform vec3 color;
 uniform int lightCount;
 uniform vec3 viewPos;
 uniform sampler2D depthMap;
-uniform samplerCube depthCubeMap;
 uniform bool hasNormalMap;
 uniform bool hasSpecMap;
-uniform float far_plane;
 
 struct Material
 {
@@ -43,10 +41,9 @@ in mat3 TBN;
 out vec4 fragment_color;
 
 float ShadowCalculation(vec4 fragPos, vec3 norm, vec3 lightDir);
-float ShadowCubeCalculation(vec3 fragPos, vec3 lightPos);
 vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir);
 vec3 DoPointLight(int lightIndex, vec3 norm, vec3 viewDir);
-vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 viewDir);
+//vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 viewDir);
 
 void main( void )
 {
@@ -69,11 +66,9 @@ void main( void )
     {
         if(LightArray[i].type==0)
             outColor += DoDirectionalLight(i, normal, viewDir);
-
-        if(LightArray[i].type==1)
+        else if(LightArray[i].type==1)
             outColor += DoPointLight(i, normal, viewDir);
-
-        //if(LightArray[i].type==2)
+        //else if(LightArray[i].type==2)
         //    outColor += DoSpotlight(i, normal, viewDir);
     }
 
@@ -117,23 +112,6 @@ float ShadowCalculation(vec4 fragPos, vec3 norm, vec3 lightDir)
     return 1.0 - shadow;
 }
 
-float ShadowCubeCalculation(vec3 fragPos, vec3 lightPos)
-{
-    // Get vector between fragment position and light position
-    vec3 fragToLight = fragPos - lightPos;
-    // Use the light to fragment vector to sample from the depth map
-    float closestDepth = texture(depthCubeMap, fragToLight).r;
-    // It is currently in linear range between [0,1]. Re-transform back to original value
-    closestDepth *= far_plane;
-    // Now get current linear depth as the length between the fragment and light position
-    float currentDepth = length(fragToLight);
-    // Now test for shadows
-    float bias = 0.05;
-    float shadow = currentDepth -  bias > closestDepth ? 1.0 : 0.0;
-
-    return shadow;
-}
-
 vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir)
 {
     vec3 lightDir = normalize(-LightArray[lightIndex].direction);
@@ -148,7 +126,7 @@ vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir)
     if (hasSpecMap) {
         vec3 halfwayDir = normalize(lightDir + viewDir);
         spec = pow(max(dot(norm, halfwayDir), 0.0), material.shininess);
-        specular = (LightArray[lightIndex].color + vec3(texture(material.specularMap, TexCoord))) * spec * material.smoothness;
+        specular = LightArray[lightIndex].color * texture(material.specularMap, TexCoord).r * spec * material.smoothness;
     }
 
     float shadow = ShadowCalculation(FragPosLightSpace, norm, lightDir);
@@ -170,7 +148,7 @@ vec3 DoPointLight(int lightIndex, vec3 norm, vec3 viewDir)
     if (hasSpecMap) {
         vec3 halfwayDir = normalize(lightDir + viewDir);
         spec = pow(max(dot(norm, halfwayDir), 0.0), material.shininess);
-        specular = (LightArray[lightIndex].color + vec3(texture(material.specularMap, TexCoord))) * spec * material.smoothness;
+        specular = LightArray[lightIndex].color * texture(material.specularMap, TexCoord).r * spec * material.smoothness;
     }
 
     // Attenuation
@@ -178,12 +156,11 @@ vec3 DoPointLight(int lightIndex, vec3 norm, vec3 viewDir)
     vec3 att = LightArray[lightIndex].attenuation;
     float attenuation = 1.0f / (att.x + att.y * distance + att.z * distance * distance);
 
-    //float shadow = ShadowCubeCalculation(FragPos, LightArray[lightIndex].position);
-
     // Combine results and add attenuation
-    return (diffuse + specular) * attenuation;//* shadow
+    return (diffuse + specular) * attenuation;
 }
 
+/*
 vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 viewDir)
 {
     vec3 lightDir = normalize(LightArray[lightIndex].position - FragPos);
@@ -214,4 +191,4 @@ vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 viewDir)
 
     // Combine results and add attenuation
     return (diffuse + specular) * attenuation;
-}
+}*/

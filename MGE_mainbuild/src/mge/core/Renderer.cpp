@@ -8,7 +8,6 @@
 #include "mge/materials/AbstractMaterial.hpp"
 #include "mge/core/Light.hpp"
 #include "mge/materials/ShadowMaterial.hpp"
-#include "mge/materials/ShadowCubeMaterial.hpp"
 #include "mge/core/Texture.hpp"
 #include <SFML/Graphics.hpp>
 #include "mge/config.hpp"
@@ -22,7 +21,6 @@ using namespace std;
 
 GLuint Renderer::_postProcessVertexAttributeArray;
 GLuint Renderer::depthMap;
-GLuint Renderer::depthCubeMap;
 
 RendererDebugInfo Renderer::debugInfo;
 
@@ -51,7 +49,7 @@ Renderer::Renderer(int width, int height)
     glDepthFunc(GL_LESS);
 
     InitializeSkyBox();
-    InitializeDepthMaps();
+    InitializeDepthMap();
 	InitializePostProc();
 
     //_postProcessList.push_back(new PostProcess("PostProcessing/hdr_shader.vs","PostProcessing/hdr_shader.fs"));
@@ -65,12 +63,9 @@ Renderer::~Renderer()
     glDeleteRenderbuffers(1, &depthMapFBO);
     glDeleteRenderbuffers(1, &skyboxVBO);
     glDeleteVertexArrays(1, &skyboxVAO);
-    //glDeleteRenderbuffers(1, &depthCubeMapFBO);
     glDeleteTextures(1, &postProc_fbo_texture0);
     glDeleteTextures(1, &postProc_fbo_texture1);
     glDeleteTextures(1, &depthMap);
-    glDeleteTextures(1, &cubemapTexture);
-    //glDeleteTextures(1, &depthCubeMap);
     glDeleteFramebuffers(1, &postProc_fbo);
 }
 
@@ -86,11 +81,6 @@ void Renderer::setClearColor(int pR, int pG, int pB) {
 GLuint Renderer::getDepthMap()
 {
     return depthMap;
-}
-
-GLuint Renderer::getDepthCubeMap()
-{
-    return depthCubeMap;
 }
 
 void Renderer::render (World* pWorld)
@@ -156,7 +146,7 @@ void Renderer::renderDirLightDepthMap (World* pWorld)
 {
     DualLinkNode<Light>* l = Light::GetLightList().startNode;
     while (l != NULL) {
-            Light* light = (Light*)l;
+        Light* light = (Light*)l;
         if (light->getType() == MGE_LIGHT_DIRECTIONAL)
         {
             //_shadowCam->RecalculateFrustum(pWorld->getMainCamera(),light->getDirection());
@@ -165,31 +155,11 @@ void Renderer::renderDirLightDepthMap (World* pWorld)
             glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
             glClear(GL_DEPTH_BUFFER_BIT);
             glCullFace(GL_FRONT);
-            renderDepthMap (pWorld, pWorld,pWorld->getMainCamera(), light, MGE_LIGHT_DIRECTIONAL, true);
+            renderDepthMap (pWorld, pWorld,pWorld->getMainCamera(), light, true);
             glCullFace(GL_BACK);
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
             glViewport(0, 0, _screenWidth, _screenHeight);
             return;
-        }
-        l = l -> nextNode;
-    }
-}
-
-void Renderer::renderPointLightDepthCubeMap (World* pWorld)
-{
-    DualLinkNode<Light>* l = Light::GetLightList().startNode;
-    while (l != NULL) {
-            Light* light = (Light*)l;
-        if (light->getType() == MGE_LIGHT_POINT) {
-            ///shadow mapping (render depth cube map)
-            glViewport(0, 0, 4096, 4096);
-            glBindFramebuffer(GL_FRAMEBUFFER, depthCubeMapFBO);
-            glClear(GL_DEPTH_BUFFER_BIT);
-            glCullFace(GL_FRONT);
-            renderDepthMap (pWorld, pWorld,pWorld->getMainCamera(), light, MGE_LIGHT_POINT, true);
-            glCullFace(GL_BACK);
-            glBindFramebuffer(GL_FRAMEBUFFER, 0);
-            glViewport(0, 0, _screenWidth, _screenHeight);
         }
         l = l -> nextNode;
     }
@@ -249,36 +219,23 @@ void Renderer::DoPostProcessing()
     //glEnable(GL_FRAMEBUFFER_SRGB);
 }
 
-void Renderer::renderDepthMap (World* pWorld, GameObject * pGameObject, Camera* pCamera, Light * light, int type, bool pRecursive)
+void Renderer::renderDepthMap (World* pWorld, GameObject * pGameObject, Camera* pCamera, Light * light, bool pRecursive)
 {
     //we don't render inactive gameobjects
     if(!pGameObject->IsActive())
         return;
 
-    if (type == MGE_LIGHT_DIRECTIONAL) {
-
-        if (pGameObject->getMesh() && pGameObject->castShadows && pCamera->FrustumCheck(pGameObject)) {
-            shadowMat->render(pWorld, pGameObject, light);
-        }
+    if (pGameObject->getMesh() && pGameObject->castShadows && pCamera->FrustumCheck(pGameObject)) {
+        shadowMat->render(pWorld, pGameObject, light);
     }
-    /*
-    else if (type == MGE_LIGHT_POINT) {
-        //our material (shader + settings) determines how we actually look
-        if (pGameObject->getMesh() && shadowCubeMat != NULL) {
-            shadowCubeMat->render(pWorld, pGameObject, light);
-        }
-    }*/
 
     if (!pRecursive) return;
     //if (childCount < 1) return;
 
-
-
-
     DualLinkNode2<ChildList>* cn2 = pGameObject->GetChildren().startNode;
     while(cn2!=NULL)
     {
-        renderDepthMap (pWorld, (GameObject*)cn2,pCamera, light, type, pRecursive);
+        renderDepthMap (pWorld, (GameObject*)cn2,pCamera, light, pRecursive);
         cn2 = cn2->nextNode;
     }
     //for (int i = 0; i < childCount; i++) {
@@ -414,10 +371,9 @@ GLuint Renderer::loadCubemap(vector<const GLchar*> faces)
     return textureID;
 }
 
-void Renderer::InitializeDepthMaps()
+void Renderer::InitializeDepthMap()
 {
       shadowMat = new ShadowMaterial();
-      //shadowCubeMat = new ShadowCubeMaterial(_screenWidth, _screenHeight);
 
       ///depth map (shadow mapping)
       //generate depth map texture
@@ -443,33 +399,6 @@ void Renderer::InitializeDepthMaps()
       glDrawBuffer(GL_NONE);
       glReadBuffer(GL_NONE);
       glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-/*
-      ///depth cube map (omnidirectional shadow mapping)
-      //generate depth cube map
-      glActiveTexture(GL_TEXTURE0);
-      glGenTextures(1, &depthCubeMap);
-      glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubeMap);
-      for (GLuint i = 0; i < 6; ++i)
-          glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_DEPTH_COMPONENT, _screenWidth, _screenHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-      glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-      glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-      glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-      glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-      glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-      glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-
-      ///depth buffer (omnidirectional shadow mapping)
-      //attach depth cube map texture to depth buffer
-      glGenFramebuffers(1, &depthCubeMapFBO);
-      glBindFramebuffer(GL_FRAMEBUFFER, depthCubeMapFBO);
-      glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthCubeMap, 0);
-      glDrawBuffer(GL_NONE);
-      glReadBuffer(GL_NONE);
-      if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-        std::cout << "Framebuffer not complete!" << std::endl;
-      glBindFramebuffer(GL_FRAMEBUFFER, 0);
-*/
 }
 
 void Renderer::InitializePostProc()

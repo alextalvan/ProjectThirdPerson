@@ -64,7 +64,7 @@ void MGEDemo::initialize() {
 void MGEDemo::_initializeScene()
 {
     return;
-    Camera* cam = new Camera("cam", glm::vec3(15,15,15));
+    Camera* cam = new Camera("cam", glm::vec3(5,5,5));
     _world->setMainCamera(cam);
     _world->AddChild(cam);
 
@@ -73,13 +73,13 @@ void MGEDemo::_initializeScene()
     Mesh* cubeMesh = Mesh::load(config::MGE_MODEL_PATH + "cube_flat.obj");
     Texture* brickTex = Texture::load(config::MGE_TEXTURE_PATH + "brickwall.jpg");
     Texture* brickNorm = Texture::load(config::MGE_TEXTURE_PATH + "brickwall_normal.jpg");
-    Texture* brickMet = Texture::load(config::MGE_TEXTURE_PATH + "brickwall.jpg");
-    TextureLitMaterial* litMat = new TextureLitMaterial(brickTex, 0.2f, 32.0f, 0.1f, brickMet, brickNorm);
+    Texture* brickSpec = Texture::load(config::MGE_TEXTURE_PATH + "brickwall_spec.png");
+    TextureLitMaterial* litMat = new TextureLitMaterial(brickTex, 1.0f, 132.0f, 0.1f, brickNorm, brickSpec);
 
     GameObject* plane = new GameObject("plane", glm::vec3(0,-1,0));
     plane->setMesh(planeMesh);
     plane->setMaterial(litMat);
-    plane->scale(glm::vec3(-10,1,10));
+    plane->scale(glm::vec3(-1,1,1));
     _world->AddChild(plane);
 
     GameObject* testCube = new GameObject("cube", glm::vec3(0,0,20));
@@ -159,7 +159,7 @@ void MGEDemo::_initializeScene()
     //testCube1->setLocalPosition(glm::vec3(0));
     //light1->setLocalPosition(glm::vec3(-30,30,-30));
     //testCube->AddChild(light1);
-    //Light* light2 = new Light(MGE_LIGHT_POINT, glm::vec3(0,0.5,2), glm::vec3(1,1,1), glm::vec3(1,0,0), glm::vec3(0.1f,0.1f,0.1f));
+    Light* light2 = new Light(MGE_LIGHT_POINT, glm::vec3(0,0.5,2), glm::vec3(1,1,1), glm::vec3(1,0,0), glm::vec3(0.1f,0.1f,0.1f));
     //Light* light3 = new Light(MGE_LIGHT_SPOTLIGHT, glm::vec3(0,2,2), glm::vec3(0,-1,0), glm::vec3(0,0,1), glm::vec3(0.1f,0.1f,0.1f), 0.36f);
     //cam->AttachComponent(new LookAt(testCube));
     testCube->AttachComponent(new KeysBehaviour(0.1,1));
