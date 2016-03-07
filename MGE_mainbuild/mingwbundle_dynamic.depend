@@ -15534,7 +15534,7 @@
 	<mge/collision/Collider.hpp>
 	<mge/collision/CollisionManager.hpp>
 
-1457014156 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.cpp
+1457343869 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\collisionmanager.cpp
 	<mge/collision/CollisionManager.hpp>
 	<mge/util/list/DualLinkNode.hpp>
 	<mge/collision/Collider.hpp>
@@ -15550,7 +15550,7 @@
 	<glm.hpp>
 	<iostream>
 
-1456842739 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
+1457345002 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
 	"AbstractGame.hpp"
 	<iostream>
 	"mge/core/Time.hpp"
@@ -15612,7 +15612,7 @@
 	<mge/core/GameObject.hpp>
 	<iostream>
 
-1456842624 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\fps.cpp
+1457345018 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\fps.cpp
 	<iostream>
 	"mge/core/FPS.hpp"
 	"mge/core/Time.hpp"
@@ -16050,7 +16050,7 @@
 1456840172 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\wallcollider.hpp
 	"mge/collision/BoxCollider.hpp"
 
-1457195128 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
+1457347714 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\charactercontroller.cpp
 	"CharacterController.hpp"
 	"mge/core/GameObject.hpp"
 	"mge/core/Camera.hpp"

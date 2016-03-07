@@ -14,7 +14,7 @@ void FPS::update()
     Time::update();
 	float time = Time::now();
 	FPS::_count++;
-	if ( time - _startTime >= 2.0f ) {
+	if ( time - _startTime >= 1.0f ) {
 		_fps = _count / (time - _startTime);
 		_count = 0;
 		_startTime = time;
