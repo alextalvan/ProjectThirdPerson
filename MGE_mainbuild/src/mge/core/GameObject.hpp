@@ -20,9 +20,9 @@ class Mesh;
 //class Activateable;
 
 class ChildList;
-//class TransparencyList;
+class TransparencyList;
 
-class GameObject : public Activateable, public Destroyable, public DualLinkNode2<ChildList>, public LuaObject
+class GameObject : public Activateable, public Destroyable, public DualLinkNode2<ChildList>, public LuaObject, public DualLinkNode<TransparencyList>
 {
     friend class AbstractGame;
 	public:
@@ -122,6 +122,9 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
         GameObject* FindChild(std::string name);
 
         bool castShadows = true;
+        bool isTransaprent = false;
+
+        void SetTransparent(bool val);
 
 	protected:
 	    virtual ~GameObject();

@@ -193,6 +193,9 @@ namespace LevelEditor
                 f>>s;
                 f>>s; ambient = std::strtof(s.c_str(),nullptr);
 
+                //std::cout<<"\n"<<smooth<<" "<<shiny<<" "<<ambient;
+
+
                 TextureLitMaterial* mat2 = new TextureLitMaterial(diffuse,smooth,shiny,ambient,normalMap,specularMap);
                 owner->setMaterial(mat2);
                 f>>s;//end_texmat
@@ -288,7 +291,11 @@ namespace LevelEditor
                 owner->AttachComponent(c);
 
                 //hard coding this shit
-                Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -3, 1), glm::vec3(1.0f,1.0f,1.0f),glm::vec3(0.1f),0,owner);
+                //Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -3, 1), glm::vec3(1.0f,1.0f,1.0f),glm::vec3(0.1f),0,owner);
+
+                glm::vec3 lightDir = glm::vec3(1, -3, 1);
+                glm::vec3 lightPos = glm::normalize(lightDir) * -15.0f;
+                Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, lightPos, lightDir , glm::vec3(1.0f,1.0f,1.0f),glm::vec3(0.1f),0,owner);
                 _storedWorld->AddChild(light1);
                 f>>s;//end_character
             }
@@ -488,6 +495,7 @@ namespace LevelEditor
 
         parent->AddChild(child);
         child->setWorldTransform(mat);
+        //child->scale(glm::vec3(-1,1,1));
 
     }
 

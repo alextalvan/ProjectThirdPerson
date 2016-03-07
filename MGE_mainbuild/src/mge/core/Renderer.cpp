@@ -27,6 +27,8 @@ RendererDebugInfo Renderer::debugInfo;
 int Renderer::_screenWidth;
 int Renderer::_screenHeight;
 
+DualLinkList<TransparencyList> Renderer::transparentList;
+
 ShadowCamera* Renderer::_shadowCam;
 
 

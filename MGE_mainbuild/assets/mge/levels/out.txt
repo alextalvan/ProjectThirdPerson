@@ -28,7 +28,7 @@ GAMEOBJECT:
       COMPONENTS:
 
          CHARACTER_CONTROLLER:
-            move_speed 0.1
+            move_speed 0.2
             jump_force 1
             jump_duration 0.3
             gravity 0.2
@@ -420,9 +420,9 @@ GAMEOBJECT:
    GAMEOBJECT:
       name Cube(6)
       transform: 
-         -1.192097E-05  0  0.2000007  92.2  
+         -1.192099E-05  0  0.200001  92.2  
          0  18.18  0  -11.5  
-         -100.0004  0  -2.384195E-08  100.6  
+         -100.0005  0  -2.384198E-08  100.6  
          0  0  0  1  
       mesh cube_flat.obj
       cast_shadows 0
@@ -445,9 +445,9 @@ GAMEOBJECT:
    GAMEOBJECT:
       name floor(1)
       transform: 
-         -1.430513E-05  0  -120.0001  213  
+         -1.430515E-05  0  -120.0003  213  
          0  2  0  -30.2  
-         120.0001  0  -1.430513E-05  -169  
+         120.0003  0  -1.430515E-05  -169  
          0  0  0  1  
       mesh cube_flat.obj
       cast_shadows 0
@@ -477,9 +477,9 @@ GAMEOBJECT:
    GAMEOBJECT:
       name Cube(5)
       transform: 
-         -2.384195E-05  0  0.2000007  199.4  
+         -2.384198E-05  0  0.200001  199.4  
          0  18.18  0  -11.5  
-         -200.0007  0  -2.384195E-08  200  
+         -200.001  0  -2.384198E-08  200  
          0  0  0  1  
       mesh cube_flat.obj
       cast_shadows 0
@@ -1124,9 +1124,9 @@ GAMEOBJECT:
             is_static 1
          END_WALL_COLLIDER
          TEXTURE_ADVANCED_MATERIAL:
-            diffuseTex floormap.png
-            normalTex missing
-            specularTex missing
+            diffuseTex brickwall.jpg
+            normalTex brickwall_normal.jpg
+            specularTex brickwall_spec.png
             smoothness 0.5
             shininess 32
             ambient 0.1
@@ -3576,9 +3576,9 @@ GAMEOBJECT:
    GAMEOBJECT:
       name Cube(4)
       transform: 
-         -4.76839E-05  0  0.2000007  0  
+         -4.768397E-05  0  0.200001  0  
          0  18.18  0  -11.5  
-         -400.0015  0  -2.384195E-08  0  
+         -400.0021  0  -2.384198E-08  0  
          0  0  0  1  
       mesh cube_flat.obj
       cast_shadows 0
@@ -4951,9 +4951,9 @@ GAMEOBJECT:
    GAMEOBJECT:
       name Cube(9)
       transform: 
-         -1.192097E-05  0  0.2000007  92.2  
+         -1.192099E-05  0  0.200001  92.2  
          0  18.18  0  -11.5  
-         -100.0004  0  -2.384195E-08  300.4  
+         -100.0005  0  -2.384198E-08  300.4  
          0  0  0  1  
       mesh cube_flat.obj
       cast_shadows 0

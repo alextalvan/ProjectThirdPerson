@@ -8,6 +8,7 @@ using namespace std;
 #include "mge/core/Mesh.hpp"
 #include "mge/core/World.hpp"
 #include "mge/behaviours/Component.hpp"
+#include "mge/core/Renderer.hpp"
 
 GameObject::GameObject(std::string pName, glm::vec3 pPosition )
 :	_name( pName ), _transform( glm::translate( pPosition ) ),  _parent(NULL), _children(),
@@ -42,6 +43,9 @@ void GameObject::Destroy()
 
     //destroy children as well
     DestroyChildren();
+
+    if(isTransaprent)
+        Renderer::transparentList.Remove((DualLinkNode<TransparencyList>*)this);
 }
 
 void GameObject::DestroyChildren()
@@ -480,6 +484,13 @@ Component* GameObject::FindComponent(std::string name)
 DualLinkList<Component>& GameObject::GetComponents()
 {
     return _components;
+}
+
+void GameObject::SetTransparent(bool val)
+{
+    isTransaprent = val;
+    if(val)
+        Renderer::transparentList.Add((DualLinkNode<TransparencyList>*)this);
 }
 
 

@@ -6,6 +6,8 @@
 #include<vector>
 #include<mge/materials/PostProcessing/PostProcess.hpp>
 #include<mge/shadow/ShadowCamera.hpp>
+#include<mge/util/list/DualLinkList.hpp>
+#include<mge/util/list/DualLinkNode.hpp>
 
 //#include
 class World;
@@ -15,6 +17,7 @@ class Light;
 class ShadowMaterial;
 class ShadowCubeMaterial;
 class ShaderProgram;
+class TransparencyList;
 
 struct RendererDebugInfo
 {
@@ -47,6 +50,9 @@ class Renderer
         static RendererDebugInfo debugInfo;
 
         static glm::vec2 GetScreenSize();
+
+        //transparency
+        static DualLinkList<TransparencyList> transparentList;
 
         //test
         static ShadowCamera* GetShadowCamera();
