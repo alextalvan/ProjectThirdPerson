@@ -18,6 +18,7 @@ struct Material
     float smoothness;
     float shininess;
     float ambient;
+    float tiling;
 };
 uniform Material material;
 
@@ -41,16 +42,17 @@ in mat3 TBN;
 out vec4 fragment_color;
 
 float ShadowCalculation(vec4 fragPos, vec3 norm, vec3 lightDir);
-vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir);
-vec3 DoPointLight(int lightIndex, vec3 norm, vec3 viewDir);
+vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir, vec2 tiledTexCoord);
+vec3 DoPointLight(int lightIndex, vec3 norm, vec3 viewDir, vec2 tiledTexCoord);
 //vec3 DoSpotlight(int lightIndex, vec3 norm, vec3 viewDir);
 
 void main( void )
 {
     vec3 normal = normalize(Normal);
+    vec2 tiledTexCoord = TexCoord * material.tiling;
 
     if (hasNormalMap) {
-        normal = texture(material.normalMap, TexCoord).rgb;
+        normal = texture(material.normalMap, tiledTexCoord).rgb;
         normal = normalize(normal * 2.0 - 1.0);
         normal = normalize(TBN * normal);
     }
@@ -65,14 +67,14 @@ void main( void )
     for(int i=0;i<lightCount;++i)
     {
         if(LightArray[i].type==0)
-            outColor += DoDirectionalLight(i, normal, viewDir);
+            outColor += DoDirectionalLight(i, normal, viewDir, tiledTexCoord);
         else if(LightArray[i].type==1)
-            outColor += DoPointLight(i, normal, viewDir);
+            outColor += DoPointLight(i, normal, viewDir, tiledTexCoord);
         //else if(LightArray[i].type==2)
         //    outColor += DoSpotlight(i, normal, viewDir);
     }
 
-    vec3 ambient = vec3(texture(material.diffuseMap, TexCoord)) * material.ambient * color;
+    vec3 ambient = vec3(texture(material.diffuseMap, tiledTexCoord)) * material.ambient * color;
     fragment_color = vec4(ambient + outColor,1.0f);
 }
 
@@ -112,13 +114,13 @@ float ShadowCalculation(vec4 fragPos, vec3 norm, vec3 lightDir)
     return 1.0 - shadow;
 }
 
-vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir)
+vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir, vec2 tiledTexCoord)
 {
     vec3 lightDir = normalize(-LightArray[lightIndex].direction);
 
     // Diffuse shading
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, TexCoord)) * diff;
+    vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, tiledTexCoord)) * diff;
 
     // Specular shading
     float spec = 0.0f;
@@ -126,7 +128,7 @@ vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir)
     if (hasSpecMap) {
         vec3 halfwayDir = normalize(lightDir + viewDir);
         spec = pow(max(dot(norm, halfwayDir), 0.0), material.shininess);
-        specular = LightArray[lightIndex].color * texture(material.specularMap, TexCoord).r * spec * material.smoothness;
+        specular = LightArray[lightIndex].color * texture(material.specularMap, tiledTexCoord).r * spec * material.smoothness;
     }
 
     float shadow = ShadowCalculation(FragPosLightSpace, norm, lightDir);
@@ -135,12 +137,12 @@ vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir)
     return (diffuse + specular) * shadow;
 }
 
-vec3 DoPointLight(int lightIndex, vec3 norm, vec3 viewDir)
+vec3 DoPointLight(int lightIndex, vec3 norm, vec3 viewDir, vec2 tiledTexCoord)
 {
     vec3 lightDir = normalize(LightArray[lightIndex].position - FragPos);
     // Diffuse shading
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, TexCoord)) * diff;
+    vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, tiledTexCoord)) * diff;
 
     // Specular shading
     float spec = 0.0f;
@@ -148,7 +150,7 @@ vec3 DoPointLight(int lightIndex, vec3 norm, vec3 viewDir)
     if (hasSpecMap) {
         vec3 halfwayDir = normalize(lightDir + viewDir);
         spec = pow(max(dot(norm, halfwayDir), 0.0), material.shininess);
-        specular = LightArray[lightIndex].color * texture(material.specularMap, TexCoord).r * spec * material.smoothness;
+        specular = LightArray[lightIndex].color * texture(material.specularMap, tiledTexCoord).r * spec * material.smoothness;
     }
 
     // Attenuation

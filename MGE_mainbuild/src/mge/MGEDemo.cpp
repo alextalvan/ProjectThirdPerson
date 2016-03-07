@@ -74,7 +74,7 @@ void MGEDemo::_initializeScene()
     Texture* brickTex = Texture::load(config::MGE_TEXTURE_PATH + "brickwall.jpg");
     Texture* brickNorm = Texture::load(config::MGE_TEXTURE_PATH + "brickwall_normal.jpg");
     Texture* brickSpec = Texture::load(config::MGE_TEXTURE_PATH + "brickwall_spec.png");
-    TextureLitMaterial* litMat = new TextureLitMaterial(brickTex, 1.0f, 132.0f, 0.1f, brickNorm, brickSpec);
+    TextureLitMaterial* litMat = new TextureLitMaterial(brickTex, 0.2f, 32.0f, 0.1f, brickNorm, brickSpec, 2);
 
     GameObject* plane = new GameObject("plane", glm::vec3(0,-1,0));
     plane->setMesh(planeMesh);
@@ -153,7 +153,7 @@ void MGEDemo::_initializeScene()
 
 
 
-    Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -3, 1), glm::vec3(1.0f,1.0f,1.0f),glm::vec3(0.1f),0,testCube);
+    Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(15,15,15), glm::vec3(-1, -3, -1), glm::vec3(1.0f,1.0f,1.0f),glm::vec3(0.1f),0,cam);
     _world->AddChild(light1);
     //light1->AddChild(testCube1);
     //testCube1->setLocalPosition(glm::vec3(0));
