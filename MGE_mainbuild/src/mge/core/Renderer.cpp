@@ -48,11 +48,14 @@ Renderer::Renderer(int width, int height)
 
     // Setup some OpenGL options
     glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
+    //glDepthFunc(GL_LESS);
 
     InitializeSkyBox();
     InitializeDepthMap();
 	InitializePostProc();
+
+	//std::cout<<"\n"<<sf::Texture::getMaximumSize();
+	//getchar();
 
     //_postProcessList.push_back(new PostProcess("PostProcessing/hdr_shader.vs","PostProcessing/hdr_shader.fs"));
     //_postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/identity.fs"));
@@ -91,8 +94,10 @@ void Renderer::render (World* pWorld)
     Time::update();
     float startTime = Time::now();
 
+    Camera* mainCam = pWorld->getMainCamera();
+
     //used for frustrum culling
-    pWorld->getMainCamera()->RecalculateFrustumCache();
+    mainCam->RecalculateFrustumCache();
 
     renderDirLightDepthMap(pWorld);
     //renderPointLightDepthCubeMap(pWorld);
@@ -103,7 +108,8 @@ void Renderer::render (World* pWorld)
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, postProc_fbo_texture0, 0);
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );//clear previous frame
         renderSkyBox(pWorld);
-        render (pWorld, pWorld, pWorld->getMainCamera(), true);//scene pass
+        render (pWorld, mainCam, true);//normal objects pass
+        renderTransparentObjects(mainCam);//transparent objects pass
 
 
         //post processing
@@ -114,7 +120,8 @@ void Renderer::render (World* pWorld)
        glBindFramebuffer(GL_FRAMEBUFFER,0);
        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
        renderSkyBox(pWorld);
-       render (pWorld, pWorld, pWorld->getMainCamera(), true);
+       render (pWorld, mainCam, true);
+       renderTransparentObjects(mainCam);//transparent objects pass
 
     }
 
@@ -157,7 +164,7 @@ void Renderer::renderDirLightDepthMap (World* pWorld)
             glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
             glClear(GL_DEPTH_BUFFER_BIT);
             glCullFace(GL_FRONT);
-            renderDepthMap (pWorld, pWorld,pWorld->getMainCamera(), light, true);
+            renderDepthMap (pWorld,pWorld->getMainCamera(), light, true);
             glCullFace(GL_BACK);
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
             glViewport(0, 0, _screenWidth, _screenHeight);
@@ -221,14 +228,14 @@ void Renderer::DoPostProcessing()
     //glEnable(GL_FRAMEBUFFER_SRGB);
 }
 
-void Renderer::renderDepthMap (World* pWorld, GameObject * pGameObject, Camera* pCamera, Light * light, bool pRecursive)
+void Renderer::renderDepthMap (GameObject * pGameObject, Camera* pCamera, Light * light, bool pRecursive)
 {
     //we don't render inactive gameobjects
     if(!pGameObject->IsActive())
         return;
 
     if (pGameObject->getMesh() && pGameObject->castShadows && pCamera->FrustumCheck(pGameObject)) {
-        shadowMat->render(pWorld, pGameObject, light);
+        shadowMat->render(pGameObject, light);
     }
 
     if (!pRecursive) return;
@@ -237,15 +244,15 @@ void Renderer::renderDepthMap (World* pWorld, GameObject * pGameObject, Camera* 
     DualLinkNode2<ChildList>* cn2 = pGameObject->GetChildren().startNode;
     while(cn2!=NULL)
     {
-        renderDepthMap (pWorld, (GameObject*)cn2,pCamera, light, pRecursive);
+        renderDepthMap ((GameObject*)cn2,pCamera, light, pRecursive);
         cn2 = cn2->nextNode;
     }
     //for (int i = 0; i < childCount; i++) {
     //    renderDepthMap (pWorld, pGameObject->GetChildAt(i), light, type, pRecursive);
     //}
 }
-
-void Renderer::render (World* pWorld, GameObject * pGameObject, Camera * pCamera, bool pRecursive)
+//regular render cycle, transparent objects are ignored
+void Renderer::render (GameObject * pGameObject, Camera * pCamera, bool pRecursive)
 {
     //glEnable(GL_FRAMEBUFFER_SRGB);
     //we don't render inactive gameobjects
@@ -255,8 +262,9 @@ void Renderer::render (World* pWorld, GameObject * pGameObject, Camera * pCamera
     AbstractMaterial* material = pGameObject->getMaterial();
 
     //our material (shader + settings) determines how we actually look
-    if (pGameObject->getMesh() && material != NULL && pCamera->FrustumCheck(pGameObject)) {
-        material->render(pWorld, pGameObject, pCamera);
+    if (!pGameObject->isTransaprent && pGameObject->getMesh() && material != NULL && pCamera->FrustumCheck(pGameObject))
+    {
+        material->render(pGameObject, pCamera);
     }
 
     if (!pRecursive) return;
@@ -267,13 +275,41 @@ void Renderer::render (World* pWorld, GameObject * pGameObject, Camera * pCamera
     DualLinkNode2<ChildList>* cn2 = pGameObject->GetChildren().startNode;
     while(cn2!=NULL)
     {
-        render (pWorld, (GameObject*)cn2, pCamera, pRecursive);
+        render ((GameObject*)cn2, pCamera, pRecursive);
         cn2 = cn2->nextNode;
     }
     //for (int i = 0; i < childCount; i++) {
     //    render (pWorld, pGameObject->GetChildAt(i), pCamera, pRecursive);
     //}
    // glDisable(GL_FRAMEBUFFER_SRGB);
+}
+
+void Renderer::renderTransparentObjects (Camera * pCamera)
+{
+    glDepthMask(GL_FALSE);//disable depth writing
+
+    DualLinkNode<TransparencyList>* cn = transparentList.startNode;
+
+    while(cn!=NULL)
+    {
+        GameObject* pGameObject = (GameObject*)cn;
+        //glEnable(GL_FRAMEBUFFER_SRGB);
+        //we don't render inactive gameobjects
+        if(!pGameObject->IsActive())
+            return;
+
+        AbstractMaterial* material = pGameObject->getMaterial();
+
+        if (pGameObject->getMesh() && material != NULL && pCamera->FrustumCheck(pGameObject))
+        {
+            material->render(pGameObject, pCamera);
+        }
+
+        cn = cn->nextNode;
+
+    }
+
+    glDepthMask(GL_TRUE);
 }
 
 void Renderer::InitializeSkyBox()

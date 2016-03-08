@@ -34,11 +34,10 @@ void ParticleMaterial::setDiffuseTexture (Texture* pDiffuseTexture) {
     _diffuseTexture = pDiffuseTexture;
 }
 
-void ParticleMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pCamera) {
+void ParticleMaterial::render(GameObject* pGameObject, Camera* pCamera) {
     if (!_diffuseTexture) return;
     using namespace glm;
     //return;
-    glDepthMask(GL_FALSE);
     _shader->use();
 
     //pass in one ofs
@@ -93,5 +92,5 @@ void ParticleMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pC
     quad->disableInOpenGL(_vertLoc,_normalLoc,_uvLoc);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, 0);
-    glDepthMask(GL_TRUE);
+
 }

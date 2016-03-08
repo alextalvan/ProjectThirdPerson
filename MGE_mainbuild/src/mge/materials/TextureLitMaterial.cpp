@@ -111,7 +111,7 @@ void TextureLitMaterial::setSpecularMapTexture (Texture* pSpecularMapTexture) {
     specularMap = true;
 }
 
-void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pCamera) {
+void TextureLitMaterial::render(GameObject* pGameObject, Camera* pCamera) {
     if (!_diffuseTexture) return;
 
     _shader->use();
@@ -177,8 +177,8 @@ void TextureLitMaterial::render(World* pWorld, GameObject* pGameObject, Camera* 
 
             glm::mat4 lightProjection, lightView;
             glm::mat4 lightSpaceMatrix;
-            GLfloat near_plane = 1.0f, far_plane = 100.0f;
-            float orthoSize = 250.0f;
+            GLfloat near_plane = 1.0f, far_plane = 200.0f;
+            float orthoSize = 1000.0f;
             lightProjection = glm::ortho(-orthoSize, orthoSize, -orthoSize, orthoSize, near_plane, far_plane);
             lightView = light->getWorldTransform();
 

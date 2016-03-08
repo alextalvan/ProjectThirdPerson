@@ -128,7 +128,7 @@ vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir, vec2 tiledTexCo
     if (hasSpecMap) {
         vec3 halfwayDir = normalize(lightDir + viewDir);
         spec = pow(max(dot(norm, halfwayDir), 0.0), material.shininess);
-        specular = LightArray[lightIndex].color * texture(material.specularMap, tiledTexCoord).r * spec * material.smoothness;
+        specular = LightArray[lightIndex].color * texture(material.specularMap, TexCoord).r * spec * material.smoothness;
     }
 
     float shadow = ShadowCalculation(FragPosLightSpace, norm, lightDir);

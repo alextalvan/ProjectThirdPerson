@@ -16,7 +16,7 @@ namespace LevelEditor
 
     void ParseCamera(ifstream& f, GameObject* parent);
 
-    void ParseDirLight(ifstream& f, GameObject* parent);
+    void ParseParticleSystem(ifstream& f, GameObject* parent);
 
     void ProcessModelMatrix(ifstream& f, GameObject* parent, GameObject* child);
 

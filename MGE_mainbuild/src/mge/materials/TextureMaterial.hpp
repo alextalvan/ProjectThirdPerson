@@ -13,7 +13,7 @@ class TextureMaterial : public AbstractMaterial
     public:
         TextureMaterial (Texture* pDiffuseTexture);
         virtual ~TextureMaterial ();
-        virtual void render(World* pWorld, GameObject* pGameObject, Camera* pCamera);
+        virtual void render(GameObject* pGameObject, Camera* pCamera);
 
         void setDiffuseTexture (Texture* pDiffuseTexture);
 

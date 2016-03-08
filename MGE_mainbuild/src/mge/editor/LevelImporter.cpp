@@ -13,6 +13,8 @@
 #include <mge/behaviours/CharacterController.hpp>
 #include <mge/lua/LuaScript.hpp>
 #include <mge/gui/GUI.hpp>
+#include <mge/particles/ParticleSystem.hpp>
+#include <mge/collision/TerrainCollider.hpp>
 #include <vector>
 
 
@@ -78,9 +80,9 @@ namespace LevelEditor
             return true;
         }
 
-        if(s == "DIRECTIONAL_LIGHT:")
+        if(s == "PARTICLE_SYSTEM:")
         {
-            ParseDirLight(f,parent);
+            ParseParticleSystem(f,parent);
             return true;
         }
 
@@ -185,18 +187,20 @@ namespace LevelEditor
                 if(s!="missing")
                 specularMap = Texture::load(config::MGE_TEXTURE_PATH + s);
 
-                float smooth,shiny,ambient;
+                float smooth,shiny,ambient,tiling;
                 f>>s;
                 f>>s; smooth = std::strtof(s.c_str(),nullptr);
                 f>>s;
                 f>>s; shiny = std::strtof(s.c_str(),nullptr);
                 f>>s;
                 f>>s; ambient = std::strtof(s.c_str(),nullptr);
+                f>>s;
+                f>>s; tiling = std::strtof(s.c_str(),nullptr);
 
                 //std::cout<<"\n"<<smooth<<" "<<shiny<<" "<<ambient;
 
 
-                TextureLitMaterial* mat2 = new TextureLitMaterial(diffuse,smooth,shiny,ambient,normalMap,specularMap);
+                TextureLitMaterial* mat2 = new TextureLitMaterial(diffuse,smooth,shiny,ambient,normalMap,specularMap,tiling);
                 owner->setMaterial(mat2);
                 f>>s;//end_texmat
             }
@@ -293,8 +297,8 @@ namespace LevelEditor
                 //hard coding this shit
                 //Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -3, 1), glm::vec3(1.0f,1.0f,1.0f),glm::vec3(0.1f),0,owner);
 
-                glm::vec3 lightDir = glm::vec3(1, -3, 1);
-                glm::vec3 lightPos = glm::normalize(lightDir) * -15.0f;
+                glm::vec3 lightDir = glm::vec3(1, -5, 1);
+                glm::vec3 lightPos = glm::normalize(lightDir) * -100.0f + glm::vec3(125,0,125);
                 Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, lightPos, lightDir , glm::vec3(1.0f,1.0f,1.0f),glm::vec3(0.1f),0,owner);
                 _storedWorld->AddChild(light1);
                 f>>s;//end_character
@@ -340,6 +344,26 @@ namespace LevelEditor
                 owner->AttachComponent(col);
                 f>>s;//end_sphere
             }
+
+            if(s=="TERRAIN_COLLIDER:")
+            {
+                std::string heightMap;
+                f>>s;//heightTex
+                f>>heightMap;//the filename
+
+                //Texture* tex = Texture::load(config::MGE_TEXTURE_PATH + s);
+
+                float x,z,h;
+                f>>s;f>>s; x = std::strtof(s.c_str(),nullptr);
+                f>>s;f>>s; z = std::strtof(s.c_str(),nullptr);
+                f>>s;f>>s; h = std::strtof(s.c_str(),nullptr);
+
+                TerrainCollider* col = new TerrainCollider(heightMap,x,z,h);
+                owner->AttachComponent(col);
+
+                f>>s;//end_terrain
+            }
+
             f>>s;//new component or end_components
         }
     }
@@ -360,9 +384,64 @@ namespace LevelEditor
         }
     }
 
+    void ParseParticleSystem(ifstream& f, GameObject* parent)
+    {
+        string s;
+
+        f>>s;//"diffuseTex
+        f>>s;//the filename
+
+        Texture* tex = Texture::load(config::MGE_TEXTURE_PATH + s);
+
+        ParticleSystem* pSys = new ParticleSystem(tex);
+
+        ProcessModelMatrix(f,parent,pSys);
+
+        glm::vec3 spawnRange1, spawnRange2, speedMin, speedMax;
+        glm::vec2 lifeRange, delayRange, scaleRange,releaseCount;
 
 
-    void ParseCamera(ifstream& f, GameObject* parent)
+        f>>s;//"spawn range 1
+        f>>s; spawnRange1.x = std::strtof(s.c_str(),nullptr); f>>s; spawnRange1.y = std::strtof(s.c_str(),nullptr); f>>s; spawnRange1.z = std::strtof(s.c_str(),nullptr);
+
+        f>>s;//"spawn range 2
+        f>>s; spawnRange2.x = std::strtof(s.c_str(),nullptr); f>>s; spawnRange2.y = std::strtof(s.c_str(),nullptr); f>>s; spawnRange2.z = std::strtof(s.c_str(),nullptr);
+
+        f>>s;//"speed min
+        f>>s; speedMin.x = std::strtof(s.c_str(),nullptr); f>>s; speedMin.y = std::strtof(s.c_str(),nullptr); f>>s; speedMin.z = std::strtof(s.c_str(),nullptr);
+
+        f>>s;//"speed max
+        f>>s; speedMax.x = std::strtof(s.c_str(),nullptr); f>>s; speedMax.y = std::strtof(s.c_str(),nullptr); f>>s; speedMax.z = std::strtof(s.c_str(),nullptr);
+
+        f>>s;//"liferange
+        f>>s; lifeRange.x = std::strtof(s.c_str(),nullptr); f>>s; lifeRange.y = std::strtof(s.c_str(),nullptr);
+
+        f>>s;//"delayRange
+        f>>s; delayRange.x = std::strtof(s.c_str(),nullptr); f>>s; delayRange.y = std::strtof(s.c_str(),nullptr);
+
+        f>>s;//"releaseCount
+        f>>s; releaseCount.x = std::strtof(s.c_str(),nullptr); f>>s; releaseCount.y = std::strtof(s.c_str(),nullptr);
+
+        f>>s;//"scaleRange
+        f>>s; scaleRange.x = std::strtof(s.c_str(),nullptr); f>>s; scaleRange.y = std::strtof(s.c_str(),nullptr);
+
+
+
+        pSys->startOffset1 = spawnRange1;
+        pSys->startOffset2 = spawnRange2;
+        pSys->speedMin = speedMin;
+        pSys->speedMax = speedMax;
+        pSys->lifeTimeRange = lifeRange;
+        pSys->releaseDelay = delayRange;
+        pSys->releaseCount = releaseCount;
+        pSys->scaleRange = scaleRange;
+
+        ParseComponents(f,pSys);
+        ParseChildren(f,pSys);
+        f>>s;//END_PSYS
+    }
+
+     void ParseCamera(ifstream& f, GameObject* parent)
     {
         string s;
         f>>s;//"name"
@@ -386,40 +465,6 @@ namespace LevelEditor
     }
 
 
-
-    void ParseDirLight(ifstream& f, GameObject* parent)
-    {
-         string s;
-        f>>s;//"name"
-        f>>s;//and the actual name
-
-        Light* obj = new Light(MGE_LIGHT_DIRECTIONAL);
-        //obj->type = MGE_LIGHT_DIRECTIONAL;
-        //parent->AddChild(obj);
-
-
-        ProcessModelMatrix(f,parent,obj);
-
-        //color
-        f>>s;//"color"
-        float r,g,b;
-        f>>s; r = std::strtof(s.c_str(),nullptr);
-        f>>s; g = std::strtof(s.c_str(),nullptr);
-        f>>s; b = std::strtof(s.c_str(),nullptr);
-
-        obj->setColor(glm::vec3(r,g,b));
-
-        f>>s;//"direction"
-        f>>s; r = std::strtof(s.c_str(),nullptr);
-        f>>s; g = std::strtof(s.c_str(),nullptr);
-        f>>s; b = std::strtof(s.c_str(),nullptr);
-        obj->setDirection(glm::vec3(r,g,b));
-
-
-        ParseComponents(f,obj);
-        ParseChildren(f,obj);
-        f>>s;//END_LIGHT
-    }
 
     void ProcessModelMatrix(ifstream& f, GameObject* parent, GameObject* child)
     {

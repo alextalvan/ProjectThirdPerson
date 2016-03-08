@@ -49,7 +49,7 @@ public:
     //int minParticlesPerRelease = 1, maxParticlesPerRelease = 1;
     glm::vec2 releaseCount;
 
-    glm::vec2 scaleRange1, scaleRange2;
+    glm::vec2 scaleRange;
 
 
 protected:

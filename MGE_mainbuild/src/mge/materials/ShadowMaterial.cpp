@@ -33,14 +33,14 @@ void ShadowMaterial::_lazyInitializeShader() {
     }
 }
 
-void ShadowMaterial::render(World* pWorld, GameObject* pGameObject, Light* light) {
+void ShadowMaterial::render(GameObject* pGameObject, Light* light) {
     _shader->use();
 
     glm::mat4 lightProjection, lightView;
     glm::mat4 lightSpaceMatrix;
-    GLfloat near_plane = 1.0f, far_plane = 100.0f;
+    GLfloat near_plane = 1.0f, far_plane = 200.0f;
 
-    float orthoSize = 250.0f;
+    float orthoSize = 1000.0f;
     lightProjection = glm::ortho(-orthoSize, orthoSize, -orthoSize, orthoSize, near_plane, far_plane);
     lightView = light->getWorldTransform();
     lightSpaceMatrix = lightProjection * lightView;

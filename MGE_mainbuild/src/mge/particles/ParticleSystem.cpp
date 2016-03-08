@@ -25,8 +25,10 @@ ParticleSystem::ParticleSystem(Texture* particleTex)
     setMaterial(new ParticleMaterial(particleTex));
     _releaseTimer.SetDuration(0.0f);
     _releaseTimer.Reset();
-    scaleRange1 = scaleRange2 = glm::vec2(1);
+    scaleRange = glm::vec2(1);
     castShadows = false;
+
+    SetTransparent(true);
 }
 
 ParticleSystem::~ParticleSystem()
@@ -66,8 +68,8 @@ void ParticleSystem::Release()
         randomOffset.y = Utils::Random::GetFloatValue(startOffset1.y,startOffset2.y);
         randomOffset.z = Utils::Random::GetFloatValue(startOffset1.z,startOffset2.z);
 
-        _buffer[i].scale.x = Utils::Random::GetFloatValue(scaleRange1.x,scaleRange2.x);
-        _buffer[i].scale.y = Utils::Random::GetFloatValue(scaleRange1.y,scaleRange2.y);
+        _buffer[i].scale = glm::vec2(Utils::Random::GetFloatValue(scaleRange.x,scaleRange.x));
+
 
         _buffer[i].position = _cachedWorldPos + randomOffset;
         _buffer[i].lifeTime = Utils::Random::GetFloatValue(lifeTimeRange.x,lifeTimeRange.y);

@@ -64,6 +64,17 @@ void MGEDemo::initialize() {
 void MGEDemo::_initializeScene()
 {
     return;
+    Mesh* sphereMesh = Mesh::load(config::MGE_MODEL_PATH + "sphere_smooth.obj");
+    Texture* brickNorm = Texture::load(config::MGE_TEXTURE_PATH + "brickwall.jpg");
+
+    GameObject* obj = new GameObject("test",glm::vec3(-80,5.65,-57));
+    obj->setMesh(sphereMesh);
+    obj->setMaterial(new TextureMaterial(brickNorm));
+    obj->AttachComponent(new SphereCollider());
+    obj->AttachComponent(new KeysBehaviour());
+
+
+    return;
     Camera* cam = new Camera("cam", glm::vec3(5,5,5));
     _world->setMainCamera(cam);
     _world->AddChild(cam);
@@ -72,7 +83,7 @@ void MGEDemo::_initializeScene()
     Mesh* planeMesh = Mesh::load(config::MGE_MODEL_PATH + "plane20x20_2tris_aligned_uvs.obj");
     Mesh* cubeMesh = Mesh::load(config::MGE_MODEL_PATH + "cube_flat.obj");
     Texture* brickTex = Texture::load(config::MGE_TEXTURE_PATH + "brickwall.jpg");
-    Texture* brickNorm = Texture::load(config::MGE_TEXTURE_PATH + "brickwall_normal.jpg");
+    //Texture* brickNorm = Texture::load(config::MGE_TEXTURE_PATH + "brickwall_normal.jpg");
     Texture* brickSpec = Texture::load(config::MGE_TEXTURE_PATH + "brickwall_spec.png");
     TextureLitMaterial* litMat = new TextureLitMaterial(brickTex, 0.2f, 32.0f, 0.1f, brickNorm, brickSpec, 2);
 

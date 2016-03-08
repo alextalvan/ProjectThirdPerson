@@ -71,7 +71,7 @@ void CollisionManager::DoCollisions()
     QuadTreeNode::_cacheIndex = 0;
 
     _quadTreeRoot = QuadTreeNode::GrabNewNode();
-    _quadTreeRoot->Reset(0,NULL,2000,-2000,2000,-2000);
+    _quadTreeRoot->Reset(0,NULL,10000,-10000,10000,-10000);
     //_quadTreeRoot = new QuadTreeNode(0,NULL,800,-800,800,-800);
 
     currentNodei = CollisionManager::_colliders.startNode;

@@ -32,7 +32,7 @@ void TextureMaterial::setDiffuseTexture (Texture* pDiffuseTexture) {
     _diffuseTexture = pDiffuseTexture;
 }
 
-void TextureMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pCamera) {
+void TextureMaterial::render(GameObject* pGameObject, Camera* pCamera) {
     if (!_diffuseTexture) return;
 
     _shader->use();

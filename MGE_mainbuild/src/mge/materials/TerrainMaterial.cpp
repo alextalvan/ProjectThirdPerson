@@ -25,7 +25,7 @@ void TerrainMaterial::_lazyInitializeShader() {
     }
 }
 
-void TerrainMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pCamera) {
+void TerrainMaterial::render(GameObject* pGameObject, Camera* pCamera) {
     if (!(_heightMap&&_splatMap&&_diffuse0&&_diffuse1&&_diffuse2&&_diffuse3)) return;
 
     _shader->use();

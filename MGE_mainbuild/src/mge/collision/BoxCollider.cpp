@@ -17,7 +17,6 @@ BoxCollider::~BoxCollider()
 
 void BoxCollider::RefreshBoundingSphere()
 {
-
     if(_owner==NULL)
         return;
 
@@ -187,8 +186,9 @@ bool BoxCollider::InternalHitTest(SphereCollider* other)
     myVerts[6] = glm::vec3(myMat * glm::vec4(-xSize*0.5f,-ySize*0.5f,zSize * 0.5f, 1));
     myVerts[7] = glm::vec3(myMat * glm::vec4(-xSize*0.5f,-ySize*0.5f,-zSize * 0.5f, 1));
 
-    glm::vec3 sphereCenter = other->getOwner()->getWorldPosition();
-    float sphereRadius = other->radius * glm::length((other->getOwner()->getTransform() * glm::vec4(1,0,0,0)));
+    glm::vec3 sphereCenter = other->GetBoundingSphere().position;
+    //float sphereRadius = other->radius * glm::length((other->getOwner()->getTransform() * glm::vec4(1,0,0,0)));
+    float sphereRadius = other->GetBoundingSphere().radius;
 
     //from sphere center to box center
     glm::vec3 workNormal = glm::normalize(_owner->getWorldPosition() - sphereCenter);
@@ -332,6 +332,11 @@ bool BoxCollider::HitTest(Collider* other)
 bool BoxCollider::RayTest(const Ray& ray, float& distance)
 {
     return false;//unimplemented
+}
+
+bool BoxCollider::HitTest(TerrainCollider* other)
+{
+    return false;
 }
 
 

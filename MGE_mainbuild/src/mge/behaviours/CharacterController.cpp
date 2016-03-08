@@ -84,6 +84,8 @@ void CharacterController::Movement()
     myMat[3] += glm::vec4(0,-_gravityForce,0,0);
 	_owner->setWorldTransform(myMat);
 	//_owner->translate(glm::vec3(0,2,0));
+
+	//std::cout<<_owner->getWorldPosition()<<"\n";
 }
 
 void CharacterController::setOwner(GameObject* owner)

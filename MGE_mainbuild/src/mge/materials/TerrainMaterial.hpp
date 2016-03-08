@@ -13,7 +13,7 @@ class TerrainMaterial : public AbstractMaterial
     public:
         TerrainMaterial (Texture* height,Texture* splat,Texture* diff0,Texture* diff1,Texture* diff2,Texture* diff3);
         virtual ~TerrainMaterial ();
-        virtual void render(World* pWorld, GameObject* pGameObject, Camera* pCamera);
+        virtual void render(GameObject* pGameObject, Camera* pCamera);
 
     protected:
     private:

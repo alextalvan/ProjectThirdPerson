@@ -10,6 +10,7 @@ using namespace Utils;
 class BoxCollider;
 class SphereCollider;
 class CollisionManager;
+class TerrainCollider;
 class QuadTreeNode;
 
 //absolute minimum translation vector - is calculated and saved after a collision test is invoked,
@@ -42,6 +43,7 @@ public:
 
     virtual bool HitTest(BoxCollider* other) = 0;
     virtual bool HitTest(SphereCollider* other) = 0;
+    virtual bool HitTest(TerrainCollider* other) = 0;
     virtual bool HitTest(Collider* other) = 0;
 
     //Ray passed by reference for performance reasons, so should be read only

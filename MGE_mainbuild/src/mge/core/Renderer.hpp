@@ -39,8 +39,8 @@ class Renderer
         void render (World* pWorld);
 
         //render specific game object within the world (using world's light settings etc)
-        void render (World* pWorld, GameObject* pGameObject, Camera* pCamera, bool pRecursive);
-        void renderDepthMap (World* pWorld, GameObject * pGameObject, Camera* pCamera, Light * light, bool pRecursive);
+        void render (GameObject* pGameObject, Camera* pCamera, bool pRecursive);
+        void renderDepthMap (GameObject * pGameObject, Camera* pCamera, Light * light, bool pRecursive);
         //utility call
         void setClearColor (int pR, int pG, int pB);
 
@@ -53,6 +53,7 @@ class Renderer
 
         //transparency
         static DualLinkList<TransparencyList> transparentList;
+        void renderTransparentObjects (Camera * pCamera);
 
         //test
         static ShadowCamera* GetShadowCamera();

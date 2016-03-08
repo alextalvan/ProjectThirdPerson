@@ -14,7 +14,7 @@ class TextureLitMaterial : public AbstractMaterial
     public:
         TextureLitMaterial (Texture* pDiffuseTexture, float pSmoothness = 0.5f, float pShininess = 32.0f, float pAmbient = 0.1f, Texture * pNormalMapTexture = nullptr, Texture* pSpecularMapTexture = nullptr, float pTiling = 1.0f);
         virtual ~TextureLitMaterial ();
-        virtual void render(World* pWorld, GameObject* pGameObject, Camera* pCamera);
+        virtual void render(GameObject* pGameObject, Camera* pCamera);
         void setDiffuseTexture (Texture* pDiffuseTexture);
         void setNormalMapTexture (Texture* pNormalMapTexture);
         void setSpecularMapTexture (Texture* pSpecularMapTexture);

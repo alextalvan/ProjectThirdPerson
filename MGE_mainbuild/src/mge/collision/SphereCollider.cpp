@@ -1,5 +1,6 @@
 #include <mge/collision/SphereCollider.hpp>
 #include <mge/collision/BoxCollider.hpp>
+#include <mge/collision/TerrainCollider.hpp>
 #include<mge/core/GameObject.hpp>
 #include <glm.hpp>
 #include <iostream>
@@ -82,5 +83,10 @@ bool SphereCollider::RayTest(const Ray& ray, float& distance)
 SphereCollider::~SphereCollider()
 {
 
+}
+
+bool SphereCollider::HitTest(TerrainCollider* other)
+{
+    return other->InternalHitTest(this);
 }
 

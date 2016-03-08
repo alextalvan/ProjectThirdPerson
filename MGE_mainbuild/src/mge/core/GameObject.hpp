@@ -123,6 +123,7 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 
         bool castShadows = true;
         bool isTransaprent = false;
+        //bool alwaysVisible = false;
 
         void SetTransparent(bool val);
 

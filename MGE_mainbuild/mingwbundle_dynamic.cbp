@@ -111,6 +111,8 @@
 		<Unit filename="src/mge/collision/QuadTree.hpp" />
 		<Unit filename="src/mge/collision/SphereCollider.cpp" />
 		<Unit filename="src/mge/collision/SphereCollider.hpp" />
+		<Unit filename="src/mge/collision/TerrainCollider.cpp" />
+		<Unit filename="src/mge/collision/TerrainCollider.hpp" />
 		<Unit filename="src/mge/collision/WallCollider.cpp" />
 		<Unit filename="src/mge/collision/WallCollider.hpp" />
 		<Unit filename="src/mge/config.hpp" />
@@ -169,8 +171,6 @@
 		<Unit filename="src/mge/materials/PostProcessing/PostProcess.hpp" />
 		<Unit filename="src/mge/materials/ShadowMaterial.cpp" />
 		<Unit filename="src/mge/materials/ShadowMaterial.hpp" />
-		<Unit filename="src/mge/materials/SkyboxMaterial.cpp" />
-		<Unit filename="src/mge/materials/SkyboxMaterial.hpp" />
 		<Unit filename="src/mge/materials/TerrainMaterial.cpp" />
 		<Unit filename="src/mge/materials/TerrainMaterial.hpp" />
 		<Unit filename="src/mge/materials/TextureLitMaterial.cpp" />

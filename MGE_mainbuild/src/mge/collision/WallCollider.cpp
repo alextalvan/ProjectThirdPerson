@@ -7,8 +7,9 @@
 WallCollider::WallCollider()
 {
     _name = "Wall Collider";
-    OnCollision = [this](Collider* other, CollisionMTV& mtv) { CollisionCallback(other, mtv);};
     layer = CollisionManager::WALLS;
+    OnCollision = [this](Collider* other, CollisionMTV& mtv) { CollisionCallback(other, mtv);};
+
 }
 
 void WallCollider::CollisionCallback(Collider* other, CollisionMTV& mtv)

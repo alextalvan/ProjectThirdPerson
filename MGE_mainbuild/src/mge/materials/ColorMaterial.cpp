@@ -46,7 +46,7 @@ ColorMaterial::~ColorMaterial()
     //dtor
 }
 
-void ColorMaterial::render(World* pWorld, GameObject* pGameObject, Camera* pCamera) {
+void ColorMaterial::render(GameObject* pGameObject, Camera* pCamera) {
     _shader->use();
 
     //pass in a precalculate mvp matrix (see texture material for the opposite)

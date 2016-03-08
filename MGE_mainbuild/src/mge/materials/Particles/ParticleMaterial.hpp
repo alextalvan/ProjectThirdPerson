@@ -12,7 +12,7 @@ class ParticleMaterial : public AbstractMaterial
     public:
         ParticleMaterial (Texture* pDiffuseTexture);
         virtual ~ParticleMaterial ();
-        virtual void render(World* pWorld, GameObject* pGameObject, Camera* pCamera);
+        virtual void render(GameObject* pGameObject, Camera* pCamera);
 
         void setDiffuseTexture (Texture* pDiffuseTexture);
 
