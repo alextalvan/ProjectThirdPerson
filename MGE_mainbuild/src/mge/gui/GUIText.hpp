@@ -6,7 +6,7 @@ class GUIText : public GUI
 {
 	public:
 		GUIText(sf::Font& pFont, std::string pText = "Text", float pPosX = 0.0f, float pPosY = 0.0f,
-          float pRotation = 0.0f, int pTextSize = 10, sf::Color pColor = sf::Color::White );
+        float pRotation = 0.0f, int pTextSize = 10, sf::Color pColor = sf::Color::White);
 		void setTextFont (sf::Font& pFont);
 		void setTextPosition (float pPosX, float pPosY);
 		void setTextRotation(float pAngle);
@@ -18,6 +18,7 @@ class GUIText : public GUI
 	protected:
 	    virtual ~GUIText();
 	    void InnerDraw(sf::RenderTarget& target) override;
+		virtual void fade();
     private:
         sf::Text _text;
         sf::Color _textColor;

@@ -11,10 +11,15 @@ class GUI : public GameObject
 		void DrawTo(sf::RenderTarget& target);
 		void SetGUIActive(bool active);
         virtual void Refresh2DTransform();
+        void startFade(bool state, int speed);
     protected:
         virtual ~GUI();
         virtual void InnerDraw(sf::RenderTarget& target);
-
+		virtual void Update();
+		virtual void fade();
+        bool _fade = false;
+        bool _fadeState = false;
+        int _fadeSpeed = 1;
     private:
         bool _active = true;
 		//sf::RenderWindow * _window;

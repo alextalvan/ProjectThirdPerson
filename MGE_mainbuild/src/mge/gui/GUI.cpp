@@ -15,6 +15,17 @@ void GUI::SetGUIActive(bool active)
     SetActive(active);
 }
 
+void GUI::startFade(bool state, int speed)
+{
+    _fade = true;
+    _fadeState = state;
+    _fadeSpeed = speed;
+}
+
+void GUI::fade()
+{
+
+}
 
 void GUI::DrawTo(sf::RenderTarget& t)
 {
@@ -35,6 +46,11 @@ void GUI::DrawTo(sf::RenderTarget& t)
 
         g = g->nextNode;
     }
+}
+
+void GUI::Update()
+{
+    fade();
 }
 
 void GUI::InnerDraw(sf::RenderTarget& t)

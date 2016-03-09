@@ -17,6 +17,7 @@ class GUISprite : public GUI
         sf::Sprite _sprite;
 	    virtual ~GUISprite();
 	    void InnerDraw(sf::RenderTarget& target) override;
+		virtual void fade();
     private:
         void initializeSettings();
 };
