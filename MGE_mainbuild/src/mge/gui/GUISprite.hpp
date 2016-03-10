@@ -13,6 +13,7 @@ class GUISprite : public GUI
 		void setSpriteScale (float pScaleX, float ScaleY);
         void Refresh2DTransform() override;
 		void setOrigin(float x, float y);
+		void setOrigin();
 	protected:
         sf::Sprite _sprite;
 	    virtual ~GUISprite();

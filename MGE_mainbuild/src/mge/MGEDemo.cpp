@@ -73,7 +73,6 @@ void MGEDemo::_initializeScene()
     obj->AttachComponent(new SphereCollider());
     obj->AttachComponent(new KeysBehaviour());
 
-
     return;
     Camera* cam = new Camera("cam", glm::vec3(5,5,5));
     _world->setMainCamera(cam);

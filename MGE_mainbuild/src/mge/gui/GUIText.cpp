@@ -25,6 +25,12 @@ void GUIText::setOrigin(float x, float y)
     _text.setOrigin(textRect.left + x, textRect.top + y);
 }
 
+void GUIText::setOrigin()
+{
+    sf::FloatRect textRect = _text.getLocalBounds();
+    _text.setOrigin(textRect.left + textRect.width/2.0f, textRect.top  + textRect.height/2.0f);
+}
+
 void GUIText::setTextString(std::string pText) {
     _text.setString(pText);
 }

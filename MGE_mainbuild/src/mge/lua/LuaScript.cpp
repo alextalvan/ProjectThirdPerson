@@ -118,6 +118,8 @@ LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
     lua_register(L, "ToggleEmitter", particleToggle);
 	lua_register(L, "StartFade", startFade);//
 	lua_register(L, "GetScreenSize", getScreenSize);
+	lua_register(L, "CenterSpriteOrigin", centerSpriteOrigin);//
+	lua_register(L, "CenterTextOrigin", centerTextOrigin);//
 
 	//Set world
 	lua_pushlightuserdata(L, (LuaObject*)world);
@@ -595,6 +597,30 @@ int LuaScript::setTextOrigin(lua_State * lua)
 	float x = lua_tonumber(lua, -2);
 	float y = lua_tonumber(lua, -1);
 	guiText->setOrigin(x, y);
+
+	return 0;
+}
+
+int LuaScript::centerSpriteOrigin(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -1)) throw "Expect: game object";
+	#endif
+
+	GUISprite * guiSprite = (GUISprite*)(LuaObject*)lua_touserdata(lua, -1);
+	guiSprite->setOrigin();
+
+	return 0;
+}
+
+int LuaScript::centerTextOrigin(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -1)) throw "Expect: game object";
+	#endif
+
+	GUIText * guiText = (GUIText*)(LuaObject*)lua_touserdata(lua, -1);
+	guiText->setOrigin();
 
 	return 0;
 }
