@@ -28,7 +28,7 @@ void Light::setDirection(glm::vec3 pDir)
     //glm::vec3 up = glm::cross (forward, right);
 
     //setWorldTransform( glm::mat4 (glm::vec4(right,0), glm::vec4(up,0), glm::vec4(forward,0), glm::vec4(getWorldPosition(),1) ) );
-    setTransform(glm::lookAt(getWorldPosition(), getWorldPosition() + pDir, glm::vec3(0,1,0)));
+    //setTransform(glm::lookAt(getWorldPosition(), getWorldPosition() + pDir, glm::vec3(0,1,0)));
     _direction = glm::normalize(pDir);
     //setWorldRotation(glm::normalize(pDir));
 }
@@ -88,6 +88,6 @@ void Light::Update()
     if(_type == MGE_LIGHT_DIRECTIONAL)
     {
         glm::vec3 tPos = _target->getWorldPosition();
-        setLocalPosition(tPos + _storedOffset);
+        setWorldPosition(tPos + _storedOffset);
     }
 }

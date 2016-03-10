@@ -52,11 +52,15 @@ bool TerrainCollider::InternalHitTest(SphereCollider* other)
     vec3 relativePos = sphereCenter - terrainPos;
     float terrainHeight = SampleHeightAt(relativePos);
 
-    //std::cout<<sphereCenter.z - sphereRadius<<" "<<terrainHeight<<"\n";
+    //if(other->getOwner()->getName()=="Character")
+    //    std::cout<<sphereCenter.z - sphereRadius<<" "<<terrainHeight + terrainPos.z<<"\n";
 
     //std::cout<<sphereCenter<<"\n";
 
     float penetrationDepth = terrainHeight - (sphereCenter.y - sphereRadius);
+
+//    if(other->getOwner()->getName()=="Character")
+//        std::cout<<sphereCenter.z - sphereRadius<<" "<<penetrationDepth<<"\n";
 
     if(penetrationDepth > 0)
     {

@@ -23,6 +23,7 @@
 #include "mge/lua/LuaObject.hpp"
 #include "mge/sound/SoundManager.hpp"
 #include "mge/util/Timer.hpp"
+#include "mge/particles/ParticleSystem.hpp"
 
 //#define MGE_LUA_SAFETY 1  //comment this define out to remove the lua safety checks but heavily improve performance
 
@@ -113,6 +114,7 @@ LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
 	lua_register(L, "SetGUIActive", setGUIActive);
 	lua_register(L, "SetLocalScale", setLocalScale);
 	lua_register(L, "GetLocalScale", getLocalScale);
+    lua_register(L, "ToggleEmitter", particleToggle);
 
 	//Set world
 	lua_pushlightuserdata(L, (LuaObject*)world);
@@ -1490,6 +1492,20 @@ int LuaScript::checkTimer(lua_State * lua)
     lua_pushboolean(lua,t->isFinished());
 
 	return 1;
+}
+
+int LuaScript::particleToggle(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	#endif
+
+    //Timer* t = (Timer*)lua_touserdata(lua,-2);
+    ParticleSystem* p = (ParticleSystem*)(GameObject*)(LuaObject*)lua_touserdata(lua,-2);
+    bool val = lua_toboolean(lua,-1);
+
+    p->ToggleEmitter(val);
+
+	return 0;
 }
 
 LuaScript::~LuaScript()

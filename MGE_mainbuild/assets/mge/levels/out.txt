@@ -15,33 +15,49 @@ GAMEOBJECT:
 
    CHILDREN:
 
-   GAMEOBJECT:
-      name floor_terrain
+   CAMERA:
+      name Main_Camera
       transform: 
          1  0  0  0  
-         0  1  0  0  
+         0  1  0  4.4  
          0  0  1  0  
          0  0  0  1  
-      mesh Terrain.obj
+      isMainCamera 1
+
+      COMPONENTS:
+
+         LUA_SCRIPT:
+            scriptName camera.lua
+         END_LUA_SCRIPT
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_CAMERA
+
+   GAMEOBJECT:
+      name Character
+      transform: 
+         1  0  0  0  
+         0  1  0  3.4  
+         0  0  1  0  
+         0  0  0  1  
+      no_mesh
       cast_shadows 0
 
       COMPONENTS:
 
-         TERRAIN_COLLIDER:
-            heightTex heightmap.png
-            xSize 500
-            zSize 500
-            height 100
-         END_TERRAIN_COLLIDER
-         TEXTURE_ADVANCED_MATERIAL:
-            diffuseTex brickwall.jpg
-            normalTex missing
-            specularTex missing
-            smoothness 0.5
-            shininess 32
-            ambient 0.1
-            tiling 200
-         END_TEXTURE_ADVANCED_MATERIAL
+         CHARACTER_CONTROLLER:
+            move_speed 0.1
+            jump_force 1
+            jump_duration 0.3
+            gravity 0.2
+            sphere_radius 1
+         END_CHARACTER_CONTROLLER
 
       END_COMPONENTS
 
@@ -53,14 +69,61 @@ GAMEOBJECT:
    END_GAMEOBJECT
 
    GAMEOBJECT:
+      name Raptor
+      transform: 
+         1  0  0  -27.86  
+         0  1  0  44.38  
+         0  0  1  -12.2  
+         0  0  0  1  
+      no_mesh
+      cast_shadows 0
+
+      COMPONENTS:
+
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+      GAMEOBJECT:
+         name Cube
+         transform: 
+            -1.192093E-08  0  -0.09999999  30.44  
+            0  0.1  0  24.2  
+            0.09999999  0  -1.192093E-08  40.4  
+            0  0  0  1  
+         mesh raptor.obj
+         cast_shadows 1
+
+         COMPONENTS:
+
+            TEXTURE_MATERIAL:
+               diffuseTex Raptor.png
+            END_TEXTURE_MATERIAL
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+
+         END_CHILDREN
+
+      END_GAMEOBJECT
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
+
+   GAMEOBJECT:
       name cube_flat
       transform: 
-         1  0  0  -79.48947  
-         0  1  0  4.61  
-         0  0  1  -57.22151  
+         1  0  0  -7.2  
+         0  1  0  5  
+         0  0  1  51.3  
          0  0  0  1  
       mesh cube_flat.obj
-      cast_shadows 0
+      cast_shadows 1
 
       COMPONENTS:
 
@@ -78,96 +141,36 @@ GAMEOBJECT:
    END_GAMEOBJECT
 
    GAMEOBJECT:
-      name Character
+      name floor_terrain
       transform: 
-         1  0  0  88.5  
-         0  1  0  7.47  
-         0  0  1  227.5  
+         1  0  0  0  
+         0  1  0  0  
+         0  0  1  0  
          0  0  0  1  
-      no_mesh
+      mesh TerrainTest.obj
       cast_shadows 0
 
       COMPONENTS:
 
-         CHARACTER_CONTROLLER:
-            move_speed 0.2
-            jump_force 1
-            jump_duration 0.3
-            gravity 0.2
-            sphere_radius 1
-         END_CHARACTER_CONTROLLER
+         TERRAIN_COLLIDER:
+            heightTex heightTest.png
+            xSize 1600
+            zSize 4000
+            height 400
+         END_TERRAIN_COLLIDER
+         TEXTURE_ADVANCED_MATERIAL:
+            diffuseTex brickwall.jpg
+            normalTex missing
+            specularTex missing
+            smoothness 0.5
+            shininess 32
+            ambient 0.1
+            tiling 200
+         END_TEXTURE_ADVANCED_MATERIAL
 
       END_COMPONENTS
 
       CHILDREN:
-
-      CAMERA:
-         name Main_Cameralol
-         transform: 
-            1  0  0  88.5  
-            0  1  0  8.469999  
-            0  0  1  227.5  
-            0  0  0  1  
-         isMainCamera 1
-
-         COMPONENTS:
-
-
-         END_COMPONENTS
-
-         CHILDREN:
-
-
-         END_CHILDREN
-
-      END_CAMERA
-
-
-      END_CHILDREN
-
-   END_GAMEOBJECT
-
-   GAMEOBJECT:
-      name Raptor
-      transform: 
-         1  0  0  -27.86  
-         0  1  0  8.4  
-         0  0  1  -12.2  
-         0  0  0  1  
-      no_mesh
-      cast_shadows 0
-
-      COMPONENTS:
-
-
-      END_COMPONENTS
-
-      CHILDREN:
-
-      GAMEOBJECT:
-         name Cube
-         transform: 
-            -1.192093E-08  0  -0.09999999  -52.96  
-            0  0.1  0  1.9  
-            0.09999999  0  -1.192093E-08  -46.2  
-            0  0  0  1  
-         mesh raptor.obj
-         cast_shadows 0
-
-         COMPONENTS:
-
-            TEXTURE_MATERIAL:
-               diffuseTex Raptor.png
-            END_TEXTURE_MATERIAL
-
-         END_COMPONENTS
-
-         CHILDREN:
-
-
-         END_CHILDREN
-
-      END_GAMEOBJECT
 
 
       END_CHILDREN

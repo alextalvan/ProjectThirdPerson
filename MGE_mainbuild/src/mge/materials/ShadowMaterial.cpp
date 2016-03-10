@@ -40,9 +40,10 @@ void ShadowMaterial::render(GameObject* pGameObject, Light* light) {
     glm::mat4 lightSpaceMatrix;
     GLfloat near_plane = 1.0f, far_plane = 200.0f;
 
-    float orthoSize = 1000.0f;
+    float orthoSize = 400.0f;
     lightProjection = glm::ortho(-orthoSize, orthoSize, -orthoSize, orthoSize, near_plane, far_plane);
-    lightView = light->getWorldTransform();
+    //lightView = light->getWorldTransform();
+    lightView = glm::lookAt(light->getWorldPosition(),light->getWorldPosition() + light->getDirection(),glm::vec3(0,1,0));
     lightSpaceMatrix = lightProjection * lightView;
 
 //    ShadowCamera* shadowCam = Renderer::GetShadowCamera();

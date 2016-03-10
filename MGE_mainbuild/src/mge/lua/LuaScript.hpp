@@ -105,6 +105,7 @@ private:
 	static int boxCollider(lua_State * lua);
 	static int wallCollider(lua_State * lua);
 	static int luaScript(lua_State * lua);
+	static int particleToggle(lua_State * lua);
 
 	//lua
 	static int luaInvokeFunction(lua_State * lua);

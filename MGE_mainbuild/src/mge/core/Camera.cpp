@@ -11,7 +11,7 @@ using namespace std;
 Camera::Camera( std::string pName, glm::vec3 pPosition, glm::mat4 pProjectionMatrix )
 :	GameObject(pName, pPosition)//, _projection(pProjectionMatrix)
 {
-    _projection = glm::perspective (glm::radians(60.0f), -16.0f/9.0f, 0.1f, 1000.0f  );
+    _projection = glm::perspective (glm::radians(60.0f), -16.0f/9.0f, 0.1f, 1500.0f  );
     _view = glm::inverse(getWorldTransform());
 
     FirstPersonLook* vis = new FirstPersonLook();
@@ -20,7 +20,7 @@ Camera::Camera( std::string pName, glm::vec3 pPosition, glm::mat4 pProjectionMat
     fov = 60.0f;
     aspectRatio = 16.0f/9.0f;
     near = 0.1f;
-    far = 1000.0f;
+    far = 1500.0f;
 }
 
 Camera::~Camera()
@@ -155,4 +155,13 @@ bool Camera::FrustumCheck(GameObject* obj)
     return true;
 
 }
+
+//void Camera::Update()
+//{
+//    if(_parent!=NULL)
+//    {
+//        glm::vec3 newPos = glm::lerp(getWorldPosition(),_parent->getWorldPosition(),followLerpFactor);
+//        setWorldPosition(newPos);
+//    }
+//}
 

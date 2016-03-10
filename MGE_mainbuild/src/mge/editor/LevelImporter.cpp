@@ -298,7 +298,8 @@ namespace LevelEditor
                 //Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -3, 1), glm::vec3(1.0f,1.0f,1.0f),glm::vec3(0.1f),0,owner);
 
                 glm::vec3 lightDir = glm::vec3(1, -5, 1);
-                glm::vec3 lightPos = glm::normalize(lightDir) * -100.0f + glm::vec3(125,0,125);
+                float n = 25.0f;
+                glm::vec3 lightPos = glm::normalize(lightDir) * -n + glm::vec3(n*1.25f,0,n*1.25f);
                 Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, lightPos, lightDir , glm::vec3(1.0f,1.0f,1.0f),glm::vec3(0.1f),0,owner);
                 _storedWorld->AddChild(light1);
                 f>>s;//end_character
@@ -386,7 +387,10 @@ namespace LevelEditor
 
     void ParseParticleSystem(ifstream& f, GameObject* parent)
     {
-        string s;
+        string s,name;
+
+        f>>s;//"name"
+        f>>name;//and the actual name
 
         f>>s;//"diffuseTex
         f>>s;//the filename
@@ -394,6 +398,7 @@ namespace LevelEditor
         Texture* tex = Texture::load(config::MGE_TEXTURE_PATH + s);
 
         ParticleSystem* pSys = new ParticleSystem(tex);
+        pSys->setName(name);
 
         ProcessModelMatrix(f,parent,pSys);
 

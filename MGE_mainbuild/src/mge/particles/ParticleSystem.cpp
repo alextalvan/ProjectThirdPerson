@@ -39,7 +39,7 @@ ParticleSystem::~ParticleSystem()
 void ParticleSystem::Update()
 {
     UpdateParticles();
-    if(_releaseTimer.isFinished())
+    if(_emitterEnabled && _releaseTimer.isFinished())
     {
         _releaseTimer.SetDuration(Utils::Random::GetFloatValue(releaseDelay.x,releaseDelay.y));
         _releaseTimer.Reset();
@@ -95,4 +95,16 @@ void ParticleSystem::UpdateParticles()
             _particles[i].position += _particles[i].speed;
         }
     }
+}
+
+void ParticleSystem::ToggleEmitter(bool val)
+{
+//    if(val)
+//    {
+//        _lastTime = Time::now();
+//        _releaseTimer.SetDuration(0.0f);
+//        _releaseTimer.Reset();
+//    }
+
+    _emitterEnabled = val;
 }

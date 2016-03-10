@@ -14435,11 +14435,11 @@
 	<SFML/Graphics/RenderWindow.hpp>
 	<SFML/Window/Event.hpp>
 
-1457181614 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.hpp
+1457533166 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.hpp
 	<string>
 	"mge/core/GameObject.hpp"
 
-1457361616 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
+1457515862 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.hpp
 	<vector>
 	<string>
 	<iostream>
@@ -15626,7 +15626,7 @@
 1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\activateable.cpp
 	"mge/core/Activateable.hpp"
 
-1457445751 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.cpp
+1457533157 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.cpp
 	<iostream>
 	<glm.hpp>
 	"mge/core/Camera.hpp"
@@ -15647,7 +15647,7 @@
 	"mge/core/FPS.hpp"
 	"mge/core/Time.hpp"
 
-1457358452 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
+1457516014 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\gameobject.cpp
 	<cassert>
 	<iostream>
 	<glm.hpp>
@@ -15665,11 +15665,11 @@
 	<glm.hpp>
 	<map>
 
-1457194404 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\light.cpp
+1457542431 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\light.cpp
 	<mge/core/Light.hpp>
 	<mge/util/Input.hpp>
 
-1457193111 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\light.hpp
+1457542114 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\light.hpp
 	<mge/core/GameObject.hpp>
 	<glm.hpp>
 	"mge/util/list/DualLinkList.hpp"
@@ -15686,7 +15686,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1457382878 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
+1457542662 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -15780,7 +15780,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1457440513 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
+1457559769 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
 	<glm.hpp>
 	"mge/materials/TextureLitMaterial.hpp"
 	"mge/core/Texture.hpp"
@@ -16004,7 +16004,7 @@
 	"mge/sound/SoundManager.hpp"
 	"mge/util/Timer.hpp"
 
-1456481250 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
+1457516696 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
 	"lua.h"
 	"lauxlib.h"
 	"lualib.h"
@@ -16013,7 +16013,7 @@
 	<mge/behaviours/Component.hpp>
 	<SFML/Graphics.hpp>
 
-1456483930 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
+1457517587 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
 	"mge/lua/LuaScript.hpp"
 	"mge/core/World.hpp"
 	"mge/core/GameObject.hpp"
@@ -16039,6 +16039,7 @@
 	"mge/lua/LuaObject.hpp"
 	"mge/sound/SoundManager.hpp"
 	"mge/util/Timer.hpp"
+	"mge/particles/ParticleSystem.hpp"
 
 1455012450 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\lua.h
 	<stdarg.h>
@@ -16096,7 +16097,7 @@
 	"mge/collision/SphereCollider.hpp"
 	"mge/util/Timer.hpp"
 
-1457443046 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
+1457542788 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
 	<mge/editor/LevelImporter.hpp>
 	<mge/config.hpp>
 	<glm.hpp>
@@ -16177,7 +16178,7 @@
 	<map>
 	"mge/config.hpp"
 
-1457366824 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\particles\particlesystem.cpp
+1457516564 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\particles\particlesystem.cpp
 	"mge/particles/ParticleSystem.hpp"
 	"mge/config.hpp"
 	"mge/util/Random.hpp"
@@ -16185,7 +16186,7 @@
 	"mge/materials/Particles/ParticleMaterial.hpp"
 	<iostream>
 
-1457366738 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\particles\particlesystem.hpp
+1457516636 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\particles\particlesystem.hpp
 	"mge/behaviours/Component.hpp"
 	"mge/core/Mesh.hpp"
 	"glm.hpp"
@@ -16378,7 +16379,7 @@
 	"mge/core/ShaderProgram.hpp"
 	"mge/shadow/ShadowCamera.hpp"
 
-1457440541 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\shadowmaterial.cpp
+1457559763 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\shadowmaterial.cpp
 	"mge/materials/ShadowMaterial.hpp"
 	<glm.hpp>
 	"mge/core/Mesh.hpp"
@@ -20867,7 +20868,7 @@
 1457343503 source:c:\github\projectthirdperson\mge_mainbuild\src\mge\shadow\shadowcamera.cpp
 	<mge/shadow/ShadowCamera.hpp>
 
-1457454999 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\terraincollider.cpp
+1457532077 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\collision\terraincollider.cpp
 	<mge/collision/TerrainCollider.hpp>
 	<iostream>
 	<mge/collision/SphereCollider.hpp>

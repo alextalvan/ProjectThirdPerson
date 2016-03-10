@@ -51,6 +51,7 @@ public:
 
     glm::vec2 scaleRange;
 
+    void ToggleEmitter(bool val);
 
 protected:
     virtual ~ParticleSystem();
@@ -60,15 +61,17 @@ protected:
 
 private:
     Particle _particles[MGE_MAX_PARTICLES_PER_SYSTEM];
-
     Particle _buffer[MGE_NEW_PARTICLE_BUFFER_SIZE];
     int _bufferCount = 0;
+
 
     Timer _releaseTimer;
 
     glm::vec3 _cachedWorldPos;
 
     float _lastTime;
+
+    bool _emitterEnabled = true;
 
     //static Mesh* _particleQuad;
 };

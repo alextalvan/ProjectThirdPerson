@@ -36,9 +36,14 @@ class Camera : public GameObject
         //for now public for ease of use
         float fov, aspectRatio, near, far;
 
+//        GameObject* followTarget = NULL;
+//        float followLerpFactor = 1.0f;
+
     protected:
         virtual void MakeTransformDirty() override;
         virtual void _recalculateLocalTransform() override;
+
+//        void Update() override;
 
 	private:
 		glm::mat4 _projection;

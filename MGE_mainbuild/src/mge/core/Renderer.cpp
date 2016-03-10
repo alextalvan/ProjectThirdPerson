@@ -234,7 +234,8 @@ void Renderer::renderDepthMap (GameObject * pGameObject, Camera* pCamera, Light 
     if(!pGameObject->IsActive())
         return;
 
-    if (pGameObject->getMesh() && pGameObject->castShadows && pCamera->FrustumCheck(pGameObject)) {
+    if (pGameObject->getMesh() && pGameObject->castShadows )//&& pCamera->FrustumCheck(pGameObject))
+    {
         shadowMat->render(pGameObject, light);
     }
 
@@ -295,8 +296,12 @@ void Renderer::renderTransparentObjects (Camera * pCamera)
         GameObject* pGameObject = (GameObject*)cn;
         //glEnable(GL_FRAMEBUFFER_SRGB);
         //we don't render inactive gameobjects
-        if(!pGameObject->IsActive())
-            return;
+        if(!pGameObject->IsActiveInWorld())
+        {
+            cn = cn->nextNode;
+            continue;
+        }
+
 
         AbstractMaterial* material = pGameObject->getMaterial();
 

@@ -84,6 +84,7 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
         Component* FindComponent(std::string name);
         DualLinkList<Component>& GetComponents();
 
+        bool IsActiveInWorld();
         //void setTransparent(bool val);
         //bool isTransparent();
 

@@ -493,4 +493,19 @@ void GameObject::SetTransparent(bool val)
         Renderer::transparentList.Add((DualLinkNode<TransparencyList>*)this);
 }
 
+bool GameObject::IsActiveInWorld()
+{
+    GameObject* obj = this;
+
+    while(obj!=NULL)
+    {
+        if(!(obj->IsActive()))
+            return false;
+
+        obj = obj->_parent;
+    }
+
+    return true;
+}
+
 
