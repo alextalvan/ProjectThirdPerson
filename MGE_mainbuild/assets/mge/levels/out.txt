@@ -7,6 +7,7 @@ GAMEOBJECT:
       0  0  0  1  
    no_mesh
    cast_shadows 0
+   transparent 0
 
    COMPONENTS:
 
@@ -14,6 +15,36 @@ GAMEOBJECT:
    END_COMPONENTS
 
    CHILDREN:
+
+   GAMEOBJECT:
+      name Character
+      transform: 
+         1  0  0  0  
+         0  1  0  33.13  
+         0  0  1  0  
+         0  0  0  1  
+      no_mesh
+      cast_shadows 0
+      transparent 0
+
+      COMPONENTS:
+
+         CHARACTER_CONTROLLER:
+            move_speed 0.1
+            jump_force 1
+            jump_duration 0.3
+            gravity 0.2
+            sphere_radius 1
+         END_CHARACTER_CONTROLLER
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_GAMEOBJECT
 
    CAMERA:
       name Main_Camera
@@ -40,35 +71,6 @@ GAMEOBJECT:
    END_CAMERA
 
    GAMEOBJECT:
-      name Character
-      transform: 
-         1  0  0  0  
-         0  1  0  3.4  
-         0  0  1  0  
-         0  0  0  1  
-      no_mesh
-      cast_shadows 0
-
-      COMPONENTS:
-
-         CHARACTER_CONTROLLER:
-            move_speed 0.1
-            jump_force 1
-            jump_duration 0.3
-            gravity 0.2
-            sphere_radius 1
-         END_CHARACTER_CONTROLLER
-
-      END_COMPONENTS
-
-      CHILDREN:
-
-
-      END_CHILDREN
-
-   END_GAMEOBJECT
-
-   GAMEOBJECT:
       name Raptor
       transform: 
          1  0  0  -27.86  
@@ -77,6 +79,7 @@ GAMEOBJECT:
          0  0  0  1  
       no_mesh
       cast_shadows 0
+      transparent 0
 
       COMPONENTS:
 
@@ -94,11 +97,13 @@ GAMEOBJECT:
             0  0  0  1  
          mesh raptor.obj
          cast_shadows 1
+         transparent 1
 
          COMPONENTS:
 
             TEXTURE_MATERIAL:
                diffuseTex Raptor.png
+               color 1 1 1 0.497
             END_TEXTURE_MATERIAL
 
          END_COMPONENTS
@@ -119,17 +124,25 @@ GAMEOBJECT:
       name cube_flat
       transform: 
          1  0  0  -7.2  
-         0  1  0  5  
+         0  1  0  32.58  
          0  0  1  51.3  
          0  0  0  1  
       mesh cube_flat.obj
       cast_shadows 1
+      transparent 1
 
       COMPONENTS:
 
-         TEXTURE_MATERIAL:
+         TEXTURE_ADVANCED_MATERIAL:
             diffuseTex water.jpg
-         END_TEXTURE_MATERIAL
+            normalTex missing
+            specularTex missing
+            smoothness 0.5
+            shininess 32
+            ambient 0.1
+            tiling 1
+            color 0.6039442 0.7720588 0.1305688 0.247
+         END_TEXTURE_ADVANCED_MATERIAL
 
       END_COMPONENTS
 
@@ -149,6 +162,7 @@ GAMEOBJECT:
          0  0  0  1  
       mesh TerrainTest.obj
       cast_shadows 0
+      transparent 0
 
       COMPONENTS:
 
@@ -166,6 +180,7 @@ GAMEOBJECT:
             shininess 32
             ambient 0.1
             tiling 200
+            color 1 1 1 1
          END_TEXTURE_ADVANCED_MATERIAL
 
       END_COMPONENTS

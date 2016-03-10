@@ -29,7 +29,7 @@ class AbstractMaterial
          * The world provides access to the lights.
          */
         virtual void render(GameObject* pGameObject, Camera* pCamera) = 0;
-        glm::vec3 color = glm::vec3(1);
+        glm::vec4 color = glm::vec4(1);
 };
 
 #endif // ABSTRACTMATERIAL_H

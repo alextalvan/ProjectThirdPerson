@@ -24,6 +24,7 @@
 #include "mge/sound/SoundManager.hpp"
 #include "mge/util/Timer.hpp"
 #include "mge/particles/ParticleSystem.hpp"
+#include "mge/core/Renderer.hpp"
 
 //#define MGE_LUA_SAFETY 1  //comment this define out to remove the lua safety checks but heavily improve performance
 
@@ -116,6 +117,7 @@ LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
 	lua_register(L, "GetLocalScale", getLocalScale);
     lua_register(L, "ToggleEmitter", particleToggle);
 	lua_register(L, "StartFade", startFade);//
+	lua_register(L, "GetScreenSize", getScreenSize);
 
 	//Set world
 	lua_pushlightuserdata(L, (LuaObject*)world);
@@ -200,10 +202,11 @@ int LuaScript::colorMaterial(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
-	glm::vec3 color = glm::vec3(0, 0, 0);
-	color.x = lua_tonumber(lua, -3);
-	color.y = lua_tonumber(lua, -2);
-	color.z = lua_tonumber(lua, -1);
+	glm::vec4 color = glm::vec4(0);
+	color.x = lua_tonumber(lua, -4);
+	color.y = lua_tonumber(lua, -3);
+	color.z = lua_tonumber(lua, -2);
+	color.w = lua_tonumber(lua, -1);
 	//lua_pop(lua,3);
 
 	AbstractMaterial* newMaterial = new ColorMaterial(color);
@@ -221,10 +224,11 @@ int LuaScript::setColor(lua_State * lua)
 	#endif
 
     GameObject* obj = (GameObject*)(LuaObject*)lua_touserdata(lua,-4);
-	glm::vec3 color = glm::vec3(0, 0, 0);
-	color.x = lua_tonumber(lua, -3);
-	color.y = lua_tonumber(lua, -2);
-	color.z = lua_tonumber(lua, -1);
+	glm::vec4 color = glm::vec4(0);
+	color.x = lua_tonumber(lua, -4);
+	color.y = lua_tonumber(lua, -3);
+	color.z = lua_tonumber(lua, -2);
+	color.w = lua_tonumber(lua, -1);
 	//lua_pop(lua,3);
 
 	//std::string s = obj->getName();
@@ -1523,6 +1527,19 @@ int LuaScript::particleToggle(lua_State * lua)
     p->ToggleEmitter(val);
 
 	return 0;
+}
+
+int LuaScript::getScreenSize(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	#endif
+	glm::vec2 ssize = Renderer::GetScreenSize();
+
+    lua_pushnumber(lua,ssize.x);
+    lua_pushnumber(lua,ssize.y);
+	//obj->
+
+	return 2;
 }
 
 LuaScript::~LuaScript()

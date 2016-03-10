@@ -2,7 +2,7 @@
 #version 330 // for glsl version (12 is for older versions , say opengl 2.1
 #define MGE_MAX_LIGHTS 8
 
-uniform vec3 color;
+uniform vec4 color;
 
 uniform int lightCount;
 uniform vec3 viewPos;
@@ -74,8 +74,8 @@ void main( void )
         //    outColor += DoSpotlight(i, normal, viewDir);
     }
 
-    vec3 ambient = vec3(texture(material.diffuseMap, tiledTexCoord)) * material.ambient * color;
-    fragment_color = vec4(ambient + outColor,1.0f);
+    vec3 ambient = vec3(texture(material.diffuseMap, tiledTexCoord)) * material.ambient * color.rgb;
+    fragment_color = vec4(ambient + outColor,color.w);
 }
 
 float ShadowCalculation(vec4 fragPos, vec3 norm, vec3 lightDir)

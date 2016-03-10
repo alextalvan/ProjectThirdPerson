@@ -33,7 +33,8 @@ GLboolean TextureLitMaterial::_hasNormMapLoc = 0;
 
 GLuint TextureLitMaterial::_colorLoc = 0;
 
-TextureLitMaterial::TextureLitMaterial(Texture * pDiffuseTexture, float pSmoothness, float pShininess, float pAmbient, Texture * pNormalMapTexture, Texture * pSpecularMapTexture, float pTiling)
+TextureLitMaterial::TextureLitMaterial(Texture * pDiffuseTexture, float pSmoothness, float pShininess, float pAmbient,
+                                       Texture * pNormalMapTexture, Texture * pSpecularMapTexture, float pTiling, glm::vec4 pColor)
 {
     _diffuseTexture=pDiffuseTexture;
     _ambient=pAmbient;
@@ -42,6 +43,8 @@ TextureLitMaterial::TextureLitMaterial(Texture * pDiffuseTexture, float pSmoothn
     _normalMapTexture=pNormalMapTexture;
     _specularMapTexture=pSpecularMapTexture;
     _tiling=pTiling;
+
+    color = pColor;
 
     _lazyInitializeShader();
 
@@ -205,7 +208,7 @@ void TextureLitMaterial::render(GameObject* pGameObject, Camera* pCamera) {
 	glUniform3fv(_viewPosLoc, 1, glm::value_ptr(pCamera->getWorldPosition()));
 
 	//color
-	glUniform3fv(_colorLoc,1,glm::value_ptr(color));
+	glUniform4fv(_colorLoc,1,glm::value_ptr(color));
 
     //pass in all MVP matrices separately
     glUniformMatrix4fv ( _projMatLoc,  1, GL_FALSE, glm::value_ptr(pCamera->getProjection()));

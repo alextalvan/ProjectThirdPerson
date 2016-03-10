@@ -14,7 +14,7 @@ GLint ColorMaterial::_aVertex = 0;
 GLint ColorMaterial::_aNormal = 0;
 GLint ColorMaterial::_aUV = 0;
 
-ColorMaterial::ColorMaterial(glm::vec3 pDiffuseColor)
+ColorMaterial::ColorMaterial(glm::vec4 pDiffuseColor)
 {
     //every time we create an instance of colormaterial we check if the corresponding shader has already been loaded
     _lazyInitializeShader();
@@ -54,7 +54,7 @@ void ColorMaterial::render(GameObject* pGameObject, Camera* pCamera) {
     glUniformMatrix4fv ( _uMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
     //set the material color
-    glUniform3fv (_colorLoc, 1, glm::value_ptr(this->color));
+    glUniform4fv (_colorLoc, 1, glm::value_ptr(this->color));
 
     //now inform mesh of where to stream its data
     pGameObject->getMesh()->streamToOpenGL(_aVertex, _aNormal, _aUV);

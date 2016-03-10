@@ -15709,7 +15709,7 @@
 	"mge/util/list/DualLinkNode.hpp"
 	<iostream>
 
-1457361768 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\abstractmaterial.hpp
+1457605291 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\abstractmaterial.hpp
 	"mge/core/ShaderProgram.hpp"
 	"glm.hpp"
 
@@ -15748,14 +15748,14 @@
 1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\abstractmaterial.cpp
 	"mge/materials/AbstractMaterial.hpp"
 
-1457361948 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\colormaterial.cpp
+1457605344 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\colormaterial.cpp
 	<glm.hpp>
 	"mge/materials/ColorMaterial.hpp"
 	"mge/config.hpp"
 	"mge/core/Camera.hpp"
 	"mge/core/Mesh.hpp"
 
-1457361955 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\colormaterial.hpp
+1457605299 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\colormaterial.hpp
 	"mge/materials/AbstractMaterial.hpp"
 	<glm.hpp>
 
@@ -15784,7 +15784,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1457559769 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
+1457604994 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
 	<glm.hpp>
 	"mge/materials/TextureLitMaterial.hpp"
 	"mge/core/Texture.hpp"
@@ -15795,12 +15795,12 @@
 	"mge/core/Renderer.hpp"
 	<string>
 
-1457361829 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.hpp
+1457604945 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.hpp
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 	"mge/shadow/ShadowCamera.hpp"
 
-1457361870 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturematerial.cpp
+1457605039 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturematerial.cpp
 	<glm.hpp>
 	"mge/materials/TextureMaterial.hpp"
 	"mge/core/Texture.hpp"
@@ -16008,7 +16008,7 @@
 	"mge/sound/SoundManager.hpp"
 	"mge/util/Timer.hpp"
 
-1457602765 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
+1457603911 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
 	"lua.h"
 	"lauxlib.h"
 	"lualib.h"
@@ -16017,7 +16017,7 @@
 	<mge/behaviours/Component.hpp>
 	<SFML/Graphics.hpp>
 
-1457602932 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
+1457605429 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
 	"mge/lua/LuaScript.hpp"
 	"mge/core/World.hpp"
 	"mge/core/GameObject.hpp"
@@ -16044,6 +16044,7 @@
 	"mge/sound/SoundManager.hpp"
 	"mge/util/Timer.hpp"
 	"mge/particles/ParticleSystem.hpp"
+	"mge/core/Renderer.hpp"
 
 1455012450 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\lua.h
 	<stdarg.h>
@@ -16101,7 +16102,7 @@
 	"mge/collision/SphereCollider.hpp"
 	"mge/util/Timer.hpp"
 
-1457542788 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
+1457605645 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
 	<mge/editor/LevelImporter.hpp>
 	<mge/config.hpp>
 	<glm.hpp>

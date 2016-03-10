@@ -11,7 +11,7 @@
 class ColorMaterial : public AbstractMaterial
 {
     public:
-        ColorMaterial(glm::vec3 pColor = glm::vec3(1,1,1));
+        ColorMaterial(glm::vec4 pColor = glm::vec4(1,1,1,1));
         virtual ~ColorMaterial();
         virtual void render(GameObject* pGameObject, Camera* pCamera);
 

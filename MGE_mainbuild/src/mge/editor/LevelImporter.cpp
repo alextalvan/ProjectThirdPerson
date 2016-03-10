@@ -114,11 +114,16 @@ namespace LevelEditor
         }
 
         //shadow toggle
-        f>>s;
+        f>>s;//"cast_shadows"
         int shadow;
         f>>shadow;
         obj->castShadows = shadow;
 
+        f>>s;//"transparent"
+        f>>shadow;
+
+        if(shadow)
+            obj->SetTransparent(true);
 
         //the exporter root is ignored
         if(obj->getName() == "MGE_exporter_root")
@@ -153,11 +158,23 @@ namespace LevelEditor
             {
                 //f>>s;//"name"
                 //f>>s;//the name
+                string name;
                 f>>s;//"diffuseTex
                 f>>s;//the filename
 
                 Texture* tex = Texture::load(config::MGE_TEXTURE_PATH + s);
                 TextureMaterial* mat1 = new TextureMaterial(tex);
+
+                f>>s;//"color
+                float r,g,b,a;
+                f>>s; r = std::strtof(s.c_str(),nullptr);
+                f>>s; g = std::strtof(s.c_str(),nullptr);
+                f>>s; b = std::strtof(s.c_str(),nullptr);
+                f>>s; a = std::strtof(s.c_str(),nullptr);
+
+                mat1->color = glm::vec4(r,g,b,a);
+
+
                 owner->setMaterial(mat1);
                 f>>s;//end_texmat
             }
@@ -201,6 +218,16 @@ namespace LevelEditor
 
 
                 TextureLitMaterial* mat2 = new TextureLitMaterial(diffuse,smooth,shiny,ambient,normalMap,specularMap,tiling);
+
+                f>>s;//"color
+                float r,g,b,a;
+                f>>s; r = std::strtof(s.c_str(),nullptr);
+                f>>s; g = std::strtof(s.c_str(),nullptr);
+                f>>s; b = std::strtof(s.c_str(),nullptr);
+                f>>s; a = std::strtof(s.c_str(),nullptr);
+
+                mat2->color = glm::vec4(r,g,b,a);
+
                 owner->setMaterial(mat2);
                 f>>s;//end_texmat
             }
@@ -210,11 +237,12 @@ namespace LevelEditor
                 //f>>s;//"name"
                 //f>>s;//the name
                 f>>s;//"color
-                float r,g,b;
+                float r,g,b,a;
                 f>>s; r = std::strtof(s.c_str(),nullptr);
                 f>>s; g = std::strtof(s.c_str(),nullptr);
                 f>>s; b = std::strtof(s.c_str(),nullptr);
-                ColorMaterial* mat2 = new ColorMaterial(glm::vec3(r,g,b));
+                f>>s; a = std::strtof(s.c_str(),nullptr);
+                ColorMaterial* mat2 = new ColorMaterial(glm::vec4(r,g,b,a));
                 owner->setMaterial(mat2);
                 f>>s;//end_colormat
             }

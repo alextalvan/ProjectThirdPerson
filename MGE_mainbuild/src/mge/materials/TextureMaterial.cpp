@@ -43,7 +43,7 @@ void TextureMaterial::render(GameObject* pGameObject, Camera* pCamera) {
     glUniform1i (_diffuseLoc, 0);
 
     //color
-    glUniform3fv (_colorLoc, 1, glm::value_ptr(color));
+    glUniform4fv (_colorLoc, 1, glm::value_ptr(color));
 
     //pass in all MVP matrices separately
     glUniformMatrix4fv ( _shader->getUniformLocation("projectionMatrix"),   1, GL_FALSE, glm::value_ptr(pCamera->getProjection()));

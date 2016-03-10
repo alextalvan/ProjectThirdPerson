@@ -91,6 +91,7 @@ private:
 	static int makeTimer(lua_State * lua);
 	static int resetTimer(lua_State * lua);
 	static int checkTimer(lua_State * lua);
+	static int getScreenSize(lua_State * lua);
 
 	//input
 	static int keyPressed(lua_State * lua);
