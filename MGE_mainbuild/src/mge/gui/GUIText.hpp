@@ -15,6 +15,7 @@ class GUIText : public GUI
 		void setTextColor (sf::Color pColor);
         void Refresh2DTransform() override;
 		void setOrigin(float x, float y);
+		void setOrigin();
 	protected:
 	    virtual ~GUIText();
 	    void InnerDraw(sf::RenderTarget& target) override;

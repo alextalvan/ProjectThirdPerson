@@ -26,6 +26,12 @@ void GUISprite::setOrigin(float x, float y)
     _sprite.setOrigin(spriteRect.left + x, spriteRect.top + y);
 }
 
+void GUISprite::setOrigin()
+{
+    sf::FloatRect spriteRect = _sprite.getLocalBounds();
+    _sprite.setOrigin(spriteRect.left + spriteRect.width/2.0f, spriteRect.top  + spriteRect.height/2.0f);
+}
+
 void GUISprite::setSpriteTexture(sf::Texture& pTexture) {
     _sprite.setTexture(pTexture);
 }

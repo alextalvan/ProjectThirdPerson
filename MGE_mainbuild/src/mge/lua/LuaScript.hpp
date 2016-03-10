@@ -82,6 +82,8 @@ private:
     static int setTextOrigin (lua_State * lua);
     static int setGUIActive (lua_State * lua);
     static int startFade (lua_State * lua);
+    static int centerSpriteOrigin (lua_State * lua);
+    static int centerTextOrigin (lua_State * lua);
 
 	//utils
 	static int getTime(lua_State * lua);
@@ -112,12 +114,8 @@ private:
 	static int luaInvokeFunction(lua_State * lua);
 	static int luaInvokeFunctionWithArgs(lua_State * lua);
 
-
 	//levels/scenes
 	static int loadLevel(lua_State * lua);
     static int playMusic(lua_State * lua);
     static int playSFX(lua_State * lua);
-
-
-
 };
