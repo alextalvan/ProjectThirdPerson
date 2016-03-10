@@ -1,8 +1,6 @@
 --Only called once, at instantiation. Do NOT reference myGameObject here
 function Start()
 
-
-     --b = Sprite("Osama.jpg",500,500,45,1,1);
      --SetParent(a,b);
      --SetSpritePosition(b,100,100);
      --a = GameObject("ayy lmao",0,10,0);
@@ -11,7 +9,6 @@ function Start()
      --SetMainCamera(world,Camera("cam",0,0,10));
     --print("test");
     --t = ColorMaterial(1,0,1);
-
 end
 
 --Called when the script component is attached to a GameObject.
@@ -19,12 +16,20 @@ end
 function OnAttach()
     --print(GetName(myGameObject))
     LoadLevel("out.txt");
+    --b = Sprite("water.jpg",0,0,0,1,1);
+
     --a = GameObject("topkek",123,124,125);
     --a = Sprite("bricks.jpg",683,384,0,0.1,0.1);
 end
 
 --Called every game logic step
 function Update()
+	--if GetKeyDown(0) then
+	--	StartFade(b, true, 15);
+	--end
+	--if GetKeyDown(3) then
+	--	StartFade(b, false, 15);
+	--end
     --SetSpriteScale(a, 2, 2);
     --Rotate(a,0.15,0.5,0.5,0);
     --if(GetKeyDown(0)) then

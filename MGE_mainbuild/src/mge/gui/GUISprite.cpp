@@ -54,6 +54,29 @@ void GUISprite::setSpriteScale(float pScaleX, float pScaleY) {
     _sprite.setScale(pScaleX, pScaleY);//glm::length(xVector),glm::length(yVector));
 }
 
+void GUISprite::fade()
+{
+    if (_fade) {
+        sf::Color col = _sprite.getColor();
+        if (_fadeState) {
+            if (col.a > _fadeSpeed)
+                _sprite.setColor(sf::Color(col.r,col.g,col.b,col.a - sf::Uint8(_fadeSpeed)));
+            else
+                _sprite.setColor(sf::Color(col.r,col.g,col.b,sf::Uint8(0)));
+        } else {
+            if (col.a + _fadeSpeed < 255)
+                _sprite.setColor(sf::Color(col.r,col.g,col.b,col.a + sf::Uint8(_fadeSpeed)));
+            else
+                _sprite.setColor(sf::Color(col.r,col.g,col.b,sf::Uint8(255)));
+        }
+
+        col = _sprite.getColor();
+        if (col.a <= 0 || col.a >= 255) {
+            _fade = false;
+        }
+    }
+}
+
 void GUISprite::InnerDraw(sf::RenderTarget& target)
 {
 	//glDisable( GL_CULL_FACE );

@@ -109,12 +109,13 @@ LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
 	lua_register(L, "Timer", makeTimer);//
 	lua_register(L, "ResetTimer", resetTimer);//
 	lua_register(L, "CheckTimer", checkTimer);//
-	lua_register(L, "SetTextOrigin", setTextOrigin);
-	lua_register(L, "SetSpriteOrigin", setSpriteOrigin);
-	lua_register(L, "SetGUIActive", setGUIActive);
+	lua_register(L, "SetTextOrigin", setTextOrigin);//
+	lua_register(L, "SetSpriteOrigin", setSpriteOrigin);//
+	lua_register(L, "SetGUIActive", setGUIActive);//
 	lua_register(L, "SetLocalScale", setLocalScale);
 	lua_register(L, "GetLocalScale", getLocalScale);
     lua_register(L, "ToggleEmitter", particleToggle);
+	lua_register(L, "StartFade", startFade);//
 
 	//Set world
 	lua_pushlightuserdata(L, (LuaObject*)world);
@@ -604,6 +605,22 @@ int LuaScript::setGUIActive(lua_State * lua)
 	GUI * gui = (GUI*)(LuaObject*)lua_touserdata(lua, -2);
 	bool active = lua_toboolean(lua, -1);
 	gui->SetGUIActive(active);
+
+	return 0;
+}
+
+int LuaScript::startFade(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -3)) throw "Expect: game object";
+	if (!lua_isboolean(lua, -2)) throw "Expect: boolean";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+	GUI * gui = (GUI*)(LuaObject*)lua_touserdata(lua, -3);
+	bool state = lua_toboolean(lua, -2);
+	int speed = lua_tonumber(lua, -1);
+	gui->startFade(state, speed);
 
 	return 0;
 }

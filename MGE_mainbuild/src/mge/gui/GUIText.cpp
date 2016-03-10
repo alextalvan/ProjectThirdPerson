@@ -71,6 +71,30 @@ void GUIText::Refresh2DTransform()
     _text.setScale(scale.x,scale.y);
 }
 
+void GUIText::fade()
+{
+    if (_fade) {
+        sf::Color col = _text.getColor();
+        if (_fadeState) {
+            if (col.a > _fadeSpeed)
+                _text.setColor(sf::Color(col.r,col.g,col.b,col.a - sf::Uint8(_fadeSpeed)));
+            else
+                _text.setColor(sf::Color(col.r,col.g,col.b,sf::Uint8(0)));
+        } else {
+            if (col.a + _fadeSpeed < 255)
+                _text.setColor(sf::Color(col.r,col.g,col.b,col.a + sf::Uint8(_fadeSpeed)));
+            else
+                _text.setColor(sf::Color(col.r,col.g,col.b,sf::Uint8(255)));
+        }
+
+        col = _text.getColor();
+        if (col.a <= 0 || col.a >= 255) {
+            _fade = false;
+            return;
+        }
+    }
+}
+
 void GUIText::InnerDraw(sf::RenderTarget& target)
 {
 	//glDisable( GL_CULL_FACE );
