@@ -21,7 +21,7 @@ GAMEOBJECT:
       transform: 
          1  0  0  0  
          0  1  0  33.13  
-         0  0  1  0  
+         0  0  1  43.8  
          0  0  0  1  
       no_mesh
       cast_shadows 0
@@ -147,6 +147,28 @@ GAMEOBJECT:
       END_COMPONENTS
 
       CHILDREN:
+
+      POINT_LIGHT:
+         name light
+         transform: 
+            1  0  0  -7.2  
+            0  1  0  32.58  
+            0  0  1  51.3  
+            0  0  0  1  
+         color 0.7720588 0.1021843 0.1021843
+         attenuation 0.1 0.1 0.1
+
+         COMPONENTS:
+
+
+         END_COMPONENTS
+
+         CHILDREN:
+
+
+         END_CHILDREN
+
+      END_POINT_LIGHT
 
 
       END_CHILDREN

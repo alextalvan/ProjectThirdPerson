@@ -14,13 +14,17 @@ ShaderProgram* TextureLitMaterial::_shader = NULL;
 GLint TextureLitMaterial::_projMatLoc = 0;
 GLint TextureLitMaterial::_viewMatLoc = 0;
 GLint TextureLitMaterial::_modelMatLoc = 0;
-GLint TextureLitMaterial::_lightMatLoc = 0;
+GLint TextureLitMaterial::_lightMatLocNear = 0;
+GLint TextureLitMaterial::_lightMatLocFar = 0;
+GLint TextureLitMaterial::_lightMatLocMid = 0;
 
 GLint TextureLitMaterial::_diffMapLoc = 0;
 GLint TextureLitMaterial::_normalMapLoc = 0;
 GLint TextureLitMaterial::_specMapLoc = 0;
 GLint TextureLitMaterial::_tilingLoc = 0;
-GLint TextureLitMaterial::_depthMapLoc = 0;
+GLint TextureLitMaterial::_depthMapLocNear = 0;
+GLint TextureLitMaterial::_depthMapLocFar = 0;
+GLint TextureLitMaterial::_depthMapLocMid = 0;
 
 GLint TextureLitMaterial::_viewPosLoc = 0;
 
@@ -79,13 +83,17 @@ void TextureLitMaterial::_lazyInitializeShader() {
         _projMatLoc = _shader->getUniformLocation("projectionMatrix");
         _viewMatLoc = _shader->getUniformLocation("viewMatrix");
         _modelMatLoc = _shader->getUniformLocation("modelMatrix");
-        _lightMatLoc = _shader->getUniformLocation("lightMatrix");
+        _lightMatLocNear = _shader->getUniformLocation("lightMatrixNear");
+        _lightMatLocFar = _shader->getUniformLocation("lightMatrixFar");
+        _lightMatLocMid = _shader->getUniformLocation("lightMatrixMid");
 
         _diffMapLoc = _shader->getUniformLocation("material.diffuseMap");
         _normalMapLoc = _shader->getUniformLocation("material.normalMap");
         _specMapLoc = _shader->getUniformLocation("material.specularMap");
         _tilingLoc = _shader->getUniformLocation("material.tiling");
-        _depthMapLoc = _shader->getUniformLocation("depthMap");
+        _depthMapLocNear = _shader->getUniformLocation("depthMapNear");
+        _depthMapLocFar = _shader->getUniformLocation("depthMapFar");
+        _depthMapLocMid = _shader->getUniformLocation("depthMapMid");
 
         _viewPosLoc = _shader->getUniformLocation("viewPos");
 
@@ -135,10 +143,22 @@ void TextureLitMaterial::render(GameObject* pGameObject, Camera* pCamera) {
         glUniform1i (_specMapLoc, 2);
     }
 
-    if (Renderer::getDepthMap()) {
+    if (Renderer::getShadowDepthMapFar()) {
         glActiveTexture(GL_TEXTURE3);
-        glBindTexture(GL_TEXTURE_2D, Renderer::getDepthMap());
-        glUniform1i (_depthMapLoc, 3);
+        glBindTexture(GL_TEXTURE_2D, Renderer::getShadowDepthMapFar());
+        glUniform1i (_depthMapLocFar, 3);
+    }
+
+    if (Renderer::getShadowDepthMapFar()) {
+        glActiveTexture(GL_TEXTURE4);
+        glBindTexture(GL_TEXTURE_2D, Renderer::getShadowDepthMapNear());
+        glUniform1i (_depthMapLocNear, 4);
+    }
+
+    if (Renderer::getShadowDepthMapMid()) {
+        glActiveTexture(GL_TEXTURE5);
+        glBindTexture(GL_TEXTURE_2D, Renderer::getShadowDepthMapMid());
+        glUniform1i (_depthMapLocMid, 5);
     }
 
 	glUniform1f(_matSmoothLoc, _smoothness);
@@ -179,21 +199,22 @@ void TextureLitMaterial::render(GameObject* pGameObject, Camera* pCamera) {
             glUniform3fv(loc,1,glm::value_ptr(light->getLocalPosition()));
 
             glm::mat4 lightProjection, lightView;
+            lightView = Light::GetDirectionalViewMatrix();
             glm::mat4 lightSpaceMatrix;
-            GLfloat near_plane = 1.0f, far_plane = 200.0f;
-            float orthoSize = 400.0f;
-            lightProjection = glm::ortho(-orthoSize, orthoSize, -orthoSize, orthoSize, near_plane, far_plane);
-            //lightView = light->getWorldTransform();
-            lightView = glm::lookAt(light->getWorldPosition(),light->getWorldPosition() + light->getDirection(),glm::vec3(0,1,0));
-
-//            ShadowCamera* shadowCam = Renderer::GetShadowCamera();
-//            lightProjection = shadowCam->getProjection();
-//            lightView = shadowCam->getWorldTransform();
-//            lightSpaceMatrix = lightProjection * lightView;
 
 
+            lightProjection = Renderer::GetFarShadowOrtho();
             lightSpaceMatrix = lightProjection * lightView;
-            glUniformMatrix4fv(_lightMatLoc, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
+            glUniformMatrix4fv(_lightMatLocFar, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
+
+            lightProjection = Renderer::GetNearShadowOrtho();
+            lightSpaceMatrix = lightProjection * lightView;
+            glUniformMatrix4fv(_lightMatLocNear, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
+
+            lightProjection = Renderer::GetMidShadowOrtho();
+            lightSpaceMatrix = lightProjection * lightView;
+            glUniformMatrix4fv(_lightMatLocMid, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
+
         } else if (lightType == MGE_LIGHT_POINT) {
             loc = _shader->getUniformLocation("LightArray[" + indexString + "].position");
             glUniform3fv(loc,1,glm::value_ptr(light->getWorldPosition()));

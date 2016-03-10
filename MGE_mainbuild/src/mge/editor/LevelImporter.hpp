@@ -18,6 +18,8 @@ namespace LevelEditor
 
     void ParseParticleSystem(ifstream& f, GameObject* parent);
 
+    void ParsePointLight(ifstream& f, GameObject* parent);
+
     void ProcessModelMatrix(ifstream& f, GameObject* parent, GameObject* child);
 
 }

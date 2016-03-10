@@ -45,7 +45,9 @@ class Renderer
         void setClearColor (int pR, int pG, int pB);
 
         static GLuint GetPostProcessVertexAttrib();
-        static GLuint getDepthMap();
+        static GLuint getShadowDepthMapFar();
+        static GLuint getShadowDepthMapNear();
+        static GLuint getShadowDepthMapMid();
         //framebuffer object used for post processing
         static RendererDebugInfo debugInfo;
 
@@ -57,6 +59,14 @@ class Renderer
 
         //test
         static ShadowCamera* GetShadowCamera();
+
+        static glm::mat4& GetCurrentShadowOrtho();
+        static glm::mat4& GetFarShadowOrtho();
+        static glm::mat4& GetNearShadowOrtho();
+        static glm::mat4& GetMidShadowOrtho();
+
+        static bool ShadowFrustumCheckExclusive(GameObject* obj, float orthoSize);
+        static bool ShadowFrustumCheckEncasing(GameObject* obj, float orthoSize);
     private:
         //general settings
         static int _screenWidth, _screenHeight;
@@ -64,7 +74,9 @@ class Renderer
         ///skybox
         ShaderProgram * _skyBoxShader;
         ///shadow mapping
-        static GLuint depthMap;
+        static GLuint shadowDepthTextureFar, shadowDepthTextureNear, shadowDepthTextureMid;
+        static glm::mat4 nearShadowOrtho, farShadowOrtho, currentShadowOrtho, midShadowOrtho;
+
         GLuint depthMapFBO;
         // Setup skybox VAO
         GLuint skyboxVAO, skyboxVBO;
@@ -72,6 +84,7 @@ class Renderer
 
         //test
         static ShadowCamera* _shadowCam;
+
 
         ///post processing
         GLuint postProc_fbo, postProc_fbo_texture0,postProc_fbo_texture1, postProc_rbo_depth;//frame buffer object with depth buffer

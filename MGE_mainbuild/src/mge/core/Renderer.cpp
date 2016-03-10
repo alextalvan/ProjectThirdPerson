@@ -15,12 +15,13 @@
 #include "mge/core/Time.hpp"
 #include "mge/util/list/DualLinkList.hpp"
 #include "mge/util/list/DualLinkNode.hpp"
+#include "mge/core/Mesh.hpp"
 
 #include <iostream>
 using namespace std;
 
 GLuint Renderer::_postProcessVertexAttributeArray;
-GLuint Renderer::depthMap;
+GLuint Renderer::shadowDepthTextureFar, Renderer::shadowDepthTextureNear, Renderer::shadowDepthTextureMid;
 
 RendererDebugInfo Renderer::debugInfo;
 
@@ -31,6 +32,10 @@ DualLinkList<TransparencyList> Renderer::transparentList;
 
 ShadowCamera* Renderer::_shadowCam;
 
+glm::mat4 Renderer::nearShadowOrtho = glm::ortho(-20.0f,20.0f,-20.0f,20.0f,0.1f,200.0f);//45+60(neartest) is good
+glm::mat4 Renderer::farShadowOrtho = glm::ortho(-1000.0f,1000.0f,-1000.0f,1000.0f,0.1f,200.0f);
+glm::mat4 Renderer::midShadowOrtho = glm::ortho(-100.0f,100.0f,-100.0f,100.0f,0.1f,200.0f);
+glm::mat4 Renderer::currentShadowOrtho;
 
 Renderer::Renderer(int width, int height)
 {
@@ -60,6 +65,7 @@ Renderer::Renderer(int width, int height)
     //_postProcessList.push_back(new PostProcess("PostProcessing/hdr_shader.vs","PostProcessing/hdr_shader.fs"));
     //_postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/identity.fs"));
 	//_postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/cut_screen.fs"));
+	//_postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/blur.fs"));
 }
 
 Renderer::~Renderer()
@@ -70,7 +76,9 @@ Renderer::~Renderer()
     glDeleteVertexArrays(1, &skyboxVAO);
     glDeleteTextures(1, &postProc_fbo_texture0);
     glDeleteTextures(1, &postProc_fbo_texture1);
-    glDeleteTextures(1, &depthMap);
+    glDeleteTextures(1, &shadowDepthTextureFar);
+    glDeleteTextures(1, &shadowDepthTextureNear);
+    glDeleteTextures(1, &shadowDepthTextureMid);
     glDeleteFramebuffers(1, &postProc_fbo);
 }
 
@@ -79,13 +87,43 @@ glm::vec2 Renderer::GetScreenSize()
     return glm::vec2(_screenWidth,_screenHeight);
 }
 
+glm::mat4& Renderer::GetCurrentShadowOrtho()
+{
+    return currentShadowOrtho;
+}
+
+glm::mat4& Renderer::GetNearShadowOrtho()
+{
+    return nearShadowOrtho;
+}
+
+glm::mat4& Renderer::GetFarShadowOrtho()
+{
+    return farShadowOrtho;
+}
+
+glm::mat4& Renderer::GetMidShadowOrtho()
+{
+    return midShadowOrtho;
+}
+
 void Renderer::setClearColor(int pR, int pG, int pB) {
     glClearColor((float)pR/0xff, (float)pG/0xff, (float)pB/0xff, 1.0f );
 }
 
-GLuint Renderer::getDepthMap()
+GLuint Renderer::getShadowDepthMapFar()
 {
-    return depthMap;
+    return shadowDepthTextureFar;
+}
+
+GLuint Renderer::getShadowDepthMapNear()
+{
+    return shadowDepthTextureNear;
+}
+
+GLuint Renderer::getShadowDepthMapMid()
+{
+    return shadowDepthTextureMid;
 }
 
 void Renderer::render (World* pWorld)
@@ -153,25 +191,39 @@ void Renderer::renderSkyBox(World* pWorld)
 
 void Renderer::renderDirLightDepthMap (World* pWorld)
 {
-    DualLinkNode<Light>* l = Light::GetLightList().startNode;
-    while (l != NULL) {
-        Light* light = (Light*)l;
-        if (light->getType() == MGE_LIGHT_DIRECTIONAL)
-        {
-            //_shadowCam->RecalculateFrustum(pWorld->getMainCamera(),light->getDirection());
-            ///shadow mapping (render depth map)
-            glViewport(0, 0, 4096, 4096);
-            glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-            glClear(GL_DEPTH_BUFFER_BIT);
-            glCullFace(GL_FRONT);
-            renderDepthMap (pWorld,pWorld->getMainCamera(), light, true);
-            glCullFace(GL_BACK);
-            glBindFramebuffer(GL_FRAMEBUFFER, 0);
-            glViewport(0, 0, _screenWidth, _screenHeight);
-            return;
-        }
-        l = l -> nextNode;
-    }
+    Light::RecalculateDirLightViewMatrix();
+    glViewport(0, 0, 4096, 4096);
+    glCullFace(GL_FRONT);
+    glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+
+    //test version, first clear textures
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureFar, 0);
+    glClear(GL_DEPTH_BUFFER_BIT);
+
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureNear, 0);
+    glClear(GL_DEPTH_BUFFER_BIT);
+
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureMid, 0);
+    glClear(GL_DEPTH_BUFFER_BIT);
+
+
+    //first shadow pass - far objects
+    //glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureFar, 0);
+    //currentShadowOrtho = farShadowOrtho;
+    //glClear(GL_DEPTH_BUFFER_BIT);
+    renderDepthMap (pWorld,pWorld->getMainCamera(), Light::GetDirectionalLight(), true);
+
+    //glViewport(0, 0, 4096, 4096);
+    //second shadow pass - near objects
+    //glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureNear, 0);
+    //currentShadowOrtho = nearShadowOrtho;
+    //glClear(GL_DEPTH_BUFFER_BIT);
+    //renderDepthMap (pWorld,pWorld->getMainCamera(), Light::GetDirectionalLight(), true);
+
+
+    glCullFace(GL_BACK);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glViewport(0, 0, _screenWidth, _screenHeight);
 }
 
 //note, this function assumes there is at least one post process in the list
@@ -236,7 +288,28 @@ void Renderer::renderDepthMap (GameObject * pGameObject, Camera* pCamera, Light 
 
     if (pGameObject->getMesh() && pGameObject->castShadows )//&& pCamera->FrustumCheck(pGameObject))
     {
-        shadowMat->render(pGameObject, light);
+        if(ShadowFrustumCheckEncasing(pGameObject,20.0f))//near check
+        {
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureNear, 0);
+            currentShadowOrtho = nearShadowOrtho;
+            shadowMat->render(pGameObject, light);
+        }
+        else
+            if(ShadowFrustumCheckExclusive(pGameObject,60.0f))//mid check
+            {
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureMid, 0);
+                currentShadowOrtho = midShadowOrtho;
+                shadowMat->render(pGameObject, light);
+            }
+            else
+                if(ShadowFrustumCheckExclusive(pGameObject,1000.0f))//far check
+                {
+                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureFar, 0);
+                    currentShadowOrtho = farShadowOrtho;
+                    shadowMat->render(pGameObject, light);
+                }
+
+
     }
 
     if (!pRecursive) return;
@@ -252,6 +325,88 @@ void Renderer::renderDepthMap (GameObject * pGameObject, Camera* pCamera, Light 
     //    renderDepthMap (pWorld, pGameObject->GetChildAt(i), light, type, pRecursive);
     //}
 }
+
+bool Renderer::ShadowFrustumCheckExclusive(GameObject* obj, float orthoSize)
+{
+    using namespace glm;
+    Light* mainLight = Light::GetDirectionalLight();
+
+    mat3 rot = mainLight->getWorldRotation();
+    vec3 pos = mainLight->getWorldPosition();
+
+    float meshRadius = obj->getMesh()->GetBoundRadius();
+    mat4 objMat = obj->getWorldTransform();
+
+    vec3 objPos = obj->getWorldPosition();
+
+    //must test for non uniform scaling
+    float maxScale = glm::length(objMat[0]);
+    float newScale = glm::length(objMat[1]);
+    if(newScale > maxScale) maxScale = newScale;
+    newScale = glm::length(objMat[2]);
+    if(newScale > maxScale) maxScale = newScale;
+
+    float objRadius = maxScale * meshRadius;
+
+    vec3 lightProj = vec3(dot(rot[0],pos),dot(rot[1],pos),dot(rot[2],pos));
+
+    if(dot(rot[0],objPos) - objRadius > lightProj[0] + orthoSize )
+        return false;
+
+    if(dot(rot[0],objPos) + objRadius < lightProj[0] - orthoSize )
+        return false;
+
+    if(dot(rot[1],objPos) - objRadius > lightProj[1] + orthoSize )
+        return false;
+
+    if(dot(rot[1],objPos) + objRadius < lightProj[1] - orthoSize )
+        return false;
+
+    if(dot(rot[2],objPos) - objRadius > lightProj[2] + 200.0f )
+        return false;
+
+    if(dot(rot[2],objPos) + objRadius < lightProj[2] + 0.1f )
+        return false;
+
+    return true;
+}
+
+
+bool Renderer::ShadowFrustumCheckEncasing(GameObject* obj, float orthoSize)
+{
+    using namespace glm;
+    Light* mainLight = Light::GetDirectionalLight();
+
+    mat3 rot = mainLight->getWorldRotation();
+    vec3 pos = mainLight->getWorldPosition();
+
+    float meshRadius = obj->getMesh()->GetBoundRadius();
+    mat4 objMat = obj->getWorldTransform();
+
+    vec3 objPos = obj->getWorldPosition();
+
+    //must test for non uniform scaling
+    float maxScale = glm::length(objMat[0]);
+    float newScale = glm::length(objMat[1]);
+    if(newScale > maxScale) maxScale = newScale;
+    newScale = glm::length(objMat[2]);
+    if(newScale > maxScale) maxScale = newScale;
+
+    float objRadius = maxScale * meshRadius;
+
+    vec3 lightProj = vec3(dot(rot[0],pos),dot(rot[1],pos),dot(rot[2],pos));
+
+    if(dot(rot[0],objPos) - objRadius > lightProj[0] - orthoSize &&
+       dot(rot[0],objPos) + objRadius < lightProj[0] + orthoSize &&
+       dot(rot[1],objPos) - objRadius > lightProj[1] - orthoSize &&
+       dot(rot[1],objPos) + objRadius < lightProj[1] + orthoSize &&
+       dot(rot[2],objPos) - objRadius > lightProj[2] + 0.1f &&
+       dot(rot[2],objPos) + objRadius < lightProj[2] + 200.0f)
+        return true;
+    else
+        return false;
+}
+
 //regular render cycle, transparent objects are ignored
 void Renderer::render (GameObject * pGameObject, Camera * pCamera, bool pRecursive)
 {
@@ -421,9 +576,9 @@ void Renderer::InitializeDepthMap()
       ///depth map (shadow mapping)
       //generate depth map texture
       glActiveTexture(GL_TEXTURE0);
-      glGenTextures(1, &depthMap);
-      glBindTexture(GL_TEXTURE_2D, depthMap);
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 4096, 4096, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+      glGenTextures(1, &shadowDepthTextureFar);
+      glBindTexture(GL_TEXTURE_2D, shadowDepthTextureFar);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, 4096, 4096, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -434,11 +589,37 @@ void Renderer::InitializeDepthMap()
       glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
       glBindTexture(GL_TEXTURE_2D, 0);
 
+      glActiveTexture(GL_TEXTURE0);
+      glGenTextures(1, &shadowDepthTextureNear);
+      glBindTexture(GL_TEXTURE_2D, shadowDepthTextureNear);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, 4096, 4096, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+      glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+      glBindTexture(GL_TEXTURE_2D, 0);
+
+      glActiveTexture(GL_TEXTURE0);
+      glGenTextures(1, &shadowDepthTextureMid);
+      glBindTexture(GL_TEXTURE_2D, shadowDepthTextureMid);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, 4096, 4096, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+      glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+      glBindTexture(GL_TEXTURE_2D, 0);
+
       ///depth buffer (shadow mapping)
       //attach depth map texture to depth buffer
       glGenFramebuffers(1, &depthMapFBO);
       glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-      glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
+      glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureFar, 0);
       glDrawBuffer(GL_NONE);
       glReadBuffer(GL_NONE);
       glBindFramebuffer(GL_FRAMEBUFFER, 0);

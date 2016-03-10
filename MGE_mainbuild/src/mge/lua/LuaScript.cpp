@@ -225,7 +225,7 @@ int LuaScript::setColor(lua_State * lua)
 	if (!lua_isnumber(lua, -1)) throw "Expect: number";
 	#endif
 
-    GameObject* obj = (GameObject*)(LuaObject*)lua_touserdata(lua,-4);
+    GameObject* obj = (GameObject*)(LuaObject*)lua_touserdata(lua,-5);
 	glm::vec4 color = glm::vec4(0);
 	color.x = lua_tonumber(lua, -4);
 	color.y = lua_tonumber(lua, -3);

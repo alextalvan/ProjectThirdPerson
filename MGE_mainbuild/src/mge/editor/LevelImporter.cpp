@@ -86,6 +86,12 @@ namespace LevelEditor
             return true;
         }
 
+        if(s == "POINT_LIGHT:")
+        {
+            ParsePointLight(f,parent);
+            return true;
+        }
+
         return false;
         //f>>s;
         //f>>objectType;//END_
@@ -325,9 +331,9 @@ namespace LevelEditor
                 //hard coding this shit
                 //Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -3, 1), glm::vec3(1.0f,1.0f,1.0f),glm::vec3(0.1f),0,owner);
 
-                glm::vec3 lightDir = glm::vec3(1, -5, 1);
-                float n = 25.0f;
-                glm::vec3 lightPos = glm::normalize(lightDir) * -n + glm::vec3(n*1.25f,0,n*1.25f);
+                glm::vec3 lightDir = glm::vec3(1, -1.5f, 1);
+                float n = 75.0f;
+                glm::vec3 lightPos = glm::normalize(lightDir) * -n; //+ glm::vec3(0,5,0); //+ glm::vec3(n*1.25f,0,n*1.25f);
                 Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, lightPos, lightDir , glm::vec3(1.0f,1.0f,1.0f),glm::vec3(0.1f),0,owner);
                 _storedWorld->AddChild(light1);
                 f>>s;//end_character
@@ -497,8 +503,6 @@ namespace LevelEditor
         f>>s;//END_CAMERA
     }
 
-
-
     void ProcessModelMatrix(ifstream& f, GameObject* parent, GameObject* child)
     {
         string s;
@@ -577,6 +581,41 @@ namespace LevelEditor
 
     }
 
+
+     void ParsePointLight(ifstream& f, GameObject* parent)
+    {
+        string s,name;
+        f>>s;//"name"
+        f>>name;//and the actual name
+
+        //GameObject* obj = new GameObject(s,glm::vec3(0));
+        Light* light = new Light(MGE_LIGHT_POINT);
+        light->setName(name);
+
+        ProcessModelMatrix(f,parent,light);
+
+
+        float r,g,b,a1,a2,a3;
+        f>>s;//"color"
+        f>>s; r = std::strtof(s.c_str(),nullptr);
+        f>>s; g = std::strtof(s.c_str(),nullptr);
+        f>>s; b = std::strtof(s.c_str(),nullptr);
+
+        f>>s;//attenuation
+        f>>s; a1 = std::strtof(s.c_str(),nullptr);
+        f>>s; a2 = std::strtof(s.c_str(),nullptr);
+        f>>s; a3 = std::strtof(s.c_str(),nullptr);
+
+        light->setColor(glm::vec3(r,g,b));
+        light->setAttenuation(glm::vec3(a1,a2,a3));
+
+        ParseComponents(f,light);
+        ParseChildren(f,light);
+
+        f>>s;//END_POINTLIGHT
+
+
+    }
 
 
 

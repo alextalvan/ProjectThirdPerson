@@ -1,7 +1,10 @@
 #include <mge/core/Light.hpp>
 #include <mge/util/Input.hpp>
+#include <mge/core/World.hpp>
 
 DualLinkList<Light> Light::_lightList;
+glm::mat4 Light::_directionalViewMatrix;
+Light* Light::_dirLight;
 
 Light::Light(int pType, glm::vec3 pPos, glm::vec3 pDir, glm::vec3 pColor, glm::vec3 pAtt, float pAngle, GameObject* target)
 : GameObject("light", pPos), _type(pType), _color(pColor), _attenuation(pAtt), _angle(glm::radians(pAngle))
@@ -11,6 +14,9 @@ Light::Light(int pType, glm::vec3 pPos, glm::vec3 pDir, glm::vec3 pColor, glm::v
     {
         _target = target;
         _storedOffset = getLocalPosition();
+        _dirLight = this;
+
+        setWorldRotation(glm::normalize(-_storedOffset));
     }
 
     _lightList.Add(this);
@@ -90,4 +96,23 @@ void Light::Update()
         glm::vec3 tPos = _target->getWorldPosition();
         setWorldPosition(tPos + _storedOffset);
     }
+}
+
+void Light::RecalculateDirLightViewMatrix()
+{
+    if(_dirLight)
+    {
+        //glm::mat3 rot = _dirLight->getWorldRotation()
+        _directionalViewMatrix = glm::lookAt(_dirLight->getWorldPosition(),_dirLight->_target->getWorldPosition(),glm::vec3(0,1,0));
+    }
+}
+
+Light* Light::GetDirectionalLight()
+{
+    return _dirLight;
+}
+
+const glm::mat4& Light::GetDirectionalViewMatrix()
+{
+    return _directionalViewMatrix;
 }

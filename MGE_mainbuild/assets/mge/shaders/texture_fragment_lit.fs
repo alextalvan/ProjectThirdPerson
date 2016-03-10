@@ -78,6 +78,22 @@ void main( void )
     fragment_color = vec4(ambient + outColor,color.w);
 }
 
+vec4 blur13(sampler2D image, vec2 uv, vec2 resolution, vec2 direction)
+{
+  vec4 color = vec4(0.0);
+  vec2 off1 = vec2(1.411764705882353) * direction;
+  vec2 off2 = vec2(3.2941176470588234) * direction;
+  vec2 off3 = vec2(5.176470588235294) * direction;
+  color += texture2D(image, uv) * 0.1964825501511404;
+  color += texture2D(image, uv + (off1 / resolution)) * 0.2969069646728344;
+  color += texture2D(image, uv - (off1 / resolution)) * 0.2969069646728344;
+  color += texture2D(image, uv + (off2 / resolution)) * 0.09447039785044732;
+  color += texture2D(image, uv - (off2 / resolution)) * 0.09447039785044732;
+  color += texture2D(image, uv + (off3 / resolution)) * 0.010381362401148057;
+  color += texture2D(image, uv - (off3 / resolution)) * 0.010381362401148057;
+  return color;
+}
+
 float ShadowCalculation(vec4 fragPos, vec3 norm, vec3 lightDir)
 {
     // perform perspective divide
@@ -86,8 +102,10 @@ float ShadowCalculation(vec4 fragPos, vec3 norm, vec3 lightDir)
     projCoords = projCoords * 0.5 + 0.5;
     // Get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
     float closestDepth = texture(depthMap, vec2(projCoords.x,projCoords.y)).r;
+    //test
     // Get depth of current fragment from light's perspective
     float currentDepth = projCoords.z;
+
     // Check whether current frag pos is in shadow
     float bias = max(0.00001 * (1.0 - dot(norm, lightDir)), 0.00001);
     float shadow = currentDepth - bias > closestDepth  ? 1.0 : 0.0;
@@ -101,11 +119,16 @@ float ShadowCalculation(vec4 fragPos, vec3 norm, vec3 lightDir)
             for(float y = -1.0; y <= 1.0; ++y)
             {
                 float pcfDepth = texture(depthMap, projCoords.xy + vec2(x, y) * texelSize).r;
-                shadow += currentDepth - bias > pcfDepth  ? 1.0 : 0.0;
+                float test = currentDepth;// * 0.95;
+                shadow += test - bias > pcfDepth  ? 1.0 : 0.0;
+
+                //float pcfDepth = texture(depthMap, projCoords.xy + vec2(x, y) * texelSize * 4);
+                //shadow += pcfDepth;
             }
         }
         shadow /= 9.0;
     }
+
 
     // Keep the shadow at 0.0 when outside the far_plane region of the light's frustum.
     if(projCoords.z > 1.0)
@@ -131,6 +154,9 @@ vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir, vec2 tiledTexCo
         specular = LightArray[lightIndex].color * texture(material.specularMap, TexCoord).r * spec * material.smoothness;
     }
 
+    //float shadow = 1.0f;
+
+    //if(diff>0.001)
     float shadow = ShadowCalculation(FragPosLightSpace, norm, lightDir);
 
     // Combine results

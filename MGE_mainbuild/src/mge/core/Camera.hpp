@@ -56,6 +56,8 @@ class Camera : public GameObject
 		//frustrum culling
 		FrustrumCheckCache _cullingCache;
 
+		//orthographic projection of directional light - calculated based on camera angle
+
 };
 
 #endif // CAMERA_H

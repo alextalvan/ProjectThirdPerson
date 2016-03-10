@@ -27,6 +27,11 @@ public:
     glm::vec3 getColor();
     glm::vec3 getAttenuation();
     float getAngle();
+
+    static const glm::mat4& GetDirectionalViewMatrix();
+    static Light* GetDirectionalLight();
+    static void RecalculateDirLightViewMatrix();
+
 protected:
     virtual ~Light();
     void Update() override;
@@ -38,8 +43,10 @@ private:
     float _angle;//45 deg, angle for spotlights
     glm::vec3 _direction;
 
-    GameObject* _target;//for directional light "hack" only
+    static Light* _dirLight;
+    static glm::mat4 _directionalViewMatrix;
     glm::vec3 _storedOffset;
+    GameObject* _target;//for directional light "hack" only
 };
 
 #endif // LIGHT_H

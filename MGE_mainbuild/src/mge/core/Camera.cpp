@@ -110,9 +110,7 @@ void Camera::RecalculateFrustumCache()
     vec3 downNormal = normalize(cross(xaxis,nearDown));
     _cullingCache.downNorm = downNormal;
     _cullingCache.downOrigin = dot(downNormal,camPos);
-
 }
-
 
 bool Camera::FrustumCheck(GameObject* obj)
 {
