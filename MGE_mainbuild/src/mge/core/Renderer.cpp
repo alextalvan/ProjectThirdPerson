@@ -34,7 +34,7 @@ ShadowCamera* Renderer::_shadowCam;
 
 glm::mat4 Renderer::nearShadowOrtho = glm::ortho(-20.0f,20.0f,-20.0f,20.0f,0.1f,200.0f);//45+60(neartest) is good
 glm::mat4 Renderer::farShadowOrtho = glm::ortho(-1000.0f,1000.0f,-1000.0f,1000.0f,0.1f,200.0f);
-glm::mat4 Renderer::midShadowOrtho = glm::ortho(-100.0f,100.0f,-100.0f,100.0f,0.1f,200.0f);
+glm::mat4 Renderer::midShadowOrtho = glm::ortho(-125.0f,125.0f,-125.0f,125.0f,0.1f,200.0f);
 glm::mat4 Renderer::currentShadowOrtho;
 
 Renderer::Renderer(int width, int height)
@@ -289,13 +289,14 @@ void Renderer::renderDepthMap (GameObject * pGameObject, Camera* pCamera, Light 
     if (pGameObject->getMesh() && pGameObject->castShadows )//&& pCamera->FrustumCheck(pGameObject))
     {
         if(ShadowFrustumCheckEncasing(pGameObject,20.0f))//near check
+        //if(ShadowFrustumCheckExclusive(pGameObject,10.0f))//near check
         {
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureNear, 0);
             currentShadowOrtho = nearShadowOrtho;
             shadowMat->render(pGameObject, light);
         }
         else
-            if(ShadowFrustumCheckExclusive(pGameObject,60.0f))//mid check
+            if(ShadowFrustumCheckExclusive(pGameObject,100.0f))//mid check
             {
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureMid, 0);
                 currentShadowOrtho = midShadowOrtho;
@@ -578,7 +579,7 @@ void Renderer::InitializeDepthMap()
       glActiveTexture(GL_TEXTURE0);
       glGenTextures(1, &shadowDepthTextureFar);
       glBindTexture(GL_TEXTURE_2D, shadowDepthTextureFar);
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, 4096, 4096, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, 4096, 4096, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -592,7 +593,7 @@ void Renderer::InitializeDepthMap()
       glActiveTexture(GL_TEXTURE0);
       glGenTextures(1, &shadowDepthTextureNear);
       glBindTexture(GL_TEXTURE_2D, shadowDepthTextureNear);
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, 4096, 4096, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, 4096, 4096, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -605,7 +606,7 @@ void Renderer::InitializeDepthMap()
       glActiveTexture(GL_TEXTURE0);
       glGenTextures(1, &shadowDepthTextureMid);
       glBindTexture(GL_TEXTURE_2D, shadowDepthTextureMid);
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, 4096, 4096, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, 4096, 4096, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -654,7 +655,7 @@ void Renderer::InitializePostProc()
       /* Depth buffer */
       glGenRenderbuffers(1, &postProc_rbo_depth);
       glBindRenderbuffer(GL_RENDERBUFFER, postProc_rbo_depth);
-      glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, _screenWidth, _screenHeight);
+      glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, _screenWidth, _screenHeight);
       glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
       /* Framebuffer to link everything together */

@@ -100,20 +100,20 @@ float ShadowCalculation(vec3 norm, vec3 lightDir)
 
 
 
-    //this IF is massive, if we are in a near shadow, we perform PCF and then return early
+    //first check for near shadow
     if(shadow > 0.75)
     {
-        shadow = 0.0;
-        vec2 texelSize = 1.0 / textureSize(depthMapNear, 0);
-        for(float x = -1.0; x <= 1.0; ++x)
-        {
-            for(float y = -1.0; y <= 1.0; ++y)
-            {
-                float pcfDepth = texture(depthMapNear, projCoords.xy + vec2(x, y) * texelSize).r;
-                shadow += currentDepth - bias > pcfDepth  ? 1.0 : 0.0;
-            }
-        }
-        shadow /= 9.0;
+//        shadow = 0.0;
+//        vec2 texelSize = 1.0 / textureSize(depthMapNear, 0);
+//        for(float x = -1.0; x <= 1.0; ++x)
+//        {
+//            for(float y = -1.0; y <= 1.0; ++y)
+//            {
+//                float pcfDepth = texture(depthMapNear, projCoords.xy + vec2(x, y) * texelSize).r;
+//                shadow += currentDepth - bias > pcfDepth  ? 1.0 : 0.0;
+//            }
+//        }
+//        shadow /= 9.0;
 
         // Keep the shadow at 0.0 when outside the far_plane region of the light's frustum.
         if(projCoords.z > 1.0)
@@ -152,7 +152,7 @@ float ShadowCalculation(vec3 norm, vec3 lightDir)
         }
         else
         {
-        //here we check the far shadow, and no PCF is done if it is found
+            //here we check the far shadow, and no PCF is done if it is found
             projCoords = FragPosLightSpaceFar.xyz / FragPosLightSpaceFar.w;
             projCoords = projCoords * 0.5 + 0.5;
             closestDepth = texture(depthMapFar, vec2(projCoords.x,projCoords.y)).r;
