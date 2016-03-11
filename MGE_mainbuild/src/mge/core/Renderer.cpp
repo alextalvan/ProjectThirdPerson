@@ -296,7 +296,8 @@ void Renderer::renderDepthMap (GameObject * pGameObject, Camera* pCamera, Light 
             shadowMat->render(pGameObject, light);
         }
         else
-            if(ShadowFrustumCheckExclusive(pGameObject,100.0f))//mid check
+            if(ShadowFrustumCheckExclusive(pGameObject,100.0f))
+            //if(ShadowFrustumCheckEncasing(pGameObject,125.0f))//mid check
             {
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureMid, 0);
                 currentShadowOrtho = midShadowOrtho;
@@ -535,12 +536,12 @@ void Renderer::InitializeSkyBox()
     glBindVertexArray(0);
 
     vector<const GLchar*> faces;
-    faces.push_back("right.jpg");
-    faces.push_back("left.jpg");
-    faces.push_back("top.jpg");
-    faces.push_back("bottom.jpg");
-    faces.push_back("back.jpg");
-    faces.push_back("front.jpg");
+    faces.push_back("Skybox/right.png");
+    faces.push_back("Skybox/left.png");
+    faces.push_back("Skybox/top.png");
+    faces.push_back("Skybox/bottom.png");
+    faces.push_back("Skybox/back.png");
+    faces.push_back("Skybox/front.png");
     cubemapTexture = loadCubemap(faces);
 }
 

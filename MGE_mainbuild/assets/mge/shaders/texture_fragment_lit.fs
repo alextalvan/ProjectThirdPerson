@@ -56,7 +56,7 @@ void main( void )
     vec2 tiledTexCoord = TexCoord * material.tiling;
 
     if (hasNormalMap) {
-        normal = texture(material.normalMap, tiledTexCoord).rgb;
+        normal = texture(material.normalMap, TexCoord * 2).rgb;
         normal = normalize(normal * 2.0 - 1.0);
         normal = normalize(TBN * normal);
     }
@@ -103,17 +103,17 @@ float ShadowCalculation(vec3 norm, vec3 lightDir)
     //first check for near shadow
     if(shadow > 0.75)
     {
-//        shadow = 0.0;
-//        vec2 texelSize = 1.0 / textureSize(depthMapNear, 0);
-//        for(float x = -1.0; x <= 1.0; ++x)
-//        {
-//            for(float y = -1.0; y <= 1.0; ++y)
-//            {
-//                float pcfDepth = texture(depthMapNear, projCoords.xy + vec2(x, y) * texelSize).r;
-//                shadow += currentDepth - bias > pcfDepth  ? 1.0 : 0.0;
-//            }
-//        }
-//        shadow /= 9.0;
+        shadow = 0.0;
+        vec2 texelSize = 1.0 / textureSize(depthMapNear, 0);
+        for(float x = -1.0; x <= 1.0; ++x)
+        {
+            for(float y = -1.0; y <= 1.0; ++y)
+            {
+                float pcfDepth = texture(depthMapNear, projCoords.xy + vec2(x, y) * texelSize).r;
+                shadow += currentDepth - bias > pcfDepth  ? 1.0 : 0.0;
+            }
+        }
+        shadow /= 9.0;
 
         // Keep the shadow at 0.0 when outside the far_plane region of the light's frustum.
         if(projCoords.z > 1.0)
@@ -177,7 +177,7 @@ vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir, vec2 tiledTexCo
 
     // Diffuse shading
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, tiledTexCoord)) * diff;
+    vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, tiledTexCoord)) * diff * 1.2;
 
     // Specular shading
     float spec = 0.0f;
@@ -185,7 +185,7 @@ vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir, vec2 tiledTexCo
     if (hasSpecMap) {
         vec3 halfwayDir = normalize(lightDir + viewDir);
         spec = pow(max(dot(norm, halfwayDir), 0.0), material.shininess);
-        specular = LightArray[lightIndex].color * texture(material.specularMap, TexCoord).r * spec * material.smoothness;
+        specular = LightArray[lightIndex].color * texture(material.specularMap, tiledTexCoord).r * spec * material.smoothness;
     }
 
     float shadow = (diff==0.0) ? 0.5f : ShadowCalculation(norm, lightDir) * 0.5f;

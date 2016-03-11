@@ -43,9 +43,11 @@ private:
 	static int getWorldPos(lua_State * lua);
 	static int setWorldPos(lua_State * lua);
 	static int getLocalPos(lua_State * lua);
+	static int setWorldRot(lua_State * lua);
 	static int rotate(lua_State * lua);
 	static int scale(lua_State * lua);
 	static int translate(lua_State * lua);
+	static int transformDirection(lua_State * lua);
 	static int setMesh(lua_State * lua);
 	static int getMesh(lua_State * lua);
 	static int setMaterial(lua_State * lua);
@@ -110,6 +112,7 @@ private:
 	static int wallCollider(lua_State * lua);
 	static int luaScript(lua_State * lua);
 	static int particleToggle(lua_State * lua);
+	//static int setRaycastIgnore(lua_State * lua);
 
 	//lua
 	static int luaInvokeFunction(lua_State * lua);

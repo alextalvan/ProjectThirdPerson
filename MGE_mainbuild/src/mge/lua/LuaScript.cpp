@@ -61,9 +61,11 @@ LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
 	lua_register(L, "GetWorldPos", getWorldPos);//
 	lua_register(L, "SetWorldPos", setWorldPos);//
 	lua_register(L, "GetLocalPos", getLocalPos);//
+	lua_register(L, "SetWorldRot", setWorldRot);
 	lua_register(L, "Rotate", rotate);//
 	lua_register(L, "Scale", scale);//
 	lua_register(L, "Translate", translate);//
+	lua_register(L, "TransformDirection", transformDirection);//
 	lua_register(L, "GetTime", getTime);//
 	lua_register(L, "GetKey", keyPressed);//
 	lua_register(L, "GetKeyUp", keyUp);//
@@ -848,6 +850,49 @@ int LuaScript::setWorldPos(lua_State * lua)
 	return 0;
 }
 
+int LuaScript::setWorldRot(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, lua_gettop(lua))) throw "Expect: game object";
+	#endif
+
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -4);
+	glm::vec3 rot = glm::vec3(0, 0, 0);
+	rot.x = lua_tonumber(lua, -3);
+	rot.y = lua_tonumber(lua, -2);
+	rot.z = lua_tonumber(lua, -1);
+
+	gameObj->setWorldRotation(rot);
+
+	return 0;
+}
+
+int LuaScript::transformDirection(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, lua_gettop(lua))) throw "Expect: game object";
+	#endif
+
+	GameObject * gameObj = (GameObject*)(LuaObject*)lua_touserdata(lua, -4);
+	glm::vec3 dir = glm::vec3(0, 0, 0);
+	dir.x = lua_tonumber(lua, -3);
+	dir.y = lua_tonumber(lua, -2);
+	dir.z = lua_tonumber(lua, -1);
+
+	dir = glm::normalize(dir);
+
+	glm::mat4 objMat = gameObj->getWorldTransform();
+	glm::vec3 trDir = glm::vec3(objMat * glm::vec4(dir,0));
+
+	trDir = glm::normalize(trDir);
+
+    lua_pushnumber(lua, trDir.x);
+	lua_pushnumber(lua, trDir.y);
+	lua_pushnumber(lua, trDir.z);
+
+	return 3;
+}
+
 int LuaScript::getLocalPos(lua_State * lua)
 {
     #ifdef MGE_LUA_SAFETY
@@ -1359,6 +1404,27 @@ int LuaScript::getActive(lua_State * lua)
 
     return 0;
 }
+
+//int LuaScript::setRaycastIgnore(lua_State * lua)
+//{
+//    #ifdef MGE_LUA_SAFETY
+//	if (!lua_islightuserdata(lua, -1)) throw "Expect: game object or component";
+//	#endif
+//
+//
+//    LuaObject* l = (LuaObject*)lua_touserdata(lua,-2);
+//    bool val = lua_toboolean(lua,-1);
+//
+//    GameObject* g = dynamic_cast<GameObject*>(l);
+//    if(g!=NULL){g->SetActive(val); return 0;}
+//
+//    Component* c = dynamic_cast<Component*>(l);
+//    if(c!=NULL) {c->SetActive(val); return 0;}
+//
+//
+//
+//    return 0;
+//}
 
 int LuaScript::luaInvokeFunction(lua_State * lua)
 {

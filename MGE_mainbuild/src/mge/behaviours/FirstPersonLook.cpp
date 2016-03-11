@@ -29,8 +29,8 @@ void FirstPersonLook::Rotation()
 {
     glm::vec2 mouseOffset = GetMouseOffset();
 
-    if(abs(mouseOffset.x) > 200) mouseOffset.x = 0;
-    if(abs(mouseOffset.y) > 200) mouseOffset.y = 0;
+    //if(abs(mouseOffset.x) > 200) mouseOffset.x = 0;
+    //if(abs(mouseOffset.y) > 200) mouseOffset.y = 0;
 
     rotationX -= mouseOffset.x / 5;
     rotationY += mouseOffset.y / 5;
