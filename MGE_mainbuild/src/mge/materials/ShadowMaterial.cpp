@@ -33,7 +33,8 @@ void ShadowMaterial::_lazyInitializeShader() {
     }
 }
 
-void ShadowMaterial::render(GameObject* pGameObject, Light* light) {
+void ShadowMaterial::render(GameObject* pGameObject, Light* light, bool shrink)
+{
     _shader->use();
 
     glm::mat4 lightProjection, lightView;
@@ -53,8 +54,16 @@ void ShadowMaterial::render(GameObject* pGameObject, Light* light) {
 //    lightView = shadowCam->getWorldTransform();
 //    lightSpaceMatrix = lightProjection * lightView;
 
+    glm::mat4 objWorldMat = pGameObject->getWorldTransform();
+    if(shrink)
+    {
+        objWorldMat[0] *= 0.98f;
+        objWorldMat[1] *= 0.98f;
+        objWorldMat[2] *= 0.98f;
+    }
+
     glUniformMatrix4fv(_lightMatLoc, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
-    glUniformMatrix4fv(_modelMatLoc, 1, GL_FALSE, glm::value_ptr(pGameObject->getWorldTransform()));
+    glUniformMatrix4fv(_modelMatLoc, 1, GL_FALSE, glm::value_ptr(objWorldMat));
 
     //now inform mesh of where to stream its data
     pGameObject->getMesh()->streamToOpenGL(0, -1, -1);

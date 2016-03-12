@@ -32,9 +32,9 @@ DualLinkList<TransparencyList> Renderer::transparentList;
 
 ShadowCamera* Renderer::_shadowCam;
 
-glm::mat4 Renderer::nearShadowOrtho = glm::ortho(-20.0f,20.0f,-20.0f,20.0f,0.1f,200.0f);//45+60(neartest) is good
-glm::mat4 Renderer::farShadowOrtho = glm::ortho(-1000.0f,1000.0f,-1000.0f,1000.0f,0.1f,200.0f);
-glm::mat4 Renderer::midShadowOrtho = glm::ortho(-125.0f,125.0f,-125.0f,125.0f,0.1f,200.0f);
+glm::mat4 Renderer::nearShadowOrtho = glm::ortho(-20.0f,20.0f,-20.0f,20.0f,0.1f,500.0f);//45+60(neartest) is good
+glm::mat4 Renderer::farShadowOrtho = glm::ortho(-600.0f,600.0f,-600.0f,600.0f,0.1f,500.0f);
+glm::mat4 Renderer::midShadowOrtho = glm::ortho(-150.0f,150.0f,-150.0f,150.0f,0.1f,500.0f);
 glm::mat4 Renderer::currentShadowOrtho;
 
 Renderer::Renderer(int width, int height)
@@ -51,8 +51,9 @@ Renderer::Renderer(int width, int height)
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glClearColor((float)0x2d/0xff, (float)0x6b/0xff, (float)0xce/0xff, 1.0f );
 
+	//glEnable(GL_FOG);
+
     // Setup some OpenGL options
-    glEnable(GL_DEPTH_TEST);
     //glDepthFunc(GL_LESS);
 
     InitializeSkyBox();
@@ -296,19 +297,23 @@ void Renderer::renderDepthMap (GameObject * pGameObject, Camera* pCamera, Light 
             shadowMat->render(pGameObject, light);
         }
         else
-            if(ShadowFrustumCheckExclusive(pGameObject,100.0f))
-            //if(ShadowFrustumCheckEncasing(pGameObject,125.0f))//mid check
+            //if(ShadowFrustumCheckExclusive(pGameObject,100.0f))
+            if(ShadowFrustumCheckEncasing(pGameObject,150.0f))//mid check
             {
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureMid, 0);
                 currentShadowOrtho = midShadowOrtho;
                 shadowMat->render(pGameObject, light);
             }
             else
-                if(ShadowFrustumCheckExclusive(pGameObject,1000.0f))//far check
+                if(ShadowFrustumCheckExclusive(pGameObject,600.0f))//far check
                 {
+                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureMid, 0);//test
+                    currentShadowOrtho = midShadowOrtho;
+                    shadowMat->render(pGameObject, light);
+
                     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureFar, 0);
                     currentShadowOrtho = farShadowOrtho;
-                    shadowMat->render(pGameObject, light);
+                    shadowMat->render(pGameObject, light,true);
                 }
 
 
@@ -364,7 +369,7 @@ bool Renderer::ShadowFrustumCheckExclusive(GameObject* obj, float orthoSize)
     if(dot(rot[1],objPos) + objRadius < lightProj[1] - orthoSize )
         return false;
 
-    if(dot(rot[2],objPos) - objRadius > lightProj[2] + 200.0f )
+    if(dot(rot[2],objPos) - objRadius > lightProj[2] + 500.0f )
         return false;
 
     if(dot(rot[2],objPos) + objRadius < lightProj[2] + 0.1f )
@@ -403,7 +408,7 @@ bool Renderer::ShadowFrustumCheckEncasing(GameObject* obj, float orthoSize)
        dot(rot[1],objPos) - objRadius > lightProj[1] - orthoSize &&
        dot(rot[1],objPos) + objRadius < lightProj[1] + orthoSize &&
        dot(rot[2],objPos) - objRadius > lightProj[2] + 0.1f &&
-       dot(rot[2],objPos) + objRadius < lightProj[2] + 200.0f)
+       dot(rot[2],objPos) + objRadius < lightProj[2] + 500.0f)
         return true;
     else
         return false;

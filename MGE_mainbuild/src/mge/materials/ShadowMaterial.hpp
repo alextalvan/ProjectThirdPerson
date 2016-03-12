@@ -14,7 +14,7 @@ class ShadowMaterial
     public:
         ShadowMaterial ();
         virtual ~ShadowMaterial ();
-        virtual void render(GameObject* pGameObject, Light* light);
+        virtual void render(GameObject* pGameObject, Light* light, bool shrink = false);
     protected:
     private:
         static ShaderProgram* _shader;

@@ -236,6 +236,7 @@ void TextureLitMaterial::render(GameObject* pGameObject, Camera* pCamera) {
     glUniformMatrix4fv ( _viewMatLoc,  1, GL_FALSE, glm::value_ptr(pCamera->getView()));
     glUniformMatrix4fv ( _modelMatLoc, 1, GL_FALSE, glm::value_ptr(pGameObject->getWorldTransform()));
 
+
     //now inform mesh of where to stream its data
     pGameObject->getMesh()->streamToOpenGL(0, 1, 2, 3);
 

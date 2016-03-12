@@ -15630,7 +15630,7 @@
 1455012464 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\activateable.cpp
 	"mge/core/Activateable.hpp"
 
-1457639988 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.cpp
+1457776393 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\camera.cpp
 	<iostream>
 	<glm.hpp>
 	"mge/core/Camera.hpp"
@@ -15691,7 +15691,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1457690805 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
+1457791529 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -15786,7 +15786,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1457651782 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
+1457785991 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\texturelitmaterial.cpp
 	<glm.hpp>
 	"mge/materials/TextureLitMaterial.hpp"
 	"mge/core/Texture.hpp"
@@ -16105,7 +16105,7 @@
 	"mge/collision/SphereCollider.hpp"
 	"mge/util/Timer.hpp"
 
-1457690718 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
+1457790244 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
 	<mge/editor/LevelImporter.hpp>
 	<mge/config.hpp>
 	<glm.hpp>
@@ -16385,11 +16385,11 @@
 1455931890 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luaobject.cpp
 	"mge/lua/LuaObject.hpp"
 
-1457361926 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\shadowmaterial.hpp
+1457791520 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\shadowmaterial.hpp
 	"mge/core/ShaderProgram.hpp"
 	"mge/shadow/ShadowCamera.hpp"
 
-1457639211 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\shadowmaterial.cpp
+1457791968 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\shadowmaterial.cpp
 	"mge/materials/ShadowMaterial.hpp"
 	<glm.hpp>
 	"mge/core/Mesh.hpp"

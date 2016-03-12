@@ -332,7 +332,7 @@ namespace LevelEditor
                 //Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -3, 1), glm::vec3(1.0f,1.0f,1.0f),glm::vec3(0.1f),0,owner);
 
                 glm::vec3 lightDir = glm::vec3(1, -1.25f, 1);
-                float n = 75.0f;
+                float n = 300.0f;
                 glm::vec3 lightPos = glm::normalize(lightDir) * -n; //+ glm::vec3(0,5,0); //+ glm::vec3(n*1.25f,0,n*1.25f);
                 Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, lightPos, lightDir , glm::vec3(1.0f,0.5f,0.188f),glm::vec3(0.1f),0,owner);
                 _storedWorld->AddChild(light1);
