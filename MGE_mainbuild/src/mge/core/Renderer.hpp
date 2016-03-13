@@ -15,7 +15,6 @@ class GameObject;
 class Camera;
 class Light;
 class ShadowMaterial;
-class ShadowCubeMaterial;
 class ShaderProgram;
 class TransparencyList;
 
@@ -38,7 +37,8 @@ class Renderer
         //render whole world
         void render (World* pWorld);
 
-        //render specific game object within the world (using world's light settings etc)
+
+        void RecalculateRenderBounds(GameObject* obj);
         void render (GameObject* pGameObject, Camera* pCamera, bool pRecursive);
         void renderDepthMap (GameObject * pGameObject, Camera* pCamera, Light * light, bool pRecursive);
         //utility call
@@ -56,9 +56,6 @@ class Renderer
         //transparency
         static DualLinkList<TransparencyList> transparentList;
         void renderTransparentObjects (Camera * pCamera);
-
-        //test
-        static ShadowCamera* GetShadowCamera();
 
         //static glm::mat4& GetCurrentShadowOrtho();
         static glm::mat4& GetFarShadowOrtho();
@@ -81,9 +78,6 @@ class Renderer
         // Setup skybox VAO
         GLuint skyboxVAO, skyboxVBO;
         GLuint cubemapTexture;
-
-        //test
-        static ShadowCamera* _shadowCam;
 
 
         ///post processing

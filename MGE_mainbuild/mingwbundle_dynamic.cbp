@@ -190,6 +190,7 @@
 		<Unit filename="src/mge/sound/SoundManager.hpp" />
 		<Unit filename="src/mge/test/TestSphereCol.cpp" />
 		<Unit filename="src/mge/test/TestSphereCol.hpp" />
+		<Unit filename="src/mge/util/BoundingSphere.hpp" />
 		<Unit filename="src/mge/util/DebugHud.cpp" />
 		<Unit filename="src/mge/util/DebugHud.hpp" />
 		<Unit filename="src/mge/util/Input.cpp" />

@@ -30,8 +30,6 @@ int Renderer::_screenHeight;
 
 DualLinkList<TransparencyList> Renderer::transparentList;
 
-ShadowCamera* Renderer::_shadowCam;
-
 glm::mat4 Renderer::nearShadowOrtho = glm::ortho(-20.0f,20.0f,-20.0f,20.0f,0.1f,500.0f);
 glm::mat4 Renderer::farShadowOrtho = glm::ortho(-600.0f,600.0f,-600.0f,600.0f,0.1f,500.0f);
 glm::mat4 Renderer::midShadowOrtho = glm::ortho(-150.0f,150.0f,-150.0f,150.0f,0.1f,500.0f);
@@ -42,7 +40,6 @@ Renderer::Renderer(int width, int height)
     _screenWidth = width;
     _screenHeight = height;
 
-    //_shadowCam = new ShadowCamera();
 
 	glEnable( GL_DEPTH_TEST );
 	glEnable( GL_CULL_FACE ); // default GL_BACK
@@ -132,6 +129,8 @@ void Renderer::render (World* pWorld)
     debugInfo.drawCallCount = debugInfo.triangleCount = 0;
     Time::update();
     float startTime = Time::now();
+
+    RecalculateRenderBounds(pWorld);
 
     Camera* mainCam = pWorld->getMainCamera();
 
@@ -293,36 +292,30 @@ void Renderer::renderDepthMap (GameObject * pGameObject, Camera* pCamera, Light 
         //if(ShadowFrustumCheckExclusive(pGameObject,10.0f))//near check
         {
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureNear, 0);
-            //currentShadowOrtho = nearShadowOrtho;
             shadowMat->render(pGameObject, light, nearShadowOrtho);
         }
         else
             //if(ShadowFrustumCheckExclusive(pGameObject,100.0f))
             if(ShadowFrustumCheckEncasing(pGameObject,150.0f))//mid check
             {
-                //test
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureNear, 0);
-                //currentShadowOrtho = nearShadowOrtho;
                 shadowMat->render(pGameObject, light, nearShadowOrtho);
 
-
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureMid, 0);
-                //currentShadowOrtho = midShadowOrtho;
-                shadowMat->render(pGameObject,light,midShadowOrtho,true);
+                shadowMat->render(pGameObject, light, midShadowOrtho);
             }
             else
                 if(ShadowFrustumCheckExclusive(pGameObject,600.0f))//far check
                 {
+                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureNear, 0);
+                    shadowMat->render(pGameObject, light, nearShadowOrtho);
+
                     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureMid, 0);//test
-                    //currentShadowOrtho = midShadowOrtho;
-                    shadowMat->render(pGameObject,light,midShadowOrtho);
+                    shadowMat->render(pGameObject, light, midShadowOrtho);
 
                     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureFar, 0);
-                    //currentShadowOrtho = farShadowOrtho;
-                    shadowMat->render(pGameObject, light,farShadowOrtho,true);
+                    shadowMat->render(pGameObject, light, farShadowOrtho);
                 }
-
-
     }
 
     if (!pRecursive) return;
@@ -347,19 +340,8 @@ bool Renderer::ShadowFrustumCheckExclusive(GameObject* obj, float orthoSize)
     mat3 rot = mainLight->getWorldRotation();
     vec3 pos = mainLight->getWorldPosition();
 
-    float meshRadius = obj->getMesh()->GetBoundRadius();
-    mat4 objMat = obj->getWorldTransform();
-
-    vec3 objPos = obj->getWorldPosition();
-
-    //must test for non uniform scaling
-    float maxScale = glm::length(objMat[0]);
-    float newScale = glm::length(objMat[1]);
-    if(newScale > maxScale) maxScale = newScale;
-    newScale = glm::length(objMat[2]);
-    if(newScale > maxScale) maxScale = newScale;
-
-    float objRadius = maxScale * meshRadius;
+    vec3 objPos = obj->GetRenderBound().position;
+    float objRadius = obj->GetRenderBound().radius;
 
     vec3 lightProj = vec3(dot(rot[0],pos),dot(rot[1],pos),dot(rot[2],pos));
 
@@ -393,19 +375,8 @@ bool Renderer::ShadowFrustumCheckEncasing(GameObject* obj, float orthoSize)
     mat3 rot = mainLight->getWorldRotation();
     vec3 pos = mainLight->getWorldPosition();
 
-    float meshRadius = obj->getMesh()->GetBoundRadius();
-    mat4 objMat = obj->getWorldTransform();
-
-    vec3 objPos = obj->getWorldPosition();
-
-    //must test for non uniform scaling
-    float maxScale = glm::length(objMat[0]);
-    float newScale = glm::length(objMat[1]);
-    if(newScale > maxScale) maxScale = newScale;
-    newScale = glm::length(objMat[2]);
-    if(newScale > maxScale) maxScale = newScale;
-
-    float objRadius = maxScale * meshRadius;
+    vec3 objPos = obj->GetRenderBound().position;
+    float objRadius = obj->GetRenderBound().radius;
 
     vec3 lightProj = vec3(dot(rot[0],pos),dot(rot[1],pos),dot(rot[2],pos));
 
@@ -702,8 +673,20 @@ GLuint Renderer::GetPostProcessVertexAttrib()
     return _postProcessVertexAttributeArray;
 }
 
-ShadowCamera* Renderer::GetShadowCamera()
+void Renderer::RecalculateRenderBounds(GameObject* obj)
 {
-    return _shadowCam;
+    if(obj->getMesh())
+        obj->RecalculateRenderBound();
+
+    DualLinkNode2<ChildList>* cn = obj->GetChildren().startNode;
+    while(cn!=NULL)
+    {
+        RecalculateRenderBounds((GameObject*)cn);
+        cn = cn->nextNode;
+    }
 }
+
+
+
+
 

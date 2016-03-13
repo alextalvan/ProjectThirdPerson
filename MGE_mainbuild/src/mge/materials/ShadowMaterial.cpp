@@ -33,7 +33,7 @@ void ShadowMaterial::_lazyInitializeShader() {
     }
 }
 
-void ShadowMaterial::render(GameObject* pGameObject, Light* light,glm::mat4& projectionMat, bool shrink)
+void ShadowMaterial::render(GameObject* pGameObject, Light* light,glm::mat4& projectionMat)//, bool shrink)//,float shrinkSize)
 {
     _shader->use();
 
@@ -55,18 +55,18 @@ void ShadowMaterial::render(GameObject* pGameObject, Light* light,glm::mat4& pro
 //    lightSpaceMatrix = lightProjection * lightView;
 
 
-    if(shrink)
-    {
-        glm::mat4 objWorldMat = pGameObject->getWorldTransform();
-        objWorldMat[0] *= 0.99f;
-        objWorldMat[1] *= 0.99f;
-        objWorldMat[2] *= 0.99f;
-        glUniformMatrix4fv(_modelMatLoc, 1, GL_FALSE, glm::value_ptr(objWorldMat));
-    }
-    else
-    {
-        glUniformMatrix4fv(_modelMatLoc, 1, GL_FALSE, glm::value_ptr(pGameObject->getWorldTransform()));
-    }
+//    if(shrink)
+//    {
+//        glm::mat4 objWorldMat = pGameObject->getWorldTransform();
+//        objWorldMat[0] *= 0.99f;
+//        objWorldMat[1] *= 0.99f;
+//        objWorldMat[2] *= 0.99f;
+//        glUniformMatrix4fv(_modelMatLoc, 1, GL_FALSE, glm::value_ptr(objWorldMat));
+//    }
+//    else
+//    {
+    glUniformMatrix4fv(_modelMatLoc, 1, GL_FALSE, glm::value_ptr(pGameObject->getWorldTransform()));
+    //}
 
     glUniformMatrix4fv(_lightMatLoc, 1, GL_FALSE, glm::value_ptr(projectionMat * Light::GetDirectionalViewMatrix()));
 

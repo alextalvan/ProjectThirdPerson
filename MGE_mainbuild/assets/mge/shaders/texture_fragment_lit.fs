@@ -98,8 +98,40 @@ void main( void )
     fragment_color = vec4(ambient + outColor,color.w);
 }
 
+bool CheckFrustum(vec2 coords)
+{
+    if(coords.x < -0.998 || coords.x > 0.998 || coords.y < -0.998 || coords.y > 0.998)
+        return false;
+
+    return true;
+}
+
+//float PoissonSample(sampler2D samp,vec2 uv, float texSize,float bias, float zCoord )
+//{
+//    vec2 poissonDisk[4] = vec2[](
+//
+//    vec2( -0.94201624, -0.39906216 ),
+//
+//    vec2( 0.94558609, -0.76890725 ),
+//
+//    vec2( -0.094184101, -0.92938870 ),
+//
+//    vec2( 0.34495938, 0.29387760 ));
+//
+//    float ret = 1.0;
+//    for (int i=0;i<4;i++)
+//    {
+//        if (BilinearShadowSample(samp,uv + poissonDisk[i]/ 8192.0, texSize)  <  zCoord-bias )
+//            ret -= 0.25;
+//    }
+//
+//    return ret;
+//}
+
 float ShadowCalculation(vec3 norm, vec3 lightDir)
 {
+
+
     //first use the NEAR map to see if a shadow is formed. the NEAR shadows override the far ones
 
     vec3 texSizes = vec3(4096,4096,4096);//near,mid,far
@@ -107,7 +139,7 @@ float ShadowCalculation(vec3 norm, vec3 lightDir)
     // perform perspective divide
     //vec3 projCoords = FragPosLightSpaceNear.xyz / FragPosLightSpaceNear.w;
     // Transform to [0,1] range
-    vec3 projCoords = FragPosLightSpaceNear.xyz * 0.5 + 0.5;
+    vec3 projCoords;// = FragPosLightSpaceNear.xyz * 0.5 + 0.5;
 
     // Get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
     //float closestDepth = texture(depthMapNear, vec2(projCoords.x,projCoords.y)).r;
@@ -115,17 +147,20 @@ float ShadowCalculation(vec3 norm, vec3 lightDir)
     // Get depth of current fragment from light's perspective
     //float currentDepth; = projCoords.z;
     // Check whether current frag pos is in shadow
-    float bias;// = max(0.0001 * (1.0 - dot(norm, lightDir)), 0.0001);
+    float bias = max(0.0001 * (1.0 - dot(norm, lightDir)), 0.0001);
     float shadow;// = currentDepth - bias > closestDepth  ? 1.0 : 0.0;
 
-
-
-    //first check for near shadow
-    if(projCoords.z < 1.00001)//shadow > 0.75)
+    //projCoords = FragPosLightSpaceNear.xyz * 0.5 + 0.5;
+    if(CheckFrustum(FragPosLightSpaceNear.xy))
     {
+        projCoords = FragPosLightSpaceNear.xyz * 0.5 + 0.5;
+        if(projCoords.z > 1.0001)//if near and mid start "bleeding" shadows, use this with them as well
+            return 1.0;
+
         closestDepth = BilinearShadowSample(depthMapNear,projCoords.xy,texSizes.x);
-        bias = max(0.0001 * (1.0 - dot(norm, lightDir)), 0.0001);
+        //bias = max(0.00001 * (1.0 - dot(norm, lightDir)), 0.00001);
         shadow = projCoords.z - bias > closestDepth  ? 1.0 : 0.0;
+
 
         if(shadow > 0.75)
         {
@@ -135,7 +170,63 @@ float ShadowCalculation(vec3 norm, vec3 lightDir)
             {
                 for(float y = -1.0; y <= 1.0; ++y)
                 {
-                    float pcfDepth = texture(depthMapNear, projCoords.xy + vec2(x, y) * texelSize).r;
+                    //float pcfDepth = texture(depthMapNear, projCoords.xy + vec2(x, y) * texelSize).r;
+                    float pcfDepth = BilinearShadowSample(depthMapNear,projCoords.xy + vec2(x, y) * texelSize ,texSizes.x);//this actually looks decent, for once
+                    shadow += projCoords.z - bias > pcfDepth  ? 1.0 : 0.0;
+
+                }
+            }
+            shadow /= 9.0;
+
+            return 1.0 - shadow;
+        }
+
+        //poisson version 1 - one poisson sample
+        //return PoissonSample(depthMapNear,projCoords.xy,texSizes.x,bias,projCoords.z);
+
+        //poisson version 2 - added pcf
+//        shadow = projCoords.z - bias > closestDepth  ? 1.0 : 0.0;
+//        if(shadow > 0.75)
+//        {
+//            shadow = 0.0;
+//            float texelSize = 1.0 / texSizes.x;
+//            for(float x = -1.0; x <= 1.0; ++x)
+//            {
+//                for(float y = -1.0; y <= 1.0; ++y)
+//                {
+//                    float pcfDepth = PoissonSample(depthMapNear,projCoords.xy + vec2(x,y) * texelSize,texSizes.x,bias,projCoords.z);
+//                    shadow += projCoords.z - bias > pcfDepth  ? 1.0 : 0.0;
+//
+//                }
+//            }
+//            shadow /= 9.0;
+//
+//
+//        }
+//        return 1.0 - shadow;
+    }
+    else
+    if(CheckFrustum(FragPosLightSpaceMid.xy))
+    {
+        projCoords = FragPosLightSpaceMid.xyz * 0.5 + 0.5;
+
+        if(projCoords.z > 1.0001)//if near and mid start "bleeding" shadows, use this with them as well
+            return 1.0;
+
+        closestDepth = BilinearShadowSample(depthMapMid,projCoords.xy,texSizes.y);
+        //bias = max(0.0001 * (1.0 - dot(norm, lightDir)), 0.0001);//0.002 was decent
+        shadow = projCoords.z - bias > closestDepth  ? 1.0 : 0.0;
+
+        if(shadow > 0.75)
+        {
+            shadow = 0.0;
+            float texelSize = 1.0 / texSizes.y;
+            for(float x = -1.0; x <= 1.0; ++x)
+            {
+                for(float y = -1.0; y <= 1.0; ++y)
+                {
+                    float pcfDepth = texture(depthMapMid, projCoords.xy + vec2(x, y) * texelSize).r;
+                    //float pcfDepth = BilinearShadowSample(depthMapMid,projCoords.xy + vec2(x, y) * texelSize,texSizes.y);
                     shadow += projCoords.z - bias > pcfDepth  ? 1.0 : 0.0;
                 }
             }
@@ -143,60 +234,20 @@ float ShadowCalculation(vec3 norm, vec3 lightDir)
 
             return 1.0 - shadow;
         }
-        else
-        {
-            //mid shadow
-            projCoords = FragPosLightSpaceMid.xyz * 0.5 + 0.5;
+    }
+    else
+    if(CheckFrustum(FragPosLightSpaceFar.xy))
+    {
+        projCoords = FragPosLightSpaceFar.xyz * 0.5 + 0.5;
 
-            if(projCoords.z < 1.00001)//shadow > 0.75)
-            {
-                closestDepth = BilinearShadowSample(depthMapMid,projCoords.xy,texSizes.y);
-                //currentDepth = projCoords.z;
-                bias = max(0.0001 * (1.0 - dot(norm, lightDir)), 0.0001);//0.002 was decent
-                shadow = projCoords.z - bias > closestDepth  ? 1.0 : 0.0;
+        if(projCoords.z > 1.0001)//if near and mid start "bleeding" shadows, use this with them as well
+            return 1.0;
 
+        closestDepth = BilinearShadowSample(depthMapFar,projCoords.xy,texSizes.z);
+        bias = max(0.00125 * (1.0 - dot(norm, lightDir)), 0.00125);
+        shadow = projCoords.z - bias > closestDepth  ? 1.0 : 0.0;
 
-                if(shadow > 0.75)
-                {
-                    shadow = 0.0;
-                    float texelSize = 1.0 / texSizes.y;
-                    for(float x = -1.0; x <= 1.0; ++x)
-                    {
-                        for(float y = -1.0; y <= 1.0; ++y)
-                        {
-                            float pcfDepth = texture(depthMapMid, projCoords.xy + vec2(x, y) * texelSize).r;
-                            //float pcfDepth = BilinearShadowSample(depthMapMid,projCoords.xy + vec2(x, y) * texelSize,texSizes.y);
-                            shadow += projCoords.z - bias > pcfDepth  ? 1.0 : 0.0;
-                        }
-                    }
-                    shadow /= 9.0;
-
-                    return 1.0 - shadow;
-                }
-                else
-                {
-                    //here we check the far shadow, and no PCF is done if it is found
-                    projCoords = FragPosLightSpaceFar.xyz * 0.5 + 0.5;
-
-                    if(projCoords.z < 1.00001)//shadow > 0.75)
-                    {
-                        closestDepth = BilinearShadowSample(depthMapFar,projCoords.xy,texSizes.z);
-                        bias = max(0.025 * (1.0 - dot(norm, lightDir)), 0.025);
-                        shadow = projCoords.z - bias > closestDepth  ? 1.0 : 0.0;
-
-                        if(shadow > 0.75)
-                            return 1.0 - shadow;
-                    }
-
-
-                }
-
-
-            }
-
-        }
-
-
+        if(shadow > 0.75) return 0.0;
     }
 
     return 1.0;
@@ -229,7 +280,9 @@ vec3 DoDirectionalLight(int lightIndex, vec3 norm, vec3 viewDir, vec2 tiledTexCo
 
 vec3 DoPointLight(int lightIndex, vec3 norm, vec3 viewDir, vec2 tiledTexCoord)
 {
-    vec3 lightDir = normalize(LightArray[lightIndex].position - FragPos);
+    vec3 diffVector = LightArray[lightIndex].position - FragPos;
+
+    vec3 lightDir = normalize(diffVector);
     // Diffuse shading
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = LightArray[lightIndex].color * vec3(texture(material.diffuseMap, tiledTexCoord)) * diff;
@@ -244,11 +297,13 @@ vec3 DoPointLight(int lightIndex, vec3 norm, vec3 viewDir, vec2 tiledTexCoord)
     }
 
     // Attenuation
-    float distance = length(LightArray[lightIndex].position - FragPos);
+    float dist = length(diffVector);
     vec3 att = LightArray[lightIndex].attenuation;
-    float attenuation = 1.0f / (att.x + att.y * distance + att.z * distance * distance);
+    float attenuation = 1.0f / (att.x + att.y * dist + att.z * dist * dist);
 
     // Combine results and add attenuation
+
+    //vec3 ret = (diffuse + specular) * attenuation;
     return (diffuse + specular) * attenuation;
 }
 

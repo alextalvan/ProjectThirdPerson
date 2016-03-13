@@ -9,6 +9,8 @@ using namespace std;
 #include "mge/core/World.hpp"
 #include "mge/behaviours/Component.hpp"
 #include "mge/core/Renderer.hpp"
+#include "mge/collision/Collider.hpp"
+#include "glm.hpp"
 
 GameObject::GameObject(std::string pName, glm::vec3 pPosition )
 :	_name( pName ), _transform( glm::translate( pPosition ) ),  _parent(NULL), _children(),
@@ -506,6 +508,33 @@ bool GameObject::IsActiveInWorld()
     }
 
     return true;
+}
+
+BoundingSphere& GameObject::GetRenderBound()
+{
+    return _renderBounds;
+}
+
+void GameObject::RecalculateRenderBound()
+{
+    using namespace glm;
+
+    if(_mesh == NULL)
+        return;
+
+    float meshRadius = _mesh->GetBoundRadius();
+    mat4 objMat = this->getWorldTransform();
+
+    _renderBounds.position = this->getWorldPosition();
+
+    //must test for non uniform scaling
+    float maxScale = glm::length(objMat[0]);
+    float newScale = glm::length(objMat[1]);
+    if(newScale > maxScale) maxScale = newScale;
+    newScale = glm::length(objMat[2]);
+    if(newScale > maxScale) maxScale = newScale;
+
+    _renderBounds.radius = maxScale * meshRadius;
 }
 
 

@@ -32,7 +32,7 @@ private:
     ~QuadTreeNode();
     //QuadAABB _boundingBox;
     float _plusZ, _minusZ, _plusX, _minusX;
-    bool OverlapCheck(const ColliderBoundingSphere& boundSphere);
+    bool OverlapCheck(const BoundingSphere& boundSphere);
 
     QuadTreeNode *_parent = NULL;
     QuadTreeNode *_children[4];

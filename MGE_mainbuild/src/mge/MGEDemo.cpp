@@ -209,7 +209,16 @@ void MGEDemo::_update()
         _debugEnabled = !_debugEnabled;
 
     if(Input::GetKey(Input::LControl)&&Input::GetKeyDown(Input::U))
+    {
         _lockFrameRate = !_lockFrameRate;
+
+        //if(_lockFrameRate)
+        //{
+            //_window->setFramerateLimit(60);
+            _window->setVerticalSyncEnabled(_lockFrameRate);
+        //}
+    }
+
 }
 
 void MGEDemo::_updateHud()

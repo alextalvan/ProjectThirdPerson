@@ -69,7 +69,7 @@ class AbstractGame
 
     private:
         float _timeAccumultor = 0.0f;
-        float _targetFrameTime = 0.016666f;
+        float _targetFrameTime = 0.016644f;//just over 60, to reduce screen tearing
 
         void TimedStep();
 

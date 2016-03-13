@@ -7,6 +7,7 @@
 #include "mge/config.hpp"
 #include "mge/core/Light.hpp"
 #include "mge/core/Renderer.hpp"
+#include "glm.hpp"
 #include <string>
 
 ShaderProgram* TextureLitMaterial::_shader = NULL;
@@ -173,7 +174,7 @@ void TextureLitMaterial::render(GameObject* pGameObject, Camera* pCamera) {
 
     DualLinkList<Light> list = Light::GetLightList();
 
-    glUniform1i(_shader->getUniformLocation("lightCount"),list.GetCount());
+
 
     DualLinkNode<Light>* cn = list.startNode;
 
@@ -181,22 +182,32 @@ void TextureLitMaterial::render(GameObject* pGameObject, Camera* pCamera) {
 
     while(cn!=NULL && index < MGE_MAX_LIGHTS)
     {
-        string indexString = std::to_string(index);
         Light* light = (Light*)cn;
+
+        if(!light->IsActive())//do not render with inactive lights
+        {
+            cn = cn->nextNode;
+            continue;
+        }
+
+        string indexString ="LightArray[" + std::to_string(index) + "]";
         GLuint loc;
 
         int lightType = light->getType();
-        loc = _shader->getUniformLocation("LightArray[" + indexString + "].type");
-        glUniform1i(loc,lightType);
 
-        loc = _shader->getUniformLocation("LightArray[" + indexString + "].color");
-        glUniform3fv(loc,1,glm::value_ptr(light->getColor()));
 
-        if (lightType == MGE_LIGHT_DIRECTIONAL) {
-            loc = _shader->getUniformLocation("LightArray[" + indexString + "].direction");
+        if (lightType == MGE_LIGHT_DIRECTIONAL)
+        {
+            loc = _shader->getUniformLocation(indexString + ".type");
+            glUniform1i(loc,lightType);
+
+            loc = _shader->getUniformLocation(indexString + ".color");
+            glUniform3fv(loc,1,glm::value_ptr(light->getColor()));
+
+            loc = _shader->getUniformLocation(indexString + ".direction");
             glUniform3fv(loc,1,glm::value_ptr(light->getDirection()));
-            loc = _shader->getUniformLocation("LightArray[" + indexString + "].position");
-            glUniform3fv(loc,1,glm::value_ptr(light->getLocalPosition()));
+            //loc = _shader->getUniformLocation(indexString + ".position");
+            //glUniform3fv(loc,1,glm::value_ptr(light->getLocalPosition()));
 
             glm::mat4 lightProjection, lightView;
             lightView = Light::GetDirectionalViewMatrix();
@@ -214,16 +225,39 @@ void TextureLitMaterial::render(GameObject* pGameObject, Camera* pCamera) {
             lightProjection = Renderer::GetMidShadowOrtho();
             lightSpaceMatrix = lightProjection * lightView;
             glUniformMatrix4fv(_lightMatLocMid, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
-
-        } else if (lightType == MGE_LIGHT_POINT) {
-            loc = _shader->getUniformLocation("LightArray[" + indexString + "].position");
-            glUniform3fv(loc,1,glm::value_ptr(light->getWorldPosition()));
-            loc = _shader->getUniformLocation("LightArray[" + indexString + "].attenuation");
-            glUniform3fv(loc,1,glm::value_ptr(light->getAttenuation()));
+            ++index;
         }
-        ++index;
+        else
+        if (lightType == MGE_LIGHT_POINT)
+        {
+            glm::vec3 lightPos = light->getWorldPosition();
+            float dist = glm::distance(lightPos, pGameObject->getWorldPosition());
+
+            if(dist > light->getFalloff() + pGameObject->GetRenderBound().radius)
+            {
+                cn = cn->nextNode;
+                continue;
+            }
+
+            loc = _shader->getUniformLocation(indexString + ".type");
+            glUniform1i(loc,lightType);
+
+            loc = _shader->getUniformLocation(indexString + ".color");
+            glUniform3fv(loc,1,glm::value_ptr(light->getColor()));
+
+            loc = _shader->getUniformLocation(indexString + ".position");
+            glUniform3fv(loc,1,glm::value_ptr(lightPos));
+
+            loc = _shader->getUniformLocation(indexString + ".attenuation");
+            glUniform3fv(loc,1,glm::value_ptr(light->getAttenuation()));
+
+            ++index;
+        }
+        //++index;
         cn = cn->nextNode;
     }
+
+    glUniform1i(_shader->getUniformLocation("lightCount"),index);
 
 	//set view pos
 	glUniform3fv(_viewPosLoc, 1, glm::value_ptr(pCamera->getWorldPosition()));

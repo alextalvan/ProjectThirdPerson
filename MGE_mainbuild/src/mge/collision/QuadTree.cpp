@@ -54,7 +54,7 @@ QuadTreeNode* QuadTreeNode::GrabNewNode()
     }
 }
 
-bool QuadTreeNode::OverlapCheck(const ColliderBoundingSphere& boundSphere)
+bool QuadTreeNode::OverlapCheck(const BoundingSphere& boundSphere)
 {
     if(boundSphere.position.z + boundSphere.radius < _minusZ )
         return false;

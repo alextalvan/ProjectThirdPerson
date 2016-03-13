@@ -22,11 +22,13 @@ public:
     void setColor(glm::vec3 pColor);
     void setAttenuation(glm::vec3 pAtt);
     void setAngle(float pAngle);
+    void setFalloff(float falloff);
     int getType();
     glm::vec3 getDirection();
     glm::vec3 getColor();
     glm::vec3 getAttenuation();
     float getAngle();
+    float getFalloff();
 
     static const glm::mat4& GetDirectionalViewMatrix();
     static Light* GetDirectionalLight();
@@ -42,6 +44,7 @@ private:
     glm::vec3 _attenuation;
     float _angle;//45 deg, angle for spotlights
     glm::vec3 _direction;
+    float _falloffDistance = 10.0f;
 
     static Light* _dirLight;
     static glm::mat4 _directionalViewMatrix;

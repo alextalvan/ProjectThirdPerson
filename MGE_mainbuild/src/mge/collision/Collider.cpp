@@ -29,14 +29,14 @@ void Collider::SetRaycastable(bool val)
         CollisionManager::_raycastTargets.Remove((DualLinkNode<RaycastList>*)this);
 }
 
-const ColliderBoundingSphere& Collider::GetBoundingSphere()
+const BoundingSphere& Collider::GetBoundingSphere()
 {
     return _bound;
 }
 
 bool Collider::BoundingSphereCheck(Collider* other)
 {
-    ColliderBoundingSphere otherB = other->GetBoundingSphere();
+    BoundingSphere otherB = other->GetBoundingSphere();
     float dist = glm::distance(_bound.position,otherB.position);
 
     if(dist<=_bound.radius + otherB.radius)

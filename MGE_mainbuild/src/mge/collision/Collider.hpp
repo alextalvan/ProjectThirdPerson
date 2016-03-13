@@ -3,6 +3,7 @@
 #include <mge/behaviours/Component.hpp>
 #include <mge/util/list/DualLinkNode.hpp>
 #include <mge/collision/CollisionManager.hpp>
+#include <mge/util/BoundingSphere.hpp>
 #include <functional>
 #include <glm.hpp>
 using namespace Utils;
@@ -20,13 +21,6 @@ struct CollisionMTV
     glm::vec3 axis = glm::vec3(1,0,0);//this always points TOWARDS the object the OnCollision callback is called on
     float magnitude = 0;
 };
-
-struct ColliderBoundingSphere
-{
-    glm::vec3 position;
-    float radius;
-};
-
 
 //for raycasts - list template dummy class
 class RaycastList;
@@ -51,7 +45,7 @@ public:
     virtual bool RayTest(const Ray& ray, float& distance) = 0;
     void SetRaycastable(bool val);
 
-    const ColliderBoundingSphere& GetBoundingSphere();
+    const BoundingSphere& GetBoundingSphere();
     virtual void RefreshBoundingSphere() = 0;//all collider bounding spheres will be cached before a round of collision checking
     bool BoundingSphereCheck(Collider* other);
 
@@ -69,7 +63,7 @@ protected:
     void setOwner (GameObject* owner) override;
 
     static CollisionMTV storedMTV;
-    ColliderBoundingSphere _bound;
+    BoundingSphere _bound;
 
 private:
     bool ignoreRaycast = true;

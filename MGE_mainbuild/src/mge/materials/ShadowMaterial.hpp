@@ -15,7 +15,7 @@ class ShadowMaterial
     public:
         ShadowMaterial ();
         virtual ~ShadowMaterial ();
-        virtual void render(GameObject* pGameObject, Light* light,glm::mat4& projectionMat, bool shrink = false);
+        virtual void render(GameObject* pGameObject, Light* light,glm::mat4& projectionMat);//, bool shrink = false);//, float shrinkSize = 0.99f);
     protected:
     private:
         static ShaderProgram* _shader;

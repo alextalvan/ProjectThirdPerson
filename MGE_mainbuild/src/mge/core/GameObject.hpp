@@ -11,6 +11,8 @@
 #include "mge/util/list/DualLinkList.hpp"
 #include "mge/util/list/DualLinkNode.hpp"
 #include "mge/lua/LuaObject.hpp"
+#include "mge/util/BoundingSphere.hpp"
+//#include "mge/collision/Collider.hpp"
 
 class AbstractCollider;
 class Component;
@@ -128,6 +130,9 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 
         void SetTransparent(bool val);
 
+        BoundingSphere& GetRenderBound();
+        void RecalculateRenderBound();
+
 	protected:
 	    virtual ~GameObject();
 		std::string _name;
@@ -166,6 +171,8 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
         void _innerAdd (Component* comp);
 		void _innerRemove (Component* comp);
         //bool _transformIsDirty = true;
+
+        BoundingSphere _renderBounds;
 };
 
 #endif // GAMEOBJECT_H

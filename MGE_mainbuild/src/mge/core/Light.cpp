@@ -116,3 +116,14 @@ const glm::mat4& Light::GetDirectionalViewMatrix()
 {
     return _directionalViewMatrix;
 }
+
+//used for culling lights from objects that never get lit by it
+void Light::setFalloff(float falloff)
+{
+    _falloffDistance = falloff;
+}
+
+float Light::getFalloff()
+{
+    return _falloffDistance;
+}
