@@ -65,6 +65,8 @@ class AbstractGame
 		GUI* _world2D;
 		bool _running;
 
+		bool _lockFrameRate = true;
+
     private:
         float _timeAccumultor = 0.0f;
         float _targetFrameTime = 0.016666f;

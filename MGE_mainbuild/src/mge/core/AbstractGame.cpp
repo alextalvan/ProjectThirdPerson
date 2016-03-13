@@ -173,14 +173,24 @@ void AbstractGame::TimedStep()
     {
         Destroyable::CollectGarbage();
 
-        FPS::update();
-        _render();
-        _window->display();
+        if(_lockFrameRate)
+        {
+            FPS::update();
+            _render();
+            _window->display();
+        }
     }
         //have this here for unlocked framerate
 //        _render();
 //        _window->display();
 //        FPS::update();
+
+    if(!_lockFrameRate)
+    {
+        FPS::update();
+        _render();
+        _window->display();
+    }
 
 }
 

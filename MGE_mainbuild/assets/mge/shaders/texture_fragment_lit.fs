@@ -66,31 +66,6 @@ float BilinearShadowSample(sampler2D samp,vec2 uv, float texSize)
     return mix(bottom,top,fracts.y);
 }
 
-//float Gauss(sampler2D samp,vec2 uv, float texSize)
-//{
-//    //float tSize = 4096;//assuming square, 4096
-//    float iSize = 1.0 / texSize;
-//    vec2 scaledUV = uv * texSize;
-//
-//    //vec2 floors = vec2(floor(scaledUV.x),floor(scaledUV.y));
-//    //vec2 fracts = vec2(fract(scaledUV.x),fract(scaledUV.y));
-//
-//    float ret = 0.0f;
-//    ret += texture(samp,uv + vec2( 0, 0) * iSize).r * 0.5;
-//    ret += texture(samp,uv + vec2(-1,-1) * iSize).r * 0.0625;
-//    ret += texture(samp,uv + vec2(-1, 0) * iSize).r * 0.125;
-//    ret += texture(samp,uv + vec2(-1, 1) * iSize).r * 0.0625;
-//    ret += texture(samp,uv + vec2( 0,-1) * iSize).r * 0.125;
-//    ret += texture(samp,uv + vec2( 0, 1) * iSize).r * 0.125;
-//    ret += texture(samp,uv + vec2( 1,-1) * iSize).r * 0.0625;
-//    ret += texture(samp,uv + vec2( 1, 0) * iSize).r * 0.125;
-//    ret += texture(samp,uv + vec2( 1, 1) * iSize).r * 0.0625;
-//    //float bottom = mix(texture(samp, floors              * iSize).r,texture(samp,(floors + vec2(1,0)) * iSize).r,fracts.x);
-//    //float top    = mix(texture(samp,(floors + vec2(0,1)) * iSize).r,texture(samp,(floors + vec2(1,1)) * iSize).r,fracts.x);
-//
-//    return ret;
-//}
-
 void main( void )
 {
     vec3 normal = normalize(Normal);

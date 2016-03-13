@@ -22,11 +22,14 @@ class MGEDemo: public AbstractGame
         virtual void _initializeScene();
 
 	    //override render to render the hud as well.
-	    virtual void _render();
+	    virtual void _render() override;
+
+	    virtual void _update() override;
 
 	private:
 		DebugHud* _hud;
         void _updateHud();
+        bool _debugEnabled = false;
 
 };
 

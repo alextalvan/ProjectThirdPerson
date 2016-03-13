@@ -46,6 +46,7 @@ using namespace std;
 #include "mge/util/ResourceCacher.hpp"
 
 #include "mge/particles/ParticleSystem.hpp"
+#include "mge/util/Input.hpp"
 
 //construct the game class into _window, _renderer and hud (other parts are initialized by build)
 MGEDemo::MGEDemo():AbstractGame ()
@@ -195,21 +196,38 @@ void MGEDemo::_initializeScene()
 void MGEDemo::_render()
 {
     AbstractGame::_render();
+
     _updateHud();
     //_world->renderDebugInfo();
 }
 
-void MGEDemo::_updateHud() {
-    string debugInfo = "";
-    debugInfo += string ("FPS:") + std::to_string(FPS::getFPS()) +
-    "\nDraw calls: " + std::to_string(Renderer::debugInfo.drawCallCount)+
-    "\nTriangles: " + std::to_string(Renderer::debugInfo.triangleCount)+
-    "\nRender time(ms): " + std::to_string(Renderer::debugInfo.time)+
-    "\nCollision tests: " + std::to_string(CollisionManager::debugInfo.tests)+
-    "\nCollision time(ms): " + std::to_string(CollisionManager::debugInfo.time);
+void MGEDemo::_update()
+{
+    AbstractGame::_update();
 
-    _hud->setDebugInfo(debugInfo);
-    _hud->draw();
+    if(Input::GetKeyDown(Input::Tilde))
+        _debugEnabled = !_debugEnabled;
+
+    if(Input::GetKey(Input::LControl)&&Input::GetKeyDown(Input::U))
+        _lockFrameRate = !_lockFrameRate;
+}
+
+void MGEDemo::_updateHud()
+{
+    if(_debugEnabled)
+    {
+        string debugInfo = "";
+        debugInfo += string ("FPS:") + std::to_string(FPS::getFPS()) +
+        "\nDraw calls: " + std::to_string(Renderer::debugInfo.drawCallCount)+
+        "\nTriangles: " + std::to_string(Renderer::debugInfo.triangleCount)+
+        "\nRender time(ms): " + std::to_string(Renderer::debugInfo.time)+
+        "\nCollision tests: " + std::to_string(CollisionManager::debugInfo.tests)+
+        "\nCollision time(ms): " + std::to_string(CollisionManager::debugInfo.time);
+
+        _hud->setDebugInfo(debugInfo);
+        _hud->draw();
+    }
+
 }
 
 
