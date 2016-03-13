@@ -60,7 +60,7 @@ class Renderer
         //test
         static ShadowCamera* GetShadowCamera();
 
-        static glm::mat4& GetCurrentShadowOrtho();
+        //static glm::mat4& GetCurrentShadowOrtho();
         static glm::mat4& GetFarShadowOrtho();
         static glm::mat4& GetNearShadowOrtho();
         static glm::mat4& GetMidShadowOrtho();
@@ -75,7 +75,7 @@ class Renderer
         ShaderProgram * _skyBoxShader;
         ///shadow mapping
         static GLuint shadowDepthTextureFar, shadowDepthTextureNear, shadowDepthTextureMid;
-        static glm::mat4 nearShadowOrtho, farShadowOrtho, currentShadowOrtho, midShadowOrtho;
+        static glm::mat4 nearShadowOrtho, farShadowOrtho, midShadowOrtho;
 
         GLuint depthMapFBO;
         // Setup skybox VAO

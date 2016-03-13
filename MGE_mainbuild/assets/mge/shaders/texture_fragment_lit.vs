@@ -30,17 +30,21 @@ void main( void )
 	gl_Position = mvp * vec4(vertex, 1.f);
 	FragPos = vec3(modelMatrix * vec4(vertex, 1.f));
 	//Normal = normalize(modelMatrix * vec4(normal,0.0f)).xyz;
-	Normal = mat3(transpose(inverse(modelMatrix))) * normal;
+	//Normal = mat3(transpose(inverse(modelMatrix))) * normal;
 	TexCoord = uv;
 
     if (hasNormalMap) {
         vec3 T = normalize(vec3(modelMatrix * vec4(tangent, 0.0)));
-        vec3 N = Normal; //normalize(vec3(modelMatrix * vec4(normal, 0.0))); //might be possible to replace with Normal
+        vec3 N = mat3(transpose(inverse(modelMatrix))) * normal; //normalize(vec3(modelMatrix * vec4(normal, 0.0))); //might be possible to replace with Normal
         // re-orthogonalize T with respect to N
         T = normalize(T - dot(T, N) * N);
         // then retrieve perpendicular vector B with the cross product of T and N
         vec3 B = cross(T, N);
         TBN = mat3(T, B, N);
+    }
+    else
+    {
+        Normal = normalize(vec3(modelMatrix * vec4(normal, 0.0)));
     }
 
     FragPosLightSpaceNear = lightMatrixNear * vec4(FragPos, 1.0);
@@ -48,6 +52,32 @@ void main( void )
     FragPosLightSpaceMid = lightMatrixMid * vec4(FragPos, 1.0);
 }
 
+//void main( void )
+//{
+//    //vertex position
+//    mat4 mvp = projectionMatrix * viewMatrix * modelMatrix;
+//	gl_Position = mvp * vec4(vertex, 1.f);
+//	FragPos = vec3(modelMatrix * vec4(vertex, 1.f));
+//	//Normal = normalize(modelMatrix * vec4(normal,0.0f)).xyz;
+//	Normal = vec3(modelMatrix * vec4(normal, 0.0));
+//
+//	TexCoord = uv;
+//
+//    if (hasNormalMap) {
+//        vec3 T = normalize(vec3(modelMatrix * vec4(tangent, 0.0)));
+//        vec3 N = normalize(Normal);//mat3(transpose(inverse(modelMatrix))) * normal; //normalize(vec3(modelMatrix * vec4(normal, 0.0))); //might be possible to replace with Normal
+//        // re-orthogonalize T with respect to N
+//        T = normalize(T - dot(T, N) * N);
+//        // then retrieve perpendicular vector B with the cross product of T and N
+//        vec3 B = cross(T, N);
+//        TBN = mat3(T, B, N);
+//    }
+//
+//
+//    FragPosLightSpaceNear = lightMatrixNear * vec4(FragPos, 1.0);
+//    FragPosLightSpaceFar = lightMatrixFar * vec4(FragPos, 1.0);
+//    FragPosLightSpaceMid = lightMatrixMid * vec4(FragPos, 1.0);
+//}
 
 
 

@@ -137,7 +137,7 @@ void AbstractGame::run()
 	_running = true;
 	_timeAccumultor = 0.0f;
 
-	_renderer->setClearColor(49,77,121);
+	//_renderer->setClearColor(49,77,121);
 
 	while (_running)
     {

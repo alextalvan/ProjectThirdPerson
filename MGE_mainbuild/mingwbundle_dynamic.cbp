@@ -12,12 +12,13 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option projectCompilerOptionsRelation="0" />
 				<Compiler>
+					<Add option="-O3" />
 					<Add option="-Wnon-virtual-dtor" />
 					<Add option="-Wunreachable-code" />
-					<Add option="-std=c++11" />
 					<Add option="-Wall" />
-					<Add option="-g" />
+					<Add option="-std=c++11" />
 					<Add directory="src" />
 					<Add directory="Lua/5.1/include" />
 					<Add directory="include" />
@@ -36,9 +37,9 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-std=c++11" />
+			<Add option="-O3" />
 			<Add option="-Wall" />
-			<Add option="-g" />
+			<Add option="-std=c++11" />
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="assets/mge/fonts/arial.ttf" />

@@ -15582,7 +15582,7 @@
 	<glm.hpp>
 	<iostream>
 
-1457705472 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
+1457869422 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
 	"AbstractGame.hpp"
 	<iostream>
 	"mge/core/Time.hpp"
@@ -15603,7 +15603,7 @@
 
 1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\fps.hpp
 
-1457650528 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.hpp
+1457870168 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.hpp
 	<GL/glew.h>
 	"glm.hpp"
 	<vector>
@@ -15691,7 +15691,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1457791529 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
+1457870180 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -15814,7 +15814,7 @@
 	"mge/core/Texture.hpp"
 	"mge/materials/AbstractMaterial.hpp"
 
-1457606307 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
+1457870368 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.cpp
 	<glm.hpp>
 	<iostream>
 	<string>
@@ -15946,7 +15946,7 @@
 	<glm.hpp>
 	<conio.h>
 
-1456839078 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\debughud.cpp
+1457826719 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\debughud.cpp
 	<cassert>
 	<iostream>
 	<cstdio>
@@ -16105,7 +16105,7 @@
 	"mge/collision/SphereCollider.hpp"
 	"mge/util/Timer.hpp"
 
-1457790244 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
+1457829329 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
 	<mge/editor/LevelImporter.hpp>
 	<mge/config.hpp>
 	<glm.hpp>
@@ -16385,11 +16385,12 @@
 1455931890 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luaobject.cpp
 	"mge/lua/LuaObject.hpp"
 
-1457791520 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\shadowmaterial.hpp
+1457869940 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\shadowmaterial.hpp
 	"mge/core/ShaderProgram.hpp"
 	"mge/shadow/ShadowCamera.hpp"
+	"glm.hpp"
 
-1457791968 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\shadowmaterial.cpp
+1457870048 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\shadowmaterial.cpp
 	"mge/materials/ShadowMaterial.hpp"
 	<glm.hpp>
 	"mge/core/Mesh.hpp"
