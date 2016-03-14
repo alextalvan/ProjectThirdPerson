@@ -132,7 +132,7 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 
         BoundingSphere& GetRenderBound();
         void RecalculateRenderBound();
-
+        void rotateTo(glm::vec3 target, float speed);
 	protected:
 	    virtual ~GameObject();
 		std::string _name;

@@ -45,6 +45,7 @@ private:
 	static int getLocalPos(lua_State * lua);
 	static int setWorldRot(lua_State * lua);
 	static int rotate(lua_State * lua);
+	static int rotateTo(lua_State * lua);
 	static int scale(lua_State * lua);
 	static int translate(lua_State * lua);
 	static int transformDirection(lua_State * lua);

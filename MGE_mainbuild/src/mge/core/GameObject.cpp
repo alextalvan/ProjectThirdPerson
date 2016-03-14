@@ -262,9 +262,9 @@ void GameObject::setLocalRotation(glm::vec3 xAxis, glm::vec3 yAxis,glm::vec3 zAx
 //this will use the current "up" as reference
 void GameObject::setLocalRotation(glm::vec3 forward)
 {
-    glm::vec3 currentUp = glm::vec3(_transform[2]);
-    glm::vec3 right = glm::cross (currentUp, forward);
-    glm::vec3 up = glm::cross (forward, right);
+    glm::vec3 currentUp = glm::vec3(glm::vec3(0,1,0));
+    glm::vec3 right = -glm::cross (currentUp, forward);
+    glm::vec3 up = -glm::cross (forward, right);
 
     setLocalRotation(right,up,forward);
 }
@@ -287,8 +287,8 @@ void GameObject::setWorldRotation(glm::vec3 xAxis, glm::vec3 yAxis,glm::vec3 zAx
 //this will use the global up as a reference
 void GameObject::setWorldRotation(glm::vec3 forward)
 {
-    glm::vec3 right = glm::cross (glm::vec3(0,1,0), forward);
-    glm::vec3 up = glm::cross (forward, right);
+    glm::vec3 right = -glm::cross (glm::vec3(0,1,0), forward);
+    glm::vec3 up = -glm::cross (forward, right);
 
     setWorldRotation(right,up,forward);
 }
@@ -508,6 +508,26 @@ bool GameObject::IsActiveInWorld()
     }
 
     return true;
+}
+
+void GameObject::rotateTo(glm::vec3 target, float speed)
+{
+    glm::mat3 objRot = getWorldRotation();
+    objRot[0]*=-1.0f;//convert matrix from left handed to right handed
+    glm::quat objQt = glm::toQuat(objRot);
+    glm::vec3 difVec = glm::normalize(target - getWorldPosition());
+    glm::vec3 right = glm::cross (glm::vec3(0,1,0), difVec);
+    glm::vec3 up = glm::cross (difVec, right);
+    glm::mat3 targetMat = glm::mat3(right, up, difVec);
+    glm::quat targetQt = glm::toQuat(targetMat);
+    objQt = glm::slerp(objQt, targetQt,speed);
+
+
+    glm::mat3 newMat = glm::mat3_cast(objQt);
+
+    setWorldRotation(-newMat[0], newMat[1], newMat[2]);//convert the right handed matrix back to left handed
+    //setLocalRotation(difVec);
+    //setLocalRotation(-newMat[0], newMat[1], newMat[2]);
 }
 
 BoundingSphere& GameObject::GetRenderBound()

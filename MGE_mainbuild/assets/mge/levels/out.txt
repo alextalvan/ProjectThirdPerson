@@ -1,10 +1,10 @@
 GAMEOBJECT:
    name MGE_exporter_root
-   transform: 
-      1  0  0  0  
-      0  1  0  0  
-      0  0  1  0  
-      0  0  0  1  
+   transform:
+      1  0  0  0
+      0  1  0  0
+      0  0  1  0
+      0  0  0  1
    no_mesh
    cast_shadows 0
    transparent 0
@@ -18,11 +18,11 @@ GAMEOBJECT:
 
    GAMEOBJECT:
       name Character
-      transform: 
-         1  0  0  0  
-         0  1  0  33.13  
-         0  0  1  43.8  
-         0  0  0  1  
+      transform:
+         1  0  0  0
+         0  1  0  33.13
+         0  0  1  43.8
+         0  0  0  1
       no_mesh
       cast_shadows 0
       transparent 0
@@ -48,11 +48,11 @@ GAMEOBJECT:
 
    CAMERA:
       name Main_Camera
-      transform: 
-         1  0  0  0  
-         0  1  0  4.4  
-         0  0  1  0  
-         0  0  0  1  
+      transform:
+         1  0  0  0
+         0  1  0  4.4
+         0  0  1  0
+         0  0  0  1
       isMainCamera 1
 
       COMPONENTS:
@@ -72,11 +72,11 @@ GAMEOBJECT:
 
    GAMEOBJECT:
       name Raptor
-      transform: 
-         1  0  0  -27.86  
-         0  1  0  44.38  
-         0  0  1  -12.2  
-         0  0  0  1  
+      transform:
+         1  0  0  -27.86
+         0  1  0  44.38
+         0  0  1  -12.2
+         0  0  0  1
       no_mesh
       cast_shadows 0
       transparent 0
@@ -90,11 +90,11 @@ GAMEOBJECT:
 
       GAMEOBJECT:
          name Cube
-         transform: 
-            -1.192093E-08  0  -0.09999999  30.44  
-            0  0.1  0  24.2  
-            0.09999999  0  -1.192093E-08  40.4  
-            0  0  0  1  
+         transform:
+            -1.192093E-08  0  -0.09999999  30.44
+            0  0.1  0  24.2
+            0.09999999  0  -1.192093E-08  40.4
+            0  0  0  1
          mesh raptor.obj
          cast_shadows 1
          transparent 1
@@ -122,16 +122,20 @@ GAMEOBJECT:
 
    GAMEOBJECT:
       name cube_flat
-      transform: 
-         1  0  0  -7.2  
-         0  1  0  32.58  
-         0  0  1  51.3  
-         0  0  0  1  
-      mesh cube_flat.obj
+      transform:
+         1  0  0  -7.2
+         0  1  0  32.58
+         0  0  1  51.3
+         0  0  0  1
+      mesh Axis_Helper.obj
       cast_shadows 1
-      transparent 1
+      transparent 0
 
       COMPONENTS:
+
+         LUA_SCRIPT:
+            scriptName raptor.lua
+         END_LUA_SCRIPT
 
          TEXTURE_ADVANCED_MATERIAL:
             diffuseTex water.jpg
@@ -141,7 +145,7 @@ GAMEOBJECT:
             shininess 32
             ambient 0.1
             tiling 1
-            color 0.6039442 0.7720588 0.1305688 0.247
+            color 0.6039442 0.7720588 0.1305688 1
          END_TEXTURE_ADVANCED_MATERIAL
 
       END_COMPONENTS
@@ -150,11 +154,11 @@ GAMEOBJECT:
 
       POINT_LIGHT:
          name light
-         transform: 
-            1  0  0  -7.2  
-            0  1  0  32.58  
-            0  0  1  51.3  
-            0  0  0  1  
+         transform:
+            1  0  0  -7.2
+            0  1  0  32.58
+            0  0  1  51.3
+            0  0  0  1
          color 0.7720588 0.1021843 0.1021843
          attenuation 0.1 0.1 0.1
 
@@ -177,11 +181,11 @@ GAMEOBJECT:
 
    GAMEOBJECT:
       name floor_terrain
-      transform: 
-         1  0  0  0  
-         0  1  0  0  
-         0  0  1  0  
-         0  0  0  1  
+      transform:
+         1  0  0  0
+         0  1  0  0
+         0  0  1  0
+         0  0  0  1
       mesh TerrainTest.obj
       cast_shadows 0
       transparent 0

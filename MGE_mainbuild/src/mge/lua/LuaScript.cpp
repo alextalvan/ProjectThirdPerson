@@ -122,6 +122,7 @@ LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
 	lua_register(L, "GetScreenSize", getScreenSize);
 	lua_register(L, "CenterSpriteOrigin", centerSpriteOrigin);//
 	lua_register(L, "CenterTextOrigin", centerTextOrigin);//
+	lua_register(L, "RotateTo", rotateTo);//
 
 	//Set world
 	lua_pushlightuserdata(L, (LuaObject*)world);
@@ -238,6 +239,28 @@ int LuaScript::setColor(lua_State * lua)
 	//std::string s = obj->getName();
 
 	obj->getMaterial()->color = color;
+
+	return 0;
+}
+
+int LuaScript::rotateTo(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_islightuserdata(lua, -5)) throw "Expect: game object";
+	if (!lua_isnumber(lua, -4)) throw "Expect: number";
+	if (!lua_isnumber(lua, -3)) throw "Expect: number";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+    GameObject * from = (GameObject*)(LuaObject*)lua_touserdata(lua,-5);
+    glm::vec3 targetPos;
+	targetPos.x = lua_tonumber(lua, -4);
+	targetPos.y = lua_tonumber(lua, -3);
+	targetPos.z = lua_tonumber(lua, -2);
+    float speed = lua_tonumber(lua, -1);
+
+    from->rotateTo(targetPos, speed);
 
 	return 0;
 }

@@ -11,11 +11,8 @@ end
 
 --Called every game logic step
 function Update()
-px,py,pz = GetWorldPos(player)
-cx,cy,cz = GetWorldPos(myGameObject)
-
---SetWorldPos(myGameObject, Lerp(cx,cy,cz,px,py + 1.8,pz,0.1))
-SetWorldPos(myGameObject, px,py,pz)
+x,y,z = GetWorldPos(player)
+	RotateTo(myGameObject, x,y,z, 0.25)
 end
 
 --Collision callback, the argument is the GameObject you are overlapping with

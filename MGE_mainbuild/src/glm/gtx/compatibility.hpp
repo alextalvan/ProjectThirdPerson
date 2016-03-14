@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,9 +30,9 @@
 ///
 /// @defgroup gtx_compatibility GLM_GTX_compatibility
 /// @ingroup gtx
-/// 
+///
 /// @brief Provide functions to increase the compatibility with Cg and HLSL languages
-/// 
+///
 /// <glm/gtx/compatibility.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -40,7 +40,7 @@
 #define GLM_GTX_compatibility
 
 // Dependency:
-#include "../glm.hpp"  
+#include "../glm.hpp"
 #include "../gtc/quaternion.hpp"
 
 #if(defined(GLM_MESSAGES) && !defined(GLM_EXT_INCLUDED))
@@ -70,7 +70,7 @@ namespace glm
 	template <typename T, precision P> GLM_FUNC_QUALIFIER detail::tvec3<T, P> lerp(const detail::tvec3<T, P>& x, const detail::tvec3<T, P>& y, const detail::tvec3<T, P>& a){return mix(x, y, a);}	//!< \brief Returns the component-wise result of x * (1.0 - a) + y * a, i.e., the linear blend of x and y using vector a. The value for a is not restricted to the range [0, 1]. (From GLM_GTX_compatibility)
 	template <typename T, precision P> GLM_FUNC_QUALIFIER detail::tvec4<T, P> lerp(const detail::tvec4<T, P>& x, const detail::tvec4<T, P>& y, const detail::tvec4<T, P>& a){return mix(x, y, a);}	//!< \brief Returns the component-wise result of x * (1.0 - a) + y * a, i.e., the linear blend of x and y using vector a. The value for a is not restricted to the range [0, 1]. (From GLM_GTX_compatibility)
 
-	template <typename T, precision P> GLM_FUNC_QUALIFIER T slerp(detail::tquat<T, P> const & x, detail::tquat<T, P> const & y, T const & a){return mix(x, y, a);} //!< \brief Returns the slurp interpolation between two quaternions.
+	//template <typename T, precision P> GLM_FUNC_QUALIFIER T slerp(detail::tquat<T, P> const & x, detail::tquat<T, P> const & y, T const & a){return mix(x, y, a);} //!< \brief Returns the slurp interpolation between two quaternions.
 
 	template <typename T, precision P> GLM_FUNC_QUALIFIER T saturate(T x){return clamp(x, T(0), T(1));}														//!< \brief Returns clamp(x, 0, 1) for each component in x. (From GLM_GTX_compatibility)
 	template <typename T, precision P> GLM_FUNC_QUALIFIER detail::tvec2<T, P> saturate(const detail::tvec2<T, P>& x){return clamp(x, T(0), T(1));}					//!< \brief Returns clamp(x, 0, 1) for each component in x. (From GLM_GTX_compatibility)
