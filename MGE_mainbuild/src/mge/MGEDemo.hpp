@@ -29,7 +29,7 @@ class MGEDemo: public AbstractGame
 	private:
 		DebugHud* _hud;
         void _updateHud();
-        bool _debugEnabled = false;
+        bool _debugEnabled = true;
 
 };
 

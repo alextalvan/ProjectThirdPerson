@@ -286,36 +286,59 @@ void Renderer::renderDepthMap (GameObject * pGameObject, Camera* pCamera, Light 
     if(!pGameObject->IsActive())
         return;
 
-    if (pGameObject->getMesh() && pGameObject->castShadows )//&& pCamera->FrustumCheck(pGameObject))
+//    if (pGameObject->getMesh() && pGameObject->castShadows )//&& pCamera->FrustumCheck(pGameObject))
+//    {
+//        if(ShadowFrustumCheckEncasing(pGameObject,20.0f))//near check
+//        if(ShadowFrustumCheckExclusive(pGameObject,10.0f))//near check
+//        {
+//            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureNear, 0);
+//            shadowMat->render(pGameObject, light, nearShadowOrtho);
+//        }
+//        else
+//            if(ShadowFrustumCheckExclusive(pGameObject,100.0f))
+//            if(ShadowFrustumCheckEncasing(pGameObject,150.0f))//mid check
+//            {
+//                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureNear, 0);
+//                shadowMat->render(pGameObject, light, nearShadowOrtho);
+//
+//                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureMid, 0);
+//                shadowMat->render(pGameObject, light, midShadowOrtho);
+//            }
+//            else
+//                if(ShadowFrustumCheckExclusive(pGameObject,600.0f))//far check
+//                {
+//                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureNear, 0);
+//                    shadowMat->render(pGameObject, light, nearShadowOrtho);
+//
+//                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureMid, 0);//test
+//                    shadowMat->render(pGameObject, light, midShadowOrtho);
+//
+//                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureFar, 0);
+//                    shadowMat->render(pGameObject, light, farShadowOrtho);
+//                }
+//    }
+
+    if (pGameObject->getMesh() && pGameObject->castShadows ) //this version seems to be more optimized
     {
-        if(ShadowFrustumCheckEncasing(pGameObject,20.0f))//near check
-        //if(ShadowFrustumCheckExclusive(pGameObject,10.0f))//near check
+        if(ShadowFrustumCheckExclusive(pGameObject,600.0f))//far check
+        {
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureFar, 0);
+            shadowMat->render(pGameObject, light, farShadowOrtho);
+        }
+
+        if(ShadowFrustumCheckExclusive(pGameObject,150.0f))//mid check
+        {
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureMid, 0);
+            shadowMat->render(pGameObject, light, midShadowOrtho);
+        }
+
+        //if(ShadowFrustumCheckEncasing(pGameObject,20.0f))//near check
+        if(ShadowFrustumCheckExclusive(pGameObject,20.0f))//near check
         {
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureNear, 0);
             shadowMat->render(pGameObject, light, nearShadowOrtho);
         }
-        else
-            //if(ShadowFrustumCheckExclusive(pGameObject,100.0f))
-            if(ShadowFrustumCheckEncasing(pGameObject,150.0f))//mid check
-            {
-                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureNear, 0);
-                shadowMat->render(pGameObject, light, nearShadowOrtho);
 
-                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureMid, 0);
-                shadowMat->render(pGameObject, light, midShadowOrtho);
-            }
-            else
-                if(ShadowFrustumCheckExclusive(pGameObject,600.0f))//far check
-                {
-                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureNear, 0);
-                    shadowMat->render(pGameObject, light, nearShadowOrtho);
-
-                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureMid, 0);//test
-                    shadowMat->render(pGameObject, light, midShadowOrtho);
-
-                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowDepthTextureFar, 0);
-                    shadowMat->render(pGameObject, light, farShadowOrtho);
-                }
     }
 
     if (!pRecursive) return;

@@ -14364,7 +14364,7 @@
 
 1455012454 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\gl\gl.h
 
-1457876449 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.hpp
+1457949595 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.hpp
 	<mge/core/AbstractGame.hpp>
 	<SFML/Graphics.hpp>
 	<vector>
@@ -15695,7 +15695,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1457899895 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
+1457949576 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
