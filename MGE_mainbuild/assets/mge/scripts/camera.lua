@@ -14,8 +14,8 @@ function Update()
 px,py,pz = GetWorldPos(player)
 cx,cy,cz = GetWorldPos(myGameObject)
 
---SetWorldPos(myGameObject, Lerp(cx,cy,cz,px,py + 1.8,pz,0.1))
-SetWorldPos(myGameObject, px,py,pz)
+SetWorldPos(myGameObject, Lerp(cx,cy,cz,px,py + 1.8,pz,0.1))
+--SetWorldPos(myGameObject, px,py,pz)
 end
 
 --Collision callback, the argument is the GameObject you are overlapping with
@@ -26,7 +26,7 @@ end
 --Called after a level loads, all gameobjects are loaded and safe to find/reference here
 function OnLevelLoad()
 player = FindChild(world,"Character")
-
+light = DirectionalLight(1,1,1,1,-1.5,1,300,myGameObject)
 end
 
 --Called when the player interacts with this object via raycast on the collider

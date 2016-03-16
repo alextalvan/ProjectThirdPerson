@@ -15,6 +15,7 @@ Light::Light(int pType, glm::vec3 pPos, glm::vec3 pDir, glm::vec3 pColor, glm::v
         _target = target;
         _storedOffset = getLocalPosition();
         _dirLight = this;
+        setName("Directional Light");
 
         setWorldRotation(glm::normalize(-_storedOffset));
     }
@@ -82,6 +83,8 @@ float Light::getAngle()
 Light::~Light()
 {
     _lightList.Remove(this);
+    if(_dirLight == this)
+        _dirLight = NULL;
 }
 
 DualLinkList<Light> const  Light::GetLightList()

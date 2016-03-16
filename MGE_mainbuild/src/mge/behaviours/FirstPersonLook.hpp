@@ -5,6 +5,7 @@ class FirstPersonLook : public Component
 {
 public:
     FirstPersonLook(float turnSpeed = 1.0f);
+    void SetActive(bool state) override;
 
 protected:
     virtual ~FirstPersonLook();

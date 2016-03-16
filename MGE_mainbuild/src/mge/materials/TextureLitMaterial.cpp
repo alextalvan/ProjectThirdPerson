@@ -22,7 +22,9 @@ GLint TextureLitMaterial::_lightMatLocMid = 0;
 GLint TextureLitMaterial::_diffMapLoc = 0;
 GLint TextureLitMaterial::_normalMapLoc = 0;
 GLint TextureLitMaterial::_specMapLoc = 0;
-GLint TextureLitMaterial::_tilingLoc = 0;
+GLint TextureLitMaterial::_diffuseTilingLoc = 0;
+GLint TextureLitMaterial::_normalTilingLoc = 0;
+GLint TextureLitMaterial::_specularTilingLoc = 0;
 GLint TextureLitMaterial::_depthMapLocNear = 0;
 GLint TextureLitMaterial::_depthMapLocFar = 0;
 GLint TextureLitMaterial::_depthMapLocMid = 0;
@@ -39,7 +41,7 @@ GLboolean TextureLitMaterial::_hasNormMapLoc = 0;
 GLuint TextureLitMaterial::_colorLoc = 0;
 
 TextureLitMaterial::TextureLitMaterial(Texture * pDiffuseTexture, float pSmoothness, float pShininess, float pAmbient,
-                                       Texture * pNormalMapTexture, Texture * pSpecularMapTexture, float pTiling, glm::vec4 pColor)
+                                       Texture * pNormalMapTexture, Texture * pSpecularMapTexture,glm::vec4 pColor)
 {
     _diffuseTexture=pDiffuseTexture;
     _ambient=pAmbient;
@@ -47,7 +49,6 @@ TextureLitMaterial::TextureLitMaterial(Texture * pDiffuseTexture, float pSmoothn
     _shininess=pShininess;
     _normalMapTexture=pNormalMapTexture;
     _specularMapTexture=pSpecularMapTexture;
-    _tiling=pTiling;
 
     color = pColor;
 
@@ -91,7 +92,9 @@ void TextureLitMaterial::_lazyInitializeShader() {
         _diffMapLoc = _shader->getUniformLocation("material.diffuseMap");
         _normalMapLoc = _shader->getUniformLocation("material.normalMap");
         _specMapLoc = _shader->getUniformLocation("material.specularMap");
-        _tilingLoc = _shader->getUniformLocation("material.tiling");
+        _diffuseTilingLoc = _shader->getUniformLocation("material.tilingDiffuse");
+        _normalTilingLoc = _shader->getUniformLocation("material.tilingNormal");
+        _specularTilingLoc = _shader->getUniformLocation("material.tilingSpecular");
         _depthMapLocNear = _shader->getUniformLocation("depthMapNear");
         _depthMapLocFar = _shader->getUniformLocation("depthMapFar");
         _depthMapLocMid = _shader->getUniformLocation("depthMapMid");
@@ -123,6 +126,21 @@ void TextureLitMaterial::setSpecularMapTexture (Texture* pSpecularMapTexture) {
     specularMap = true;
 }
 
+void TextureLitMaterial::SetDiffuseTiling(float val)
+{
+    _diffuseTiling = val;
+}
+
+void TextureLitMaterial::SetNormalTiling(float val)
+{
+    _normalTiling = val;
+}
+
+void TextureLitMaterial::SetSpecularTiling(float val)
+{
+    _specularTiling = val;
+}
+
 void TextureLitMaterial::render(GameObject* pGameObject, Camera* pCamera) {
     if (!_diffuseTexture) return;
 
@@ -131,17 +149,20 @@ void TextureLitMaterial::render(GameObject* pGameObject, Camera* pCamera) {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _diffuseTexture->getId());
     glUniform1i (_diffMapLoc, 0);
+    glUniform1f(_diffuseTilingLoc, _diffuseTiling);
 
     if (normalMap) {
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, _normalMapTexture->getId());
         glUniform1i (_normalMapLoc, 1);
+        glUniform1f(_normalTilingLoc, _normalTiling);
     }
 
     if (specularMap) {
         glActiveTexture(GL_TEXTURE2);
         glBindTexture(GL_TEXTURE_2D, _specularMapTexture->getId());
         glUniform1i (_specMapLoc, 2);
+        glUniform1f(_specularTilingLoc, _specularTiling);
     }
 
     if (Renderer::getShadowDepthMapFar()) {
@@ -165,7 +186,6 @@ void TextureLitMaterial::render(GameObject* pGameObject, Camera* pCamera) {
 	glUniform1f(_matSmoothLoc, _smoothness);
 	glUniform1f(_matShineLoc, _shininess);
 	glUniform1f(_matAmbLoc, _ambient);
-	glUniform1f(_tilingLoc, _tiling);
     glUniform1f(_hasNormMapLoc, normalMap);
     glUniform1f(_hasSpecMapLoc, specularMap);
 
@@ -228,7 +248,7 @@ void TextureLitMaterial::render(GameObject* pGameObject, Camera* pCamera) {
             ++index;
         }
         else
-        if (lightType == MGE_LIGHT_POINT)
+        if ((!pGameObject->ignoreNonDirLights) && lightType == MGE_LIGHT_POINT)
         {
             glm::vec3 lightPos = light->getWorldPosition();
             float dist = glm::distance(lightPos, pGameObject->getWorldPosition());

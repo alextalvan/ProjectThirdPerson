@@ -21,11 +21,12 @@
 //bool testBool = false;
 
 sf::RenderWindow* AbstractGame::_window = 0;
+bool AbstractGame::_running = true;
 
-AbstractGame::AbstractGame():_renderer(NULL),_world(NULL),_world2D(NULL),_running(false)
+AbstractGame::AbstractGame():_renderer(NULL),_world(NULL),_world2D(NULL)
 {
     //initialize game systems
-
+    _running = true;
 }
 sf::RenderWindow* const AbstractGame::GetWindow()
 {
@@ -75,7 +76,7 @@ void AbstractGame::_initializeWindow(int width, int height, int fullscreen)
 
 	int style = (fullscreen) ? sf::Style::None : sf::Style::Titlebar;
 	_window = new sf::RenderWindow( sf::VideoMode(width,height), "FairWind Game Engine", style , sf::ContextSettings(24,8,4,3,3));
-	_window->setMouseCursorVisible(false);
+	//_window->setMouseCursorVisible(false);
 	//_window->setFramerateLimit(0);
 	_window->setVerticalSyncEnabled(true);
     std::cout << "Window initialized." << std::endl << std::endl;
@@ -128,6 +129,11 @@ void AbstractGame::_initializeWorld() {
 	_world->AttachComponent(new LuaScript("main.lua",_world, _world2D));
 	//_world
     std::cout << "World initialized." << std::endl << std::endl;
+}
+
+void AbstractGame::Quit()
+{
+    _running = false;
 }
 
 ///LOOP
@@ -221,7 +227,7 @@ void AbstractGame::_processEvents()
     }
 
     //exit key
-	if(Input::GetKeyDown(Input::Escape))
+	if(Input::GetKey(Input::X) && Input::GetKeyDown(Input::Escape))
     {
          _window->close();
          _running = false;

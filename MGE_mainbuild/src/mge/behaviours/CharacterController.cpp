@@ -29,7 +29,7 @@ void CharacterController::Update()
         jumping = true;
     }
 
-    if(Input::GetKey(Input::L))
+    if(Input::GetKey(Input::L))//debug
     {
         _jumpTimer.Reset();
         jumping = true;
@@ -91,6 +91,9 @@ void CharacterController::Movement()
 void CharacterController::setOwner(GameObject* owner)
 {
     Component::setOwner(owner);
+
+    if(owner == NULL)
+        return;
     _collider = new SphereCollider();
     _collider->radius = _colliderRadius;
     _collider->SetStatic(false);

@@ -13,6 +13,7 @@ FirstPersonLook::FirstPersonLook(float turnSpeed)
 {
     _name = "FirstPersonVision";
     _turnSpeed = turnSpeed;
+    AbstractGame::GetWindow()->setMouseCursorVisible(false);
 }
 
 FirstPersonLook::~FirstPersonLook()
@@ -98,4 +99,25 @@ glm::vec2 FirstPersonLook::GetMouseOffset()
 	prevMousePos = mousePos;
 
 	return offset;
+}
+
+void FirstPersonLook::SetActive(bool state)
+{
+    _isActive = state;
+    glm::vec2 screenSize = Renderer::GetScreenSize();
+    screenSize = screenSize * 0.5f;
+
+    if(state)
+    {
+        AbstractGame::GetWindow()->setMouseCursorVisible(false);
+        prevMousePos = glm::vec2(Input::getMouseX(), Input::getMouseY());
+    }
+    else
+    {
+        prevMousePos = screenSize;
+        sf::Mouse::setPosition(sf::Vector2i((int)(screenSize.x),(int)(screenSize.y)),*AbstractGame::GetWindow());
+        AbstractGame::GetWindow()->setMouseCursorVisible(true);
+    }
+
+
 }

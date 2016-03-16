@@ -86,7 +86,7 @@ void ParticleSystem::UpdateParticles()
 {
     float delta = Time::now() - _lastTime;
     _lastTime = Time::now();
-    for(int i=0;i<MGE_MAX_PARTICLES_PER_SYSTEM;++i)
+    for(int i=0;i<_particleLimit;++i)
     {
         _particles[i].lifeTime -= delta;
 
@@ -108,3 +108,19 @@ void ParticleSystem::ToggleEmitter(bool val)
 
     _emitterEnabled = val;
 }
+
+void ParticleSystem::SetParticleLimit(int amount)
+{
+    if(amount > MGE_MAX_PARTICLES_PER_SYSTEM)
+        amount = MGE_MAX_PARTICLES_PER_SYSTEM;
+
+    if(amount < 0)
+        amount = 0;
+
+    _particleLimit = amount;
+}
+
+//int ParticleSystem::GetParticleLimit()
+//{
+//    return _particleLimit;
+//}

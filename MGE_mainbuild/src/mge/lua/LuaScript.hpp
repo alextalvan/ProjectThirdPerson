@@ -92,6 +92,7 @@ private:
 	static int getTime(lua_State * lua);
 	static int distance(lua_State * lua);
 	static int randomRange(lua_State * lua);
+	static int randomRangeFloat(lua_State * lua);
 	static int randomRoll(lua_State * lua);
 	static int makeTimer(lua_State * lua);
 	static int resetTimer(lua_State * lua);
@@ -123,4 +124,6 @@ private:
 	static int loadLevel(lua_State * lua);
     static int playMusic(lua_State * lua);
     static int playSFX(lua_State * lua);
+    static int directionalLight(lua_State * lua);
+    static int quit(lua_State * lua);
 };

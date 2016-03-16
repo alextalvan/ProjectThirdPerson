@@ -19,7 +19,8 @@ ParticleMaterial::ParticleMaterial(Texture * pDiffuseTexture):_diffuseTexture(pD
 
 ParticleMaterial::~ParticleMaterial() {}
 
-void ParticleMaterial::_lazyInitializeShader() {
+void ParticleMaterial::_lazyInitializeShader()
+{
     if (!_shader) {
         _shader = new ShaderProgram();
         _shader->addShader(GL_VERTEX_SHADER, config::MGE_SHADER_PATH+"Particles/particle.vs");
@@ -34,7 +35,8 @@ void ParticleMaterial::setDiffuseTexture (Texture* pDiffuseTexture) {
     _diffuseTexture = pDiffuseTexture;
 }
 
-void ParticleMaterial::render(GameObject* pGameObject, Camera* pCamera) {
+void ParticleMaterial::render(GameObject* pGameObject, Camera* pCamera)
+{
     if (!_diffuseTexture) return;
     using namespace glm;
     //return;
@@ -62,7 +64,9 @@ void ParticleMaterial::render(GameObject* pGameObject, Camera* pCamera) {
     Mesh* quad = pSys->_mesh;
     quad->enableInOpenGL(_vertLoc,_normalLoc,_uvLoc);
 
-    for(int i=0;i<MGE_MAX_PARTICLES_PER_SYSTEM;++i)
+    int particleLimit = pSys->_particleLimit;
+
+    for(int i=0;i<particleLimit;++i)
     {
         //check if we can insert a particle from the buffer to the main array
         if(pSys->_particles[i].lifeTime < 0.0f && newPartIndex < newPartCount)

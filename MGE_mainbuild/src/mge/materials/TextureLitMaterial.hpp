@@ -13,13 +13,16 @@ class TextureLitMaterial : public AbstractMaterial
 {
     public:
         TextureLitMaterial (Texture* pDiffuseTexture, float pSmoothness = 0.5f, float pShininess = 32.0f, float pAmbient = 0.1f,
-                            Texture * pNormalMapTexture = nullptr, Texture* pSpecularMapTexture = nullptr, float pTiling = 1.0f,
-                            glm::vec4 pColor = glm::vec4(1));
+                            Texture * pNormalMapTexture = nullptr, Texture* pSpecularMapTexture = nullptr, glm::vec4 pColor = glm::vec4(1));
         virtual ~TextureLitMaterial ();
         virtual void render(GameObject* pGameObject, Camera* pCamera);
         void setDiffuseTexture (Texture* pDiffuseTexture);
         void setNormalMapTexture (Texture* pNormalMapTexture);
         void setSpecularMapTexture (Texture* pSpecularMapTexture);
+
+        void SetDiffuseTiling(float val);
+        void SetNormalTiling(float val);
+        void SetSpecularTiling(float val);
     protected:
     private:
         bool specularMap = false;
@@ -40,7 +43,9 @@ class TextureLitMaterial : public AbstractMaterial
         static GLint _depthMapLocFar;
         static GLint _depthMapLocNear;
         static GLint _depthMapLocMid;
-        static GLint _tilingLoc;
+        static GLint _diffuseTilingLoc;
+        static GLint _normalTilingLoc;
+        static GLint _specularTilingLoc;
 
         static GLint _viewPosLoc;
 
@@ -59,7 +64,9 @@ class TextureLitMaterial : public AbstractMaterial
         float _ambient;
         Texture* _normalMapTexture;
         Texture* _specularMapTexture;
-        float _tiling;
+        float _diffuseTiling = 1.0;
+        float _normalTiling = 1.0;
+        float _specularTiling = 1.0;
 };
 
 #endif // TextureLitMaterial_H

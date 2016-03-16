@@ -1,13 +1,14 @@
 GAMEOBJECT:
    name MGE_exporter_root
-   transform:
-      1  0  0  0
-      0  1  0  0
-      0  0  1  0
-      0  0  0  1
+   transform: 
+      1  0  0  0  
+      0  1  0  0  
+      0  0  1  0  
+      0  0  0  1  
    no_mesh
    cast_shadows 0
    transparent 0
+   ignore_nondir_lights 0
 
    COMPONENTS:
 
@@ -16,49 +17,20 @@ GAMEOBJECT:
 
    CHILDREN:
 
-   GAMEOBJECT:
-      name Character
-      transform:
-         1  0  0  0
-         0  1  0  33.13
-         0  0  1  43.8
-         0  0  0  1
-      no_mesh
-      cast_shadows 0
-      transparent 0
-
-      COMPONENTS:
-
-         CHARACTER_CONTROLLER:
-            move_speed 0.1
-            jump_force 1
-            jump_duration 0.3
-            gravity 0.2
-            sphere_radius 1
-         END_CHARACTER_CONTROLLER
-
-      END_COMPONENTS
-
-      CHILDREN:
-
-
-      END_CHILDREN
-
-   END_GAMEOBJECT
-
    CAMERA:
-      name Main_Camera
-      transform:
-         1  0  0  0
-         0  1  0  4.4
-         0  0  1  0
-         0  0  0  1
+      name Cam
+      transform: 
+         1  0  0  0  
+         0  1  0  0  
+         0  0  1  0  
+         0  0  0  1  
       isMainCamera 1
+      attach_firstpersonlook 0
 
       COMPONENTS:
 
          LUA_SCRIPT:
-            scriptName camera.lua
+            scriptName main_menu.lua
          END_LUA_SCRIPT
 
       END_COMPONENTS
@@ -69,154 +41,6 @@ GAMEOBJECT:
       END_CHILDREN
 
    END_CAMERA
-
-   GAMEOBJECT:
-      name Raptor
-      transform:
-         1  0  0  -27.86
-         0  1  0  44.38
-         0  0  1  -12.2
-         0  0  0  1
-      no_mesh
-      cast_shadows 0
-      transparent 0
-
-      COMPONENTS:
-
-
-      END_COMPONENTS
-
-      CHILDREN:
-
-      GAMEOBJECT:
-         name Cube
-         transform:
-            -1.192093E-08  0  -0.09999999  30.44
-            0  0.1  0  24.2
-            0.09999999  0  -1.192093E-08  40.4
-            0  0  0  1
-         mesh raptor.obj
-         cast_shadows 1
-         transparent 1
-
-         COMPONENTS:
-
-            TEXTURE_MATERIAL:
-               diffuseTex Raptor.png
-               color 1 1 1 0.497
-            END_TEXTURE_MATERIAL
-
-         END_COMPONENTS
-
-         CHILDREN:
-
-
-         END_CHILDREN
-
-      END_GAMEOBJECT
-
-
-      END_CHILDREN
-
-   END_GAMEOBJECT
-
-   GAMEOBJECT:
-      name cube_flat
-      transform:
-         1  0  0  -7.2
-         0  1  0  32.58
-         0  0  1  51.3
-         0  0  0  1
-      mesh Axis_Helper.obj
-      cast_shadows 1
-      transparent 0
-
-      COMPONENTS:
-
-         LUA_SCRIPT:
-            scriptName raptor.lua
-         END_LUA_SCRIPT
-
-         TEXTURE_ADVANCED_MATERIAL:
-            diffuseTex water.jpg
-            normalTex missing
-            specularTex missing
-            smoothness 0.5
-            shininess 32
-            ambient 0.1
-            tiling 1
-            color 0.6039442 0.7720588 0.1305688 1
-         END_TEXTURE_ADVANCED_MATERIAL
-
-      END_COMPONENTS
-
-      CHILDREN:
-
-      POINT_LIGHT:
-         name light
-         transform:
-            1  0  0  -7.2
-            0  1  0  32.58
-            0  0  1  51.3
-            0  0  0  1
-         color 0.7720588 0.1021843 0.1021843
-         attenuation 0.1 0.1 0.1
-
-         COMPONENTS:
-
-
-         END_COMPONENTS
-
-         CHILDREN:
-
-
-         END_CHILDREN
-
-      END_POINT_LIGHT
-
-
-      END_CHILDREN
-
-   END_GAMEOBJECT
-
-   GAMEOBJECT:
-      name floor_terrain
-      transform:
-         1  0  0  0
-         0  1  0  0
-         0  0  1  0
-         0  0  0  1
-      mesh TerrainTest.obj
-      cast_shadows 0
-      transparent 0
-
-      COMPONENTS:
-
-         TERRAIN_COLLIDER:
-            heightTex heightTest.png
-            xSize 1600
-            zSize 4000
-            height 400
-         END_TERRAIN_COLLIDER
-         TEXTURE_ADVANCED_MATERIAL:
-            diffuseTex brickwall.jpg
-            normalTex missing
-            specularTex missing
-            smoothness 0.5
-            shininess 32
-            ambient 0.1
-            tiling 200
-            color 1 1 1 1
-         END_TEXTURE_ADVANCED_MATERIAL
-
-      END_COMPONENTS
-
-      CHILDREN:
-
-
-      END_CHILDREN
-
-   END_GAMEOBJECT
 
 
    END_CHILDREN

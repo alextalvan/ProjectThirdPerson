@@ -46,7 +46,7 @@ void GameObject::Destroy()
     //destroy children as well
     DestroyChildren();
 
-    if(isTransaprent)
+    if(isTranparent)
         Renderer::transparentList.Remove((DualLinkNode<TransparencyList>*)this);
 }
 
@@ -490,9 +490,21 @@ DualLinkList<Component>& GameObject::GetComponents()
 
 void GameObject::SetTransparent(bool val)
 {
-    isTransaprent = val;
     if(val)
+    {
         Renderer::transparentList.Add((DualLinkNode<TransparencyList>*)this);
+    }
+    else
+    {
+        if(isTranparent)
+            Renderer::transparentList.Remove((DualLinkNode<TransparencyList>*)this);
+    }
+    isTranparent = val;
+}
+
+bool GameObject::IsTransparent()
+{
+    return isTranparent;
 }
 
 bool GameObject::IsActiveInWorld()
@@ -513,7 +525,7 @@ bool GameObject::IsActiveInWorld()
 void GameObject::rotateTo(glm::vec3 target, float speed)
 {
     glm::mat3 objRot = getWorldRotation();
-    objRot[0]*=-1.0f;//convert matrix from left handed to right handed
+    objRot[0]*=-1.0f;//convert matrix from right handed to left handed
     glm::quat objQt = glm::toQuat(objRot);
     glm::vec3 difVec = glm::normalize(target - getWorldPosition());
     glm::vec3 right = glm::cross (glm::vec3(0,1,0), difVec);
@@ -525,7 +537,7 @@ void GameObject::rotateTo(glm::vec3 target, float speed)
 
     glm::mat3 newMat = glm::mat3_cast(objQt);
 
-    setWorldRotation(-newMat[0], newMat[1], newMat[2]);//convert the right handed matrix back to left handed
+    setWorldRotation(-newMat[0], newMat[1], newMat[2]);//convert the left handed matrix back to right handed
     //setLocalRotation(difVec);
     //setLocalRotation(-newMat[0], newMat[1], newMat[2]);
 }

@@ -15,6 +15,7 @@
 #include <mge/gui/GUI.hpp>
 #include <mge/particles/ParticleSystem.hpp>
 #include <mge/collision/TerrainCollider.hpp>
+#include <mge/behaviours/FirstPersonLook.hpp>
 #include <vector>
 
 
@@ -121,15 +122,19 @@ namespace LevelEditor
 
         //shadow toggle
         f>>s;//"cast_shadows"
-        int shadow;
-        f>>shadow;
-        obj->castShadows = shadow;
+        int readValue;
+        f>>readValue;
+        obj->castShadows = readValue;
 
         f>>s;//"transparent"
-        f>>shadow;
+        f>>readValue;
 
-        if(shadow)
+        if(readValue)
             obj->SetTransparent(true);
+
+        f>>s;//"ignore non directional lights"
+        f>>readValue;
+        obj->ignoreNonDirLights = readValue;
 
         //the exporter root is ignored
         if(obj->getName() == "MGE_exporter_root")
@@ -210,7 +215,9 @@ namespace LevelEditor
                 if(s!="missing")
                 specularMap = Texture::load(config::MGE_TEXTURE_PATH + s);
 
-                float smooth,shiny,ambient,tiling;
+                float smooth,shiny,ambient;
+                float difTile,normTile,specTile;
+
                 f>>s;
                 f>>s; smooth = std::strtof(s.c_str(),nullptr);
                 f>>s;
@@ -218,12 +225,20 @@ namespace LevelEditor
                 f>>s;
                 f>>s; ambient = std::strtof(s.c_str(),nullptr);
                 f>>s;
-                f>>s; tiling = std::strtof(s.c_str(),nullptr);
+                f>>s; difTile = std::strtof(s.c_str(),nullptr);
+                f>>s;
+                f>>s; normTile = std::strtof(s.c_str(),nullptr);
+                f>>s;
+                f>>s; specTile = std::strtof(s.c_str(),nullptr);
 
                 //std::cout<<"\n"<<smooth<<" "<<shiny<<" "<<ambient;
 
 
-                TextureLitMaterial* mat2 = new TextureLitMaterial(diffuse,smooth,shiny,ambient,normalMap,specularMap,tiling);
+                TextureLitMaterial* mat2 = new TextureLitMaterial(diffuse,smooth,shiny,ambient,normalMap,specularMap);
+
+                mat2->SetDiffuseTiling(difTile);
+                mat2->SetNormalTiling(normTile);
+                mat2->SetSpecularTiling(specTile);
 
                 f>>s;//"color
                 float r,g,b,a;
@@ -329,13 +344,12 @@ namespace LevelEditor
                 owner->AttachComponent(c);
 
                 //hard coding this shit
-                //Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, glm::vec3(-15,15,-15), glm::vec3(1, -3, 1), glm::vec3(1.0f,1.0f,1.0f),glm::vec3(0.1f),0,owner);
 
-                glm::vec3 lightDir = glm::vec3(1, -1.5f, 1);
-                float n = 300.0f;
-                glm::vec3 lightPos = glm::normalize(lightDir) * -n; //+ glm::vec3(0,5,0); //+ glm::vec3(n*1.25f,0,n*1.25f);
-                Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, lightPos, lightDir , glm::vec3(1.0f,0.5f,0.188f),glm::vec3(0.1f),0,owner);
-                _storedWorld->AddChild(light1);
+                //glm::vec3 lightDir = glm::vec3(1, -1.5f, 1);
+                //float n = 300.0f;
+                //glm::vec3 lightPos = glm::normalize(lightDir) * -n; //+ glm::vec3(0,5,0); //+ glm::vec3(n*1.25f,0,n*1.25f);
+                //Light* light1 = new Light(MGE_LIGHT_DIRECTIONAL, lightPos, lightDir , glm::vec3(1.0f,0.5f,0.188f),glm::vec3(0.1f),0,owner);
+                //_storedWorld->AddChild(light1);
                 f>>s;//end_character
             }
 
@@ -438,6 +452,7 @@ namespace LevelEditor
 
         glm::vec3 spawnRange1, spawnRange2, speedMin, speedMax;
         glm::vec2 lifeRange, delayRange, scaleRange,releaseCount;
+        int limit;
 
 
         f>>s;//"spawn range 1
@@ -464,7 +479,8 @@ namespace LevelEditor
         f>>s;//"scaleRange
         f>>s; scaleRange.x = std::strtof(s.c_str(),nullptr); f>>s; scaleRange.y = std::strtof(s.c_str(),nullptr);
 
-
+        f>>s;//particle_limit
+        f>>limit;
 
         pSys->startOffset1 = spawnRange1;
         pSys->startOffset2 = spawnRange2;
@@ -474,6 +490,7 @@ namespace LevelEditor
         pSys->releaseDelay = delayRange;
         pSys->releaseCount = releaseCount;
         pSys->scaleRange = scaleRange;
+        pSys->SetParticleLimit(limit);
 
         ParseComponents(f,pSys);
         ParseChildren(f,pSys);
@@ -497,6 +514,14 @@ namespace LevelEditor
         f>>isMain;//actual value, 1 or 0
 
         if(isMain) _storedWorld->setMainCamera(obj);
+
+        f>>s;//attach first person
+        f>>isMain;
+
+        if(isMain)
+        {
+            obj->AttachComponent(new FirstPersonLook());
+        }
 
         ParseComponents(f,obj);
         ParseChildren(f,obj);
@@ -608,6 +633,11 @@ namespace LevelEditor
 
         light->setColor(glm::vec3(r,g,b));
         light->setAttenuation(glm::vec3(a1,a2,a3));
+
+        f>>s;//falloff
+        f>>s; a1 = std::strtof(s.c_str(),nullptr);
+        light->setFalloff(a1);
+
 
         ParseComponents(f,light);
         ParseChildren(f,light);

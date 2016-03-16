@@ -5,22 +5,20 @@ using namespace std;
 #include "mge/core/Camera.hpp"
 #include<mge/behaviours/Component.hpp>
 #include<mge/core/GameObject.hpp>
-#include<mge/behaviours/FirstPersonLook.hpp>
+//#include<mge/behaviours/FirstPersonLook.hpp>
 #include<mge/core/Mesh.hpp>
 
-Camera::Camera( std::string pName, glm::vec3 pPosition, glm::mat4 pProjectionMatrix )
+Camera::Camera( std::string pName, glm::vec3 pPosition, glm::mat4 pProjectionMatrix)
 :	GameObject(pName, pPosition)//, _projection(pProjectionMatrix)
 {
-    _projection = glm::perspective (glm::radians(60.0f), -16.0f/9.0f, 0.1f, 2500.0f  );
+    _projection = glm::perspective (glm::radians(60.0f), -16.0f/9.0f, 0.1f, 5000.0f  );
     _view = glm::inverse(getWorldTransform());
 
-    FirstPersonLook* vis = new FirstPersonLook();
-    AttachComponent(vis);
 
     fov = 60.0f;
     aspectRatio = 16.0f/9.0f;
     near = 0.1f;
-    far = 2500.0f;
+    far = 5000.0f;
 }
 
 Camera::~Camera()
@@ -87,9 +85,8 @@ void Camera::RecalculateFrustumCache()
     _cullingCache.backOrigin = dot(_cullingCache.backNorm,(nearPos + camPos));
 
 
-    vec3 farPos = zaxis * farPlane;
-    _cullingCache.forwardOrigin = dot(_cullingCache.forwardNorm,(farPos + camPos));
-
+    //vec3 farPos = zaxis * farPlane;
+    //_cullingCache.forwardOrigin = dot(_cullingCache.forwardNorm,(farPos + camPos));
 
     vec3 nearLeft = xaxis * (wNear * -0.5f) + nearPos;
     vec3 leftNormal = normalize(glm::cross(yaxis,nearLeft));
@@ -151,6 +148,8 @@ bool Camera::FrustumCheck(GameObject* obj)
         return false;
 
     //for now, skipped forward culling
+    //if(dot(_cullingCache.forwardNorm,objPos) < _cullingCache.forwardOrigin - objRadius)
+    //   return false;
 
     return true;
 

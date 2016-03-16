@@ -48,8 +48,6 @@ Renderer::Renderer(int width, int height)
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glClearColor((float)0x2d/0xff, (float)0x6b/0xff, (float)0xce/0xff, 1.0f );
 
-	//glEnable(GL_FOG);
-
     // Setup some OpenGL options
     //glDepthFunc(GL_LESS);
 
@@ -60,10 +58,11 @@ Renderer::Renderer(int width, int height)
 	//std::cout<<"\n"<<sf::Texture::getMaximumSize();
 	//getchar();
 
-    //_postProcessList.push_back(new PostProcess("PostProcessing/hdr_shader.vs","PostProcessing/hdr_shader.fs"));
+    //_postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/hdr_shader.fs"));
     //_postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/identity.fs"));
 	//_postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/cut_screen.fs"));
 	//_postProcessList.push_back(new PostProcess("PostProcessing/identity.vs","PostProcessing/blur.fs"));
+
 }
 
 Renderer::~Renderer()
@@ -425,7 +424,7 @@ void Renderer::render (GameObject * pGameObject, Camera * pCamera, bool pRecursi
     AbstractMaterial* material = pGameObject->getMaterial();
 
     //our material (shader + settings) determines how we actually look
-    if (!pGameObject->isTransaprent && pGameObject->getMesh() && material != NULL && pCamera->FrustumCheck(pGameObject))
+    if (!pGameObject->IsTransparent() && pGameObject->getMesh() && material != NULL && pCamera->FrustumCheck(pGameObject))
     {
         material->render(pGameObject, pCamera);
     }

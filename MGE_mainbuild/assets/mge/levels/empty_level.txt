@@ -1,0 +1,45 @@
+GAMEOBJECT:
+   name MGE_exporter_root
+   transform: 
+      1  0  0  0  
+      0  1  0  0  
+      0  0  1  0  
+      0  0  0  1  
+   no_mesh
+   cast_shadows 0
+   transparent 0
+   ignore_nondir_lights 0
+
+   COMPONENTS:
+
+
+   END_COMPONENTS
+
+   CHILDREN:
+
+   CAMERA:
+      name Cam
+      transform: 
+         1  0  0  0  
+         0  1  0  0  
+         0  0  1  0  
+         0  0  0  1  
+      isMainCamera 1
+
+      COMPONENTS:
+
+
+      END_COMPONENTS
+
+      CHILDREN:
+
+
+      END_CHILDREN
+
+   END_CAMERA
+
+
+   END_CHILDREN
+
+END_GAMEOBJECT
+

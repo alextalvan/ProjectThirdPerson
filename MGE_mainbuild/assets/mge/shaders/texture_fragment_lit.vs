@@ -22,13 +22,21 @@ out vec4 FragPosLightSpaceMid;
 out vec2 TexCoord;
 out vec3 Normal;
 out mat3 TBN;
+out float camSpaceDepth;
 
 void main( void )
 {
     //vertex position
-    mat4 mvp = projectionMatrix * viewMatrix * modelMatrix;
-	gl_Position = mvp * vec4(vertex, 1.f);
-	FragPos = vec3(modelMatrix * vec4(vertex, 1.f));
+    vec4 modelVert = modelMatrix * vec4(vertex, 1.f);
+    FragPos = modelVert.xyz;
+
+    vec4 viewVert = viewMatrix * modelVert;
+    camSpaceDepth = viewVert.z;
+
+    //mat4 mvp = projectionMatrix * viewMatrix * modelMatrix;
+	gl_Position = projectionMatrix * viewVert;
+
+
 	//Normal = normalize(modelMatrix * vec4(normal,0.0f)).xyz;
 	//Normal = mat3(transpose(inverse(modelMatrix))) * normal;
 	TexCoord = uv;

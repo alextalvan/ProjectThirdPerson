@@ -53,6 +53,9 @@ public:
 
     void ToggleEmitter(bool val);
 
+    void SetParticleLimit(int amount);
+    //int GetParticleLimit();
+
 protected:
     virtual ~ParticleSystem();
     void Update();
@@ -72,6 +75,8 @@ private:
     float _lastTime;
 
     bool _emitterEnabled = true;
+
+    int _particleLimit = MGE_MAX_PARTICLES_PER_SYSTEM;
 
     //static Mesh* _particleQuad;
 };

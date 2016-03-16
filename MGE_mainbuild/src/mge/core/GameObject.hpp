@@ -125,10 +125,11 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
         GameObject* FindChild(std::string name);
 
         bool castShadows = true;
-        bool isTransaprent = false;
+        bool ignoreNonDirLights = false;//optimization large objects and point/spot lights
         //bool alwaysVisible = false;
 
         void SetTransparent(bool val);
+        bool IsTransparent();
 
         BoundingSphere& GetRenderBound();
         void RecalculateRenderBound();
@@ -150,7 +151,7 @@ class GameObject : public Activateable, public Destroyable, public DualLinkNode2
 		AbstractMaterial* _material;
 		//World* _world;
 
-
+        bool isTranparent = false;
 
 		virtual void Update();
 		virtual void MakeTransformDirty();

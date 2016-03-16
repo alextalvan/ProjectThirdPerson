@@ -25,13 +25,13 @@
 #include "mge/util/Timer.hpp"
 #include "mge/particles/ParticleSystem.hpp"
 #include "mge/core/Renderer.hpp"
+#include "mge/core/Light.hpp"
 
 //#define MGE_LUA_SAFETY 1  //comment this define out to remove the lua safety checks but heavily improve performance
 
 
 LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
 {
-
     _name = "LuaScript:" + path;
 	//Open lua
 	L = lua_open();
@@ -76,6 +76,7 @@ LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
 	lua_register(L, "AttachComponent", attachComponent);//
 	lua_register(L, "Distance", distance);//
 	lua_register(L, "RandomInRange", randomRange);//
+	lua_register(L, "RandomInRangeFloat", randomRangeFloat);
 	lua_register(L, "RollDice", randomRoll);//
 	lua_register(L, "SphereCollider", sphereCollider);//
 	lua_register(L, "BoxCollider", boxCollider);//
@@ -105,7 +106,6 @@ LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
 	lua_register(L, "CallComplex", luaInvokeFunctionWithArgs);//
 	lua_register(L, "PlayMusic", playMusic);//
 	lua_register(L, "PlaySFX", playSFX);//
-	lua_register(L, "PlaySFX", playSFX);//
 	lua_register(L, "SetActive", setActive);//
 	lua_register(L, "GetActive", getActive);//
 	lua_register(L, "SetColor", setColor);//
@@ -123,6 +123,8 @@ LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
 	lua_register(L, "CenterSpriteOrigin", centerSpriteOrigin);//
 	lua_register(L, "CenterTextOrigin", centerTextOrigin);//
 	lua_register(L, "RotateTo", rotateTo);//
+	lua_register(L, "DirectionalLight", directionalLight);//
+	lua_register(L, "Quit", quit);//
 
 	//Set world
 	lua_pushlightuserdata(L, (LuaObject*)world);
@@ -1172,6 +1174,17 @@ int LuaScript::randomRange(lua_State * lua)
 	return 1;
 }
 
+int LuaScript::randomRangeFloat(lua_State * lua)
+{
+    float r1 = lua_tonumber(lua, -2);
+    float r2 = lua_tonumber(lua, -1);
+
+    //lua_pop(lua,2);
+
+    lua_pushnumber(lua,Utils::Random::GetFloatValue(r1,r2));
+	return 1;
+}
+
 
 int LuaScript::randomRoll(lua_State * lua)
 {
@@ -1656,6 +1669,54 @@ int LuaScript::getScreenSize(lua_State * lua)
 
 	return 2;
 }
+
+int LuaScript::directionalLight(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+    if (!lua_isnumber(lua, -8)) throw "Expect: number";//color fields
+    if (!lua_isnumber(lua, -7)) throw "Expect: number";//
+	if (!lua_isnumber(lua, -6)) throw "Expect: number";//
+    if (!lua_isnumber(lua, -5)) throw "Expect: number";//direction fields
+    if (!lua_isnumber(lua, -4)) throw "Expect: number";//
+	if (!lua_isnumber(lua, -3)) throw "Expect: number";//
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";//hover distance
+	if (!lua_islightuserdata(lua, -1)) throw "Expect: game object";
+	#endif
+
+    glm::vec3 color;
+
+	color.x = lua_tonumber(lua, -8);
+	color.y = lua_tonumber(lua, -7);
+	color.z = lua_tonumber(lua, -6);
+
+	glm::vec3 direction;
+
+	direction.x = lua_tonumber(lua, -5);
+	direction.y = lua_tonumber(lua, -4);
+	direction.z = lua_tonumber(lua, -3);
+
+	float hover = lua_tonumber(lua, -2);
+
+	GameObject* target =  (GameObject*)(LuaObject*)lua_touserdata(lua,-1);
+
+    lua_getglobal(lua,"world");
+	World* world = (World*)(LuaObject*)lua_touserdata(lua,-1);
+
+	glm::vec3 lightPos = glm::normalize(direction) * -hover;
+	Light* light = new Light(MGE_LIGHT_DIRECTIONAL, lightPos, direction , color,glm::vec3(0.1f),0,target);
+	world->AddChild(light);
+
+	lua_pushlightuserdata(lua,(LuaObject*)light);
+
+	return 1;
+}
+
+int LuaScript::quit(lua_State * lua)
+{
+    AbstractGame::Quit();
+    return 0;
+}
+
 
 LuaScript::~LuaScript()
 {

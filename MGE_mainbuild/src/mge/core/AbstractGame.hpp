@@ -34,6 +34,8 @@ class AbstractGame
 
         static sf::RenderWindow* const GetWindow();
 
+        static void Quit();
+
     protected:
 
         //methods above delegate behaviour to the methods below so that you can override it in a subclass
@@ -63,7 +65,7 @@ class AbstractGame
 		Renderer* _renderer;        //the renderer class to render the world
 		World* _world;              //the root game object that represents our scene
 		GUI* _world2D;
-		bool _running;
+		static bool _running;
 
 		bool _lockFrameRate = true;
 
