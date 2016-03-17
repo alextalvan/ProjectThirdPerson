@@ -26,6 +26,7 @@
 #include "mge/particles/ParticleSystem.hpp"
 #include "mge/core/Renderer.hpp"
 #include "mge/core/Light.hpp"
+#include "mge/behaviours/FirstPersonLook.hpp"
 
 //#define MGE_LUA_SAFETY 1  //comment this define out to remove the lua safety checks but heavily improve performance
 
@@ -122,9 +123,14 @@ LuaScript::LuaScript(std::string path, World * world, GUI * world2D)
 	lua_register(L, "GetScreenSize", getScreenSize);
 	lua_register(L, "CenterSpriteOrigin", centerSpriteOrigin);//
 	lua_register(L, "CenterTextOrigin", centerTextOrigin);//
-	lua_register(L, "RotateTo", rotateTo);//
-	lua_register(L, "DirectionalLight", directionalLight);//
-	lua_register(L, "Quit", quit);//
+	lua_register(L, "RotateTo", rotateTo);
+	lua_register(L, "DirectionalLight", directionalLight);
+	lua_register(L, "Quit", quit);
+	lua_register(L, "CacheSFX", cacheSound);
+	lua_register(L, "SetLightColor", setLightColor);
+	lua_register(L, "SetLightAttenuation", setLightAttenuation);
+	lua_register(L, "GetRaycastObject", getLastRaycastInfo);
+	lua_register(L, "SetMasterVolume", setMasterVolume);
 
 	//Set world
 	lua_pushlightuserdata(L, (LuaObject*)world);
@@ -151,6 +157,7 @@ lua_State* LuaScript::getLuaStatePointer()
 
 void LuaScript::InvokeFunction(std::string name)
 {
+    //std::cout<<"Calling function "<<name<<" on "<<_name<<"\n";
     lua_getglobal(L,name.c_str());
     lua_call(L,0,0);
 }
@@ -243,6 +250,54 @@ int LuaScript::setColor(lua_State * lua)
 	obj->getMaterial()->color = color;
 
 	return 0;
+}
+
+int LuaScript::setLightColor(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_isnumber(lua, -3)) throw "Expect: number";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+    Light* light = (Light*)(LuaObject*)lua_touserdata(lua,-4);
+	glm::vec3 color = glm::vec3(1);
+	color.x = lua_tonumber(lua, -3);
+	color.y = lua_tonumber(lua, -2);
+	color.z = lua_tonumber(lua, -1);
+	light->setColor(color);
+
+	return 0;
+}
+
+int LuaScript::setLightAttenuation(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	if (!lua_isnumber(lua, -3)) throw "Expect: number";
+	if (!lua_isnumber(lua, -2)) throw "Expect: number";
+	if (!lua_isnumber(lua, -1)) throw "Expect: number";
+	#endif
+
+    Light* light = (Light*)(LuaObject*)lua_touserdata(lua,-4);
+	glm::vec3 att = glm::vec3(1);
+	att.x = lua_tonumber(lua, -3);
+	att.y = lua_tonumber(lua, -2);
+	att.z = lua_tonumber(lua, -1);
+	light->setAttenuation(att);
+
+	return 0;
+}
+
+int LuaScript::getLastRaycastInfo(lua_State * lua)
+{
+    GameObject* target = FirstPersonLook::GetLastRaycastInfo().object;
+
+    if(target==NULL)
+        lua_pushnil(lua);
+    else
+        lua_pushlightuserdata(lua,(LuaObject*)target);
+
+    return 1;
 }
 
 int LuaScript::rotateTo(lua_State * lua)
@@ -1308,6 +1363,7 @@ int LuaScript::distance(lua_State * lua)
 
 void LuaScript::Update()
 {
+    //std::cout<<"Updating: "<<_name<<"\n";
 	lua_getglobal(L, "Update");
 	lua_call(L, 0, 0);
 	//cout<<_name<<" stack size: "<<lua_gettop(L)<<"\n";
@@ -1402,6 +1458,27 @@ int LuaScript::playSFX(lua_State * lua)
 
     Sound::PlaySFX((config::MGE_SOUND_PATH + name).c_str(),vol);
 
+	return 0;
+}
+
+int LuaScript::setMasterVolume(lua_State * lua)
+{
+    float vol = lua_tonumber(lua,-1);
+
+    Sound::SoundManager::GetSingleton()->SetMasterVolume(vol);
+    return 0;
+}
+
+int LuaScript::cacheSound(lua_State * lua)
+{
+    #ifdef MGE_LUA_SAFETY
+	#endif
+
+	//float vol = lua_tonumber(lua,-1);
+	string name = lua_tostring(lua,-1);
+
+    //Sound::PlaySFX((config::MGE_SOUND_PATH + name).c_str(),vol);
+    Sound::SoundManager::GetSingleton()->CacheSoundFile(config::MGE_SOUND_PATH + name);
 	return 0;
 }
 
@@ -1623,7 +1700,10 @@ int LuaScript::resetTimer(lua_State * lua)
     #ifdef MGE_LUA_SAFETY
 	#endif
 
+
+
     Timer* t = (Timer*)lua_touserdata(lua,-2);
+
     float dur = lua_tonumber(lua,-1);
     t->SetDuration(dur);
     t->Reset();

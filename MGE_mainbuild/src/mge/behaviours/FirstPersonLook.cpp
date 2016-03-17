@@ -9,6 +9,9 @@
 #include <mge/core/Renderer.hpp>
 #include<mge/collision/QuadTree.hpp>
 
+RaycastInfo FirstPersonLook::_storedRaycastInfo;
+
+
 FirstPersonLook::FirstPersonLook(float turnSpeed)
 {
     _name = "FirstPersonVision";
@@ -59,11 +62,13 @@ void FirstPersonLook::Rotation()
     glm::vec3 dir = glm::normalize(glm::vec3(newTransform[2])) * -1.0f;
 
 
-    RaycastInfo res;
+    //RaycastInfo res;
     Ray ray(origin,dir);
-    if(Input::GetKeyDown(Input::E) && CollisionManager::Raycast(ray,res) && res.distance <= reach)
+    bool rayTestResult = CollisionManager::Raycast(ray,_storedRaycastInfo);
+
+    if(rayTestResult && Input::GetKeyDown(Input::E) && _storedRaycastInfo.distance <= reach)
     {
-        DualLinkNode<Component>* cn = res.object->GetComponents().startNode;
+        DualLinkNode<Component>* cn = _storedRaycastInfo.object->GetComponents().startNode;
         while(cn!=NULL)
         {
             LuaScript* script = dynamic_cast<LuaScript*>((Component*)cn);
@@ -75,6 +80,11 @@ void FirstPersonLook::Rotation()
         //std::cout<<"distance: "<<res.distance<<"\n";
     }
 
+}
+
+const RaycastInfo& FirstPersonLook::GetLastRaycastInfo()
+{
+    return _storedRaycastInfo;
 }
 
 glm::vec2 FirstPersonLook::GetMouseOffset()

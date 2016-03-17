@@ -15702,7 +15702,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1458158136 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
+1458161703 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -15872,7 +15872,7 @@
 	<mge/collision/BoxCollider.hpp>
 	<mge/collision/Collider.hpp>
 
-1455014884 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\sound\soundmanager.hpp
+1458224007 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\sound\soundmanager.hpp
 	<vector>
 	<SFML/Audio/Sound.hpp>
 	<SFML/Audio/SoundBuffer.hpp>
@@ -15928,7 +15928,7 @@
 	<SFML/System/Time.hpp>
 	<string>
 
-1455012464 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\sound\soundcacher.hpp
+1458208432 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\sound\soundcacher.hpp
 	<SFML/Audio/SoundBuffer.hpp>
 	<map>
 
@@ -15946,7 +15946,7 @@
 1455015352 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\sound\soundchannel.cpp
 	"mge/sound/SoundChannel.hpp"
 
-1455015421 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\sound\soundmanager.cpp
+1458224292 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\sound\soundmanager.cpp
 	<mge/sound/SoundManager.hpp>
 	<cstddef>
 	<iostream>
@@ -16025,7 +16025,7 @@
 	"mge/particles/ParticleSystem.hpp"
 	"mge/core/Renderer.hpp"
 
-1458045712 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
+1458225561 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.hpp
 	"lua.h"
 	"lauxlib.h"
 	"lualib.h"
@@ -16034,7 +16034,7 @@
 	<mge/behaviours/Component.hpp>
 	<SFML/Graphics.hpp>
 
-1458045736 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
+1458230861 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\luascript.cpp
 	"mge/lua/LuaScript.hpp"
 	"mge/core/World.hpp"
 	"mge/core/GameObject.hpp"
@@ -16063,6 +16063,7 @@
 	"mge/particles/ParticleSystem.hpp"
 	"mge/core/Renderer.hpp"
 	"mge/core/Light.hpp"
+	"mge/behaviours/FirstPersonLook.hpp"
 
 1455012450 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\lua\lua.h
 	<stdarg.h>
@@ -16152,7 +16153,7 @@
 1455310221 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\firstpersonvision.hpp
 	<mge/behaviours/Component.hpp>
 
-1458032563 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\firstpersonlook.cpp
+1458224675 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\firstpersonlook.cpp
 	<mge/behaviours/FirstPersonLook.hpp>
 	<mge/util/Input.hpp>
 	<mge/collision/CollisionManager.hpp>
@@ -16164,8 +16165,9 @@
 	<mge/core/Renderer.hpp>
 	<mge/collision/QuadTree.hpp>
 
-1458031089 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\firstpersonlook.hpp
+1458224642 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\behaviours\firstpersonlook.hpp
 	<mge/behaviours/Component.hpp>
+	<mge/collision/CollisionManager.hpp>
 
 1457602765 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\gui.hpp
 	<SFML/Graphics.hpp>

@@ -64,6 +64,8 @@ private:
 	static int setActive(lua_State * lua);
 	static int getActive(lua_State * lua);
 	static int setColor(lua_State * lua);
+	static int setLightColor(lua_State * lua);
+	static int setLightAttenuation(lua_State * lua);
 
 	//gui
 	static int guiText(lua_State * lua);
@@ -124,6 +126,9 @@ private:
 	static int loadLevel(lua_State * lua);
     static int playMusic(lua_State * lua);
     static int playSFX(lua_State * lua);
+    static int cacheSound(lua_State * lua);
+    static int setMasterVolume(lua_State * lua);
     static int directionalLight(lua_State * lua);
     static int quit(lua_State * lua);
+    static int getLastRaycastInfo(lua_State * lua);
 };

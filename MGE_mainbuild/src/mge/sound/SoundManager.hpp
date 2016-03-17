@@ -18,7 +18,9 @@ namespace Sound
 
         Sound::SoundChannel* const LoadSFX(std::string fileName);
         Sound::SoundChannel* const LoadMusic(std::string fileName);
-
+        void CacheSoundFile(std::string fileName);
+        void SetMasterVolume(float val);
+        float GetMasterVolume();
 
     private:
          SoundManager();
@@ -28,6 +30,8 @@ namespace Sound
         std::vector<SoundChannel*> _sfxChannels;
         Sound::SoundChannel* _musicChannel = NULL;
         Sound::SoundCacher* _cache;
+
+        float masterVolume = 1.0f;
     };
 
     void PlaySFX(std::string fileName,float vol = 1.0f);

@@ -16,6 +16,11 @@ namespace Sound
         delete _musicChannel;
     }
 
+    void SoundManager::CacheSoundFile(std::string fileName)
+    {
+        _cache->LoadSoundFile(fileName);
+    }
+
     Sound::SoundChannel* const SoundManager::LoadSFX(std::string fileName)
     {
         //cache sound buffer
@@ -52,7 +57,8 @@ namespace Sound
 
     void PlaySFX(std::string fileName,float vol)
     {
-        Sound::SoundManager::GetSingleton()->LoadSFX(fileName)->Play(vol,false);
+        SoundManager* sMng = Sound::SoundManager::GetSingleton();
+        sMng->LoadSFX(fileName)->Play(vol * sMng->GetMasterVolume(),false);
     }
 
 
@@ -72,7 +78,8 @@ namespace Sound
 
     void PlayMusic(std::string fileName,float vol,bool loop)
     {
-        Sound::SoundManager::GetSingleton()->LoadMusic(fileName)->Play(vol,loop);
+        SoundManager* sMng = Sound::SoundManager::GetSingleton();
+       sMng->LoadMusic(fileName)->Play(vol* sMng->GetMasterVolume(),loop);
     }
 
     SoundManager* const SoundManager::GetSingleton()
@@ -83,5 +90,15 @@ namespace Sound
         }
 
         return _instance;
+    }
+
+    void SoundManager::SetMasterVolume(float val)
+    {
+        masterVolume = val;
+    }
+
+    float SoundManager::GetMasterVolume()
+    {
+        return masterVolume;
     }
 }
