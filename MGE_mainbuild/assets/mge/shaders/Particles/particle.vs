@@ -1,22 +1,18 @@
-#version 330
-
+#version 330 compatibility
 uniform mat4 vpMatrix;//view and projection combined
 uniform	mat4 rotationMatrix;//camera orientation
-uniform vec3 position;//this is passed separately for each particle
-uniform vec2 scale;
 
-in vec3 vertex;
-in vec3 normal;
-in vec2 uv;
 
-out vec2 texCoord; //interpolated uv
+in vec3 position;
+in float lifetime;
+in float scale;
+
+out float gsLifetime;
+out float gsScale;
 
 void main( void )
 {
-    mat4 rot = rotationMatrix;
-    rot[0] *= scale.x;
-    rot[1] *= scale.y;
-    vec4 pos = rot * vec4(vertex,1.0f) + vec4(position,0.0f);
-	gl_Position = vpMatrix * pos;
-	texCoord = uv;
+    gl_Position = vec4(position,0.0f);
+    gsLifetime = lifetime;
+    gsScale = scale;
 }

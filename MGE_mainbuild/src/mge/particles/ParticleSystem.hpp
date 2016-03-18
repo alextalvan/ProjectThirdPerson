@@ -9,20 +9,20 @@
 #define MGE_MAX_PARTICLES_PER_SYSTEM 1024
 #define MGE_NEW_PARTICLE_BUFFER_SIZE 128
 
-namespace particles
-{
-    struct Particle
-    {
-        float lifeTime = -1.0f;
-        glm::vec3 position;
-        glm::vec3 speed;
-        glm::vec2 scale;
-    };
-}
+//namespace particles
+//{
+//    struct Particle
+//    {
+//        float lifeTime = -1.0f;
+//        glm::vec3 position;
+//        glm::vec3 speed;
+//        glm::vec2 scale;
+//    };
+//}
 
 class ParticleMaterial;
 
-using namespace particles;
+//using namespace particles;
 class ParticleSystem : public GameObject
 {
 friend class ParticleMaterial;
@@ -63,8 +63,18 @@ protected:
     void UpdateParticles();
 
 private:
-    Particle _particles[MGE_MAX_PARTICLES_PER_SYSTEM];
-    Particle _buffer[MGE_NEW_PARTICLE_BUFFER_SIZE];
+    //Particle _particles[MGE_MAX_PARTICLES_PER_SYSTEM];
+    //Particle _buffer[MGE_NEW_PARTICLE_BUFFER_SIZE];
+    glm::vec1 _lifeTimesMain[MGE_MAX_PARTICLES_PER_SYSTEM];
+    glm::vec3 _positionsMain[MGE_MAX_PARTICLES_PER_SYSTEM];
+    glm::vec3 _speedsMain[MGE_MAX_PARTICLES_PER_SYSTEM];
+    glm::vec1 _scalesMain[MGE_MAX_PARTICLES_PER_SYSTEM];
+
+    glm::vec1 _lifeTimesBuffer[MGE_NEW_PARTICLE_BUFFER_SIZE];
+    glm::vec3 _positionsBuffer[MGE_NEW_PARTICLE_BUFFER_SIZE];
+    glm::vec3 _speedsBuffer[MGE_NEW_PARTICLE_BUFFER_SIZE];
+    glm::vec1 _scalesBuffer[MGE_NEW_PARTICLE_BUFFER_SIZE];
+
     int _bufferCount = 0;
 
 

@@ -22,12 +22,15 @@ class ParticleMaterial : public AbstractMaterial
         static void _lazyInitializeShader();
 
         Texture* _diffuseTexture;
-        GLuint _vpMatrixLoc;
-        GLuint _rotMatrixLoc;
-        GLuint _posVectorLoc;
-        GLuint _scaleVectorLoc;
-        GLuint _vertLoc;
-        GLuint _normalLoc;
-        GLuint _uvLoc;
+        static GLuint _vpMatrixLoc;
+        static GLuint _rotMatrixLoc;
+        static GLuint _posLoc;
+        static GLuint _lifetimeLoc;
+        static GLuint _scaleLoc;
+        static GLuint _texLoc;
+
+        static GLuint _offsetsBuffer;
+        static GLuint _lifetimesBuffer;
+        static GLuint _scalesBuffer;
 };
 

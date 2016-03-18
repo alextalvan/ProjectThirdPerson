@@ -313,6 +313,7 @@ void Mesh::streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUV
 	// no current buffer, to avoid mishaps, very important for performance
 
 	glBindBuffer(GL_ARRAY_BUFFER,0);
+	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
 
 	//fix for serious performance issue
 	if (pUVsAttrib != -1) glDisableVertexAttribArray(pUVsAttrib);
@@ -349,6 +350,7 @@ void Mesh::streamToOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUV
 	// no current buffer, to avoid mishaps, very important for performance
 
 	glBindBuffer(GL_ARRAY_BUFFER,0);
+	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
 
 	//fix for serious performance issue
 	if (pUVsAttrib != -1) glDisableVertexAttribArray(pUVsAttrib);
@@ -390,6 +392,7 @@ void Mesh::drawInOpenGL()
 void Mesh::disableInOpenGL(GLint pVerticesAttrib, GLint pNormalsAttrib, GLint pUVsAttrib)
 {
     glBindBuffer(GL_ARRAY_BUFFER,0);
+    glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
 
 	//fix for serious performance issue
 	if (pUVsAttrib != -1) glDisableVertexAttribArray(pUVsAttrib);

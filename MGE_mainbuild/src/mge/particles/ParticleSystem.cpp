@@ -29,6 +29,13 @@ ParticleSystem::ParticleSystem(Texture* particleTex)
     castShadows = false;
 
     SetTransparent(true);
+
+    for(int i=0;i<MGE_MAX_PARTICLES_PER_SYSTEM;++i)
+    {
+        _lifeTimesMain[i] = -1.0f;
+        _scalesMain[i] = 1.0f;
+        _positionsMain[i] = glm::vec3(-1000000);
+    }
 }
 
 ParticleSystem::~ParticleSystem()
@@ -68,14 +75,15 @@ void ParticleSystem::Release()
         randomOffset.y = Utils::Random::GetFloatValue(startOffset1.y,startOffset2.y);
         randomOffset.z = Utils::Random::GetFloatValue(startOffset1.z,startOffset2.z);
 
-        _buffer[i].scale = glm::vec2(Utils::Random::GetFloatValue(scaleRange.x,scaleRange.x));
+        _scalesBuffer[i] = Utils::Random::GetFloatValue(scaleRange.x,scaleRange.y);
 
 
-        _buffer[i].position = _cachedWorldPos + randomOffset;
-        _buffer[i].lifeTime = Utils::Random::GetFloatValue(lifeTimeRange.x,lifeTimeRange.y);
-        _buffer[i].speed.x = Utils::Random::GetFloatValue(speedMin.x,speedMax.x);
-        _buffer[i].speed.y = Utils::Random::GetFloatValue(speedMin.y,speedMax.y);
-        _buffer[i].speed.z = Utils::Random::GetFloatValue(speedMin.z,speedMax.z);
+        _positionsBuffer[i] = _cachedWorldPos + randomOffset;
+        _lifeTimesBuffer[i] = Utils::Random::GetFloatValue(lifeTimeRange.x,lifeTimeRange.y);
+
+        _speedsBuffer[i].x = Utils::Random::GetFloatValue(speedMin.x,speedMax.x);
+        _speedsBuffer[i].y = Utils::Random::GetFloatValue(speedMin.y,speedMax.y);
+        _speedsBuffer[i].z = Utils::Random::GetFloatValue(speedMin.z,speedMax.z);
     }
 
     _bufferCount = amount;
@@ -84,15 +92,16 @@ void ParticleSystem::Release()
 
 void ParticleSystem::UpdateParticles()
 {
+    //Time::update();
     float delta = Time::now() - _lastTime;
     _lastTime = Time::now();
-    for(int i=0;i<_particleLimit;++i)
+    for(int i=0;i<MGE_MAX_PARTICLES_PER_SYSTEM;++i)
     {
-        _particles[i].lifeTime -= delta;
+        _lifeTimesMain[i] -= delta;
 
-        if(_particles[i].lifeTime>0.0f)
+        if(_lifeTimesMain[i].x>0.0f)
         {
-            _particles[i].position += _particles[i].speed;
+            _positionsMain[i] += _speedsMain[i];
         }
     }
 }
