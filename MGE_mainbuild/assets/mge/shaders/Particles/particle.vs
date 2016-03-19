@@ -1,18 +1,16 @@
-#version 330 compatibility
+#version 330
 uniform mat4 vpMatrix;//view and projection combined
 uniform	mat4 rotationMatrix;//camera orientation
 
 
-in vec3 position;
-in float lifetime;
-in float scale;
+layout (location = 0) in vec3 position;
+layout (location = 1) in vec2 particleInfo;//x stores lifetime, y stores scale
 
-out float gsLifetime;
-out float gsScale;
 
-void main( void )
+out vec2 gsParticleInfo;
+
+void main()
 {
     gl_Position = vec4(position,0.0f);
-    gsLifetime = lifetime;
-    gsScale = scale;
+    gsParticleInfo = particleInfo;
 }

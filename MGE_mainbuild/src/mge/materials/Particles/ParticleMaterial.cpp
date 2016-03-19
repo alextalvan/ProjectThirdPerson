@@ -1,24 +1,28 @@
 #include <mge/materials/Particles/ParticleMaterial.hpp>
 #include <mge/particles/ParticleSystem.hpp>
+#include <mge/core/Renderer.hpp>
 
 
 ShaderProgram* ParticleMaterial::_shader = NULL;
 
 GLuint ParticleMaterial::_rotMatrixLoc = 0;
 GLuint ParticleMaterial::_vpMatrixLoc = 0;
-GLuint ParticleMaterial::_posLoc = 0;
-GLuint ParticleMaterial::_scaleLoc = 0;
-GLuint ParticleMaterial::_lifetimeLoc = 0;
 GLuint ParticleMaterial::_texLoc = 0;
 
+
+GLuint ParticleMaterial::_posLoc = 0;
+GLuint ParticleMaterial::_lifeScaleLoc = 0;
+
+
 GLuint ParticleMaterial::_offsetsBuffer = 0;
-GLuint ParticleMaterial::_lifetimesBuffer = 0;
-GLuint ParticleMaterial::_scalesBuffer = 0;
+GLuint ParticleMaterial::_lifeScaleBuffer = 0;
 
-ParticleMaterial::ParticleMaterial(Texture * pDiffuseTexture):_diffuseTexture(pDiffuseTexture) {
+std::size_t ParticleMaterial::_vec3Size = sizeof(glm::vec3);
+std::size_t ParticleMaterial::_vec2Size = sizeof(glm::vec2);
+
+ParticleMaterial::ParticleMaterial(Texture * pDiffuseTexture):_diffuseTexture(pDiffuseTexture)
+{
     _lazyInitializeShader();
-    //generate the buffers to be used by particle rendering
-
 }
 
 ParticleMaterial::~ParticleMaterial() {}
@@ -33,30 +37,34 @@ void ParticleMaterial::_lazyInitializeShader()
 
         _shader->finalize();
 
-        //_vpMatrixLoc =
         _rotMatrixLoc = _shader->getUniformLocation("rotationMatrix");
         _vpMatrixLoc = _shader->getUniformLocation("vpMatrix");
         _posLoc = _shader->getAttribLocation("position");
-        _scaleLoc = _shader->getAttribLocation("scale");
-        _lifetimeLoc = _shader->getAttribLocation("lifetime");
+        _lifeScaleLoc = _shader->getAttribLocation("particleInfo");
 
         _texLoc = _shader->getUniformLocation("textureDiffuse");
 
-        glm::vec3 dummy[MGE_MAX_PARTICLES_PER_SYSTEM];
+        glm::vec3 dummy_vec3[MGE_MAX_PARTICLES_PER_SYSTEM];
+        glm::vec2 dummy_vec2[MGE_MAX_PARTICLES_PER_SYSTEM];
+
+        for(int i=0;i<MGE_MAX_PARTICLES_PER_SYSTEM;++i)
+        {
+            dummy_vec2[i] = glm::vec2(-1.0f,1.0f);
+            dummy_vec3[i] = glm::vec3(-10000000);
+        }
+
+
         glGenBuffers(1, &_offsetsBuffer);
         glBindBuffer(GL_ARRAY_BUFFER, _offsetsBuffer);
-        glBufferData(GL_ARRAY_BUFFER,MGE_MAX_PARTICLES_PER_SYSTEM*sizeof(glm::vec3), &dummy, GL_DYNAMIC_DRAW);
+        //extremely important to mark this as a dynamic draw buffer
+        glBufferData(GL_ARRAY_BUFFER,  MGE_MAX_PARTICLES_PER_SYSTEM*_vec3Size, &dummy_vec3[0], GL_DYNAMIC_DRAW);
 
 
-        glm::vec1 dummy2[MGE_MAX_PARTICLES_PER_SYSTEM];
-        glGenBuffers(1, &_lifetimesBuffer);
-        glBindBuffer(GL_ARRAY_BUFFER, _lifetimesBuffer);
-        glBufferData(GL_ARRAY_BUFFER, MGE_MAX_PARTICLES_PER_SYSTEM*sizeof(glm::vec1), &dummy2, GL_DYNAMIC_DRAW);
-//
-//        //float dummy2[MGE_MAX_PARTICLES_PER_SYSTEM];
-        glGenBuffers(1, &_scalesBuffer);
-        glBindBuffer(GL_ARRAY_BUFFER, _scalesBuffer);
-        glBufferData(GL_ARRAY_BUFFER, MGE_MAX_PARTICLES_PER_SYSTEM*sizeof(glm::vec1), &dummy2, GL_DYNAMIC_DRAW);
+
+        glGenBuffers(1, &_lifeScaleBuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, _lifeScaleBuffer);
+        //extremely important to mark this as a dynamic draw buffer
+        glBufferData(GL_ARRAY_BUFFER, MGE_MAX_PARTICLES_PER_SYSTEM*_vec2Size, &dummy_vec2[0], GL_DYNAMIC_DRAW);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
@@ -89,72 +97,44 @@ void ParticleMaterial::render(GameObject* pGameObject, Camera* pCamera)
 
     ParticleSystem* pSys = (ParticleSystem*)pGameObject;//we know the object we are rendering is a particle system
 
-    int newPartCount = pSys->_bufferCount;
-    int newPartIndex = 0;
-
-    //Mesh* quad = pSys->_mesh;
-    //quad->enableInOpenGL(_vertLoc,_normalLoc,_uvLoc);
-
     int particleLimit = pSys->_particleLimit;
-    int aliveParticles = 0;
 
-    //insertion of new particles
-    for(int i=0;i<MGE_MAX_PARTICLES_PER_SYSTEM;++i)
-    {
-        if(aliveParticles == particleLimit)
-            break;
-
-        if(pSys->_lifeTimesMain[i].x > 0.0f)
-        {
-            aliveParticles++;
-        }
-        else
-        //check if we can insert a particle from the buffer to the main array
-        if(newPartIndex < newPartCount && aliveParticles < particleLimit)
-        {
-            //pSys->_particles[i] = pSys->_buffer[newPartIndex];//copying by value
-            pSys->_lifeTimesMain[i] = pSys->_lifeTimesBuffer[i];
-            pSys->_positionsMain[i] = pSys->_positionsBuffer[i];
-            pSys->_speedsMain[i] = pSys->_speedsBuffer[i];
-            pSys->_scalesMain[i] = pSys->_scalesBuffer[i];
-
-            newPartIndex++;
-        }
-    }
-
-    pSys->_bufferCount = 0;
-
+    //void* target;
 
     glBindBuffer(GL_ARRAY_BUFFER, _offsetsBuffer);
-    glBufferSubData(GL_ARRAY_BUFFER,0,MGE_MAX_PARTICLES_PER_SYSTEM*sizeof(glm::vec3), &(pSys->_positionsMain[0]));
+///   mapBuffer method - get a pointer from OpenGL to write raw memory to with memcpy
+//    target = glMapBuffer(GL_ARRAY_BUFFER,GL_WRITE_ONLY);
+//    memcpy(target,&(pSys->_positionsMain[0]),particleLimit*sizeof(glm::vec3));
+//    glUnmapBuffer( GL_ARRAY_BUFFER );
+
+///   bufferData method - discards current buffer memory and allocates new contents
+//    glBufferData(GL_ARRAY_BUFFER,particleLimit*sizeof(glm::vec3),&(pSys->_positionsMain[0]),GL_STATIC_DRAW);
+
+///   bufferSubData method - modify existing buffer memory
+    glBufferSubData(GL_ARRAY_BUFFER,0,particleLimit*_vec3Size, &(pSys->_positionsMain[0]));
     glEnableVertexAttribArray(_posLoc);
     glVertexAttribPointer(_posLoc, 3, GL_FLOAT, GL_FALSE, 0, (void*)0 );
 
 
-
-    glBindBuffer(GL_ARRAY_BUFFER, _lifetimesBuffer);
-    glBufferSubData(GL_ARRAY_BUFFER,0,MGE_MAX_PARTICLES_PER_SYSTEM*sizeof(glm::vec1), &(pSys->_lifeTimesMain[0]));
-    glEnableVertexAttribArray(_lifetimeLoc);
-    glVertexAttribPointer(_lifetimeLoc, 1, GL_FLOAT, GL_FALSE, 0, (void*)0 );
-
-
-
-    glBindBuffer(GL_ARRAY_BUFFER, _scalesBuffer);
-    glBufferSubData(GL_ARRAY_BUFFER,0,MGE_MAX_PARTICLES_PER_SYSTEM*sizeof(glm::vec1), &(pSys->_scalesMain[0]));
-    glEnableVertexAttribArray(_scaleLoc);
-    glVertexAttribPointer(_scaleLoc, 1, GL_FLOAT, GL_FALSE, 0, (void*)0 );
-
+    glBindBuffer(GL_ARRAY_BUFFER, _lifeScaleBuffer);
+    glBufferSubData(GL_ARRAY_BUFFER,0,particleLimit*_vec2Size, &(pSys->_lifeScaleMain[0]));
+    glEnableVertexAttribArray(_lifeScaleLoc);
+    glVertexAttribPointer(_lifeScaleLoc, 2, GL_FLOAT, GL_FALSE, 0, (void*)0 );
 
 
     //THE draw call
-    glDrawArrays(GL_POINTS,0,MGE_MAX_PARTICLES_PER_SYSTEM);
+    glDrawArrays(GL_POINTS,0,particleLimit);
+    Renderer::debugInfo.drawCallCount++;
+    //Renderer::debugInfo.triangleCount += particleLimit *
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+
     glDisableVertexAttribArray(_posLoc);
-    glDisableVertexAttribArray(_lifetimeLoc);
-    glDisableVertexAttribArray(_scaleLoc);
+    glDisableVertexAttribArray(_lifeScaleLoc);
+
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 }

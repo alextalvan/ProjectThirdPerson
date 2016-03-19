@@ -25,12 +25,17 @@ class ParticleMaterial : public AbstractMaterial
         static GLuint _vpMatrixLoc;
         static GLuint _rotMatrixLoc;
         static GLuint _posLoc;
-        static GLuint _lifetimeLoc;
-        static GLuint _scaleLoc;
+        //static GLuint _lifetimeLoc;
+        //static GLuint _scaleLoc;
+        static GLuint _lifeScaleLoc;
         static GLuint _texLoc;
 
         static GLuint _offsetsBuffer;
-        static GLuint _lifetimesBuffer;
-        static GLuint _scalesBuffer;
+        //static GLuint _lifetimesBuffer;
+        //static GLuint _scalesBuffer;
+        static GLuint _lifeScaleBuffer;
+
+        static std::size_t _vec3Size;
+        static std::size_t _vec2Size;
 };
 

@@ -107,9 +107,12 @@ void main( void )
 
     //fog
     float fogBlend = (2000.0 + camSpaceDepth) * 0.0005002501; //(fogFar - fragDepth) / (fogFar - fogNear)
-    fogBlend = clamp(fogBlend,0.5,1.0);
+    fogBlend = clamp(fogBlend,0.4,1.0);
 
-    fragment_color = fragment_color * fogBlend + (1.0 - fogBlend) * vec4(0.5,0.5,0.5,1.0);
+    fragment_color = fragment_color * fogBlend + (1.0 - fogBlend) * vec4(0.933503,0.796875,0.457031,1.0);
+    //vec4(0.882812,0.558593,0.203125,1.0); - orange
+    //vec4(0.933503,0.796875,0.457031,1.0); - pale yellow
+    //vec4(0.603921,0.290196,0.121568,1.0); - crimson red
 
 }
 
@@ -213,7 +216,7 @@ float ShadowCalculation(vec3 norm, vec3 lightDir)
             return 1.0;
 
         closestDepth = BilinearShadowSample(depthMapFar,projCoords.xy,texSizes.z);
-        bias = max(0.00125 * (1.0 - dot(norm, lightDir)), 0.00125);
+        bias = max(0.0005 * (1.0 - dot(norm, lightDir)), 0.0005);
         shadow = projCoords.z - bias > closestDepth  ? 1.0 : 0.0;
 
         if(shadow > 0.75) return 0.0;

@@ -74,8 +74,8 @@ void AbstractGame::_initializeWindow(int width, int height, int fullscreen)
 {
 	std::cout << "Initializing window..." << std::endl;
 
-	int style = (fullscreen) ? sf::Style::None : sf::Style::Titlebar;
-	_window = new sf::RenderWindow( sf::VideoMode(width,height), "FairWind Game Engine", style , sf::ContextSettings(24,8,4,3,3));
+	//int style = (fullscreen) ? sf::Style::None : sf::Style::None;
+	_window = new sf::RenderWindow( sf::VideoMode(width,height), "FairWind Game Engine", sf::Style::None , sf::ContextSettings(24,8,4,3,3));
 	//_window->setMouseCursorVisible(false);
 	//_window->setFramerateLimit(0);
 	_window->setVerticalSyncEnabled(true);

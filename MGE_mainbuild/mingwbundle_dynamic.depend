@@ -14372,7 +14372,7 @@
 
 1455012454 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\gl\gl.h
 
-1457949595 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.hpp
+1458347354 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\mgedemo.hpp
 	<mge/core/AbstractGame.hpp>
 	<SFML/Graphics.hpp>
 	<vector>
@@ -15592,7 +15592,7 @@
 	<glm.hpp>
 	<iostream>
 
-1458135813 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
+1458301517 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\abstractgame.cpp
 	"AbstractGame.hpp"
 	<iostream>
 	"mge/core/Time.hpp"
@@ -15702,7 +15702,7 @@
 	"mge/core/Camera.hpp"
 	"glm.hpp"
 
-1458253193 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
+1458347721 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\core\renderer.cpp
 	"mge/core/Renderer.hpp"
 	<cassert>
 	<GL/glew.h>
@@ -16121,7 +16121,7 @@
 	"mge/collision/SphereCollider.hpp"
 	"mge/util/Timer.hpp"
 
-1458124144 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
+1458291049 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\editor\levelimporter.cpp
 	<mge/editor/LevelImporter.hpp>
 	<mge/config.hpp>
 	<glm.hpp>
@@ -16204,7 +16204,7 @@
 	<map>
 	"mge/config.hpp"
 
-1458265745 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\particles\particlesystem.cpp
+1458343967 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\particles\particlesystem.cpp
 	"mge/particles/ParticleSystem.hpp"
 	"mge/config.hpp"
 	"mge/util/Random.hpp"
@@ -16212,7 +16212,7 @@
 	"mge/materials/Particles/ParticleMaterial.hpp"
 	<iostream>
 
-1458265751 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\particles\particlesystem.hpp
+1458344221 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\particles\particlesystem.hpp
 	"mge/behaviours/Component.hpp"
 	"mge/core/Mesh.hpp"
 	"glm.hpp"
@@ -16228,7 +16228,7 @@
 1455634128 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\gui\guibutton.hpp
 	"mge/gui/GUISprite.hpp"
 
-1456830306 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\timer.cpp
+1458291302 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\util\timer.cpp
 	"mge/util/Timer.hpp"
 	<iostream>
 	"mge/core/Time.hpp"
@@ -16417,11 +16417,12 @@
 	"mge/core/Renderer.hpp"
 	<string>
 
-1458265737 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\particles\particlematerial.cpp
+1458345868 source:c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\particles\particlematerial.cpp
 	<mge/materials/Particles/ParticleMaterial.hpp>
 	<mge/particles/ParticleSystem.hpp>
+	<mge/core/Renderer.hpp>
 
-1458252673 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\particles\particlematerial.hpp
+1458344638 c:\users\user\documents\projectthirdperson2\mge_mainbuild\src\mge\materials\particles\particlematerial.hpp
 	<mge/materials/AbstractMaterial.hpp>
 	<glm.hpp>
 	"mge/core/Texture.hpp"

@@ -1,4 +1,4 @@
-#version 330 compatibility
+#version 330
 //layout(triangles) in;
 //layout(triangle_strip, max_vertices=3) out;
 
@@ -8,20 +8,19 @@ layout(triangle_strip, max_vertices=4) out;
 uniform mat4 vpMatrix;
 uniform	mat4 rotationMatrix;
 
-in float gsLifetime[];
-in float gsScale[];
+in vec2 gsParticleInfo[];//x is lifetime, y is scale
 
 out vec2 fTexCoord;
+//out float debug;
 
 void main()
 {
-    if(gsLifetime[0]<0.0)
+    if(gsParticleInfo[0].x<0.0)
         return;
 
-
     mat4 rot = rotationMatrix;
-    rot[0] *= gsScale[0];
-    rot[1] *= gsScale[0];
+    rot[0] *= gsParticleInfo[0].y;
+    rot[1] *= gsParticleInfo[0].y;
 
     //first quad vert
     gl_Position = vpMatrix * (gl_in[0].gl_Position + rot * vec4(0.5,0.5,0,1));
@@ -44,6 +43,5 @@ void main()
     EmitVertex();
 
     EndPrimitive();
-
 
 }

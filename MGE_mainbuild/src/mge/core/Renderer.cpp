@@ -30,9 +30,9 @@ int Renderer::_screenHeight;
 
 DualLinkList<TransparencyList> Renderer::transparentList;
 
-glm::mat4 Renderer::nearShadowOrtho = glm::ortho(-20.0f,20.0f,-20.0f,20.0f,0.1f,700.0f);
-glm::mat4 Renderer::farShadowOrtho = glm::ortho(-600.0f,600.0f,-600.0f,600.0f,0.1f,700.0f);
-glm::mat4 Renderer::midShadowOrtho = glm::ortho(-150.0f,150.0f,-150.0f,150.0f,0.1f,700.0f);
+glm::mat4 Renderer::nearShadowOrtho = glm::ortho(-20.0f,20.0f,-20.0f,20.0f,0.1f,1500.0f);
+glm::mat4 Renderer::farShadowOrtho = glm::ortho(-600.0f,600.0f,-600.0f,600.0f,0.1f,1500.0f);
+glm::mat4 Renderer::midShadowOrtho = glm::ortho(-150.0f,150.0f,-150.0f,150.0f,0.1f,1500.0f);
 //glm::mat4 Renderer::currentShadowOrtho;
 
 Renderer::Renderer(int width, int height)
@@ -379,7 +379,7 @@ bool Renderer::ShadowFrustumCheckExclusive(GameObject* obj, float orthoSize)
     if(dot(rot[1],objPos) + objRadius < lightProj[1] - orthoSize )
         return false;
 
-    if(dot(rot[2],objPos) - objRadius > lightProj[2] + 700.0f )
+    if(dot(rot[2],objPos) - objRadius > lightProj[2] + 1500.0f )
         return false;
 
     if(dot(rot[2],objPos) + objRadius < lightProj[2] + 0.1f )
@@ -407,7 +407,7 @@ bool Renderer::ShadowFrustumCheckEncasing(GameObject* obj, float orthoSize)
        dot(rot[1],objPos) - objRadius > lightProj[1] - orthoSize &&
        dot(rot[1],objPos) + objRadius < lightProj[1] + orthoSize &&
        dot(rot[2],objPos) - objRadius > lightProj[2] + 0.1f &&
-       dot(rot[2],objPos) + objRadius < lightProj[2] + 700.0f)
+       dot(rot[2],objPos) + objRadius < lightProj[2] + 1500.0f)
         return true;
     else
         return false;

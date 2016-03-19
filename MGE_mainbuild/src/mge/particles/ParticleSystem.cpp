@@ -18,6 +18,8 @@ void ParticleSystem::Initialize()
 }
 */
 
+//float debug = 0.0f;
+
 ParticleSystem::ParticleSystem(Texture* particleTex)
 {
     setMesh(Mesh::load(config::MGE_MODEL_PATH + "particleQuad.obj"));//this is useless for actual rendering but I do it so the recursive render method lets it draw (if mesh!=NULL && material!=NULL)
@@ -32,8 +34,7 @@ ParticleSystem::ParticleSystem(Texture* particleTex)
 
     for(int i=0;i<MGE_MAX_PARTICLES_PER_SYSTEM;++i)
     {
-        _lifeTimesMain[i] = -1.0f;
-        _scalesMain[i] = 1.0f;
+        _lifeScaleMain[i] = glm::vec2(-1.0f,1.0f);
         _positionsMain[i] = glm::vec3(-1000000);
     }
 }
@@ -45,7 +46,9 @@ ParticleSystem::~ParticleSystem()
 
 void ParticleSystem::Update()
 {
-    UpdateParticles();
+    //UpdateParticles();
+
+    //std::cout<<_releaseTimer.isFinished()<<"\n";
     if(_emitterEnabled && _releaseTimer.isFinished())
     {
         _releaseTimer.SetDuration(Utils::Random::GetFloatValue(releaseDelay.x,releaseDelay.y));
@@ -55,13 +58,14 @@ void ParticleSystem::Update()
         Release();
     }
 
+    UpdateParticles();
+
     //_bufferCount = 0;
 }
 
 void ParticleSystem::Release()
 {
     int amount = Utils::Random::GetValue(releaseCount.x,releaseCount.y);
-
     if(amount > MGE_NEW_PARTICLE_BUFFER_SIZE)
     {
         amount = MGE_NEW_PARTICLE_BUFFER_SIZE;
@@ -75,11 +79,10 @@ void ParticleSystem::Release()
         randomOffset.y = Utils::Random::GetFloatValue(startOffset1.y,startOffset2.y);
         randomOffset.z = Utils::Random::GetFloatValue(startOffset1.z,startOffset2.z);
 
-        _scalesBuffer[i] = Utils::Random::GetFloatValue(scaleRange.x,scaleRange.y);
-
+        _lifeScaleBuffer[i].x = Utils::Random::GetFloatValue(lifeTimeRange.x,lifeTimeRange.y);
+        _lifeScaleBuffer[i].y = Utils::Random::GetFloatValue(scaleRange.x,scaleRange.y);
 
         _positionsBuffer[i] = _cachedWorldPos + randomOffset;
-        _lifeTimesBuffer[i] = Utils::Random::GetFloatValue(lifeTimeRange.x,lifeTimeRange.y);
 
         _speedsBuffer[i].x = Utils::Random::GetFloatValue(speedMin.x,speedMax.x);
         _speedsBuffer[i].y = Utils::Random::GetFloatValue(speedMin.y,speedMax.y);
@@ -95,15 +98,29 @@ void ParticleSystem::UpdateParticles()
     //Time::update();
     float delta = Time::now() - _lastTime;
     _lastTime = Time::now();
-    for(int i=0;i<MGE_MAX_PARTICLES_PER_SYSTEM;++i)
-    {
-        _lifeTimesMain[i] -= delta;
 
-        if(_lifeTimesMain[i].x>0.0f)
+    int currentInserted = 0;
+
+    for(int i=0;i<_particleLimit;++i)
+    {
+        _lifeScaleMain[i].x -= delta;
+
+        if(_lifeScaleMain[i].x>0.0f)
         {
             _positionsMain[i] += _speedsMain[i];
         }
+        else//check for insertion
+        if(currentInserted < _bufferCount)
+        {
+            _lifeScaleMain[i] = _lifeScaleBuffer[currentInserted];
+            _positionsMain[i] = _positionsBuffer[currentInserted];
+            _speedsMain[i] = _speedsBuffer[currentInserted];
+            currentInserted++;
+        }
+
     }
+
+    _bufferCount = 0;
 }
 
 void ParticleSystem::ToggleEmitter(bool val)
@@ -127,6 +144,13 @@ void ParticleSystem::SetParticleLimit(int amount)
         amount = 0;
 
     _particleLimit = amount;
+
+//    for(int i=MGE_MAX_PARTICLES_PER_SYSTEM - amount;i<MGE_MAX_PARTICLES_PER_SYSTEM;++i)
+//    {
+//        _lifeTimesMain[i].x = -1.0f;
+//        _scalesMain[i].x = 1.0f;
+//        _positionsMain[i] = glm::vec3(-1000000);
+//    }
 }
 
 //int ParticleSystem::GetParticleLimit()
